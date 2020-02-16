@@ -1,4 +1,4 @@
-package com.jhzh.wsm;
+package com.jhzh.wsm.http;
 
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.CloseableHttpClient;
