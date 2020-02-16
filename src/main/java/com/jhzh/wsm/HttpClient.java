@@ -1,4 +1,4 @@
-package com.lxg.springboot;
+package com.jhzh.wsm;
 
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * Created by admin on 2017/2/6.
- */
+
 @Configuration
 public class HttpClient {
 

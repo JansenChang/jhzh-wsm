@@ -1,4 +1,4 @@
-package com.lxg.springboot.http;
+package com.jhzh.wsm.http;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +11,12 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 
 @Component
@@ -31,7 +31,6 @@ public class HttpAPIService {
 
     /**
      * 不带参数的get请求，如果状态码为200，则返回body，如果不为200，则返回null
-     * 
      * @param url
      * @return
      * @throws Exception
@@ -118,5 +117,24 @@ public class HttpAPIService {
      */
     public HttpResult doPost(String url) throws Exception {
         return this.doPost(url, null);
+    }
+
+    public HttpResult doPostJson(String url,String json) throws Exception{
+        // 声明httpPost请求
+        HttpPost httpPost = new HttpPost(url);
+        // 加入配置信息
+        httpPost.setConfig(config);
+        //将Json字符串进行转换
+        StringEntity requestEntity = new StringEntity(json,"utf-8");
+        requestEntity.setContentEncoding("UTF-8");
+        httpPost.setHeader("Content-type", "application/json");
+        httpPost.setEntity(requestEntity);
+        // 发起请求
+        CloseableHttpResponse response = this.httpClient.execute(httpPost);
+
+
+
+        return new HttpResult(response.getStatusLine().getStatusCode(), EntityUtils.toString(
+                response.getEntity(), "UTF-8"));
     }
 }

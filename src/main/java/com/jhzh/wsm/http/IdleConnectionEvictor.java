@@ -1,4 +1,4 @@
-package com.lxg.springboot.http;
+package com.jhzh.wsm.http;
 
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +16,7 @@ public class IdleConnectionEvictor extends Thread {
         super();
         super.start();
     }
+
 
     @Override
     public void run() {
