@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>DPH</title>
+
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" href="../css/css_0_0_normalize.css">
+    <link rel="stylesheet" href="../css/css_0_0_f5.css">
+    <link rel="stylesheet" href="../css/css_0_0_back.css">
+    <link rel="stylesheet" href="../css/standardization.css">
+
+    <script src="../js/jquery.js"></script>
+    <script src="../js/js_0_0_f5m.js"></script>
+    <script src="../js/vendor/modernizr.js"></script>
+    <script src="../js/svg.min.js" type="text/javascript"></script>
+    <script src="../js/mapobj.js" type="text/javascript"></script>
+
+    <style>
+        body {
+            height: auto;
+        }
+    </style>
+
+    <script type="text/javascript">
+        var svgdivid;
+        var svgdiv;
+        var svgdraw; //object
+        var w_max,h_max;
+        var w_10f,h_10f;
+        var w_15f,h_15f;
+        var w_20f,h_20f;
+        var x0_10f,y0_10f;
+        var x0_15f,y0_15f;
+        var x0_hov,y0_hov;
+
+
+        function init()
+        {
+	        svgdivid = "drawing";
+	        drawdiv = document.getElementById(svgdivid);
+
+	        var boxdiv = document.getElementById("box");
+	        var boxheight= boxdiv.clientHeight+drawdiv.offsetHeight;
+	        if(drawdiv==null)
+		        return; //不存在该图层，绘图失败
+	        drawdiv.innerHTML=""; //clean svg content
+	        w_max = drawdiv.clientWidth||drawdiv.offsetWidth;
+	        //h_max = drawdiv.clientHeight||drawdiv.offsetHeight;
+	        h_max = w_max * 0.6;//drawdiv.clientHeight||drawdiv.offsetHeight;
+	        svgdraw = SVG(svgdivid).size(w_max, window.screen.availHeight);//boxheight);// h_max+100);
+	        var rect = svgdraw.rect(w_max, window.screen.availHeight);//boxheight).attr({ fill: '#000' });
+	
+	        x0_hov=0;y0_hov=0;w_hov=0.5*w_max;h_hov=0.6*h_max;
+	        x0_10f=0;y0_10f=h_hov-50;w_10f=0.5*w_max;h_10f=0.6*h_max;
+	        x0_15f=x0_hov+w_hov-0.1*w_max+5;y0_15f=0;w_15f=0.6*w_max;h_15f=h_max;
+
+        }
+
+        function draw_all()
+        {
+	        init();
+	        //draw_15f(x0_15f,y0_15f,w_15f,h_15f,svgdraw);
+	        //draw_10f(x0_10f,y0_10f,w_10f,h_10f,svgdraw);
+	        //draw_hov(x0_hov,y0_hov,w_hov,h_hov,svgdraw);
+	        ////draw_hov(x0_hov,y0_hov,svgdraw);
+
+	        ////draw_15f(drawdivid);
+	        ////obj= draw.attr(1001);
+	        ////drawmap();
+	        ////window.οnresize=findWindowSize;
+        }
+
+
+
+        </script>
+
+        </head>
+        <body style="padding:0px;">
+
+        <div class="row" id="box">
+        <div class="medium-10 columns" style="padding:0px;">
+        <div id="drawing"></div>
+        </div>
+        <div class="medium-2 columns">
+            <button onclick="draw_all();">后台同步</button>
+            <label><input type="text" placeholder="Name" id="noticetext">      </label>
+            <!-- <label>车辆号<input type="text" placeholder="agv"></label> -->
+            <div class="row">
+                <div>
+                    <label>起点<input type="text" placeholder="行"><input type="text" placeholder="列"><input type="text" placeholder="层"></label>
+                </div>
+                <div>
+                    <label>终点<input type="text" placeholder="行"><input type="text" placeholder="列"><input type="text" placeholder="层"></label>
+                </div>
+                <label><button type="button" class="button radius" id=managvcontrol>调度</button></label>
+            </div>
+        </div>
+
+
+        </div>
+        </body>

@@ -1,0 +1,119 @@
+<html>
+<head>
+    <title>test1</title>
+    <meta charset="UTF-8"> <!-- for HTML5 -->
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/css_0_0_normalize.css">
+    <link rel="stylesheet" href="../css/css_0_0_f5.css">
+    <link rel="stylesheet" href="../css/css_0_0_back.css">
+    <link rel="stylesheet" href="../css/standardization.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/bootstrap-table.css">
+    <script src="../js/mapnode.js"></script>
+
+
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/bootstrap-table.js"></script>
+    <script src="../js/bootstrap-table-zh-CN.min.js"></script>
+
+    <script src="../js/js_0_0_f5m.js"></script>
+    <script src="../js/vendor/modernizr.js"></script>
+    <script src="../js/svg.min.js" type="text/javascript" ></script>
+
+</head>
+<body>
+<table data-toggle="table" data-url="data1.json">
+    <thead>
+    <tr>
+        <th data-field="id">序号</th>
+        <th data-field="name">名称</th>
+        <th data-field="price">价格</th>
+    </tr>
+    </thead>
+
+</table>
+
+<script>
+    $("#table").bootstrapTable({ // 对应table标签的id
+        url: "<%=request.getContextPath()%>/api/getDataList.do", // 获取表格数据的url
+        cache: false, // 设置为 false 禁用 AJAX 数据缓存， 默认为true
+        striped: false,  //表格显示条纹，默认为false
+        pagination: true, // 在表格底部显示分页组件，默认false
+        pageList: [1, 2], // 设置页面可以显示的数据条数
+        pageSize: 10, // 页面数据条数
+        pageNumber: 1, // 首页页码
+        sidePagination: 'server', // 设置为服务器端分页
+        queryParams: function (params) { // 请求服务器数据时发送的参数，可以在这里添加额外的查询参数，返回false则终止请求
+
+            return {
+                pageSize: params.limit, // 每页要显示的数据条数
+                offset: params.offset, // 每页显示数据的开始行号
+                sort: params.sort, // 要排序的字段
+                sortOrder: params.order, // 排序规则
+                dataId: $("#dataId").val() // 额外添加的参数
+            }
+        },
+        sortName: 'id', // 要排序的字段
+        sortOrder: 'desc', // 排序规则
+        columns: [
+            {
+                checkbox: true, // 显示一个勾选框
+                align: 'center' // 居中显示
+            }, {
+                field: 'code', // 返回json数据中的name
+                title: '编号', // 表格表头显示文字
+                align: 'center', // 左右居中
+                valign: 'middle' // 上下居中
+            }, {
+                field: 'name',
+                title: '名称',
+                align: 'center',
+                valign: 'middle'
+            }, {
+                field: 'calcMode',
+                title: '计算方式',
+                align: 'center',
+                valign: 'middle',
+                formatter: function (value, row, index){ // 单元格格式化函数
+                    var text = '-';
+                    if (value == 1) {
+                        text = "方式一";
+                    } else if (value == 2) {
+                        text = "方式二";
+                    } else if (value == 3) {
+                        text = "方式三";
+                    } else if (value == 4) {
+                        text = "方式四";
+                    }
+                    return text;
+                }
+            }, {
+                title: "操作",
+                align: 'center',
+                valign: 'middle',
+                width: 160, // 定义列的宽度，单位为像素px
+                formatter: function (value, row, index) {
+                    return '<button class="btn btn-primary btn-sm" οnclick="del(\'' + row.stdId + '\')">删除</button>';
+                }
+            }
+        ],
+        onLoadSuccess: function(){  //加载成功时执行
+            console.info("111111");
+        },
+        onLoadError: function(){  //加载失败时执行
+            console.info("222222");
+        }
+
+    })
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,685 @@
+<html>
+<head>
+  <title>DPH</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../css/css_0_0_normalize.css">
+  <link rel="stylesheet" href="../css/css_0_0_f5.css">
+  <link rel="stylesheet" href="../css/css_0_0_back.css">
+  <link rel="stylesheet" href="../css/standardization.css">
+  <link rel="stylesheet" href="http://static.runoob.com/assets/foundation-icons/foundation-icons.css">
+   <script src="../js/model_data.js"></script>
+  <script src="../js/mapnode.js"></script>
+  <script src="../js/jquery.js"></script>
+  <script src="../js/js_0_0_f5m.js"></script>
+  <script src="../js/vendor/modernizr.js"></script> 
+  <script src="../js/svg.min.js" type="text/javascript" ></script>
+   <script src="../js/dev_agv_control_buttonclick.js" ></script>
+  
+  <style>
+  	body{height:auto;}
+
+    .controls{
+     padding:0;
+
+    }
+
+    .controls h5{
+        color:#4D7AFF;
+    }
+    .accordion1{
+        margin:0;
+        padding:0;
+        width:100%;
+
+
+    }
+    .accordion/deep/ .title1{
+       line-height:0.1rem;
+       width:100%;
+
+    }
+
+    .accordion .accordion-navigation > .content{/** 这个一定要保留在页面style**/
+        padding:0;
+        margin: 0;
+        width:100%;
+        background-color:#EEEEEE ;
+    }
+    .searchbox {
+        width:70%;
+        vertical-align: middle;
+
+        margin-bottom: 1rem;
+        overflow: hidden;
+        height:1.9rem;
+
+    }
+
+     .searchbox * {
+        float: left;
+
+    }
+
+    .searchbox input {
+        margin: 0;
+        padding:0;
+        text-indent: 1.2em;
+        height: 1.9rem;
+        width: 80%;
+        border: 1px grey solid;
+
+
+
+
+    }
+    .searchbox button{
+        padding:0;
+        margin: 0;
+        width:20%;
+        height:1.9rem;
+        border: 1px grey solid;
+        background: url("../images/search.png ") no-repeat center/100% 100%;
+
+
+
+    }
+
+    .menu1{
+
+        width:100%;
+    }
+    .menu1/deep/ ul li{
+        margin: 0;
+        padding:0;
+        line-height: 0.1rem;
+        width:25%;
+
+
+    }
+    .menu1/deep/ .tab-title a{
+        margin: 0;
+        padding:0;
+        line-height: 2rem;
+        font-size: 10px;
+        text-align: left;
+        width:15%;
+
+
+    }
+    .menu1/deep/ .tab-title.active a{
+        margin: 0;
+        padding:0;
+        line-height: 2rem;
+        font-size: 10px;
+        text-align: left;
+        width:15%;
+    }
+   .menu1/deep/ .content.active{
+       padding:0.66rem;
+   }
+
+
+  .enterbox{
+      width:100%;
+      overflow: hidden;
+  }
+   .enterbox input{
+      width:70%;
+       float:left;
+    }
+   .enterbox button{
+        float:left;
+        padding:0;
+        height:2.32rem;
+        width:30%;
+
+    }
+
+   .inf{
+       width:100%;
+       height:10rem;
+       border:1px grey solid;
+       background-color: white;
+       padding:0;
+       padding-top:0.66rem ;
+       padding-bottom:0.66rem ;
+       color:white;
+       line-height: 0.33rem;
+
+   }
+    .inf .smallp{
+
+        font-size:0.66rem;
+        margin: 0;
+        text-align: center;
+        color:red;
+    }
+
+    .show{
+        margin: 0;
+        padding:0.35rem 1rem  ;
+        font-size: 0.875rem;
+        margin-top: 1rem;
+
+    }
+  </style>    
+</head>
+
+<body style="padding:0px;">
+
+<div class="row" id="box"  >
+  <div class="medium-10 columns"  style="padding:0px;"  >
+    <div id="drawing"></div>
+  </div>
+  <div class="medium-2 columns controls">
+  <!-- 右边操作面板!-->
+      <ul class="accordion accordion1" data-accordion>
+
+          <li class="accordion-navigation">
+              <a href="#demo2" class="title1">JF操作</a>
+              <div id="demo2" class="content content1">
+
+                  <div class="menu1">
+                      <ul class="tabs row" data-tab>
+                          <li class="tab-title active medium-3 columns"><a href="#home">入库</a></li>
+                          <li class="tab-title medium-3 columns"><a href="#menu1">库位转移</a></li>
+                          <li class="tab-title medium-3 columns"><a href="#menu2">异常处理</a></li>
+                          <li class="tab-title medium-3 columns"><a href="#menu3">大盘搬运</a></li>
+                      </ul>
+                      <div class="tabs-content">
+                          <div class="content active" id="home">
+                              <h5>由于各种原因大、小载盘未送达目的位置时请使用此功能</h5>
+                              <div class="controlgrop">
+                                  <label for="">请输入库位坐标</label>
+                                  <input type="text"id="cell"/>
+                                  <label for="" >请输入载盘ID</label>
+                                  <input type="text" id="palletid2"/>
+                                  <button id="instore" onclick="into()">入库</button>
+                              </div>
+                          </div>
+                          <div class="content" id="menu1">
+                              <h5>夹层库载盘及一楼库载盘需进行库位转移时使用</h5>
+                              <div class="controlgrop"style="vertical-align: middle;line-height: 0.5rem;">
+                                  <input type="radio" name="type" value="10" style="vertical-align: middle;margin-top: 0.9rem;" />
+                                  <label for="" style="vertical-align: middle;">堆垛机库</label>
+
+                                  <input type="radio" name="type" value="15" style="vertical-align: middle;margin-top: 0.9rem; " />
+                                  <label for="" style="vertical-align: middle;">夹层库</label>
+                              </div>
+                              <div class="controlgrop" >
+                                  <label for="">请输入来源库位</label>
+                                  <input type="text" id="srccell"/>
+                                  <label for="">请输入目标库位</label>
+                                  <input type="text" id="dstcell"/>
+                                  <button id="move" onclick="las_move()">开始移库</button>
+                              </div>
+                          </div>
+                          <div class="content" id="menu2">
+                              <h5>回夹层的大载盘有异常时使用（前个功能用于自动模式下出异常时使用，后个应用于单机测试）</h5>
+                              <div class="controlgrop">
+                                  <p> <label for="">当前大盘:</label>
+                                      <span style="display: none;">正在回流中请稍等</span>
+                                      <span>未能正常回流请手动点击回流按钮 <button id="backflow" onclick="backflow()">回流</button> </span>
+                                  </p>
+
+                              </div>
+                              <div class="controlgrop">
+                                  <label for="">请输入堆垛机库需要搬运的大载盘的库位坐标，点确定后会搬盘到夹层的拣选位</label>
+                                  <div class="enterbox" >
+                                      <input type="text" id="cell2"/>
+                                      <button id="enter1" onclick="enter1()">确定</button>
+                                  </div>
+
+                              </div>
+                          </div>
+                          <div class="content content1" id="menu3">
+                              <h5>拣选完成后送大载盘下一楼（自动模式下需全部输入数值，单机测试时无需输入工单ID及大盘编码、只需要点选上下层后点击开始搬运）</h5>
+                              <div class="controlgrop"style="vertical-align: middle;line-height: 0.5rem;">
+                                  <input type="radio" name="layer" value="10" style="vertical-align: middle;margin-top: 0.9rem;" />
+                                  <label for="" style="vertical-align: middle;">上层</label>
+
+                                  <input type="radio" name="layer" value="15" style="vertical-align: middle;margin-top: 0.9rem; " />
+                                  <label for="" style="vertical-align: middle;">下层</label>
+                              </div>
+                              <div class="controlgrop">
+                                  <label for="">请输入外层工单id</label>
+                                  <input type="text" id="workid"/>
+                                  <label for="" >请输入大盘编码</label>
+                                  <input type="text" id="bigpalletid"/>
+                                  <button id="starttransport" onclick="starttransport()">开始搬运</button>
+                              </div>
+                          </div>
+                      </div>
+
+                  </div>
+
+
+
+              </div>
+          </li>
+          <li class="accordion-navigation">
+              <a href="#demo3" class="title1">1F操作</a>
+              <div id="demo3" class="content">
+                  <div class="menu1">
+                      <ul class="tabs row" data-tab>
+                          <li class="tab-title active medium-3 columns"><a href="#home2">出库</a></li>
+                          <li class="tab-title medium-3 columns"><a href="#menu4">大盘入库</a></li>
+
+                      </ul>
+                      <div class="tabs-content">
+                          <div class="content active" id="home2">
+                              <h5>用于一楼需要进行出库时使用,可单机测试或自动模式</h5>
+                              <div class="controlgrop">
+                                  <label for="">请输入要出库的载盘ID编码,可以不连同下面功能一起使用</label>
+                                  <div  class="enterbox">
+                                      <input type="text" id="palletid3" />
+                                      <button id="enter2" onclick="enter2()">确定</button>
+
+                                  </div>
+
+                                  <label for="">请输入待搬运的库位坐标,可以不连同上面功能一起使用 </label>
+                                  <div class="enterbox">
+                                      <input type="text" id="cell3"/>
+                                      <button id="enter3" onclick="enter3()">确定</button>
+                                  </div>
+
+                              </div>
+                          </div>
+                          <div class="content" id="menu4">
+                              <h5>用于一楼进行空的大载盘入库时使用,可单机测试或自动模式</h5>
+                              <div class="controlgrop">
+                                  <label for="">请输入要入库的载盘ID编码,可以不连同下面功能一起使用</label>
+                                  <div class="enterbox">
+                                      <input type="text" id="palletid4"/>
+                                      <button onclick="enter4()">确定</button>
+                                  </div>
+
+                                  <label for="">请输入待放置的库位坐标,可以不连同上面功能一起使用 </label>
+                                  <div class="enterbox">
+                                      <input type="text" id="cell4"/>
+                                      <button onclick="enter5()">确定</button>
+                                  </div>
+
+                              </div>
+                          </div>
+                      </div>
+
+                  </div>
+
+              </div>
+          </li>
+      </ul>
+      <div class="inf">
+
+      </div>
+      <div class="row">
+          <div class="medium-6 columns"><button class="show" onclick="showtrayid()">按托盘号显示</button></div>
+          <div class="medium-6 columns"> <button class="show"onclick="partid()" >按物料号显示</button></div>
+      </div>
+
+</div>
+
+
+</div>
+
+<script>
+    $(document).ready(function() {// 初始化 Foundation JS
+        $(document).foundation();
+    })
+</script>
+<script type="text/javascript">
+    /**
+    * 自定义函数名：PrefixZero
+    * @param num： 被操作数
+    * @param n： 固定的总位数
+    * var myNum = 9;var myNum2 = 12;
+    * console.log('处理后myNum：'+PrefixZero(myNum, 3));//009
+    * console.log('处理后myNum2：'+PrefixZero(myNum2, 3));//012
+    */
+    function PrefixZero(num, n) {
+    return (Array(n).join(0) + num).slice(-n);
+    }
+</script>
+
+ <script type="text/javascript">
+    var svgdivid;
+    var svgdiv;
+    var svgdraw; //object
+    var w_max,h_max;
+    var w_10f,h_10f;
+    var w_15f,h_15f;
+    var w_20f,h_20f;
+    var x0_10f,y0_10f;
+    var x0_15f,y0_15f;
+    var x0_hov,y0_hov;
+    var x0_sel,y0_sel;
+    
+    var map_layer_10f;
+    var map_layer_hov;
+    var map_layer_15f;
+    var map_layer_road;
+    var map_layer_agv;
+    var duiduoji;
+    var select;
+
+
+
+
+
+
+function init()
+{
+    create_node(mapnode_pri_10f );
+    create_node(mapnode_pri_hov );
+    create_node(mapnode_pri_15f );
+    create_node(mapnode_pri_road );
+    create_node(mapnode_pri_agv );
+    create_node(mapnode_pri_duiduoji );
+    create_node(mapnode_pri_select );
+	//使用画图数组(全局变量)
+    map_layer_10f=mapnode_10f;
+    map_layer_hov=mapnode_hov;
+    map_layer_15f=mapnode_15f;
+    map_layer_road=mapnode_road;
+    map_layer_agv=mapnode_agv;
+    duiduoji=mapnode_duiduoji;
+    select=mapnode_select;
+
+
+	svgdivid = "drawing";
+	drawdiv = document.getElementById(svgdivid);
+
+	var boxdiv = document.getElementById("box");
+	var boxheight= boxdiv.clientHeight+drawdiv.offsetHeight;
+	if(drawdiv==null)
+		return; //不存在该图层，绘图失败
+	drawdiv.innerHTML=""; //clean svg content
+	w_max = drawdiv.clientWidth||drawdiv.offsetWidth;
+	//h_max = drawdiv.clientHeight||drawdiv.offsetHeight;
+	h_max = w_max * 0.6;//drawdiv.clientHeight||drawdiv.offsetHeight;
+	svgdraw = SVG(svgdivid).size(w_max, window.screen.availHeight);//boxheight);// h_max+100);
+	var rect = svgdraw.rect(w_max, window.screen.availHeight);//boxheight).attr({ fill: '#000' });
+	
+	x0_hov=20;y0_hov=30;w_hov=0.5*w_max;h_hov=0.6*h_max;
+	x0_10f=10;y0_10f=h_hov+30;w_10f=0.5*w_max;h_10f=0.6*h_max;
+    x0_15f=720; y0_15f=30; w_15f=0.5*w_max; h_15f=0.5*h_max;
+    x0_sel=720; y0_sel=h_15f+72;w_sel=0.5*w_max;h_sel=0.6*h_max;
+}
+
+
+function draw_hov(x0,y0,w,h,draw)
+{
+	var w_ratio = w/680;
+	var h_ratio = h/600;
+	
+    //修正真实坐标
+    for (j = 0, len = map_layer_hov.length; j < len; j++)
+        map_layer_hov[j].update_whxy(w, h, x0, y0, w_ratio, h_ratio);
+    for (j = 0, len = map_layer_hov.length; j < len; j++)
+        map_layer_hov[j].draw(draw);
+}
+
+
+function draw_10f(x0,y0,w,h,draw) {
+    var w_ratio = w / 680;
+    var h_ratio = h / 600;
+    
+    for (j = 0, len = map_layer_10f.length; j < len; j++) {
+       
+        map_layer_10f[j].update_whxy(w, h, x0, y0, w_ratio, h_ratio);
+       
+    }
+    for (j = 0, len = map_layer_10f.length; j < len; j++) {
+        map_layer_10f[j].draw(draw);
+    }
+    for (j = 0, len = duiduoji.length; j < len; j++) {
+       
+       duiduoji[j].update_whxy(w, h, x0, y0, w_ratio, h_ratio);
+      
+   }
+   for (j = 0, len = duiduoji.length; j < len; j++) {
+       duiduoji[j].draw(draw);
+   }
+
+}
+
+function notice(index)
+{
+	$("#noticetext1").val(map_layer_road[index].name);
+}
+
+function draw_15f(x0,y0,w,h,draw )
+{
+
+	var w_ratio = w/1600;
+	var h_ratio = h/1080;
+    for (j = 0, len = map_layer_15f.length; j < len; j++)
+        map_layer_15f[j].update_whxy(w, h, x0, y0, w_ratio, h_ratio);
+    for (j = 0, len = map_layer_15f.length; j < len; j++)
+        map_layer_15f[j].draw(draw);
+    for (j = 0, len = map_layer_road.length; j < len; j++)
+        map_layer_road[j].update_whxy(w, h, x0, y0, w_ratio, h_ratio);
+    for (j = 0, len = map_layer_road.length; j < len; j++)
+        map_layer_road[j].draw(draw);
+    for (j = 0, len = map_layer_agv.length; j < len; j++){
+
+         //map_layer_agv[j].changeposition(lastX,lastY);
+        map_layer_agv[j].update_whxy(w, h, x0, y0, w_ratio, h_ratio);}
+
+
+    for (j = 0, len = map_layer_agv.length; j < len; j++)
+        map_layer_agv[j].draw(draw);
+}
+
+function draw_select(x0,y0,w,h,draw)
+{
+    var w_ratio = w/1600;
+    var h_ratio = h/1080;
+    for (j = 0, len = select.length; j < len; j++) {
+        select[j].update_whxy(w, h, x0, y0, w_ratio, h_ratio);
+    }
+    for (j = 0, len = select.length; j < len; j++) {
+        select[j].draw(draw);
+    }
+}
+
+function draw_all()
+{
+	init();
+	draw_15f(x0_15f,y0_15f,w_15f,h_15f,svgdraw);
+	draw_10f(x0_10f,y0_10f,w_10f,h_10f,svgdraw);
+    draw_hov(x0_hov,y0_hov,w_hov,h_hov,svgdraw);
+    draw_select(x0_sel,y0_sel,w_sel,h_sel,svgdraw);
+
+
+}
+
+function agvtrace(message){
+	if(message == null)
+		return;
+	 for(f = 0,lenf=message.length; f < lenf; f++){
+	 	var agvnum = message[f].robotid;v
+	 	var x = PrefixZero(message[f].posX,2);
+	 	var y = PrefixZero(message[f].posY,2);
+	 	for(k=0, lenk=map_layer_road.length;k<lenk;k++){
+	 		var hj = map_layer_road[k].name.substr(7,2);
+	 		var gh  = map_layer_road[k].name.substr(10,2);
+	 		if(map_layer_road[k].name.substr(7,2) == x+'' && map_layer_road[k].name.substr(10,2) == y+'')
+	 			break;
+	 	}
+	 	if(k >= lenk)
+	 		return;
+		for(j = 0,len=map_layer_agv.length; j < len; j++)
+		   if(map_layer_agv[j].name == (agvnum + '')){
+		   		//寻找对应的道路地标message[f].posX,posY
+		   		var x1=map_layer_road[k].svgobj.attr('x');
+		   		var y1= map_layer_road[k].svgobj.attr('y');
+		   		map_layer_agv[j].svgobj.move(map_layer_road[k].svgobj.attr('x'), map_layer_road[k].svgobj.attr('y'));
+		   }		 	
+	}	 
+}
+
+function srmtrace(message){  //返回堆垛机的结果显示
+	//取出行列层
+		for(j = 0,len=map_layer_srm.length; j < len; j++) //遍历堆垛机
+		   if(map_layer_srm[j].name == (agvnum + '')){
+	}
+}
+
+$("#mancontrol").click(function(){
+  $.get("/yxpower/ajax?a=manop",function(data,status){
+    alert("数据：" + data + "\n状态：" + status);
+  });
+  });
+    
+function timer_display()
+{
+	 getagvs();
+	 getsrms();
+}
+</script>
+<script>
+function las_agvenable(){//
+	$.ajax({  
+		type : "get", //使用get方法访问后台        
+		url : "/yxpower/ajax",		
+		dataType : "html",  			
+		data : "a=las_agvenable", //要发送的参数  
+		async : false,//同步调用   			
+		success : function(msg) {
+			//$("#patinfo").val(msg); 
+			//getlistjust(15);
+			alert("已执行");
+		}
+	});
+}
+
+
+function showtrayid(){//按托盘号显示按钮
+    addcell(mapnode_pri_10f,1);
+    addcell(mapnode_pri_15f,1);
+    addcell(mapnode_pri_hov,1);
+    addcell(mapnode_pri_select,1);
+}
+
+function partid(){//按料号显示按钮
+    addcell(mapnode_pri_10f,0);
+    addcell(mapnode_pri_15f,0);
+    addcell(mapnode_pri_hov,0);
+    addcell(mapnode_pri_select,0);
+}
+
+
+function las_agvrun(){//  
+	$.ajax({  
+		type : "get", //使用get方法访问后台        
+		url : "/yxpower/ajax",		
+		dataType : "html",  			
+		data : "a=las_agvrun", //要发送的参数  
+		async : false,//同步调用   			
+		success : function(msg) {
+			//$("#patinfo").val(msg); 
+			//getlistjust(15);
+			alert("已执行");
+		}
+	});
+}
+</script>
+
+
+
+<script type="text/javascript">
+
+
+
+
+
+
+    draw_all();
+
+
+
+    addcell(mapnode_pri_10f,1);
+    addcell(mapnode_pri_15f,1);
+    addcell(mapnode_pri_hov,1);
+    addcell(mapnode_pri_select,1);
+
+
+
+
+    function get_all(){//
+        $.ajax({
+            type : "get", //???get??????????
+            url : "/yxpower/ajax",
+            dataType : "html",
+            data : "a=get_all", //?????????
+            async : false,//???????
+            success : function(msg) {
+                //$("#patinfo").val(msg);
+                //getlistjust(15);
+                alert(msg);
+            }
+        });
+    }
+
+
+
+
+    update_all(point);
+
+
+//var int=self.setInterval("getagvs()",500);
+function getagvs()
+{
+
+	$.ajax({type: "GET",
+	url:"/yxpower/ajax?a=getagvs",   
+	contentType: "application/json;charset=utf-8",
+	data:null,//content, 
+	dataType:"json",
+	success:function (message) {
+              //alert("提交成功"+JSON.stringify(message));
+              //message=message = [{"robotid":3202,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":87,"posX":19,"posY":16,"posCode":819,"direction":0,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":798,"count":151313,"system_pause":true,"offset":15120,"exception":0},{"robotid":3201,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":86,"posX":19,"posY":9,"posCode":469,"direction":1,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":794,"count":205455,"system_pause":true,"offset":8682,"exception":0},{"robotid":3199,"status":0,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":76,"posX":20,"posY":9,"posCode":470,"direction":1,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":203875,"system_pause":true,"offset":21846,"exception":0},{"robotid":3197,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":73,"posX":19,"posY":12,"posCode":619,"direction":0,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":797,"count":628308,"system_pause":true,"offset":6402,"exception":0},{"robotid":3205,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":27,"posY":23,"posCode":1177,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":992389,"system_pause":true,"offset":28112,"exception":0},{"robotid":3203,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":29,"posY":23,"posCode":1179,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":-1,"count":204129,"system_pause":true,"offset":13186,"exception":0},{"robotid":3200,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":25,"posY":23,"posCode":1175,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":783,"count":131145,"system_pause":true,"offset":15946,"exception":0},{"robotid":3198,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":28,"posY":23,"posCode":1178,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":100674,"system_pause":true,"offset":21362,"exception":0},{"robotid":3204,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":24,"posY":23,"posCode":1174,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":-1,"count":1341011,"system_pause":true,"offset":20228,"exception":0},{"robotid":3196,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":26,"posY":23,"posCode":1176,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":784,"count":204369,"system_pause":true,"offset":24154,"exception":0}];
+              agvtrace(message);
+          },
+          error:function (message) {
+              //alert("提交失败"+JSON.stringify(message));
+              //var message = [{"robotid":3202,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":87,"posX":19,"posY":16,"posCode":819,"direction":0,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":798,"count":151313,"system_pause":true,"offset":15120,"exception":0},{"robotid":3201,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":86,"posX":19,"posY":9,"posCode":469,"direction":1,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":794,"count":205455,"system_pause":true,"offset":8682,"exception":0},{"robotid":3199,"status":0,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":76,"posX":20,"posY":9,"posCode":470,"direction":1,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":203875,"system_pause":true,"offset":21846,"exception":0},{"robotid":3197,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":73,"posX":19,"posY":12,"posCode":619,"direction":0,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":797,"count":628308,"system_pause":true,"offset":6402,"exception":0},{"robotid":3205,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":27,"posY":23,"posCode":1177,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":992389,"system_pause":true,"offset":28112,"exception":0},{"robotid":3203,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":29,"posY":23,"posCode":1179,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":-1,"count":204129,"system_pause":true,"offset":13186,"exception":0},{"robotid":3200,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":25,"posY":23,"posCode":1175,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":783,"count":131145,"system_pause":true,"offset":15946,"exception":0},{"robotid":3198,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":28,"posY":23,"posCode":1178,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":100674,"system_pause":true,"offset":21362,"exception":0},{"robotid":3204,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":24,"posY":23,"posCode":1174,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":-1,"count":1341011,"system_pause":true,"offset":20228,"exception":0},{"robotid":3196,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":26,"posY":23,"posCode":1176,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":784,"count":204369,"system_pause":true,"offset":24154,"exception":0}];
+              //agvtrace(message);
+          }
+	});
+
+}
+
+function getsrms()
+{
+	$.ajax({type: "GET",
+	url:"/yxpower/ajax?a=getsrms",   
+	contentType: "application/json;charset=utf-8",
+	data:null,//content, 
+	dataType:"json",
+	success:function (message) {
+              //alert("提交成功"+JSON.stringify(message));
+              //message=message = [{"robotid":3202,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":87,"posX":19,"posY":16,"posCode":819,"direction":0,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":798,"count":151313,"system_pause":true,"offset":15120,"exception":0},{"robotid":3201,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":86,"posX":19,"posY":9,"posCode":469,"direction":1,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":794,"count":205455,"system_pause":true,"offset":8682,"exception":0},{"robotid":3199,"status":0,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":76,"posX":20,"posY":9,"posCode":470,"direction":1,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":203875,"system_pause":true,"offset":21846,"exception":0},{"robotid":3197,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":73,"posX":19,"posY":12,"posCode":619,"direction":0,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":797,"count":628308,"system_pause":true,"offset":6402,"exception":0},{"robotid":3205,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":27,"posY":23,"posCode":1177,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":992389,"system_pause":true,"offset":28112,"exception":0},{"robotid":3203,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":29,"posY":23,"posCode":1179,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":-1,"count":204129,"system_pause":true,"offset":13186,"exception":0},{"robotid":3200,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":25,"posY":23,"posCode":1175,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":783,"count":131145,"system_pause":true,"offset":15946,"exception":0},{"robotid":3198,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":28,"posY":23,"posCode":1178,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":100674,"system_pause":true,"offset":21362,"exception":0},{"robotid":3204,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":24,"posY":23,"posCode":1174,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":-1,"count":1341011,"system_pause":true,"offset":20228,"exception":0},{"robotid":3196,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":26,"posY":23,"posCode":1176,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":784,"count":204369,"system_pause":true,"offset":24154,"exception":0}];
+              srmtrace(message);
+          },
+          error:function (message) {
+              //alert("提交失败"+JSON.stringify(message));
+              //var message = [{"robotid":3202,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":87,"posX":19,"posY":16,"posCode":819,"direction":0,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":798,"count":151313,"system_pause":true,"offset":15120,"exception":0},{"robotid":3201,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":86,"posX":19,"posY":9,"posCode":469,"direction":1,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":794,"count":205455,"system_pause":true,"offset":8682,"exception":0},{"robotid":3199,"status":0,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":76,"posX":20,"posY":9,"posCode":470,"direction":1,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":203875,"system_pause":true,"offset":21846,"exception":0},{"robotid":3197,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":73,"posX":19,"posY":12,"posCode":619,"direction":0,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":797,"count":628308,"system_pause":true,"offset":6402,"exception":0},{"robotid":3205,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":27,"posY":23,"posCode":1177,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":992389,"system_pause":true,"offset":28112,"exception":0},{"robotid":3203,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":29,"posY":23,"posCode":1179,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":-1,"count":204129,"system_pause":true,"offset":13186,"exception":0},{"robotid":3200,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":25,"posY":23,"posCode":1175,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":783,"count":131145,"system_pause":true,"offset":15946,"exception":0},{"robotid":3198,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":28,"posY":23,"posCode":1178,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":100674,"system_pause":true,"offset":21362,"exception":0},{"robotid":3204,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":24,"posY":23,"posCode":1174,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":-1,"count":1341011,"system_pause":true,"offset":20228,"exception":0},{"robotid":3196,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":26,"posY":23,"posCode":1176,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":784,"count":204369,"system_pause":true,"offset":24154,"exception":0}];
+              //agvtrace(message);
+          }
+	});
+}
+
+</script>
+
+<script>
+
+</script>
+
+</body>
+</html>

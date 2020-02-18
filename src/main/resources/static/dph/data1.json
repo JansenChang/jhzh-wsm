@@ -1,0 +1,24 @@
+{
+  "table1":[
+    {
+      "item":1,"goodscode":1,"name":1,"model":1,"palletid":1,"storeposition":1,"lot":1,"number":1,"unit":"cps",
+      "intotime":"2020-1-8 13:55","store-howlong": "5","storestatus":"未锁定"
+    },
+    {
+      "item":2,"goodscode":1,"name":1,"model":1,"palletid":1,"storeposition":1,"lot":1,"number":1,"unit":"cps",
+      "intotime":"2020-1-8 13:55","store-howlong": "5","storestatus":"锁定"
+    },
+    {
+      "item":3,"goodscode":1,"name":1,"model":1,"palletid":1,"storeposition":1,"lot":1,"number":1,"unit":"cps",
+      "intotime":"2020-1-8 13:55","store-howlong": "5","storestatus":"未锁定"
+    },
+    {
+      "item":4,"goodscode":1,"name":1,"model":1,"palletid":1,"storeposition":1,"lot":1,"number":1,"unit":"cps",
+      "intime":"2020-1-8 13:55","store-howlong": "5","storestatus":"锁定"
+    },
+    {
+      "item":5,"goodscode":1,"name":1,"model":1,"palletid":1,"storeposition":1,"lot":1,"number":1,"unit":"cps",
+      "intotime":"2020-1-8 13:55","store-howlong": "5","storestatus":"未锁定"
+    }
+  ]
+}

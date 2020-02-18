@@ -1,0 +1,979 @@
+<html>
+<head>
+    <title>DPH</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/css_0_0_normalize.css">
+    <link rel="stylesheet" href="../css/css_0_0_f5.css">
+    <link rel="stylesheet" href="../css/css_0_0_back.css">
+    <link rel="stylesheet" href="../css/standardization.css">
+    <script src="../js/mapnode.js"></script>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/js_0_0_f5m.js"></script>
+    <script src="../js/vendor/modernizr.js"></script>
+    <script src="../js/svg.min.js" type="text/javascript" ></script>
+    <script src="../js/report_control_buttonclick.js"></script>
+    <style>
+        body{
+            font-size: 0.875rem;
+            height:auto;
+
+
+        }
+
+
+        #longlabel{
+            position: absolute;
+            top: 0.08rem;
+            right:29rem;
+            width:6.5rem;
+
+        }
+
+        @media all and (max-width: 1000px){
+            #longlabel{
+                position: absolute;
+                top: 0.08rem;
+                right:22rem;
+
+
+
+            }
+           #starttime1{
+                  width:30%;
+              }
+            #endtime1{
+                width:30%;
+            }
+        }
+        @media all and (max-width: 1040px){
+            #longlabel{
+                position: absolute;
+                top: 0.08rem;
+                right:22rem;
+
+            }
+            #starttime1{
+                width:30%;
+            }
+            #endtime1{
+                width:30%;
+            }
+        }
+        @media all and (max-width: 990px){
+            #longlabel{
+                position: absolute;
+                top: 0.08rem;
+                right:22rem;
+
+
+
+            }
+        }
+
+        @media all and (max-width: 920px){
+            #longlabel{
+                position: absolute;
+                top: 0.08rem;
+                right:20rem;
+
+
+
+            }
+        }
+
+        @media all and (max-width: 860px){
+            #longlabel{
+                position: absolute;
+                width:20%;
+                top: 0.08rem;
+                right:18rem;
+
+
+
+            }
+        }
+
+        .menureport{
+
+            width:100%;
+        }
+        .menureport  .menu/deep/ ul li{
+            margin: 0;
+            padding:0.2rem;
+            line-height: 0.1rem;
+
+
+
+        }
+        .menureport  .menu/deep/ .tab-title a{
+            margin: 0;
+            padding:0.2rem;
+            line-height: 2rem;
+            text-align: left;
+
+
+
+        }
+        .menureport  .menu/deep/ .tab-title.active a{
+            margin: 0;
+            padding:0.2rem;
+            line-height: 2rem;
+            text-align: left;
+
+        }
+        .menureport/deep/ .menucontent{
+            padding:0.66rem;
+
+
+        }
+        .menureport/deep/ .menucontent.active {
+            padding:0.66rem;
+
+
+
+        }
+
+        .tabs-content{
+            margin-bottom: 0;
+
+
+
+        }
+
+        .tabs-content > .content.active{/*留在页面*/
+            height: 93.5vh;
+            margin-bottom: 0;
+        }
+        .control{
+            background-color: white;
+            margin-bottom: 1rem;
+
+        }
+
+        .headgrop{
+
+            line-height: 2rem;
+            height: 2rem;
+            folat:left;
+            margin-top: 1rem;
+            margin-right: 1rem;
+            position: relative;
+
+        }
+        .headgrop.short{
+            width:11rem;
+        }
+        .headgrop *{
+            float:right;
+        }
+
+        .headgrop label{
+            margin-top: 0.3rem;
+            position: absolute;
+            right:7.3rem;
+            top:0.08rem;
+            width:39%;
+            text-align: right;
+
+        }
+        .headgrop/deep/ input{
+            width:61%;
+            height: 2rem;
+
+        }
+        @media all and (max-width: 1100px) {
+
+            .headgrop label{
+
+                position: absolute;
+                right:7.3rem;
+                top:0.08rem;
+                width:19%;
+                text-align: right;
+
+            }
+
+
+        }
+
+        .headgrop .selectinput{
+            width:61%;
+            height:2rem;
+            border-right: none;
+            position:relative;
+
+        }
+
+        .headgrop .selectinput select{
+            width:100%;
+            height:2rem;
+            float:right;
+            font-size: 0.875rem;
+        }
+
+        .headgrop .timerang{
+            float:right;
+            width:13.7rem;
+            height:2rem;
+        }
+        .headgrop button{
+            margin: 0;
+            padding:0;
+            height:2rem;
+            width:5rem;
+        }
+
+
+        .banner{
+            padding:1rem 0.9rem;
+        }
+
+        tbody tr:hover{
+            background-color:rgb(122 197 205) ;
+        }
+
+
+        table thead tr th{/*留在页面*/
+            background:linear-gradient(#FFFFFF,#CCCCCC);
+        }
+
+        /*自定义菜单*/
+
+        #menu {
+            position: absolute;
+            display: none;
+            width: 143px;
+            height: 159px;
+            border: rgba(153,153,153,1) 1px solid;
+            background-color: white;
+            border-radius: 3px;
+            -webkit-box-shadow: 1px 1px 3px #BBBBBB;
+            box-shadow: 1px 1px 3px #BBBBBB;
+            overflow: hidden;
+            z-index: 99;
+        }
+        #menu a {
+            display: block;
+            height: 31px;
+            line-height: 31px;
+            font-size: 12px;
+            color: rgba(102,102,102,1);
+            text-decoration: none;
+            text-indent: 10px;
+            white-space:normal;
+
+        }
+
+        #menu a:hover {
+            background-color:rgb(122 197 205) ;
+            color:white;
+        }
+
+
+        input[type="datetime-local"]{
+            width:1rem;
+            height:1rem;
+        }
+
+
+        .menubottom{
+            border-top:1px grey solid;
+            width:80%;
+            margin-left: 1em;
+        }
+
+        .menubottom a{
+            transform: translateX(-1em);
+            width:130%;
+        }
+
+    </style>
+</head>
+<body style="padding:0px;" >
+
+
+
+<div class="menureport">
+    <ul class="tabs menu" data-tab>
+        <li class="row">
+            <div class="medium-2 columns">
+                <li class="tab-title active "><a href="#home">进出库台账</a></li>
+                <li class="tab-title "><a href="#menu1">在库管理</a></li>
+                <li class="tab-title "><a href="#menu2">库存预警</a></li>
+
+            </div>
+
+        </li>
+
+
+
+    </ul>
+    <div class="tabs-content">
+
+        <div id="menu">
+            <a href="#" id="unlock">解锁当前库存</a>
+            <a href="#" id="lock">锁定当前库存</a>
+            <!--根据栏位内容激活以上2个点击项中的一个,未激活的显示暗灰色处理并无法点击,在库存预警和进出库台账里不显示!-->
+            <div class="menubottom">
+                <a href="#">引出当前表格数据</br>&nbsp&nbsp&nbsp(excel格式)</a>
+            </div>
+
+            <!--上面点击项"引出当前数据`"功能为引出所有表格数据,生成一份Excel文档,在进出库台账里改为引出当前表格内数据这个项-->
+
+        </div>
+
+
+        <div class="content active menucontent" id="home">
+          <div class="row control">
+              <div class="medium-2 columns">
+                  <div class="headgrop short">
+                      <input type="text" id="workid1" />
+                      <label for="" >工单ID</label>
+                  </div>
+
+                  <div class="headgrop short ">
+                      <input type="text"  id="palletid1" />
+                      <label for="" >托盘号</label>
+                  </div>
+
+              </div>
+              <div class="medium-2 columns">
+                  <div class="headgrop short ">
+                      <input type="text"  id="code1"/>
+                      <label for="" >物资编码</label>
+                  </div>
+
+                  <div class="headgrop short">
+                      <div class="selectinput">
+                          <select name="" id="store1">
+                              <option value="10">JF库</option>
+                              <option value="15">1F库</option>
+                          </select>
+                      </div>
+                      <label for="" >仓库</label>
+                  </div>
+
+              </div>
+              <div class="medium-7 columns">
+
+                  <div class="headgrop"  >
+                      <input type="datetime-local" value="2020-01-31T13:59:59" class="timerang"  id="endtime1" />
+                      <span>至</span>
+                      <input type="datetime-local" value="2020-01-31T13:59:58" class="timerang" id="starttime1"/>
+
+                      <label for="" id="longlabel">进出库时间范围</label>
+                  </div>
+                  <div class="headgrop" style="position: absolute; top: 3rem;right:1rem;">
+                      <div class="selectinput">
+                          <select name="" id="type1" style="width:8rem" >
+                              <option value="10">入库</option>
+                              <option value="15">出库</option>
+                          </select>
+                      </div>
+                      <label for="" style="width:6rem;margin-right: 1.3rem" >进出库类型</label>
+                  </div>
+              </div>
+              <div class="medium-1 columns">
+                  <div class="headgrop buttonwrap">
+                      <button class="button alert radius" id="reset1" onclick="reset()">重置</button>
+                  </div>
+                  <div class="headgrop buttonwrap">
+                      <button class="button radius" id="search1" onclick="search_1()">查询</button>
+                  </div>
+
+              </div>
+
+
+          </div>
+          <div class="row banner">
+              <div class="medium-12 column">
+                  <table id="tb1" border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+                      <thead>
+                      <tr class="trHead">
+                          <th>物资编码</th>
+                          <th>工单ID</th>
+                          <th>托盘号</th>
+                          <th>库位</th>
+                          <th>数量</th>
+                          <th>入库时间</th>
+                          <th>出库时间</th>
+                          <th>进出库类型</th>
+                      </tr>
+
+                      </thead>
+                      <tbody>
+
+
+                      </tbody>
+
+
+                  </table>
+              </div>
+          </div>
+        </div>
+        <div class="content menucontent" id="menu1">
+            <div class="row control">
+                <div class="medium-2 columns">
+                    <div class="headgrop short">
+                        <input type="text" id="workid2"/>
+                        <label for=""  >工单ID</label>
+                    </div>
+
+                    <div class="headgrop short">
+                        <input type="text"  id="palletid2"/>
+                        <label for="" >托盘号</label>
+                    </div>
+
+                </div>
+                <div class="medium-2 columns">
+                    <div class="headgrop short">
+                        <input type="text" id="code2"/>
+                        <label for="" >物资编码</label>
+                    </div>
+
+                    <div class="headgrop short">
+                        <div class="selectinput" >
+                            <select name="" id="store2">
+                                <option value="10">JF库</option>
+                                <option value="15">1F库</option>
+                            </select>
+                        </div>
+                        <label for="" >仓库</label>
+                    </div>
+
+                </div>
+                <div class="medium-4 columns">
+
+                    <div class="headgrop short" >
+                        <div class="selectinput" >
+                            <select name="" id="lockstatus">
+                                <option value="10">已锁定</option>
+                                <option value="15">未锁定</option>
+                            </select>
+                        </div>
+                        <label for="" >库存状态</label>
+                    </div>
+                </div>
+                <div class="medium-4 columns">
+                    <div class="headgrop buttonwrap">
+                        <button class="button alert radius" onclick="reset()">重置</button>
+                    </div>
+                    <div class="headgrop buttonwrap">
+                        <button class="button radius" id="search2" onclick="search_2()">查询</button>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="row banner">
+                <div class="medium-12 columns">
+                    <table id="tb2" border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+                        <thead>
+                        <tr class="trHead">
+                            <th>物资编码</th>
+                            <th>工单ID</th>
+                            <th>托盘号</th>
+                            <th>库位</th>
+                            <th>数量</th>
+                            <th>入库时间</th>
+                            <th>出库时间</th>
+
+                            <th>在库时长</th>
+                            <th>库存状态</th>
+                            <!---可以通過右鍵菜单修改成库存已锁定/库存未锁定!-->
+                        </tr>
+
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+
+
+
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="content menucontent" id="menu2">
+            <div class="row control" style="margin-bottom: 2rem; ">
+                <div class="medium-4 columns">
+                    <div class="headgrop"  style="width:14rem;">
+                        <div class="selectinput" >
+                            <select name="" style=" width:10rem;transform:translateX(1rem) " id="overtime">
+                                <option value="10">2天</option>
+                                <option value="15">5天</option>
+                            </select>
+                        </div>
+                        <label for="" style="right:9.5rem;" >超期时长</label>
+                    </div>
+
+                </div>
+                <div class="medium-8 columns">
+                    <div class="headgrop buttonwrap">
+                        <button class="button alert radius" onclick="reset()">重置</button>
+                    </div>
+                    <div class="headgrop buttonwrap">
+                        <button class="button radius" onclick="search_3()" style="margin-bottom: 1rem;">查询</button>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="row banner">
+                <div class="medium-12 column">
+                    <table id="tb3" border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+                        <thead>
+                        <tr class="trHead">
+                            <th>物资编码</th>
+                            <th>工单ID</th>
+                            <th>托盘号</th>
+                            <th>库位</th>
+                            <th>数量</th>
+                            <th>入库时间</th>
+                            <th>出库时间</th>
+
+                            <th>在库时长</th>
+                            <th>超期时长</th>
+                        </tr>
+
+                        </thead>
+                        <tbody>
+
+
+                        </tbody>
+
+
+
+                    </table>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<script>
+    $(document).ready(function() {// 初始化 Foundation JS
+        $(document).foundation();
+    })
+</script>
+
+
+<!--<script>
+    var table1=[
+        {
+            "item":1,"goodscode":101260977,"name":"M14","model":"S1000-2M","palletid":"p100000","storeposition":"JF-13-10-5","lot":"G000006","number":12,"unit":"pcs",
+            "intotime":"2020-1-8 13:55","storetypetext": "入库","storetype":10,"workid":12-100733075-6-03-000,"f" :10,"howlong":"3天","lockstatus":10,"locktext":"已锁定","overtime":10,"overtimetext":"2天"
+        },
+        {
+            "item":2,"goodscode":101260978,"name":"M15","model":"S1000-3M","palletid":"p105000","storeposition":"1F-12-11-5","lot":"G000006","number":12,"unit":"pcs",
+            "intotime":"2020-1-8 13:55","storetypetext": "出库","storetype":15,"workid":12-100733075-6-02-001,"f" :15,"howlong":"3天","lockstatus":10,"locktext":"已锁定","overtime":10,"overtimetext":"2天"
+        },
+        {
+            "item":3,"goodscode":101261977,"name":"M16","model":"S1002-2M","palletid":"p100070","storeposition":"JF-13-11-3","lot":"G000005","number":13,"unit":"pcs",
+            "intotime":"2020-1-8 13:55","storetypetext": "出库","storetype":15,"workid":12-100733065-6-03-002,"f" :10,"howlong":"3天","lockstatus":10,"locktext":"已锁定","overtime":10,"overtimetext":"2天"
+        },
+        {
+            "item":4,"goodscode":101260997,"name":"M06","model":"S1000-4M","palletid":"p130000","storeposition":"1F-13-10-5","lot":"G000006","number":14,"unit":"pcs",
+            "intotime":"2020-1-8 13:55","storetypetext": "入库","storetype":10,"workid":12-100733075-6-03-003,"f" :15,"howlong":"3天","lockstatus":10,"locktext":"已锁定","overtime":10,"overtimetext":"2天"
+        },
+        {
+            "item":5,"goodscode":101260977,"name":"M20","model":"S1000-2M","palletid":"p100060","storeposition":"1F-11-10-5","lot":"G000006","number":15,"unit":"pcs",
+            "intotime":"2020-1-8 13:55","storetypetext": "入库","storetype":10,"workid":12-100733075-6-03-012,"f" :15,"howlong":"3天","lockstatus":10,"locktext":"已锁定","overtime":10,"overtimetext":"2天"
+        }
+    ];
+
+
+    //比较两个对象同名属性的值是否相等
+    function isObjectValueEqual(a, b) {
+
+        var aProps = Object.getOwnPropertyNames(a);
+        console.log(aProps);
+        var bProps = Object.getOwnPropertyNames(b);
+        console.log(bProps);
+        for (var i = 0; i < aProps.length; i++) {
+            var propName = aProps[i];
+            console.log("aProps[i]"+aProps[i]);
+            console.log("bProps[i]"+bProps[i]);
+
+            if (a[propName] !== b[propName]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+    //自定义菜单
+    //获取菜单（菜单为预先写好，用css设为隐藏）
+    var menu = document.getElementById("menu");
+
+    var tr;
+
+
+
+
+    //在菜单点击事件中再度隐藏菜单
+    menu.onclick=function(e){
+        menu.style.display="none";
+    }
+
+    // 左键点击关闭自定义菜单
+    document.onclick=function(e){
+        menu.style.display="none";
+    }
+//搜索按钮事件
+   function search_1(){
+        $("#tb1 tbody").html("");
+        workid1=$("#workid1").val();
+        palletid1=$("#palletid1").val();
+        code1=$("#code1").val();
+        store1=$("#store1").val();
+        console.log(store1);
+        starttime1=$("#starttime1").val();
+        endtime1=$("#endtime1").val();
+        type1=$("#type1").val();
+
+        var obj=new Object();
+        if(palletid1!=""){ obj.palletid=palletid1;}
+        if(code1!=""){obj.goodscode=code1;}
+        if(workid1!=""){obj.workid=workid1;}
+        obj.f=store1;
+        obj.storetype=type1;
+
+        console.log(obj);
+        var nodearr=[];
+
+
+      for(let i of table1){
+
+           /* Object.keys(i).forEach(function(key1){
+                Object.keys(obj).forEach(function(key2){
+                    if(key2==key1){
+                        if(obj[key2]==i[key1]){
+                            nodearr.push(i);
+
+                        }
+
+                    }
+
+                });
+
+
+
+            });*/
+           var isequal= isObjectValueEqual(i,obj);
+            console.log(isequal);
+            if(isequal==true){
+                nodearr.push(i);
+
+            }
+
+
+
+
+          }
+
+
+
+        var nodeset=new Set(nodearr)  ;
+        console.log(nodeset);
+
+        for(let i of nodeset){
+            var htmlstr=" <tr><td>"+i.item+"</td><td>"+i.workid+"</td><td>"+i.goodscode+"</td><td>"+i.name+"</td><td>"+i.model+"</td><td>"+i.palletid+"</td><td>"+i.storeposition+"</td><td>"+i.lot+"</td><td>"+i.number+"</td><td>"+i.unit+"</td><td>"+i.intotime+"</td><td>"+i.storetypetext+"</td></tr>";
+
+            $("#tb1 tbody").append(htmlstr);
+
+        }
+        //获取tr集合
+        tr = document.querySelectorAll("tr");
+        //帮每个tr对象绑定右键菜单事件
+
+        for(var i=1;i<tr.length;i++){
+
+            tr[i].oncontextmenu = function(e){
+                //禁止默认菜单
+                e.preventDefault();
+                var e = e || window.event;
+                //把预先写好的自定义菜单设为可见
+                menu.style.display="block";
+                console.log(e.target);
+
+
+
+                if (e.target.parentNode.parentNode.parentNode.id == "tb1" || e.target.parentNode.parentNode.parentNode.id == "tb3") {
+                    $("#unlock").hide();
+                    $("#lock").hide();
+
+
+                } else {
+                    $("#unlock").show();
+                    $("#lock").show();
+                }
+
+
+
+
+
+
+                //获得事件发生坐标并把它作为菜单的绝对定位坐标
+                var x = e.clientX-15;
+                var y = e.clientY-10;
+                menu.style.left=x/15+'rem';
+                menu.style.top=y/15+'rem';
+
+            }
+
+
+
+
+
+
+        }
+
+
+
+
+        }
+
+
+    function search_2(){
+        $("#tb2 tbody").html("");
+        workid2=$("#workid2").val();
+        palletid2=$("#palletid2").val();
+        code2=$("#code2").val();
+        store2=$("#store2").val();
+
+        lockstatus=$("#type1").val();
+
+        var obj=new Object();
+        if(palletid2!=""){ obj.palletid=palletid2;}
+        if(code2!=""){obj.goodscode=code2;}
+        if(workid2!=""){obj.workid=workid2;}
+        obj.f=store2;
+        obj.lockstatus=lockstatus;
+
+
+        console.log(obj);
+        var nodearr=[];
+
+
+        for(let i of table1){
+
+            Object.keys(i).forEach(function(key1){
+                Object.keys(obj).forEach(function(key2){
+                    if(key2==key1){
+                        if(obj[key2]==i[key1]){
+                            nodearr.push(i);
+
+                        }
+
+                    }
+
+                });
+
+
+
+            });
+
+
+
+
+        }
+
+
+
+        var nodeset=new Set(nodearr)  ;
+        console.log(nodeset);
+
+        for(let i of nodeset){
+            var htmlstr=" <tr><td>"+i.item+"</td><td>"+i.workid+"</td><td>"+i.goodscode+"</td><td>"+i.name+"</td><td>"+i.model+"</td><td>"+i.palletid+"</td><td>"+i.storeposition+"</td><td>"+i.lot+"</td><td>"+i.number+"</td><td>"+i.unit+"</td><td>"+i.intotime+"</td><td>"+i.howlong+"</td><td>"+i.locktext+"</td></tr>";
+
+            $("#tb2 tbody").append(htmlstr);
+
+        }
+        //获取tr集合
+        tr = document.querySelectorAll("tr");
+        //帮每个tr对象绑定右键菜单事件
+
+        for(var i=1;i<tr.length;i++){
+
+            tr[i].oncontextmenu = function(e){
+                //禁止默认菜单
+                e.preventDefault();
+                var e = e || window.event;
+                //把预先写好的自定义菜单设为可见
+                menu.style.display="block";
+
+
+                if (e.target.parentNode.parentNode.parentNode.id == "tb1" || e.target.parentNode.parentNode.parentNode.id == "tb3") {
+                    $("#unlock").hide();
+                    $("#lock").hide();
+
+                } else {
+                    $("#unlock").show();
+                    $("#lock").show();
+                }
+
+
+
+
+
+
+                //获得事件发生坐标并把它作为菜单的绝对定位坐标
+                var x = e.clientX-15;
+                var y = e.clientY-10;
+                menu.style.left=x/15+'rem';
+                menu.style.top=y/15+'rem';
+
+            }
+
+
+
+
+
+
+        }
+
+
+
+
+    }
+
+
+    function search_3(){
+        $("#tb3 tbody").html("");
+
+       overtime=$("#overtime").val();
+
+        var obj=new Object();
+
+        obj.overtime=overtime;
+
+
+        console.log(obj);
+        var nodearr=[];
+
+
+        for(let i of table1){
+
+            Object.keys(i).forEach(function(key1){
+                Object.keys(obj).forEach(function(key2){
+                    if(key2==key1){
+                        if(obj[key2]==i[key1]){
+                            nodearr.push(i);
+
+                        }
+
+                    }
+
+                });
+
+
+
+            });
+
+
+
+
+        }
+
+
+
+        var nodeset=new Set(nodearr)  ;
+        console.log(nodeset);
+
+        for(let i of nodeset){
+            var htmlstr=" <tr><td>"+i.item+"</td><td>"+i.workid+"</td><td>"+i.goodscode+"</td><td>"+i.name+"</td><td>"+i.model+"</td><td>"+i.palletid+"</td><td>"+i.storeposition+"</td><td>"+i.lot+"</td><td>"+i.number+"</td><td>"+i.unit+"</td><td>"+i.intotime+"</td><td>"+i.howlong+"</td><td>"+i.overtimetext+"</td></tr>";
+
+            $("#tb3 tbody").append(htmlstr);
+
+        }
+        //获取tr集合
+        tr = document.querySelectorAll("tr");
+        //帮每个tr对象绑定右键菜单事件
+
+        for(var i=1;i<tr.length;i++){
+
+            tr[i].oncontextmenu = function(e){
+                //禁止默认菜单
+                e.preventDefault();
+                var e = e || window.event;
+                //把预先写好的自定义菜单设为可见
+                menu.style.display="block";
+
+
+                if (e.target.parentNode.parentNode.parentNode.id == "tb1" || e.target.parentNode.parentNode.parentNode.id == "tb3") {
+                    $("#unlock").hide();
+                    $("#lock").hide();
+
+                } else if(e.target.parentNode.parentNode.parentNode.id == "tb2" ) {
+                    alert(0);
+                    $("#unlock").show();
+                    $("#lock").show();
+                }
+
+
+
+
+
+
+                //获得事件发生坐标并把它作为菜单的绝对定位坐标
+                var x = e.clientX-15;
+                var y = e.clientY-10;
+                menu.style.left=x/15+'rem';
+                menu.style.top=y/15+'rem';
+
+            }
+
+
+
+
+
+
+        }
+
+
+
+
+    }
+
+    function reset(){
+        $('input[type="text"]').val("");
+        $('#starttime1').val("2020-02-09T00:00:00");
+        $('#endtime1').val("2020-02-10T00:00:00");
+        $('select').val(10);
+    }
+
+
+*/
+
+
+</script>
+<script type="text/javascript">
+
+
+
+    //隐藏浏览器滚动条
+    //document.body.parentNode.style.overflowY = "hidden";
+    //  $("body").parent().css("overflow-y","hidden").css("overflow-x","hidden");
+</script> !-->
+</body>
+</html>

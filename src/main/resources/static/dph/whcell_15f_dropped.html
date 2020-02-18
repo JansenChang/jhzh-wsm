@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+	<!--<![endif]-->
+
+	<head>
+		<!-- Set the viewport width to device width for mobile -->
+		<meta name="viewport" content="width=device-width" />
+		<meta charset="GB2312" />
+		<title></title>
+		<link href="../images/logo/favicon.ico" type="image/x-icon" rel="icon" />
+		<link href="../images/logo/favicon.ico" type="image/x-icon" rel="shortcut icon" />
+		<link rel="stylesheet" href="../css/css_0_0_normalize.css">
+		<link rel="stylesheet" href="../css/css_0_0_f5.css">
+		<link rel="stylesheet" href="../css/foundation_index.css">
+		<link rel="stylesheet" href="../css/standardization.css">
+
+		<link rel="stylesheet" type="text/css" href="../css/global3.css" />
+		<script src="../js/jquery.js"></script>
+		<script src="../js/tools.tabs-1.0.4.min.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="../css/include/include_nav.css" />
+		<script src="../js/vendor/modernizr.js"></script>
+		<script src="../js/zepto.js"></script>
+		<!-- <script src="../js/foundation.min.js"></script> -->
+		<script src="../js/js_0_0_f5m.js"></script>
+		<script src="../js/fun.js"></script>
+		<script src="../js/svg.min.js" type="text/javascript" ></script>
+	</head>
+
+	<body>
+
+		<nav class="top-bar bgcolor-orange">
+			<ul class="title-area bgcolor-orange">
+				<!-- Title Area -->
+				<li class="name">
+					<h1>
+					<a href="<%=basePath_nav%>">AGV监控</a>
+				</h1>
+				</li>
+				<li class="toggle-topbar menu-icon"><a href="javascript:void(0)"> <span>menu</span>	</a>
+				</li>
+			</ul>
+			<section class="top-bar-section ">
+				<!-- Right Nav Section -->
+				<ul class="left">
+				</ul>
+
+			</section>
+		</nav>
+
+		<div class="row row-own">
+			<div class="large-12 columns">
+
+				<!-- Content Slider -->
+
+				<div class="row row-own">
+					<div class="large-9 pad-12"    >
+
+						<div  id="drawing"  >
+
+						</div>
+
+					</div>
+					<div class="large-3 pad-6 small-6 phone-12  columns" >
+						<!-- AGV ONE -->
+						<ul class="pricing-table">
+							<li class="title">3303</li>
+							<li class="price">1111</li>
+							<li class="description">2222</li>
+							<li class="bullet-item">3333</li>
+							<li class="bullet-item">4444</li>
+							<li class="bullet-item">5555</li>
+							<li class="cta-button"><a class="button success" href="" target="_blank">查看详情</a>
+							</li>
+						</ul>
+						<!-- 热卖产品1 -->
+					</div>
+					<div class="large-3 small-6 pad-6 columns hide-for-phone hide-for-no-pad">
+					</div>
+				</div>
+
+				<div class="row row-own">
+					<div class="large-9 pad-12 columns">
+						<div class="panel small-padding">
+							<p>
+								<strong>概况</span>
+							</p>
+						</div>
+
+						<div class="panel bgcolor-white">
+							<div class="row">
+								<div class="large-12 small-4 phone-6 pad-2 columns">
+									
+									<h6 class="panel small-padding hover-01">预留</h6>
+								</div>
+							</div>
+
+
+
+							<div class="bgcolor-white overflow_auto">
+
+								<div class="large-6 small-12 column reset-padding-left reset-padding-right">
+
+CCC								</div>
+
+								<div class="large-6 small-12 column">
+DDD
+								</div>
+
+							</div>
+
+
+
+						</div>
+					</div>
+
+					<div class="large-3 pad-12 columns ">
+						<div class="row collapse search">
+							<div class="large-8 pad-9 small-8 columns">
+								<input placeholder="请输入关键字" type="text" />
+							</div>
+							<div class="large-4 pad-3 small-4 columns">
+								<a class="postfix success button expand" href="javascript:void(0);">本站搜索</a>
+							</div>
+						</div>
+						<div data-section="accordion" class="section-container accordion" style="">
+
+						</div>
+						<div class="panel bgcolor-white">
+							<h4>手工调度</h4>
+							<div class="row collapse">
+								<input type="text" placeholder="目标地点(鼠标点击)" id="loginEmail">
+							</div>
+							<div class="row collapse">
+								<input type="password" placeholder="执行密码" id="loginPassword">
+							</div>
+							<div class="row collapse">
+								<ul class="button-group">
+									<li><a class="button secondary margin-bottom-small" id="salepsnLogin">人工调度</a>
+									</li>
+									<li><a class="button secondary margin-bottom-small" id="memberLogin">其他调度</a>
+									</li>
+								</ul>
+							</div>
+							<p>
+								更多功能<a href="register/register.jsp">点击</a>
+							</p>
+						</div>
+					</div>
+				</div>
+
+
+				
+				
+
+				<footer class="row row-own">
+					<div class="large-12 columns">
+						<hr>
+						<div class="row row-own">
+
+							<div class="large-6 columns">
+								<p>版权所有： 
+								</p>
+							</div>
+							
+						</div>
+					</div>
+				</footer>
+
+				<!-- End Footer -->
+
+			</div>
+		</div>
+		<div class="suggest"></div>
+		<div class="to-top" onclick="javascript:scroll(0,0)"></div>
+
+		<script>
+			$(document).foundation();
+			    var path = "";
+			    var jsonrowSaleorgs = "<%=jsonrowSaleorgs%>"; 
+			    var jsonrowSalepsns = "<%=jsonrowSalepsns%>";
+		</script>
+		<script src="../js/rel/index.js"></script>
+		
+		<script type="text/javascript">
+	    function findWindowSize() {
+	    
+			//JS动态获取div的宽度
+			var o = document.getElementById("drawing");
+			var w = o.clientWidth||o.offsetWidth;
+			alert("Div 'drawing'  width is "+w);
+			var draw = SVG('drawing').size(w, w*1);
+			var rect = draw.rect(w, w*1).attr({ fill: '#000' });
+			//JS动态获取div的高度同理：
+			//var o = document.getElementById("drawing");
+			var h = o.clientHeight||o.offsetHeight;
+			//alert("Div1 height is "+h);
+			var unitw = w/26;
+			var unith = h /40;
+			var unitw_in = w/26-1;
+			var unith_in = h/40-1;
+
+			var unitgridw = 0.8*unitw;var unitgridh = 0.8*unith;
+			var mark =[
+				//0   1    2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  
+				[ 01, 01,  01, 01, 01, 01, 01, 01, 01, 01,00, 00, 01, 01, 01, 01, 01, 01, 01, 01, 01, 00, 00, 01, 01, 00  ],	
+				[ 10, 10,  10, 10, 10, 10, 10, 10, 10, 10,10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10  ],	//1
+				[ 01, 01,  01, 01, 01, 01, 01, 01, 01, 01,01, 01, 10, 10, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 10  ],
+				[ 00, 00,  00, 00, 00, 00, 01, 01, 01, 01,01, 01, 10, 10, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 10  ],
+				[ 00, 00,  00, 00, 00, 00, 10, 10, 10, 10,10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10  ],	//2
+				[ 00, 00,  00, 00, 00, 00, 01, 01, 01, 01,01, 01, 10, 10, 01, 01, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00  ],
+				
+				[ 00, 00,  00, 00, 00, 00, 00, 00, 00, 00,00, 00, 10, 10, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00, 00  ],
+				[ 00, 00,  00, 00, 00, 00, 00, 00, 00, 00,00, 00, 10, 10, 10, 10, 10, 10, 10, 10, 10, 00, 00, 00, 00, 00  ],	//3	
+				[ 00, 00,  00, 00, 00, 00, 00, 00, 00, 00,00, 00, 10, 10, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00, 00  ],
+				
+				[ 00, 00,  00, 00, 00, 00, 00, 00, 40, 50,40, 50, 10, 10, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00, 00  ],
+				[ 00, 00,  00, 00, 00, 00, 00, 00, 40, 50,40, 50, 10, 10, 10, 10, 10, 10, 10, 10, 10, 00, 00, 00, 00, 00  ],	//4
+				[ 00, 00,  00, 00, 00, 00, 00, 00, 40, 50,40, 50, 10, 10, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00, 00  ],
+				
+				[ 00, 00,  00, 00, 00, 00, 00, 00, 30, 50,30, 50, 10, 10, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00, 00  ],
+				[ 00, 00,  00, 00, 00, 00, 00, 00, 30, 50,30, 50, 10, 10, 10, 10, 10, 10, 10, 10, 10, 00, 00, 00, 00, 00  ],	//5
+				[ 00, 00,  00, 00, 00, 00, 00, 00, 14, 50,14, 50, 10, 10, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00, 00  ],
+
+//6右8				
+				[ 00, 00,  00, 00, 00, 00, 00, 00, 10, 14,10, 14, 10, 10, 01, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00  ],
+				[ 00, 00,  00, 00, 00, 00, 00, 00, 10, 00,10, 00, 14, 10, 10, 10, 10, 10, 10, 10, 10, 10, 00, 00, 00, 00  ],	//6
+				[ 00, 00,  00, 00, 00, 00, 00, 00, 10, 14,10, 14, 10, 10, 01, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00  ],
+//7				
+				[ 00, 00,  00, 00, 00, 00, 00, 00, 01, 01,01, 01, 10, 10, 01, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00  ],
+				[ 00, 00,  00, 00, 00, 00, 00, 00, 10, 10,10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 00, 00, 00, 00  ],	//7
+				[ 00, 00,  00, 00, 00, 00, 00, 00, 01, 01,01, 01, 10, 10, 01, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00  ],
+//8			
+				[ 00, 00,  00, 00, 00, 00, 00, 00, 00, 00,00, 00, 10, 10, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00, 00  ],
+				[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 00, 00, 00, 00  ],	//8	//充电桩
+				[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 00, 00, 00, 00  ],	//9	//充电桩
+
+				[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00  ],	//0-10 拣选台  	//充电桩
+
+				[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00  ],	//充电桩
+				[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00  ],	//充电桩
+				[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00  ],	//充电桩
+
+			];
+			var obj;
+			for( var i=0;i<28;i++) {
+				for( var j=0;j<26;j++)
+					if(mark[i][j]==1)
+						obj=draw.rect(unitw_in, unith_in).attr({ fill: '#444' }).move(j*unitw,i*unith); 
+					else if(mark[i][j]==10)
+						obj=draw.rect(unitw_in, unith_in).attr({ fill: '#888' }).move(j*unitw,i*unith); 
+					else if(mark[i][j]==0)
+						obj=draw.rect(unitw_in, unith_in).attr({ fill: '#000' }).move(j*unitw,i*unith); 
+					else if(mark[i][j]==14)
+						obj=draw.rect(unitw_in, unith_in).attr({ fill: '#777' }).move(j*unitw,i*unith); 
+					else if(mark[i][j]==12)
+						obj=draw.rect(unitw_in, unith_in).attr({ fill: '#666' }).move(j*unitw,i*unith); 
+					else if(mark[i][j]==20)
+						obj=draw.rect(unitw_in, unith_in).attr({ fill: '#120' }).move(j*unitw,i*unith); 
+					else if(mark[i][j]==30)
+						obj=draw.rect(unitw_in, unith_in).attr({ fill: '#440' }).move(j*unitw,i*unith); 
+					else if(mark[i][j]==40)
+						obj=draw.rect(unitw_in, unith_in).attr({ fill: '#600' }).move(j*unitw,i*unith); 
+					else if(mark[i][j]==50)
+						obj=draw.rect(unitw_in, unith_in).attr({ fill: '#500' }).move(j*unitw,i*unith); 
+					obj.attr(id,i*100+j);
+						
+			}
+			
+		
+		}
+//		obj= draw.attr(1001);
+//		findWindowSize();
+//		window.οnresize=findWindowSize;
+		</script>			
+	</body>
+
+</html>

@@ -1,0 +1,741 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    
+    
+    <script src="../js/jquery.js"></script>
+    <script>
+
+        (function (doc, win) {
+
+            var docEl = doc.documentElement,
+
+                    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+
+                    recalc = function () {
+
+                        var clientWidth = docEl.clientWidth;
+
+                        if (!clientWidth) return;
+
+                        if(clientWidth>=640){
+
+                            docEl.style.fontSize = '100px';
+
+                        }else{
+
+                            docEl.style.fontSize = 100 * (clientWidth / 640) + 'px';
+
+                        }
+
+                    };
+
+            if (!doc.addEventListener) return;
+
+            win.addEventListener(resizeEvt, recalc, false);
+
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+
+        })(document, window);
+
+    </script>
+    
+	<script>
+	function las_move(){//  
+		type=$("#type").val();
+		srcrow=$("#srcrow").val();
+		srccol=$("#srccol").val();
+		srclayer=$("#srclayer").val();
+		dstrow=$("#dstrow").val();
+		dstcol=$("#dstcol").val();
+		dstlayer=$("#dstlayer").val();
+		
+		
+		$.ajax({  
+			type : "get", //使用get方法访问后台        
+			url : "/yxpower/ajax",		
+			dataType : "html",  			
+			data : "a=las_move&type="+type+"&srcrow="+srcrow+"&srccol="+srccol+"&srclayer="+srclayer  +"&dstrow="+dstrow+"&dstcol="+dstcol+"&dstlayer="+dstlayer   , //要发送的参数  
+			async : false,//同步调用   			
+			success : function(msg) {
+				//$("#patinfo").val(msg); 
+				//getlistjust(15);
+				alert("已执行");
+			}
+		});
+	}
+     
+   </script>
+    
+    
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link rel="stylesheet" href="../css/manage_inAndOut_style.css">
+
+    <style>
+
+    </style>
+</head>
+<body onload="winopen()">
+<div class="container">
+    <div class="tabs">
+        <div class="tabs-nav">
+            <ul>
+                <li class="opentow">设<br/>备<br/>运<br/>行<br/>统<br/>计</li>
+                <li>统<br/>计<br/>报<br/>告</li>
+                <li>系<br/>统<br/>配<br/>置</li>
+                <li>测<br/>试</li>
+
+            </ul>
+        </div>
+
+        <div class="tabs-content">
+            <div class="item open">
+                <div class=" journal">
+                    <p>AGV异常,3019#1排2列8层取空AGV异常,3020#1排3列8层取空AGV异常,3022#1排5列1层取空AGV异常,3025#1排10列2层取空 2020.1.12.14:20</p>
+                    <p>2#吊笼入库任务下达成功 2020.1.12.14:20</p>
+                    <p>1#吊笼在2F未抓取到2层载盘,请手动处理 2020.1.12.14:23</p>
+                    <p>堆垛机超宽报警 2020.1.12.14:23</p>
+                    <p>堆垛机检测到载盘,请手动检查库存信息 2020.1.12.14:23</p>
+                    <p>1#吊笼入库任务下达成功 2020.1.12.14:23</p>
+                    <p>2#吊笼在2F未抓取到2层载盘,请手动处理 2020.1.12.14:23</p>
+                    <p>2#吊笼在2F未抓取到2层载盘,请手动处理 2020.1.12.14:23</p>
+                    <p>堆垛机原点丢失,请手动归位原点 2020.1.12.14:23</p>
+                    <p>P000386载盘已在库使用,请核实载盘信息 2020.1.12.14:23</p>
+                    <p>2#吊笼在2F取5层载盘时,气缸伸出超时、请手动修复故障 2020.1.12.14:23</p>
+                    <p>AGV异常,3020#6排8列12层取空 2020.1.12.14:23</p>
+                    <p>AGV异常,3021#3排2列8层取空AGV取空 2020.1.12.14:23</p>
+                    <p>AGV异常,3019#1排2列8层取空AGV异常,3019#1排2列8层取空 2020.1.12.14:23</p>
+                    <p>堆垛机超宽报警 2020.1.12.14:33</p>
+                    <p>AGV异常,3018#1排2列12层取空 2020.1.12.14:33</p>
+                    <p>AGV异常,3015#冲出跑道、请手动恢复异常 2020.1.12.14:33</p>
+                    <p>AGV异常,3019#1排2列8层取空AGV异常,3019#1排2列8层取空AGV异常,3019#1排2列8层取空 2020.1.12.14:35</p>
+                    <p>AGV异常,3019#1排2列8层取空 2020.1.12.14:35</p>
+                    <p>AGV异常,3019#1排2列8层取空AGV异常,3019#1排2列8层取空 2020.1.12.14:35</p>
+                    <p>AGV异常,3019#1排2列8层取空 2020.1.12.14:35</p>
+                </div>
+
+                <p class="name">当前<span>admin</span>已登录 | <a href="javascript:void(0);">注销</a> </p>
+               <div class="floatwin_wrap">
+                   <div class="floatwin" style="height:20%;">
+                       <div class="floatwin_left">
+                           <div class="greenLight" style="margin-top: -1px; "></div>
+                           <h3>设<br/>备<br/>状<br/>态</h3>
+                       </div>
+                       <div class="floatwin_right">
+                           <div class="floatwinItem">
+                               <h2>堆垛机械手</h2>
+                               <p>状态: <span>正常</span></p>
+                           </div>
+                           <div class="floatwinItem">
+                               <h2>垂直吊笼</h2>
+                               <p>状态: <span>正常</span></p>
+                           </div>
+                           <div class="floatwinItem">
+                               <h2>AGV</h2>
+                               <p>状态: <span>正常</span></p>
+                           </div>
+
+                       </div>
+                   </div>
+                   <div class="floatwin" style="height:20%;">
+                       <div class="floatwin_left">
+                           <div class="greenLight"></div>
+                           <h3>监<br/>测<br/>分<br/>析</h3>
+                       </div>
+                       <div class="floatwin_right">
+                           <p>故障累计:<span class="bigred">110</span>笔</p>
+                           <p>码垛机械手:<span class="bigred">30</span>笔</p>
+                           <p>AGV<span class="bigred">30</span>笔</p>
+                           <p>垂直吊笼<span class="bigred">50</span>笔</p>
+                       </div>
+                   </div>
+                   <div class="floatwin" style="height:58%;">
+                       <div class="floatwin_left">
+                           <div class="greenLight"></div>
+                           <h3>故<br/>障<br/>预<br/>警</h3>
+                       </div>
+                       <div class="floatwin_right">
+                           <p>14:20 AGV异常,3019#1排2列8层取空</p>
+                           <p>14:30 AGV异常,3019#1排2列7层取空</p>
+                           <p>14:33 AGV异常,3020#2排2列1层取空</p>
+                           <p>14:35 AGV异常,3025#3排3列8层取空</p>
+                           <p>14:37 堆垛机取空异常</p>
+                           <p>15:20 AGV异常,3015#1排10列12层取空</p>
+                           <p>15:21 AGV异常,当前未联机,请手动开启联机服务</p>
+                           <p>15:22 1#吊笼取夹层2#物流线下层载盘时未探测到载盘信息,请手动处理</p>
+                           <p>15:24 AGV异常,3020#2排2列1层取空</p>
+                           <p>16:35 AGV异常,3025#3排3列8层取空</p>
+                           <p>16:37 堆垛机取空异常</p>
+                           <p>17:20 AGV异常,3015#1排10列12层取空</p>
+
+                       </div>
+                   </div>
+               </div>
+            </div>
+            <div class="item">
+                <div class="tabs2">
+                    <div class="tabs-nav2">
+
+                        <ul>
+                            <li class="opentow">进出库台帐</li>
+                            <li>在库管理</li>
+                            <li>库存预警</li>
+                        </ul>
+                    </div>
+
+                    <div class="tabs-content2">
+                        <div class="item2 open">
+                            <form id="editform1" name="editform" action="http://localhost:8000/yxpower/back" method="post">
+                                <header>
+                                    <div class="header-1" >
+                                        <div class="grop1"><input type="text" style="width:80px"/><label for="">任务号</label></div>
+                                        <div class="grop1"><input type="text" style="width:80px"/><label for="">托盘号</label></div>
+                                    </div>
+                                    <div class="header-1">
+
+                                        <div class="grop1"><input type="text"/><label for="">单号</label></div>
+                                        <div class="grop1">
+                                            <div class="selectinput">
+                                                <select name="">
+                                                    <option value=""></option>
+                                                    <option value=""></option>
+                                                </select>
+                                            </div><label for="">仓库</label></div>
+                                    </div>
+                                    <div class="header-1">
+                                        <div class="grop1">
+                                            <div class="selectinput" style="width:80px">
+                                                <select name="">
+                                                    <option value="">入库</option>
+                                                    <option value="">出库</option>
+                                                    <option value=""></option>
+                                                </select>
+                                            </div><label for="">指令类型</label></div>
+
+                                    </div>
+
+
+                                    <div class="header-1" >
+                                        <div class="grop1" >
+
+                                            <a href="javascript:void(0)" class="btn_1" style="background-color:#D94C3A; ">重置</a>
+                                        </div>
+                                        <div class="grop1" >
+
+                                            <a href="javascript:void(0)" class="btn_1" style="background-color:#514FA3; ">查询</a>
+                                        </div>
+
+
+
+                                    </div>
+
+
+
+                                </header>
+                                <div class="banner">
+
+                                    <table id="tb1"  border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+                                        <tr class="trHead">
+                                            <th>项次</th>
+                                            <th>物资编码</th>
+                                            <th>名称</th>
+                                            <th>规格</th>
+                                            <th>托盘号</th>
+                                            <th>仓位 </th>
+                                            <th>批号 </th>
+
+                                            <th>数量</th>
+                                            <th>单位</th>
+                                            <th>进库时间</th>
+                                            <th>在库时长</th>
+                                        </tr>
+                                        <tr>
+
+
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
+                                        </tr>
+                                        <tr>
+
+
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
+                                        </tr>
+                                    </table>
+
+                                </div>
+
+
+
+                            </form>
+                        </div>
+                        <div class="item2">
+                            <form id="editform2" name="editform" action="http://localhost:8000/yxpower/back" method="post">
+                                <header>
+                                    <div class="header-1" >
+                                        <div class="grop1"><input type="text" style="width:80px"/><label for="">工单ID</label></div>
+                                        <div class="grop1"><input type="text" style="width:80px"/><label for="">托盘号</label></div>
+                                    </div>
+                                    <div class="header-1">
+
+                                        <div class="grop1"><input type="text"/><label for="">物资编码</label></div>
+                                        <div class="grop1">
+                                            <div class="selectinput">
+                                                <select name="">
+                                                    <option value="">JF库</option>
+                                                    <option value="">1F库</option>
+                                                </select>
+                                            </div><label for="">仓库</label></div>
+                                    </div>
+
+
+                                    <div class="header-1" >
+                                        <div class="grop1" >
+
+                                            <a href="javascript:void(0)" class="btn_1" style="background-color:#D94C3A; ">重置</a>
+                                        </div>
+                                        <div class="grop1" >
+
+                                            <a href="javascript:void(0)" class="btn_1" style="background-color:#514FA3; ">查询</a>
+                                        </div>
+
+
+
+                                    </div>
+
+
+
+                                </header>
+                                <div class="banner">
+
+                                    <table id="tb2"  border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+                                        <tr class="trHead">
+                                            <th>项次</th>
+                                            <th>物资编码</th>
+                                            <th>名称</th>
+                                            <th>规格</th>
+                                            <th>托盘号</th>
+                                            <th>仓位 </th>
+                                            <th>批号 </th>
+
+                                            <th>数量</th>
+                                            <th>单位</th>
+                                            <th>进库时间</th>
+                                            <th>在库时长</th>
+                                        </tr>
+
+
+                                    </table>
+
+                                </div>
+
+
+
+                            </form>
+
+                        </div>
+                        <div class="item2">
+                            <form id="editform" name="editform" action="http://localhost:8000/yxpower/back" method="post">
+                                <header>
+                                    <div class="header-1">
+                                        <div class="grop1">
+                                            <div class="selectinput" style="width:160px">
+                                                <select name="">
+                                                    <option value=""></option>
+                                                    <option value=""></option>
+                                                    <option value=""></option>
+                                                </select>
+                                            </div><label for="">超期范围</label></div>
+
+                                    </div>
+
+
+                                    <div class="header-1" >
+                                        <div class="grop1" >
+
+                                            <a href="javascript:void(0)" class="btn_1" style="background-color:#D94C3A; ">重置</a>
+                                        </div>
+                                        <div class="grop1" >
+
+                                            <a href="javascript:void(0)" class="btn_1" style="background-color:#514FA3; ">查询</a>
+                                        </div>
+
+
+
+                                    </div>
+
+
+
+                                </header>
+                                <div class="banner">
+
+                                    <table id="tb3"  border="0" cellpadding="0" cellspacing="0" style="width:100%;">
+                                        <tr class="trHead">
+                                            <th>项次</th>
+                                            <th>物资编码</th>
+                                            <th>名称</th>
+                                            <th>规格</th>
+                                            <th>托盘号</th>
+                                            <th>仓位 </th>
+                                            <th>批号 </th>
+
+                                            <th>数量</th>
+                                            <th>单位</th>
+                                            <th>进库时间</th>
+                                            <th>在库时长</th>
+                                        </tr>
+
+
+                                    </table>
+
+                                </div>
+
+
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="item">
+                第三块内容
+                <div class="testBigGrop">
+                    <p class="testTitle">拣选规则</p>
+                    <div class="testBigGrop_inner">
+                        <div class="grop">
+                            <input type="radio" name="sorting"/>
+                            <label for="">一拣一备</label>
+                        </div>
+
+                        <div class="grop">
+                            <input type="radio" name="sorting"/>
+                            <label for="">自动分配拣选任务</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <p style="position: absolute;top:3.11rem;left:3.63rem;color: #4D7AFF">入数值，单机测试时无需输入工单ID及大盘编码、只需要点选上下层后点击开始搬运）</p>
+                <div class="itemtop">
+                    <div class="itemtop_left">
+                        <div class="testBigGrop">
+                            <p class="testTitle" >Test.搜索内、外工单在库位置</p>
+                            <div class="testBigGrop_inner">
+                                <label for="">请输入工单ID</label>
+                                <div class="searchbox">
+                                    <input type="text"/>
+                                    <button><img src="../images/search.png" alt=""/> </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testBigGrop" style="margin-top:1.2rem">
+                            <p class="testTitle">Test.由于各种原因大、小载盘未送达目的位置时请使用此功能</p>
+                            <div class="testBigGrop_inner">
+                                <p>请输入将要入库的库位坐标</p>
+                                <div class="grop3">
+                                    <label for="">行</label>
+                                    <input type="text" class="smallinput"/>
+                                    <label for="">列</label>
+                                    <input type="text" class="smallinput"/>
+                                    <label for="">层</label>
+                                    <input type="text"class="smallinput" />
+                                </div>
+                                <div class="grop3">
+                                    <label for="">载盘ID</label>
+                                    <input type="text"/>
+                                    <button id="" class="finish">确定</button>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+
+
+
+                    </div>
+                    <div class="itemtop_middle">
+                        <div class="testBigGrop">
+                            <p class="testTitle">Test.搜索大、小载盘的物理位置</p>
+                            <div class="testBigGrop_inner">
+                                <label for="">请输入载盘ID</label>
+                                <div class="searchbox">
+                                    <input type="text"/>
+                                    <button><img src="../images/search.png" alt=""/> </button>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="testBigGrop" style="width:300px; margin-top: 1.2rem">
+                            <p class="testTitle">Test.夹层库载盘及一楼库载盘需进行库位转移时使用</p>
+										<select id='type' name="type" style="width:200px;height:30px;" >
+											  <option value ="10">外层库（一楼成品立库）</option>
+											  <option value ="15">内层库（夹层原料立库）</option>
+										</select>
+                            <div class="testBigGrop_inner">
+                                <div class="middleGrop">
+                                    <div class="grop"><label for="">来源库位</label> </div>
+                                    <div class="grop3" style="margin-top: -0.1px">
+                                        <label for="">行</label>
+                                        <input id='srcrow'  type="text" class="smallinput"/>
+                                        <label for="">列</label>
+                                        <input id='srccol' type="text" class="smallinput"/>
+                                        <label for="">层</label>
+                                        <input id='srclayer' type="text"class="smallinput" />
+                                    </div>
+                                    <div class="grop" style="margin-top: 0"><label for="">目标库位</label> </div>
+                                    <div class="grop3" style="margin-top: -0.1px">
+                                        <label for="">行</label>
+                                        <input id='dstrow' type="text" class="smallinput"/>
+                                        <label for="">列</label>
+                                        <input id='dstcol' type="text" class="smallinput"/>
+                                        <label for="">层</label>
+                                        <input id='dstlayer' type="text"class="smallinput" />
+                                    </div>
+                                </div>
+
+                                <button id="startMove"  onclick="las_move()"     >开始移库</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="itemtop_right">
+
+
+                        <div class="testBigGrop" style="margin-top:1.93rem;margin-left: 0;">
+                            <p class="testTitle " >Test.回夹层的大载盘有异常时使用（前个功能用于自动模式下出异常时使用，后个应用于单机测试）</p>
+                            <div class="testBigGrop_inner">
+                                <label for="">当前大盘,</label>
+                                <span style="display: none;">正在回流中请稍等</span>
+                                <span>未能正常回流请手动点击回流按钮 <button id="backflow">回流</button> </span>
+                                <br/>
+                                <p> 请输入堆垛机库需要搬运的大载盘的库位坐标，点确定后会搬盘到夹层的拣选位 <div class="grop3 left" style="margin-top: -0.1px">
+                                <label for="">行</label>
+                                <input type="text" class="smallinput"/>
+                                <label for="">列</label>
+                                <input type="text" class="smallinput"/>
+                                <label for="">层</label>
+                                <input type="text"class="smallinput" />
+                            </div><button id="finish1"class="left" style=" background-color:#E8E8E8;">确定</button> </p>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <div class="itembottom">
+                    <div class="itembottom_left">
+                        <div class="testBigGrop" style="width:300px">
+                            <p class="testTitle" style="white-space: nowrap">Test.拣选完成后送大载盘下一楼（自动模式下需全部输入</p>
+                            <div class="testBigGrop_inner">
+
+                                <button id="startTransport">开始搬运</button>
+                                <div class="middleGrop" >
+                                    <div class="grop1"><input type="text"/><label for="">外层工单ID</label> </div>
+                                    <div class="grop1"><input type="text"/><label for="">大盘编码</label> </div>
+                                    <div class="grop" >
+                                        <label for="" style="float:left;margin-left: 0.39rem ">盘位</label> </div>
+                                    <button id="upper" style="float:left">上层</button>
+                                    <button id="lower" style="float:left">下层</button>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testBigGrop">
+                            <p class="testTitle">Test.此功能仅适用于单机功能测试，当一楼需要进行出库作业时使用</p>
+                            <div class="testBigGrop_inner">
+                                <p>请输入要出库的载盘ID编码
+
+                                </p>
+                                <div class="grop3">
+                                    <label for="">载盘ID</label>
+                                    <input type="text"/>
+                                    <button id="" class="finish">确定</button>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="testBigGrop">
+                            <p class="testTitle">Test.此功能仅适用于单机功能测试，当一楼需要进行空的大载盘入库作业时使用</p>
+                            <div class="testBigGrop_inner">
+
+                                <p>请输入要入库的载盘ID编码
+
+                                </p>
+                                <div class="grop3">
+                                    <label for="">载盘ID</label>
+                                    <input type="text"/>
+                                    <button id="" class="finish">确定</button>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="itembottom_middle">
+                        <div class="testBigGrop">
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="itembottom_right">
+
+
+
+
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+<script>
+
+    $(".tabs-nav li").click(function(){//外层选项卡切换函数
+        $(".tabs-nav li").eq(1).removeClass('opentow');
+        var index = $(this).index();
+        $(this).addClass('opentow').siblings().removeClass('opentow');
+        $(".tabs-content .item").eq(index).addClass('open').siblings().removeClass('open');
+
+    })
+
+
+    $(".tabs-nav2 li").click(function(){//内层选项卡切换函数
+        $(".tabs-nav2 li").eq(1).removeClass('opentow');
+        var index = $(this).index();
+        $(this).addClass('opentow').siblings().removeClass('opentow');
+        $(".tabs-content2 .item2").eq(index).addClass('open').siblings().removeClass('open');
+
+
+
+
+
+    })
+
+
+//    function changeTrClor(tbid){
+//        var t_name = document.getElementById(tbid);//表
+//        var t_len = t_name.getElementsByTagName("tr");//列
+//        for(var i=1;i<=t_len.length;i++){//隔行变色、鼠标经过变色
+//            //偶数行时执行
+//            if(i%2 == 0){
+//                t_len[i].style.backgroundColor="#ffcccc";
+//
+//                //添加鼠标经过事件
+//                t_len[i].onmouseover = function(){
+//                    this.style.backgroundColor="blue";
+//                    this.style.color="white";
+//                }
+//                //添加鼠标离开事件
+//                t_len[i].onmouseout = function(){
+//                    this.style.backgroundColor="#ffcccc"
+//                    this.style.color="black";
+//                }
+//            }
+//            else{
+//                t_len[i].style.backgroundColor="#ffffcc";
+//                t_len[i].onmouseover = function(){
+//                    this.style.backgroundColor="blue";
+//                    this.style.color="white";
+//                }
+//                t_len[i].onmouseout = function(){
+//                    this.style.backgroundColor="#ffffcc"
+//                    this.style.color="black";
+//                }
+//            }
+//        }
+//    }
+//
+//    changeTrClor("tb1");
+//
+//    changeTrClor("tb3");
+</script>
+<script type="text/javascript">
+    function winopen(){
+        var targeturl="地址"
+        newwin=window.open("","","scrollbars");
+        if(document.all){
+            newwin.moveTo(0,0)//新窗口的坐标
+            newwin.resizeTo(screen.width,screen.height)
+//此处可设置窗口大小，如(1024, 768)，不设置的话为全屏
+        }
+        newwin.location=targeturl;
+    }
+
+
+    //隐藏浏览器滚动条
+    //document.body.parentNode.style.overflowY = "hidden";
+  //  $("body").parent().css("overflow-y","hidden").css("overflow-x","hidden");
+</script>
+</body>
+</html>

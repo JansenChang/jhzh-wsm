@@ -1,0 +1,17 @@
+/*网站导航*/
+.top-bar-section > ul > .divider{border-color:#f60;;}/*bar的颜色修改*/
+.top-bar-section .divider, .top-bar-section [role="separator"]{border-color:#f60;}/*bar的颜色修改*/
+.top-bar-section ul{background-color:#f60;}/*bar的颜色修改*/
+.top-bar-section li a:not(.button){background-color:#ff7316;}/*bar的颜色修改*/
+.top-bar-section ul li > a {background-color:#ff7316;}/*bar的颜色修改*/
+.top-bar-section li a:hover:not(.button){background:#f60;}/*bar的颜色修改*/
+.top-bar-section .dropdown li label{background:#ff7316;}/* 下拉导航里的label标签 */
+.top-bar-section .dropdown label{font-size:0.75em; color:#ffb686;}
+
+.orbit-bullets li{border-color:#f60; background-color:#ff9b59;}/* 播放图片的下面的圆标 */
+.orbit-bullets li.active{background-color:#f60;}
+
+.top-bar.expanded .toggle-topbar a{color:#fff;}/*缩起后菜单两个字的颜色*/
+.top-bar.expanded .toggle-topbar a span{box-shadow: 0 10px 0 1px #fff, 0 16px 0 1px #fff, 0 22px 0 1px #fff;}
+
+.section-container.auto > section > .title a, .section-container.auto > .section > .title a{padding:0.4em 1em;}

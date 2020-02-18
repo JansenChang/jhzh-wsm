@@ -1,0 +1,105 @@
+
+/*修改覆盖样式区*/
+
+html{background:none;height:100%;}
+ul li ul, ul li ol{margin-left:0;}/*去除ul下面的ul的右边界*/
+.row{max-width:none;}
+
+#search_line_buttons{
+padding-top: 0.5rem;
+padding-right: 1.1rem;
+padding-bottom: 0.5rem;
+padding-left: 1.1rem;
+font-size: 0.8125rem;
+}
+
+
+.top-bar-section > ul > .divider{border-color:#00abd6;}/*bar的颜色修改*/
+.top-bar-section .divider, .top-bar-section [role="separator"]{border-color:#00abd6;}/*bar的颜色修改*/
+.top-bar-section ul{background:url(../images/foundation_back/nav_bg.png) repeat scroll 0 0 #00abd6;}/*bar的颜色修改*/
+.top-bar-section li a:not(.button){background:url(../images/foundation_back/nav_bg.png) repeat scroll 0 0 #00abd6;}/*bar的颜色修改*/
+.top-bar-section ul li > a {background:url(../images/foundation_back/nav_bg.png) repeat scroll 0 0 #00abd6;}/*bar的颜色修改*/
+.top-bar-section li a:hover:not(.button){background:url(../images/foundation_back/nav_bg.png) repeat scroll 0 0 #00abd6;}/*bar的颜色修改*/
+.top-bar.expanded .title-area {background:url(../images/foundation_back/nav_bg.png) repeat scroll 0 0 #00abd6;}
+.top-bar .name h1 a{padding:0 35px 0 15px;}/*改变logo的左右填充*/
+
+.top-bar-section li{background:#0aceff; border-radius:5px; -moz-border-radius:5px; box-shadow:0 1px 1px #0195ba; margin-right:15px;}/*导航栏上的按钮样式修改*/
+.top-bar-section li:hover{background:#3dd8ff;}/*导航栏上的按钮样式修改*/
+.top-bar-section li img{margin-top:-3px; margin-right:5px;}/*导航栏上的按钮样式修改*/
+.top-bar-section li a:not(.button){display:inline; line-height:30px; background:none; padding:0 8px;}/*导航栏上的按钮样式修改*/
+.top-bar-section li a:not(.button):hover{background:none;}/*导航栏上的按钮样式修改*/
+.top-bar-section li{height:30px; line-height:30px; margin-top:8px;}/*导航栏上的按钮样式修改*/
+
+.pagination li.current a{background: none repeat scroll 0 0 #00abd6;}/*翻页样式*/
+
+@media only screen and (min-width: 750px) and (max-width:940px)/*pad的设定*/{
+	.top-bar-section ul{width:auto;}
+}
+
+@media only screen and (max-width: 750px)/*手机的设定*/{
+	.top-bar-section ul{width:auto;}
+}
+
+@media only screen and (min-width: 58.75em){
+	*{font-family:"微软雅黑";}
+	h1,h2,h3,h4,h5,h6{font-family:"微软雅黑";}
+	.font-size-14{font-size:0.875em;}
+}
+/*修改覆盖样式区结束*/
+
+
+/*新增样式区*/
+
+body{height:100%;}
+.main{padding-left:220px;}
+
+.nav_bar{background:url(../images/foundation_back/nav_bg.png) repeat scroll 0 0 #00abd6; height:46px;}/*nav的背景颜色和花纹*/
+.logo{width:220px; padding-left:15px;}/*logo的设定*/
+.logo h1{font-size:1em;}/*logo的设定*/
+.logo h1 a{line-height:46px; color:#fff;}/*logo的设定*/
+.logo h1 a:hover{color:#fff;}/*logo的设定*/
+
+.list-left{height:auto; width:220px; float:left; margin-left:-220px; border-right:1px solid #d9d9d9; background:#ebebeb;}/*左侧*/
+.list-right{height:auto; width:100%; float:right;}/*右侧*/
+
+/*左侧*/
+.profile{display:block; height:84px; line-height: normal; padding:15px 25px;}/*人物介绍*/
+
+.function ul li{padding:0px 3px; border-radius:4px; -moz-border-radius:4px; height:30px; float:left; margin-right:5px; margin-bottom:5px;}/*功能区样式*/
+.function ul li a{line-height:30px;}
+.function ul li img{margin-right:2px;}
+
+.accordion li{border-bottom:1px solid #d9d9d9; background:#fafafa;}/*左侧菜单*/
+.accordion li img{margin-right:10px;}
+.accordion li a {display: block; position: relative; min-width: 110px; padding-left:25px; height:40px; line-height:40px; font-weight:bold; text-decoration: none; color:#7c7c7c;}
+.after{color: #7c7c7c; background:#f2f2f2;}
+
+.sub-menu{border-top:none; border-bottom:none;}/*左侧二级菜单*/
+.sub-menu li a{color: #797979; background: #f2f2f2; border:none; font-weight:normal; font-size:0.875em; padding-left:60px;}
+.sub-menu li:hover a{border:none;}
+.accordion li > .sub-menu{display: none;}
+/*左侧结束*/
+
+/*右侧*/
+.active{background:url(../images/foundation_back/nav_bg.png) repeat scroll 0 0 #f8f8f8; border:1px solid #e5e5e5; zoom:1; overflow:hidden;}/*按钮活动区*/
+.active ul li{float:left; height:36px;}
+.active ul li a{font-size:0.875em; display:block; height:36px; line-height:36px; color:#333; font-weight:bold; padding:0 0.7em;}
+.title{top:0px; left:45%;}/*页面内容标题*/
+
+.table td,.table th{border:1px solid #ddd;}/*list页面表格*/
+tr:hover{cursor:pointer;}
+
+.search,.content{border:1px solid #e5e5e5; border-top:none; padding:0.7em; zoom:1; overflow:hidden;}/*查找搜索区*/
+.content{padding-top:2.5em;}/*增删改查内容区*/
+.line-height{line-height:2em; height:2em;}/*增删改查内容区input标签前面字的行高*/
+.content [class*="column"] + [class*="column"]:last-child {float:left;}
+.content img{vertical-align:middle}
+
+textarea{width: 100%; height:180px; min-width:100%; max-width:100%; max-height:300px;}/*增删改查页面的textarea大小设定*/
+
+
+
+/*右侧结束*/
+
+
+/*新增样式区结束*/

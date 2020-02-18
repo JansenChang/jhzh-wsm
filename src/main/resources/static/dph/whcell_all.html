@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <title>企业综合平台-后台管理</title>
+  <link rel="stylesheet" href="http://localhost:8000/yxpower/css/css_0_0_normalize.css">
+  <link rel="stylesheet" href="http://localhost:8000/yxpower/css/css_0_0_f5.css">
+  <link rel="stylesheet" href="http://localhost:8000/yxpower/css/css_0_0_back.css">
+  <link rel="stylesheet" href="http://localhost:8000/yxpower/css/standardization.css">
+  
+  
+  <script type="text/javascript" src="http://localhost:8000/yxpower/js/vendor/modernizr.js"></script>
+  <script type="text/javascript" src="http://localhost:8000/yxpower/js/vendor/jquery.js"></script>
+  <script type="text/javascript" src="http://localhost:8000/yxpower/js/js_0_0_f5m.js"></script>
+  
+  <script type="text/javascript" src="http://localhost:8000/yxpower/js/fun.js" ></script>
+  <script type="text/javascript" src="http://localhost:8000/yxpower/js/commonframe.js" ></script>
+  <script type="text/javascript" src="http://localhost:8000/yxpower/js/timer/WdatePicker.js" ></script>
+  <style>
+  		body{height:auto;}
+  		.myinput{width:40px;height=20px; }
+  		.wrap1{margin-right:2%;}
+  </style>
+  
+  <script type="text/javascript">
+  function submit(cmd,arg1,arg2)
+  {
+  	if(cmd=="cmds"){
+  	
+		if(arg2==0){ //不需要选择
+	  		document.forms[0].roleattrid.value = arg1;	//传递的是roleattrid 将进行新的操作
+	  		document.forms[0].submit(); //传送后台进行操作
+	  		return true;
+		}  	
+		
+  		var count_checked=0;
+  		var ids_checked="";
+  		var id_checked="";
+		jQuery('input[name="ids"]:checked').each(function() {//遍历每一个复选框
+			id_checked = jQuery(this).val();   
+			ids_checked += jQuery(this).val() + ",";
+			count_checked++;
+		});
+  		
+  		if(count_checked==0){
+  			alert("没有选择记录.");
+  			return false;
+  		}
+  		
+  		if(arg2>1){ //允许多选，允许多选传递ids,否则传递id
+  			document.forms[0].ids_checked.value = ids_checked;
+  		}
+  		else{ //不允许多选，则判断只有一个选中
+  			if(count_checked>1 ){
+  				alert("该操作禁止多选，请选择一条记录进行操作");
+  				return false;
+  			}
+  			document.forms[0].id_checked.value = id_checked;
+  		}
+  		document.forms[0].roleattrid.value = arg1;	//传递的是roleattrid 将进行新的操作
+  		document.forms[0].submit(); //传送后台进行操作
+  	}
+  	else
+  	if(cmd=="newpagesize"){
+  		var new_pagesize = document.forms[0].pageSize.value;
+  		if(new_pagesize>500 || new_pagesize<1){
+  			alert("页面记录条数应该在1和500之间，建议20-100之间");
+  			document.forms[0].pageSize.focus();
+  			return false;
+  		}
+  		document.forms[0].pageNo.value = 1;
+  		document.forms[0].submit();
+  	}
+  	
+  	else{
+  		document.forms[0].pageNo.value = arg1;	//执行了翻页操作
+  		document.forms[0].submit();
+  	}
+  }
+  </script>
+  
+  
+  </head>
+  
+  <body>
+  	<form id="editform" name="editform" action="http://localhost:8000/yxpower/back" method="post">
+		<input type="hidden" id="roleattrid" name="roleattrid" value=901000021100  />   <!-- 用于修改删除详情和审批 -->
+		<input type="hidden" id="id" name="id_checked"/>   <!-- 用于修改删除详情和审批 -->
+		<input type="hidden" id="ids" name="ids_checked"/>   <!-- 用于修改删除详情和审批 -->
+		<input type="hidden" name="pageNo" value="1" />
+	
+	<div class="margin-top-small">
+		<div class="large-12 small-12 columns display-none">
+			<div class="alert-box radius" data-alert="">
+				<font class="OUTFOX_JTR_TRANS_NODE" id="OUTFOX_JTR_TRANS_NODE-14"	style="text-decoration: none;">这是一个标准的警报(div警告框)。</font> 
+				<a class="close" href=""><font class="OUTFOX_JTR_TRANS_NODE" id="OUTFOX_JTR_TRANS_NODE-15">×</font></a>
+			</div>
+		</div>
+		<div class="large-12 small-12 columns display-none">
+			<div class="alert-box radius success" data-alert="">
+				<font class="OUTFOX_JTR_TRANS_NODE" id="OUTFOX_JTR_TRANS_NODE-16">这是一个成功的警报(警告框成功)。</font>
+				<a class="close" href=""><font class="OUTFOX_JTR_TRANS_NODE" id="OUTFOX_JTR_TRANS_NODE-17">×</font>	</a>
+			</div>
+		</div>
+		</div>
+		<div class="large-12 small-12 columns">
+			<div class="active">
+				<ul>
+					<li class=right >全库查设&nbsp;全部货位查询与修改&nbsp;</li>
+					<li><a href="javascript:void(0)" onclick="submit('cmds',901000021101,1)"      title='详细' ><img src="http://localhost:8000/yxpower/images/foundation_back/act_5000.gif" width=16 height=16 />&nbsp;详细</a></li>
+					<li><a href="javascript:void(0)" onclick="submit('cmds',901000021102,0)"      title='新增' ><img src="http://localhost:8000/yxpower/images/foundation_back/act_2000.gif" width=16 height=16 />&nbsp;新增</a></li>
+					<li><a href="javascript:void(0)" onclick="submit('cmds',901000021103,1)"      title='修改' ><img src="http://localhost:8000/yxpower/images/foundation_back/act_3000.gif" width=16 height=16 />&nbsp;修改</a></li>
+					<li><a href="javascript:void(0)" onclick="submit('cmds',901000021104,2)"      title='删除' ><img src="http://localhost:8000/yxpower/images/foundation_back/act_4000.gif" width=16 height=16 />&nbsp;删除</a></li>
+				</ul>
+			</div>
+			<div class="search" >
+				<div class="row"  id="search_div"  >
+					<div class="large-4 small-4 row">
+						<div class="wrap1 left"  ><input type="text" class="myinput left" style="width:80px;margin-right:5px;"  value=400101 /><a id=search_line_buttons  class="small button radius  secondary" href="#">按任务查询</a></div>
+						<div class="wrap1 left"  ><input type="text" class="myinput left" style="width:120px;margin-right:5px;"  value=10087 /><a id=search_line_buttons  class="small button radius  secondary" href="#">按托盘查询</a></div>
+						<div class="wrap1 left"  ><input type="text" class="myinput left" style="width:200px;margin-right:5px;"  value=1001040-101 /><a id=search_line_buttons  class="small button radius  secondary" href="#">按物料查询</a></div>
+						<a id=search_line_buttons  class="small button radius  secondary" href="#">重置</a>
+						<a id=search_line_buttons  class="small button radius  secondary" href="/yxpower/back?roleattrid=901000021100&action=toexcel">导出</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="large-12 small-12 columns margin-top-small">
+		<div class="table">
+			<table id="indextable" style="width: 100%;">
+ 				<thead>
+					<tr>
+						<th width="">库区</th><th width="">行</th><th>列</th><th width="">库位1</th><th width="">库位2</th>	<th width="">库位3</th><th width="">库位4</th><th width="">库位5</th><th width="">库位6</th><th width="">库位7</th>
+						<th width="">库位8</th><th width="">库位9</th><th width="">库位10</th><th width="">库位11</th><th width="">库位12</th>
+						<th width="">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>2F</td>
+						<td>提升机1口</td>
+						<td>X</td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td></td><td></td><td></td><td></td><td></td><td></td>
+						<td>
+							<ul class="button-group">
+          						<!--<li><a class="small button reset-margin-bottom secondary" href="#">详情</a></li>
+          						<li><a class="small button reset-margin-bottom secondary" href="#">修改</a></li>
+          						<li><a class="small button reset-margin-bottom secondary" href="#">删除</a></li>  -->
+          						<li><a class="small button reset-margin-bottom secondary" href="#">维护</a></li>
+        					</ul>
+        				</td>
+					</tr>
+					<tr>
+						<td>2F</td>
+						<td>提升机2口</td>
+						<td>X</td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td></td><td></td><td></td><td></td><td></td><td></td>
+						<td>
+							<ul class="button-group">
+          						<!--<li><a class="small button reset-margin-bottom secondary" href="#">详情</a></li>
+          						<li><a class="small button reset-margin-bottom secondary" href="#">修改</a></li>
+          						<li><a class="small button reset-margin-bottom secondary" href="#">删除</a></li>  -->
+          						<li><a class="small button reset-margin-bottom secondary" href="#">维护</a></li>
+        					</ul>
+        				</td>
+					</tr>
+					<tr>
+						<td>JF</td>
+						<td>1</td>
+						<td>1</td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						
+						<td>
+							<ul class="button-group">
+          						<!--<li><a class="small button reset-margin-bottom secondary" href="#">详情</a></li>
+          						<li><a class="small button reset-margin-bottom secondary" href="#">修改</a></li>
+          						<li><a class="small button reset-margin-bottom secondary" href="#">删除</a></li>  -->
+          						<li><a class="small button reset-margin-bottom secondary" href="#">维护</a></li>
+        					</ul>
+        				</td>
+					</tr>
+					<tr>
+						<td>JF</td>
+						<td>1</td>
+						<td>2</td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						<td><input type="text" value=400101 /> <input type="text" value="1001040-101" /></td>
+						
+						<td>
+							<ul class="button-group">
+          						<!--<li><a class="small button reset-margin-bottom secondary" href="#">详情</a></li>
+          						<li><a class="small button reset-margin-bottom secondary" href="#">修改</a></li>
+          						<li><a class="small button reset-margin-bottom secondary" href="#">删除</a></li>  -->
+          						<li><a class="small button reset-margin-bottom secondary" href="#">维护</a></li>
+        					</ul>
+        				</td>
+					</tr>
+				</tbody> 
+			</table>
+
+			</div>
+		</div>
+		
+		
+		
+		<div class="row">
+			<div class="large-4 columns"><ul class='pagination'><li class='current'><a href="javascript:submit('pageto',1);">1</a></li></ul> </div>
+			<div class="large-4 columns"><p>总记录数:(13)</p></div>
+			<div class="large-4 columns">
+      <div class="row collapse prefix-radius">
+        <div class="small-3 columns">
+          <span class="prefix">每页记录数</span>
+        </div>
+        <div class="small-6 columns">
+          <input type="text" name="pageSize" placeholder="14"  value="14" >
+        </div>
+        <div class="small-3 columns">
+          <a href="javascript:submit('newpagesize',0);" class="button postfix  secondary">按新条数浏览</a>
+        </div>
+        
+      </div>
+			
+		</div>
+		</div>	
+			
+			
+			
+
+	</form>
+	<script>
+    $(document).foundation();
+  </script>
+  </body>
+<script type="text/javascript" >
+createAdd1("http://localhost:8000/yxpower/","search_div","[]");
+
+$(function(){
+});
+</script>
+</html>

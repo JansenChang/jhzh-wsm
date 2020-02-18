@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DPH</title>
+  
+  
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="stylesheet" href="../css/css_0_0_normalize.css">
+  <link rel="stylesheet" href="../css/css_0_0_f5.css">
+  <link rel="stylesheet" href="../css/css_0_0_back.css">
+  <link rel="stylesheet" href="../css/standardization.css">
+  
+  
+  
+  <script src="../js/jquery.js"></script>
+  <script src="../js/js_0_0_f5m.js"></script>
+  <script src="../js/vendor/modernizr.js"></script> 
+  <script src="../js/svg.min.js" type="text/javascript" ></script>
+  <script src="../js/map.js" type="text/javascript"  ></script>
+  
+  <style>
+  	body{height:auto;}
+  </style>    
+  
+  
+  
+</head>
+<body style="padding:0px;">
+
+<div class="row" id="box"  >
+  <div class="medium-10 columns"  style="padding:0px;"  >
+    <div id="drawing"></div>
+  </div>
+  <div class="medium-2 columns">
+      <button onclick="draw_all();">监控刷新</button>
+      <label>指定目标地调度        <input type="text" placeholder="Name">      </label>
+      <label>指定车辆 <input type="text" placeholder="agv"></label>
+      <label>指定位置<input type="text" placeholder="loc"></label>
+      <label><button type="button" class="button radius">手工调度</button></label>
+</div>
+
+
+</div>
+
+
+<script type="text/javascript">
+	var svgdivid;
+	var svgdiv;
+	var svgdraw; //object
+	var w_max,h_max;
+	var w_10f,h_10f; 
+	var w_15f,h_15f;
+	var w_20f,h_20f;
+	var x0_10f,y0_10f;
+	var x0_15f,y0_15f;
+
+	var x0_hov,y0_hov;
+	var mark_15f =[
+		//0   1    2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  
+		[ 01, 01,  01, 01, 01, 01, 01, 01, 01, 01,00, 00, 01, 01, 01, 01, 01, 01, 01, 01, 01, 00, 00, 01, 01, 00  ],	
+		[ 10, 10,  10, 10, 10, 10, 10, 10, 10, 10,10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10  ],	//1
+		[ 01, 01,  01, 01, 01, 01, 01, 01, 01, 01,01, 01, 10, 10, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 10  ],
+		[ 00, 00,  00, 00, 00, 00, 01, 01, 01, 01,01, 01, 10, 10, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 10  ],
+		[ 00, 00,  00, 00, 00, 00, 10, 10, 10, 10,10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10  ],	//2
+		[ 00, 00,  00, 00, 00, 00, 01, 01, 01, 01,01, 01, 10, 10, 01, 01, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00  ],
+		
+		[ 00, 00,  00, 00, 00, 00, 00, 00, 00, 00,00, 00, 10, 10, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00, 00  ],
+		[ 00, 00,  00, 00, 00, 00, 00, 00, 00, 00,00, 00, 10, 10, 10, 10, 10, 10, 10, 10, 10, 00, 00, 00, 00, 00  ],	//3	
+		[ 00, 00,  00, 00, 00, 00, 00, 00, 00, 00,00, 00, 10, 10, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00, 00  ],
+		
+		[ 00, 00,  00, 00, 00, 00, 00, 00, 40, 50,40, 50, 10, 10, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00, 00  ],
+		[ 00, 00,  00, 00, 00, 00, 00, 00, 40, 50,40, 50, 10, 10, 10, 10, 10, 10, 10, 10, 10, 00, 00, 00, 00, 00  ],	//4
+		[ 00, 00,  00, 00, 00, 00, 00, 00, 00, 50,40, 50, 10, 10, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00, 00  ],
+		
+		[ 00, 00,  00, 00, 00, 00, 00, 00, 30, 50,30, 50, 10, 10, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00, 00  ],
+		[ 00, 00,  00, 00, 00, 00, 00, 00, 30, 50,30, 50, 10, 10, 10, 10, 10, 10, 10, 10, 10, 00, 00, 00, 00, 00  ],	//5
+		[ 00, 00,  00, 00, 00, 00, 00, 00, 14, 50,14, 50, 10, 10, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00, 00  ],
+
+		//6右8				
+		[ 00, 00,  00, 00, 00, 00, 00, 00, 10, 14,10, 14, 10, 10, 01, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00  ],
+		[ 00, 00,  00, 00, 00, 00, 00, 00, 10, 00,10, 00, 14, 10, 10, 10, 10, 10, 10, 10, 10, 10, 00, 00, 00, 00  ],	//6
+		[ 00, 00,  00, 00, 00, 00, 00, 00, 10, 14,10, 14, 10, 10, 01, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00  ],
+		//7				
+		[ 00, 00,  00, 00, 00, 00, 00, 00, 01, 01,01, 01, 10, 10, 01, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00  ],
+		[ 00, 00,  00, 00, 00, 00, 00, 00, 10, 10,10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 00, 00, 00, 00  ],	//7
+		[ 00, 00,  00, 00, 00, 00, 00, 00, 01, 01,01, 01, 10, 10, 01, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00  ],
+		//8			
+		[ 00, 00,  00, 00, 00, 00, 00, 00, 00, 00,00, 00, 10, 10, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00, 00  ],
+		[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 00, 00, 00, 00  ],	//8	//充电桩
+		[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 00, 00, 00, 00  ],	//9	//充电桩
+
+		[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00  ],	//0-10 拣选台  	//充电桩
+
+		[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00  ],	//充电桩
+		[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00  ],	//充电桩
+		[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00  ],	//充电桩
+
+	];
+
+</script>
+
+<script type="text/javascript">
+
+
+
+/**
+* 自定义函数名：PrefixZero
+* @param num： 被操作数
+* @param n： 固定的总位数
+* var myNum = 9;var myNum2 = 12;
+* console.log('处理后myNum：'+PrefixZero(myNum, 3));//009
+* console.log('处理后myNum2：'+PrefixZero(myNum2, 3));//012
+*/
+function PrefixZero(num, n) {
+    return (Array(n).join(0) + num).slice(-n);
+}
+
+var count_svg_obj =0; // 记录SVG对象，关联到。
+var array_svgobj = new Array(5000);//记录所有本监控画面的svg 对象，通过下标关联数据对象
+var array_inf = [
+{svgobj:null,name:"A_1_1_1_PNO", value: "aaaaaa"},  //A_1_1_1_PNO托盘号
+{svgobj:null,name:"D_1_HEIGHT", value: "71.4"},  //1#提升机高度
+];
+
+function init()
+{
+	svgdivid = "drawing";
+	drawdiv = document.getElementById(svgdivid);
+
+	var boxdiv = document.getElementById("box");
+	var boxheight= boxdiv.clientHeight+drawdiv.offsetHeight;
+	if(drawdiv==null)
+		return; //不存在该图层，绘图失败
+	drawdiv.innerHTML=""; //clean svg content
+	w_max = drawdiv.clientWidth||drawdiv.offsetWidth;
+	//h_max = drawdiv.clientHeight||drawdiv.offsetHeight;
+	h_max = w_max * 0.6;//drawdiv.clientHeight||drawdiv.offsetHeight;
+	svgdraw = SVG(svgdivid).size(w_max, window.screen.availHeight);//boxheight);// h_max+100);
+	var rect = svgdraw.rect(w_max, window.screen.availHeight);//boxheight).attr({ fill: '#000' });
+	
+	x0_hov=0;y0_hov=0;w_hov=0.4*w_max;h_hov=0.5*h_max;
+	x0_10f=0;y0_10f=h_hov;w_10f=0.4*w_max;h_10f=0.5*h_max;
+	x0_15f=x0_hov+w_hov;y0_15f=0;w_15f=0.6*w_max;h_15f=h_max;
+}
+
+
+function draw_hov(x0,y0,w,h,draw)
+{
+	var wper = w/25;
+	var hper = h/20;
+	
+	count_svg_obj =0; 
+	array_svgobj[count_svg_obj]  = draw.rect(2*wper,13*hper).fill('#444').move(x0, y0);  //每一次画图产生obj 对象，存储到svg对象数组中
+	array_inf[count_svg_obj].svgobj  = array_svgobj[count_svg_obj];
+	count_svg_obj++; //完成关联，以便动态改变
+
+	for (var row = 0; row < 6; row++) {
+		var rect = draw.rect(wper*4, hper-1).fill('#444').move(1+2*wper,row*hper);  //short hov 2F 6 station text
+		var text = draw.text(row+2+" ").fill('#444').move(1+6.5*wper,row*hper);  //short hov  2F 6 station rect
+	}
+	var text1 = draw.text("1#短吊笼").fill('#444').move(1+2*wper,6*hper); 
+	
+	//短吊笼夹层对接台 
+	var text = draw.text("A21").fill('#444').move(1+2*wper,3*hper+6*hper-2);	var text = draw.text("A22").fill('#444').move(2+6*wper,3*hper+6*hper-2);
+	var rect = draw.rect(wper*4, hper).fill('#444').move(1+2*wper,4*hper+6*hper);	var rect = draw.rect(wper*4, hper).fill('#440').move(2+6*wper,4*hper+6*hper);
+	var rect = draw.rect(wper*4, hper).fill('#444').move(1+2*wper,1+5*hper+6*hper);	var rect = draw.rect(wper*4, hper).fill('#440').move(2+6*wper,1+5*hper+6*hper);
+	var text = draw.text("A11").fill('#444').move(1+2*wper,4*hper+8*hper);		var text = draw.text("A12").fill('#444').move(2+6*wper,4*hper+8*hper);
+
+	//长吊笼
+	var rect1 = draw.rect(2*wper,19*hper).fill('#444').move(x0+12*wper, y0);
+	//长吊笼2F6X1对接台
+	for (var row = 0; row < 6; row++) {
+		var rect = draw.rect(wper*4, hper-1).fill('#444').move(1+14*wper,row*hper);
+		var text = draw.text(row+2+" ").fill('#444').move(1+18.5*wper,row*hper);
+	}
+	var text1 = draw.text("2#长吊笼").fill('#444').move(1+14*wper,row*hper);//row==6
+	//长吊笼夹层对接台
+	var text = draw.text("B41").fill('#444').move(1+14*wper,4*hper+5*hper-2);	var text = draw.text("B42").fill('#440').move(2+18*wper,4*hper+5*hper-2);
+	var rect = draw.rect(wper*4, hper).fill('#444').move(1+14*wper,5*hper+5*hper);	var rect = draw.rect(wper*4, hper).fill('#440').move(2+18*wper,5*hper+5*hper);
+	var rect = draw.rect(wper*4, hper).fill('#444').move(1+14*wper,1+6*hper+5*hper);var rect = draw.rect(wper*4, hper).fill('#440').move(2+18*wper,1+5*hper+6*hper);
+	var text = draw.text("B31").fill('#444').move(1+14*wper,4*hper+8*hper);	var text = draw.text("B32").fill('#440').move(2+18*wper,4*hper+8*hper);
+
+	//长吊笼1层对接台
+	var text = draw.text("B21").fill('#444').move(1+14*wper,4*hper+11*hper-2);	var text = draw.text("B22").fill('#444').move(2+18*wper,4*hper+11*hper-2);
+	var rect = draw.rect(wper*4, hper).fill('#444').move(1+14*wper,5*hper+11*hper);	var rect = draw.rect(wper*4, hper).fill('#444').move(2+18*wper,5*hper+11*hper);
+	var rect = draw.rect(wper*4, hper).fill('#444').move(1+14*wper,1+6*hper+11*hper);	var rect = draw.rect(wper*4, hper).fill('#444').move(2+18*wper,1+5*hper+12*hper);
+	var text = draw.text("B11").fill('#444').move(1+14*wper,5*hper+13*hper);	var text = draw.text("B12").fill('#444').move(2+18*wper,5*hper+13*hper);
+}
+
+
+function draw_10f(x0,y0,w,h,draw)
+{
+	var rect,text,row,col;
+	var wper = (w-10)/6;
+	var hper = h/22;
+	for (row=0; row<10; row++){
+		for (var col=1;col<5;col++) 
+			rect = draw.rect(wper-1, hper).fill('#444').move(x0+wper*col+1, y0+row*hper+1);
+		
+		text = draw.text(2 +"-"+"5-"+ PrefixZero(10-row,2) ).fill('#222').move(x0+wper*col+1, y0+row*hper+1); //col title
+	}
+	row=10; 
+	for (col=0; col<5; col++)
+		text = draw.text(col + 1 + "列").fill('#444').move(x0+wper*col+1, y0+row*hper+1); //col title
+	
+	for (row=11; row<21; row++){
+		for (var col=0;col<5;col++) 
+			rect = draw.rect(wper-1, hper).fill('#444').move(x0+wper*col+1, y0+row*hper+1);
+		text = draw.text(1 +"-"+"5-"+ PrefixZero(21-row,2) ).fill('#222').move(x0+wper*col+1, y0+row*hper+1); //col title
+	}
+}
+
+
+function draw_15f(x0,y0,w,h,mark,draw) 
+{
+	var unitw = w/26;
+	var unith = h /30;
+	var unitw_in = w/26-1;
+	var unith_in = h/30-1;
+
+	var unitgridw = 0.8*unitw;var unitgridh = 0.8*unith;
+	var obj;
+	for( var i=0;i<28;i++) {
+		for( var j=0;j<26;j++)
+			if(mark[i][j]==1)
+				obj=draw.rect(unitw_in, unith_in).attr({ fill: '#444' }).move(x0+j*unitw,y0+i*unith); 
+			else if(mark[i][j]==10)
+				obj=draw.rect(unitw_in, unith_in).attr({ fill: '#888' }).move(x0+j*unitw,y0+i*unith); 
+			else if(mark[i][j]==0)
+				obj=draw.rect(unitw_in, unith_in).attr({ fill: '#000' }).move(x0+j*unitw,y0+i*unith); 
+			else if(mark[i][j]==14)
+				obj=draw.rect(unitw_in, unith_in).attr({ fill: '#777' }).move(x0+j*unitw,y0+i*unith); 
+			else if(mark[i][j]==12)
+				obj=draw.rect(unitw_in, unith_in).attr({ fill: '#666' }).move(x0+j*unitw,y0+i*unith); 
+			else if(mark[i][j]==20)
+				obj=draw.rect(unitw_in, unith_in).attr({ fill: '#120' }).move(x0+j*unitw,y0+i*unith); 
+			else if(mark[i][j]==30)
+				obj=draw.rect(unitw_in, unith_in).attr({ fill: '#440' }).move(x0+j*unitw,y0+i*unith); 
+			else if(mark[i][j]==40)
+				obj=draw.rect(unitw_in, unith_in).attr({ fill: '#200' }).move(x0+j*unitw,y0+i*unith); 
+			else if(mark[i][j]==50)
+				obj=draw.rect(unitw_in, unith_in).attr({ fill: '#111' }).move(x0+j*unitw,y0+i*unith); 
+			//obj.attr(id,i*100+j);
+	}
+}
+
+
+
+
+function draw_all()
+{
+	init();
+	draw_15f(x0_15f,y0_15f,w_15f,h_15f,mark_15f,svgdraw);
+	draw_10f(x0_10f,y0_10f,w_10f,h_10f,svgdraw);
+	draw_hov(x0_hov,y0_hov,w_hov,h_hov,svgdraw);
+	//draw_hov(x0_hov,y0_hov,svgdraw);
+
+	//draw_15f(drawdivid);
+	//obj= draw.attr(1001);
+	//drawmap();
+	//window.οnresize=findWindowSize;
+}
+
+</script>
+
+
+<script type="text/javascript">
+draw_all();
+</script>			
+
+</body>
+</html>

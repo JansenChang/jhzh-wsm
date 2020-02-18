@@ -1,0 +1,240 @@
+/*页面重置*/
+*{font-family:"微软雅黑";}
+h1,h2,h3,h4,h5,h6{font-family:"微软雅黑";}
+a{color:#f60;}
+a:hover, a:focus{color:#e15a00;}
+li{line-height:2em;}
+.row-own{max-width:80em; margin:0;}/*改变行的最大宽度，是页面内容区增大*/
+.row-own.row-own{margin:0 auto;}
+.small-padding{padding:0.5em 0.9em;}/*减小panel版块的padding值*/
+.breadcrumbs > * a, .breadcrumbs > * span{color:#f60;}
+.row .row{margin:0;}
+
+select{background-color: white;  font-family: inherit;  border: 1px solid #cccccc;  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);  color: rgba(0, 0, 0, 0.75);  display: block;  font-size: 0.875em;  margin: 0 0 1em 0;  padding: 0.3em;  height: 2.3125em;  width: 100%;  -moz-box-sizing: border-box;  -webkit-box-sizing: border-box;  box-sizing: border-box;  -webkit-transition: -webkit-box-shadow 0.45s, border-color 0.45s ease-in-out;  -moz-transition: -moz-box-shadow 0.45s, border-color 0.45s ease-in-out;  transition: box-shadow 0.45s, border-color 0.45s ease-in-out;}/*select标签样式修改*/
+select:focus{-webkit-box-shadow: 0 0 5px #999999; -moz-box-shadow: 0 0 5px #999999; box-shadow: 0 0 5px #999999; border-color: #999999;}/*select标签样式修改*/
+select:focus{background: #fafafa; border-color: #999999; outline: none;}/*select标签样式修改*/
+select[disabled] {background-color: #dddddd;}/*select标签样式修改*/
+option{border-right:1px solid #777;}/*select标签样式修改*/
+/*页面重置结束*/
+
+
+@media only screen and (max-width:500px) /*手机*/{
+	.padding-none{padding:0;}
+	.hide-for-phone{display:none;}
+	.phone-1 {position: relative; width: 8.33333%; }
+	.phone-2 {position: relative; width: 16.66667%; }
+    .phone-3 {position: relative; width: 25%;}
+	.phone-4 {position: relative; width: 33.33333%; }
+    .phone-5 {position: relative; width: 41.66667%; }
+	.phone-6 {position: relative; width: 50%;}
+	.phone-7 {position: relative; width: 58.33333%; }
+	.phone-8 {position: relative; width: 66.66667%; }
+	.phone-9 {position: relative; width: 75%;}
+	.phone-10 {position: relative; width: 83.33333%; }
+	.phone-11 {position: relative; width: 91.66667%; }
+	.phone-12 {position: relative; width: 100%; }
+}
+
+@media only screen and (min-width:940px)/*pad以上的分辨率*/{
+	.hide-for-no-pad{display:none;}
+}
+
+@media only screen and (min-width: 750px) and (max-width:940px)/*pad的设定*/{
+	.hide-for-pad{display: none !important; }
+	.padding-none{padding:0;}
+	.pad-1 {position: relative; width: 8.33333%; }
+	.pad-2 {position: relative; width: 16.66667%; }
+	.pad-3 {position: relative; width: 25%; }
+	.pad-4 {position: relative; width: 33.33333%; }
+	.pad-5 {position: relative; width: 41.66667%; }
+	.pad-6 {position: relative; width: 50%; }
+	.pad-7 {position: relative; width: 58.33333%; }
+	.pad-8 {position: relative; width: 66.66667%; }
+	.pad-9 {position: relative; width: 75%; }
+	.pad-10 {position: relative; width: 83.33333%; }
+	.pad-11 {position: relative; width: 91.66667%; }
+	.pad-12 {position: relative; width: 100%; }
+}
+
+
+/*字体*/
+.font-normal{font-weight:normal;}/*字体设置为常规*/
+.font-bold{font-weight:bold;}/*字体设置为粗体*/
+.font-size-14{font-size:0.875em;}/*字体大小设置为14像素*/
+/*字体结束*/
+
+
+/*文字颜色*/
+.white{color:#fff;}
+.red{color:#f00;}/*文字颜色为大红色*/
+.orange{color:#f60 !important;}/*文字颜色改为橙色（前台页面主要颜色）*/
+.blue{color:#00abd6;}/*文字颜色改为蓝色（后台页面主要颜色）*/
+.french-grey-01{color:#9F9F9F !important;}/*文本颜色浅灰色(主要用于资讯列表副标题)*/
+.green{color:#5DA423;}/*文字颜色改为绿色（前台页面的点缀色）*/
+.color-9{color:#999 !important;}/*文字颜色为浅灰*/
+/*文字颜色结束*/
+
+
+/*带hover属性的字体颜色*/
+.white-a{color:#fff;}
+.white-a:hover{color:#fff;}
+.normal-a{color:#333;}/*网站a标签正常颜色 和网站基本字体颜色一致*/
+.normal-a:hover,.normal-a:focus{color:#f60;}
+.normal-back-a{color:#333;}/*后台使用*/
+.normal-back-a:hover,.normal-back-a:focus{color:#00abd6;}
+.french-grey{color:#aaa;}/*文字颜色浅灰(用于a标签 带hover属性)*/
+.french-grey:hover{color:#888;}/*灰色字体的hover属性*/
+/*带hover属性的字体颜色结束*/
+
+
+/*背景颜色*/
+.reset-background{background:none;}/*清空背景*/
+.bgcolor-orange{background-color:#f60 !important;}/*背景颜色改为橙色*/
+.bgcolor-white{background-color:#fff !important;}/*背景颜色改为白色*/
+.bgcolor-f2{background-color:#f2f2f2;}/*背景颜色改为#f2f2f2*/
+.bgcolor-f9{background-color:#f9f9f9;}/*背景颜色为浅灰*/
+.bgcolor-blue{background-color:#00abd6;}/*背景颜色改为蓝色*/
+.bgcolor-green{background-color:#5DA423;}/*背景颜色改为绿色*/
+.bgcolor-french-orange{background-color:#FFF9F4}/*背景颜色改为浅橘色（用于前台页面的提示背景颜色）*/
+/*背景颜色结束*/
+
+
+/*背景图片*/
+.bgimages-chequer{background:url(../images/foundation_back/nav_bg.png);}/*背景为灰色格子底纹*/
+/*背景图片结束*/
+
+
+
+/*带hover属性的背景颜色*/
+/*带hover属性的背景颜色结束*/
+
+
+/*清除浮动*/
+.clear{clear:both;}/* 清除浮动（适用于浮动div下面的div里） */
+.overflow{zoom:1; overflow:hidden;}/*清除浮动（适用于浮动div的父div里）*/
+/*清除浮动结束*/
+
+
+/*增加边界（适用于foundation框架内）*/
+.margin-small{margin:0.7em;}/*边界增加0.7em*/
+.margin-large{margin:1.25em;}/*边界增加1.25em*/
+.margin-bottom-small{margin-bottom:0.7em !important;}/*下边界增加0.7em*/
+.margin-bottom-large{margin-bottom:1.25em;}/*下边界增加1.25em*/
+.margin-top-small{margin-top:0.7em;}/*上边界增加0.7em*/
+.margin-top-large{margin-top:1.25em;}/*上边界增加0.7em*/
+.margin-left-small{margin-left:0.7em;}/*下边界增加0.7em*/
+.margin-left-large{margin-left:1.25em;}/*下边界增加1.25em*/
+.margin-right-small{margin-right:0.7em;}/*上边界增加0.7em*/
+.margin-right-large{margin-right:1.25em;}/*上边界增加0.7em*/
+
+/*增加边界结束*/
+
+
+/*增加填充（适用于foundation框架内）*/
+.padding-small{padding:0.7em;}/*填充增加0.7em*/
+.padding-large{padding:1.25em;}/*填充增加1.25em*/
+.padding-bottom-small{padding-bottom:0.7em !important;} /*下填充增加0.7em*/
+.padding-bottom-large{padding-bottom:1.25em !important;}/*下填充增加1.25em*/
+.padding-top-small{padding-top:0.7em !important;}/*上填充增加0.7em*/
+.padding-top-large{padding-top:1.25em !important;}/*上填充增加0.7em*/
+.padding-left-small{padding-left:0.7em;}/*下填充增加0.7em*/
+.padding-left-large{padding-left:1.25em;}/*下填充增加1.25em*/
+.padding-right-small{padding-right:0.7em;}/*上填充增加0.7em*/
+.padding-right-large{padding-right:1.25em;}/*上填充增加0.7em*/
+/*增加填充结束*/
+
+/*取消填充、边界*/
+.reset-padding{padding:0;}/*去掉填充*/
+.reset-margin{margin:0 !important;}/*去掉边界*/
+.reset-margin-top{margin-top:0;}/*清除上边界*/
+.reset-margin-left{margin-left:0;}/*清除左边界*/
+.reset-margin-right{margin-right:0;}/*清除右边界*/
+.reset-margin-bottom{margin-bottom:0;}/*清除下边界*/
+.reset-padding-top{padding-top:0;}/*清除上边界*/
+.reset-padding-left{padding-left:0;}/*清除左边界*/
+.reset-padding-right{padding-right:0;}/*清除右边界*/
+.reset-padding-bottom{padding-bottom:0;}/*清除下边界*/
+/*取消填充、边界结束*/
+
+
+/*边框*/
+.border-dashed{border:1px dashed #ccc;}/*虚线边框*/
+.border-solid{border:1px solid #d9d9d9;}/*实线边框*/
+.border-solid-orange{border:1px solid #f60;}/*实线边框颜色为#f60*/
+.border-solid-orange{border:1px solid #f60;}/*实线边框颜色为#f60*/
+.border-bottom-dashed{border-bottom:1px dashed #ccc;}/*下虚线边框*/
+.border-bottom-solid{border-bottom:1px solid #d9d9d9;}/*下实线边框*/
+.border-top-dashed{border-top:1px dashed #ccc;}/*上虚线边框*/
+.border-top-solid{border-top:1px solid #d9d9d9;}/*上实线边框*/
+.border-top-table{border-top:2px solid #f60 !important;}/*上2像素实现边框(多用于table标签)*/
+.reset-border{border:none;}/*清除边框*/
+.reset-border-right{border-right:none;}/*清除右边框*/
+.reset-border-left{border-left:none;}/*清除左边框*/
+.reset-border-top{border-top:none;}/*清除上边框*/
+.reset-border-bottom{border-bottom:none;}/*清除下边框*/
+.border-shaow{box-shadow: 0 0 5px #999999;}
+.border-radius-4px{border-radius:4px;}
+/*边框结束*/
+
+/*定位*/
+.position-relative{position:relative;}/*相对定位*/
+.position-absolute{position:absolute;}/*绝对定位*/
+.position-fixed{position:fixed;}/*浏览器窗口定位*/
+/*定位结束*/
+
+/*文本*/
+.text-center{text-align:center;}/*文本居中对齐*/
+.text-right{text-align:right;}/*文本居右对齐*/
+.text-left{text-align:left;}/*文本居左对齐*/
+.text-indent{text-indent:2em;}/*文本段落缩进*/
+/*文本结束*/
+
+
+/*行高*/
+.line-height-1.5em{line-height:1.5em;}/*行高1.5em*/
+.line-height-2em{line-height:2em;}/*行高2em*/
+.line-height-3em{line-height:3em;}/*行高3em*/
+/*行高结束*/
+
+
+/*显示*/
+.display-none{display:none;}/*不显示*/
+.display-block{display:block;}/*显示为块元素*/
+.display-inline{display:inline;}/*显示为内联元素*/ 
+/*显示结束*/
+
+
+/*垂直对齐*/
+.vertical-align-top{vertical-align: top;}/*垂直方向顶部对齐*/
+.vertical-align-middle{vertical-align:middle ;}/*垂直方向中间对齐*/
+.vertical-align-bottom{vertical-align: bottom;}/*垂直方向底部对齐*/
+/*垂直对齐结束*/
+
+
+/*无边框表格（在foundation的表格基础上修改表格样式）*/
+.none-border-table{border:none;}
+.none-border-table th{text-align:right;}
+.none-border-table td,.none-border-table th{background:none;}
+.none-border-table tr.even, .none-border-table tr.alt, .none-border-table tr:nth-of-type(2n){background:none;}
+.none-border-table input[type="text"],.none-border-table input[type="password"],.none-border-table select{display:inline; width:50%; height:2.3em; margin:0;}
+@media only screen and (max-width: 48em){
+	.none-border-table input[type="text"],.none-border-table input[type="password"],.none-border-table select{display:inline; width:90%; height:2.3em; margin:0;}
+}
+/*无边框表格结束*/
+
+
+
+/*其他*/
+a{cursor:pointer;}/*鼠标设为手状*/
+.cursor{cursor:pointer;}/*鼠标设为手状*/
+ul,ol,li{list-style-type:none;}/*去掉ul li ol的默认样式*/
+
+.display-block{display:block;}/*显示为块*/
+.align-center{text-align:center;}/*文本居中对齐*/
+.float-left ul li{float:left;}/*float-left下的li标签浮动左*/
+/*其他结束*/
+
+.nav-bgcolor{background-color: #93DEF7!important;}
+.content-bgcolor{background-color: #DAF6FF!important;}
+
+

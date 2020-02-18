@@ -1,0 +1,5 @@
+.hover-01{cursor:pointer; text-align:center;}/*热点导购专题版块*/
+.hover-01:hover{background:#f60; border:1 px solid #f60; color:#fff;}
+
+.suggest{width:40px; height:61px; background:url(../images/index/bg_suggest.gif) no-repeat; position:fixed; bottom:61px; right:10px;}
+.to-top{width:40px; height:41px; background:url(../images/index/bg_back_top.gif) no-repeat; position:fixed; bottom:10px; right:10px;}

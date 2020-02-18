@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhzh.wsm.dao.YxWmsCellDao">
+    <resultMap id="yxWmsCellDto" type="com.jhzh.wsm.dto.YxWmsCellDto">
+        <result column="ROW" property="row"/>
+        <result column="COL" property="col"/>
+        <result column="LAYER" property="layer"/>
+        <result column="TRAYID" property="trayid"/>
+        <result column="TRAYNO" property="trayno"/>
+    </resultMap>
+    <update id="updateTrayInfo">
+        UPDATE YX_WMS_CELL SET TRAYID=#{trayid},TRAYNO=#{trayno} WHERE
+        ROW =#{row}
+        AND COL=#{col}
+        AND LAYER=#{layer}
+    </update>
+    <update id="update">
+        UPDATE YX_WMS_CELL SET TRAYNO=#{trayno}
+        WHERE
+        ROW=#{row} AND
+        COL=#{col} AND
+        LAYER=#{layer}
+        AND TRAYNO !='.'
+    </update>
+
+
+    <select id="queryTrayInfo" resultMap="yxWmsCellDto">
+        SELECT ROW, COL, LAYER, TRAYID, TRAYNO FROM YX_WMS_CELL
+        <where>
+         <if test="row!=null and row !=''">ROW=#{row}</if>
+         <if test="col!=null and col !=''">AND COL=#{col}</if>
+        </where>
+    </select>
+    <select id="selectAllTray" resultType="com.jhzh.wsm.dto.YxWmsCellDto">
+        select ROW,
+            COL,
+            LAYER,
+            TRAYID,
+            TRAYNO
+            FROM YX_WMS_CELL WHERE TRAYNO !='.'
+    </select>
+
+</mapper>

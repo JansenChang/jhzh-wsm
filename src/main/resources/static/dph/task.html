@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+  <title>企业综合平台-后台管理</title>
+  <link rel="stylesheet" href="http://localhost:8000/yxpower/css/css_0_0_normalize.css">
+  <link rel="stylesheet" href="http://localhost:8000/yxpower/css/css_0_0_f5.css">
+  <link rel="stylesheet" href="http://localhost:8000/yxpower/css/css_0_0_back.css">
+  <link rel="stylesheet" href="http://localhost:8000/yxpower/css/standardization.css">
+  
+  
+  <script type="text/javascript" src="http://localhost:8000/yxpower/js/vendor/modernizr.js"></script>
+  <script type="text/javascript" src="http://localhost:8000/yxpower/js/vendor/jquery.js"></script>
+  <script type="text/javascript" src="http://localhost:8000/yxpower/js/js_0_0_f5m.js"></script>
+  
+  <script type="text/javascript" src="http://localhost:8000/yxpower/js/fun.js" ></script>
+  <script type="text/javascript" src="http://localhost:8000/yxpower/js/commonframe.js" ></script>
+  <script type="text/javascript" src="http://localhost:8000/yxpower/js/timer/WdatePicker.js" ></script>
+  <style>
+  		body{height:auto;}
+  </style>
+  
+  <script type="text/javascript">
+  function submit(cmd,arg1,arg2)
+  {
+  	if(cmd=="cmds"){
+  	
+		if(arg2==0){ //不需要选择
+	  		document.forms[0].roleattrid.value = arg1;	//传递的是roleattrid 将进行新的操作
+	  		document.forms[0].submit(); //传送后台进行操作
+	  		return true;
+		}  	
+		
+  		var count_checked=0;
+  		var ids_checked="";
+  		var id_checked="";
+		jQuery('input[name="ids"]:checked').each(function() {//遍历每一个复选框
+			id_checked = jQuery(this).val();   
+			ids_checked += jQuery(this).val() + ",";
+			count_checked++;
+		});
+  		
+  		if(count_checked==0){
+  			alert("没有选择记录.");
+  			return false;
+  		}
+  		
+  		if(arg2>1){ //允许多选，允许多选传递ids,否则传递id
+  			document.forms[0].ids_checked.value = ids_checked;
+  		}
+  		else{ //不允许多选，则判断只有一个选中
+  			if(count_checked>1 ){
+  				alert("该操作禁止多选，请选择一条记录进行操作");
+  				return false;
+  			}
+  			document.forms[0].id_checked.value = id_checked;
+  		}
+  		document.forms[0].roleattrid.value = arg1;	//传递的是roleattrid 将进行新的操作
+  		document.forms[0].submit(); //传送后台进行操作
+  	}
+  	else
+  	if(cmd=="newpagesize"){
+  		var new_pagesize = document.forms[0].pageSize.value;
+  		if(new_pagesize>500 || new_pagesize<1){
+  			alert("页面记录条数应该在1和500之间，建议20-100之间");
+  			document.forms[0].pageSize.focus();
+  			return false;
+  		}
+  		document.forms[0].pageNo.value = 1;
+  		document.forms[0].submit();
+  	}
+  	
+  	else{
+  		document.forms[0].pageNo.value = arg1;	//执行了翻页操作
+  		document.forms[0].submit();
+  	}
+  }
+  </script>
+  
+  
+  </head>
+  
+  <body>
+  	<form id="editform" name="editform" action="http://localhost:8000/yxpower/back" method="post">
+		<input type="hidden" id="roleattrid" name="roleattrid" value=901000021100  />   <!-- 用于修改删除详情和审批 -->
+		<input type="hidden" id="id" name="id_checked"/>   <!-- 用于修改删除详情和审批 -->
+		<input type="hidden" id="ids" name="ids_checked"/>   <!-- 用于修改删除详情和审批 -->
+		<input type="hidden" name="pageNo" value="1" />
+	
+	<div class="margin-top-small">
+		<div class="large-12 small-12 columns display-none">
+			<div class="alert-box radius" data-alert="">
+				<font class="OUTFOX_JTR_TRANS_NODE" id="OUTFOX_JTR_TRANS_NODE-14"	style="text-decoration: none;">这是一个标准的警报(div警告框)。</font> 
+				<a class="close" href=""><font class="OUTFOX_JTR_TRANS_NODE" id="OUTFOX_JTR_TRANS_NODE-15">×</font></a>
+			</div>
+		</div>
+		<div class="large-12 small-12 columns display-none">
+			<div class="alert-box radius success" data-alert="">
+				<font class="OUTFOX_JTR_TRANS_NODE" id="OUTFOX_JTR_TRANS_NODE-16">这是一个成功的警报(div警告框成功)。</font>
+				<a class="close" href=""><font class="OUTFOX_JTR_TRANS_NODE" id="OUTFOX_JTR_TRANS_NODE-17">×</font>	</a>
+			</div>
+		</div>
+		</div>
+		<div class="large-12 small-12 columns">
+			<div class="active">
+				<ul>
+					<li class=right >仓储设备&nbsp;仓储设备&nbsp;</li>
+				<!-- 
+	1.<a onclick="fn()">Does not appear as a link, because there's no href</a>  
+2.<a href="javascript:void(0)" onclick="fn()">fn is called</a>  
+3.<a href="javascript:undefined" onclick="fn()">fn is called</a>  
+4.<a href="javascript:" onclick="fn()">fn is called too!</a> 
+				 -->
+				
+					<li><a href="javascript:void(0)" onclick="submit('cmds',901000021101,1)"      title='详细' ><img src="http://localhost:8000/yxpower/images/foundation_back/act_5000.gif" width=16 height=16 />&nbsp;详细</a></li>
+					
+				
+					<li><a href="javascript:void(0)" onclick="submit('cmds',901000021102,0)"      title='新增' ><img src="http://localhost:8000/yxpower/images/foundation_back/act_2000.gif" width=16 height=16 />&nbsp;新增</a></li>
+					
+				
+					<li><a href="javascript:void(0)" onclick="submit('cmds',901000021103,1)"      title='修改' ><img src="http://localhost:8000/yxpower/images/foundation_back/act_3000.gif" width=16 height=16 />&nbsp;修改</a></li>
+					
+				
+					<li><a href="javascript:void(0)" onclick="submit('cmds',901000021104,2)"      title='删除' ><img src="http://localhost:8000/yxpower/images/foundation_back/act_4000.gif" width=16 height=16 />&nbsp;删除</a></li>
+					
+					
+					
+				</ul>
+			</div>
+			<div class="search" >
+				<div class="row"  id="search_div"  >
+					
+					<div class="large-4 small-4 columns right">
+						<a id=search_line_buttons  class="small button radius  secondary" href="#">查询</a>
+						<a id=search_line_buttons  class="small button radius  secondary" href="#">重置</a>
+						<a id=search_line_buttons  class="small button radius  secondary" href="/yxpower/back?roleattrid=901000021100&action=toexcel">导出</a>
+					</div>
+					
+					
+				</div>
+			</div>
+		</div>
+		<div class="large-12 small-12 columns margin-top-small">
+		<div class="table">
+			<table id="indextable" style="width: 100%;">
+<!-- 				<thead>
+					<tr>
+						<th width="60">编号</th>
+						<th width="150">标题</th>
+						<th>摘要</th>
+						<th width="200">类别</th>
+						<th width="200">关键词</th>
+						<th width="150">主要图片</th>
+						<th width="220">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>内资本金最高基金</td>
+						<td>中国平安集团旗下再添新成员-平安大华基金管理有限公司于, 获得中国证监会批准</td>
+						<td>【资讯中心】【财经资讯】</td>
+						<td>【基金】【平安】</td>
+						<td>shafdddddddddg6595+65+54648</td>
+						<td>
+							<ul class="button-group">
+          						<li><a class="small button reset-margin-bottom secondary" href="#">详情</a></li>
+          						<li><a class="small button reset-margin-bottom secondary" href="#">修改</a></li>
+          						<li><a class="small button reset-margin-bottom secondary" href="#">删除</a></li>
+          						<li><a class="small button reset-margin-bottom secondary" href="#">维护</a></li>
+        					</ul>
+        				</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>外资本金最高基金</td>
+						<td>中国平安集团旗下再添新成员-平安大华基金管理有限公司于, 获得中国证监会批准</td>
+						<td>【资讯中心】【财经资讯】</td>
+						<td>【基金】【平安】</td>
+						<td>shafdddddddddg6595+65+54648</td>
+						<td>
+							<ul class="button-group">
+          						<li><a class="small button reset-margin-bottom secondary" href="#">详情</a></li>
+          						<li><a class="small button reset-margin-bottom secondary" href="#">修改</a></li>
+          						<li><a class="small button reset-margin-bottom secondary" href="#">删除</a></li>
+          						<li><a class="small button reset-margin-bottom secondary" href="#">维护</a></li>
+        					</ul>
+						</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>面临结婚，怎么理财？</td>
+						<td>如何做好平日的理财？手头的8.5万元存款如何打理才能获得更大收益？看到刚退休回家的母亲收入与其在岗时差别很大，小张既感到失落</td>
+						<td>【保险生活】【保险常识】【投保攻略】【案例分析】【养老理财】【理财保险】</td>
+						<td>【医疗保险】【重大疾病保险】【综合意外险】【年金保险】</td>
+						<td>shafdddddddddg6595+65+54648</td>
+						<td>
+							<ul class="button-group">
+          						<li><a class="small button reset-margin-bottom secondary" href="#">详情</a></li>
+          						<li><a class="small button reset-margin-bottom secondary" href="#">修改</a></li>
+          						<li><a class="small button reset-margin-bottom secondary" href="#">删除</a></li>
+          						<li><a class="small button reset-margin-bottom secondary" href="#">维护</a></li>
+        					</ul>
+						</td>
+					</tr>
+				</tbody> -->
+			</table>
+			<!-- <ul class="pagination">
+				<li class="arrow unavailable"><a href="">&laquo;</a>
+				</li>
+				<li class="current"><a href="">1</a>
+				</li>
+				<li><a href="">2</a>
+				</li>
+				<li><a href="">3</a>
+				</li>
+				<li><a href="">4</a>
+				</li>
+				<li class="unavailable"><a href="">…</a>
+				</li>
+				<li><a href="">12</a>
+				</li>
+				<li><a href="">13</a>
+				</li>
+				<li class="arrow"><a href="">&raquo;</a>
+				</li>
+			</ul> -->
+			</div>
+		</div>
+		
+		
+		
+		<div class="row">
+			<div class="large-4 columns"><ul class='pagination'><li class='current'><a href="javascript:submit('pageto',1);">1</a></li></ul> </div>
+			<div class="large-4 columns"><p>总记录数:(13)</p></div>
+			<div class="large-4 columns">
+      <div class="row collapse prefix-radius">
+        <div class="small-3 columns">
+          <span class="prefix">每页记录数</span>
+        </div>
+        <div class="small-6 columns">
+          <input type="text" name="pageSize" placeholder="14"  value="14" >
+        </div>
+        <div class="small-3 columns">
+          <a href="javascript:submit('newpagesize',0);" class="button postfix  secondary">按新条数浏览</a>
+        </div>
+        
+      </div>
+			
+		</div>
+		</div>	
+			
+			
+			
+
+	</form>
+	<script>
+    $(document).foundation();
+  </script>
+  </body>
+<script type="text/javascript" >
+createAdd1("http://localhost:8000/yxpower/","search_div","[]");
+
+$(function(){
+	disp_list("indextable","yx_fas_whdev","[{'id':'2111000','tbl':'yx_fas_whdev','idx':'0','col':'id','title':'序号','type':'80','datalen':'8','refiid':'.','refname':'.','refcat':'0','reftable':'.','prikey':'0','args':'.','remark':'.'},{'id':'2111010','tbl':'yx_fas_whdev','idx':'10','col':'cat','title':'类别','type':'49','datalen':'4','refiid':'iid','refname':'name','refcat':'2111010','reftable':'yx_sys_code','prikey':'0','args':'yx_sys_code','remark':'yx_sys_code'},{'id':'2111020','tbl':'yx_fas_whdev','idx':'20','col':'name','title':'名称','type':'610','datalen':'64','refiid':'.','refname':'.','refcat':'0','reftable':'.','prikey':'0','args':'.','remark':'.'},{'id':'2111030','tbl':'yx_fas_whdev','idx':'30','col':'no','title':'设备编号','type':'610','datalen':'16','refiid':'.','refname':'.','refcat':'0','reftable':'.','prikey':'0','args':'.','remark':'.'},{'id':'2111070','tbl':'yx_fas_whdev','idx':'70','col':'computer','title':'计算机名称','type':'610','datalen':'32','refiid':'.','refname':'.','refcat':'0','reftable':'.','prikey':'0','args':'.','remark':'.'},{'id':'2111080','tbl':'yx_fas_whdev','idx':'80','col':'ip','title':'ip地址','type':'610','datalen':'32','refiid':'.','refname':'.','refcat':'0','reftable':'.','prikey':'0','args':'.','remark':'.'},{'id':'2111090','tbl':'yx_fas_whdev','idx':'90','col':'port','title':'端口','type':'40','datalen':'4','refiid':'.','refname':'.','refcat':'0','reftable':'.','prikey':'0','args':'.','remark':'.'},{'id':'2111150','tbl':'yx_fas_whdev','idx':'150','col':'modeauto','title':'自动状态','type':'49','datalen':'4','refiid':'iid','refname':'name','refcat':'10','reftable':'yx_sys_code','prikey':'0','args':'yx_sys_code','remark':'yx_sys_code'},{'id':'2111160','tbl':'yx_fas_whdev','idx':'160','col':'onidle','title':'是否空闲','type':'49','datalen':'4','refiid':'iid','refname':'name','refcat':'10','reftable':'yx_sys_code','prikey':'0','args':'yx_sys_code','remark':'yx_sys_code'},{'id':'2111170','tbl':'yx_fas_whdev','idx':'170','col':'error','title':'异常类别','type':'49','datalen':'4','refiid':'iid','refname':'name','refcat':'2111170','reftable':'yx_sys_code','prikey':'0','args':'yx_sys_code','remark':'yx_sys_code'},{'id':'2111180','tbl':'yx_fas_whdev','idx':'180','col':'cmd','title':'当前指令','type':'49','datalen':'4','refiid':'iid','refname':'name','refcat':'2111180','reftable':'yx_sys_code','prikey':'0','args':'yx_sys_code','remark':'yx_sys_code'},{'id':'2111190','tbl':'yx_fas_whdev','idx':'190','col':'cmdstatus','title':'指令状态','type':'49','datalen':'4','refiid':'iid','refname':'name','refcat':'20','reftable':'yx_sys_code','prikey':'0','args':'yx_sys_code','remark':'yx_sys_code'},{'id':'2111200','tbl':'yx_fas_whdev','idx':'200','col':'arg','title':'当前参数','type':'40','datalen':'4','refiid':'.','refname':'.','refcat':'0','reftable':'.','prikey':'0','args':'.','remark':'.'},{'id':'2111210','tbl':'yx_fas_whdev','idx':'210','col':'argx','title':'当前参数x','type':'40','datalen':'4','refiid':'.','refname':'.','refcat':'0','reftable':'.','prikey':'0','args':'.','remark':'.'},{'id':'2111220','tbl':'yx_fas_whdev','idx':'220','col':'argy','title':'当前参数y','type':'40','datalen':'4','refiid':'.','refname':'.','refcat':'0','reftable':'.','prikey':'0','args':'.','remark':'.'},{'id':'2111230','tbl':'yx_fas_whdev','idx':'230','col':'argz','title':'当前参数z','type':'40','datalen':'4','refiid':'.','refname':'.','refcat':'0','reftable':'.','prikey':'0','args':'.','remark':'.'},{'id':'2111350','tbl':'yx_fas_whdev','idx':'350','col':'status','title':'状态','type':'49','datalen':'4','refiid':'iid','refname':'name','refcat':'99','reftable':'yx_sys_code','prikey':'0','args':'yx_sys_code','remark':'yx_sys_code'},{'id':'2111360','tbl':'yx_fas_whdev','idx':'360','col':'remark','title':'备注','type':'610','datalen':'256','refiid':'.','refname':'.','refcat':'0','reftable':'.','prikey':'0','args':'.','remark':'.'}]","[{'computer':'cmpt1','port':'4999','cat':'提升机','error':'无','cmdstatus':'成功','remark':'.','status':'正常','no':'T1','modeauto':'是','ip':'192.168.8.4','id':'21','arg':'0','cmd':'无','onidle':'是','name':'H1','argx':'0','argy':'0','argz':'0'},{'computer':'cmpt2','port':'4999','cat':'提升机','error':'无','cmdstatus':'成功','remark':'.','status':'正常','no':'T2','modeauto':'是','ip':'192.168.8.4','id':'22','arg':'0','cmd':'无','onidle':'是','name':'H2','argx':'0','argy':'0','argz':'0'},{'computer':'cmps1','port':'4999','cat':'堆垛机','error':'无','cmdstatus':'成功','remark':'.','status':'正常','no':'S1','modeauto':'是','ip':'192.168.8.2','id':'31','arg':'0','cmd':'无','onidle':'是','name':'S1','argx':'0','argy':'0','argz':'0'},{'computer':'cmpa0','port':'33333','cat':'拣选AGV','error':'无','cmdstatus':'成功','remark':'.','status':'正常','no':'3196','modeauto':'是','ip':'192.168.8.31','id':'3196','arg':'819','cmd':'无','onidle':'是','name':'A6','argx':'19','argy':'16','argz':'698'},{'computer':'cmpa0','port':'33333','cat':'拣选AGV','error':'无','cmdstatus':'成功','remark':'.','status':'正常','no':'3197','modeauto':'是','ip':'192.168.8.31','id':'3197','arg':'1179','cmd':'无','onidle':'是','name':'A7','argx':'29','argy':'23','argz':'699'},{'computer':'cmpa0','port':'33333','cat':'拣选AGV','error':'无','cmdstatus':'成功','remark':'.','status':'正常','no':'3198','modeauto':'是','ip':'192.168.8.31','id':'3198','arg':'1177','cmd':'无','onidle':'是','name':'A8','argx':'27','argy':'23','argz':'699'},{'computer':'cmpa0','port':'33333','cat':'拣选AGV','error':'无','cmdstatus':'成功','remark':'.','status':'正常','no':'3199','modeauto':'是','ip':'192.168.8.31','id':'3199','arg':'1175','cmd':'无','onidle':'是','name':'A9','argx':'25','argy':'23','argz':'699'},{'computer':'cmpa0','port':'33333','cat':'拣选AGV','error':'无','cmdstatus':'成功','remark':'.','status':'正常','no':'3200','modeauto':'是','ip':'192.168.8.31','id':'3200','arg':'619','cmd':'无','onidle':'是','name':'A0','argx':'19','argy':'12','argz':'698'},{'computer':'cmpa0','port':'33333','cat':'拣选AGV','error':'无','cmdstatus':'成功','remark':'.','status':'正常','no':'3201','modeauto':'是','ip':'192.168.8.31','id':'3201','arg':'1176','cmd':'无','onidle':'是','name':'A1','argx':'26','argy':'23','argz':'698'},{'computer':'cmpa0','port':'33333','cat':'拣选AGV','error':'无','cmdstatus':'成功','remark':'.','status':'正常','no':'3202','modeauto':'是','ip':'192.168.8.31','id':'3202','arg':'469','cmd':'无','onidle':'是','name':'A2','argx':'19','argy':'9','argz':'698'},{'computer':'cmpa0','port':'33333','cat':'拣选AGV','error':'无','cmdstatus':'成功','remark':'.','status':'正常','no':'3203','modeauto':'是','ip':'192.168.8.31','id':'3203','arg':'1174','cmd':'无','onidle':'是','name':'A3','argx':'24','argy':'23','argz':'699'},{'computer':'cmpa0','port':'33333','cat':'拣选AGV','error':'无','cmdstatus':'成功','remark':'.','status':'正常','no':'3204','modeauto':'是','ip':'192.168.8.31','id':'3204','arg':'1178','cmd':'无','onidle':'是','name':'A4','argx':'28','argy':'23','argz':'699'},{'computer':'cmpa0','port':'33333','cat':'拣选AGV','error':'无','cmdstatus':'成功','remark':'.','status':'正常','no':'3205','modeauto':'是','ip':'192.168.8.31','id':'3205','arg':'470','cmd':'无','onidle':'是','name':'A5','argx':'20','argy':'9','argz':'698'}]");
+	
+	$("table#indextable tbody").find("tr").each(function(){//background:#daf2f8;
+		$(this).mouseover(function(){
+			$(this).css("background","#daf2f8");
+		});
+		$(this).mouseout(function(){
+			$(this).css("background","");
+		});
+	});	
+});
+</script>
+</html>

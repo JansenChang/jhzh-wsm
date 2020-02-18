@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhzh.wsm.dao.TestDao">
+    <resultMap id="user" type="com.jhzh.wsm.dto.User">
+        <result column="nickname" property="nikename"/>
+    </resultMap>
+    <insert id="insert" >
+        insert into yx_las_part(
+        id
+        ) values (
+        #{id}
+        )
+    </insert>
+
+
+    <select id="test" resultType="java.util.HashMap" >
+        select * from yx_sys_usr
+    </select>
+    <select id="sel" resultType="com.jhzh.wsm.dto.YxLasPart">
+        select atlastdate from yx_las_part
+    </select>
+
+</mapper>
