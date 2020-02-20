@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhzh.wsm.dao.PutInStorageDao">
+
+    <insert id="wmsInvInSave" parameterType="com.jhzh.wsm.dto.WmsInvInBean">
+        insert into yx_las_warehouse
+         (id, unt,app, dptid, taskid, tasksrc, locator, shelfcode, cellid, woid, trayid, partcode,lotcode, qty, ifhalf, status)
+values (#{id},#{unt},#{app},#{deptid},#{taskId},#{taskSource},#{locator},#{shelfCode},#{shelfLay},#{wipEntityId},#{stockNo},#{itemCode},#{lotCode},#{quantity},#{isMultiPalForLot},0)
+ </insert>
+
+</mapper>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhzh.wsm.dao.WmsInvOutDao">
+
+    <insert id="wmsInvOutSave" parameterType="com.jhzh.wsm.dto.WmsInvOutBean">
+        insert into yx_las_exwarehouse
+         (id,unt, app,dptid,taskid,tasksrc,invtype,woid,partcode,qty,status)
+values (#{id},#{unt},#{app},#{deptid},#{taskId},#{taskSource},#{invOutType},#{wipEntityId},#{itemCode},#{quantity},0)
+ </insert>
+
+</mapper>

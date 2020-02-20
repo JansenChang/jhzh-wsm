@@ -3,6 +3,7 @@ package com.jhzh.wsm.service.impl;
 import com.jhzh.wsm.dao.YxWmsCellDao;
 import com.jhzh.wsm.dto.YxWmsCellDto;
 import com.jhzh.wsm.service.TrayInfoService;
+import com.jhzh.wsm.utils.result.CodeMsg;
 import com.jhzh.wsm.utils.result.Result;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,11 +49,11 @@ public class TrayInfoServiceImpl implements TrayInfoService {
                 }
                 yxWmsCellDao.updateTrayInfo(updateDto);
             }
-        }catch (Exception e){/*
-            return Result.error();*/
+        }catch (Exception e){
+            return Result.error(new CodeMsg(200,e.getMessage()));
         }
 
-        return Result.success("更新成功！");
+        return Result.success(yxWmsCellDto);
     }
 
 

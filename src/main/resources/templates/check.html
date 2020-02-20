@@ -1,15 +1,15 @@
-<html lang="ZH-cn">
+<html>
 <head>
     <title>DPH</title>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="../css/css_0_0_normalize.css"/>
-    <link rel="stylesheet" href="../css/css_0_0_f5.css"/>
-    <link rel="stylesheet" href="../css/css_0_0_back.css"/>
-    <link rel="stylesheet" href="../css/standardization.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/css_0_0_normalize.css">
+    <link rel="stylesheet" href="../css/css_0_0_f5.css">
+    <link rel="stylesheet" href="../css/css_0_0_back.css">
+    <link rel="stylesheet" href="../css/standardization.css">
     <script src="../js/mapnode.js"></script>
     <script src="../js/jquery.js"></script>
     <script src="../js/js_0_0_f5m.js"></script>
@@ -60,7 +60,7 @@
         </div>
 
         <div class="buttonbox">
-            <div class="grop"><button onclick="save()">保存</button></div><!--保存当前焦点所在文本框数据!-->
+            <!--<div class="grop"><button onclick="save()">保存</button></div>!--><!--保存当前焦点所在文本框数据!-->
             <div class="grop"><button onclick="clearinput()">清除</button></div>
         </div>
 
@@ -70,7 +70,7 @@
     <div class="medium-3 columns">
         <div class="grop">
             <label for="">列</label>
-            <select name="" id="col">
+            <select name="" id="col" >
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -155,6 +155,13 @@
         return num;
     }
 
+    function cutafter3 (str){//截取字符串后面3位并转为数字
+        var len=str.length;
+        str=str.substring(len-3,len);
+        num= parseInt(str);
+        return num;
+    }
+
 
 
     onload = function(){
@@ -167,9 +174,7 @@
     function palletidtxtonblur(){//盘号输入框失焦事件
         var txts = document.getElementsByClassName("ptxt");
 
-        var row=parseInt(document.getElementById("row").value);
 
-        var col=parseInt(document.getElementById("col").value);
 
         var traylist=[];
 
@@ -183,16 +188,27 @@
 
 
             t.onkeyup=function(){
-                if(event.keyCode == 13){
-                    var next = this.index + 1;
-                    if(next > txts.length - 1) {//如果是最后一个
-                        var lastid=this.id;
 
+
+                if(event.keyCode == 13){
+                    console.log("键码"+event.keyCode);
+                    var next = this.index + 1;
+                    if((this.value!="")&&(next > txts.length - 1)) {//如果是最后一个
+                        var lastid=this.id;
+                        var row=parseInt(document.getElementById("row").value);
+
+                        var col=parseInt(document.getElementById("col").value);
 
                         var layer=cutafter2(lastid);
-                        console.log(layer);
+
                         var trayno=document.getElementById(lastid).value;
-                        var trayid=cutafter5(trayno);
+
+                        if(trayno[0]=="P"){
+                            var trayid=cutafter5(trayno);
+                        }else if(trayno[0]=="6"){
+                            var trayid=cutafter3(trayno);
+                        }
+
 
                         var objt={
                             'layer':layer,
@@ -201,7 +217,7 @@
                         };
 
                         traylist.push(objt);
-                        debugger
+
                         //化成对象再作为ajax的data
                         var obj={
                             'row':row,
@@ -211,7 +227,7 @@
                         }
                         console.log(obj);
                         var str=JSON.stringify(obj);
-                        console.log(str);
+
                         save(str);//ajax
 
 
@@ -229,11 +245,19 @@
 
 
                         var pid=this.id;
+                        var row=parseInt(document.getElementById("row").value);
+
+                        var col=parseInt(document.getElementById("col").value);
 
                         var layer=cutafter2(pid);
                         console.log(layer);
                         var trayno =document.getElementById(pid).value;
-                        var trayid=cutafter5(trayno);
+                        if(trayno[0]=="P"){
+                            var trayid=cutafter5(trayno);
+                        }else if(trayno[0]=="6"){
+                            var trayid=cutafter3(trayno);
+                        }
+
 
                         console.log(trayid);
                         var objt={
@@ -243,23 +267,12 @@
                         };
 
                         traylist.push(objt);
-                        //if(traylist.length>12){
 
-                       // }
                         console.log(traylist);
-
-
-
-
-
                         txts[next].focus();//下一个输入框获得焦点
                     }
-
-
-
-
-
-
+                }else if(event.keyCode == 16){//禁止条码枪默认的shift鍵
+                    event.returnValue=false;
                 }
 
 
@@ -299,6 +312,7 @@
 
             t.onkeyup=function(){
                 if(event.keyCode == 13){
+
                     var next = this.index + 1;
                     if(next > txts.length - 1) {//如果是最后一个
                         for(var j=0;j<txts.length;j++){//真正自动保存在此处
@@ -331,20 +345,28 @@
     }
 
 
-  function save(data) {//把输入框内容保存进数据库
-        console.log(data)
-        $.ajax({
+    function save(data){//把输入框内容保存进数据库
+        console.log(data);
+
+       $.ajax({
             type: "post", //使用post方法访问后台
             url: "/saveTrayInfo",
             contentType:"application/json;charset=utf-8",
             dataType: "JSON",
             data:  data, //要发送的参数
             async: false,//同步调用
-            success: function (resultData) {
-
+            success : function(resultData) {
                 console.log(resultData);
+                console.log(resultData.code);
+                if(resultData.errorCode==0){
+                    alert("存入成功");
+                }else{
+                    alert("存入失败");
+                }
+
+
             },
-            error: function (errorMsg) {
+            error:function(errorMsg){
                 console.log(errorMsg);
             }
         });

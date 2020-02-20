@@ -28,7 +28,10 @@ public class TrayInfoController {
         //獲取12條數據
         List<YxWmsCellDto> yxWmsCellDtos = trayInfoService.queryTrayInfo(yxWmsCellDto);
         Result<?> result = trayInfoService.updateTrayInfo(yxWmsCellDto, yxWmsCellDtos);
+        //TODO 入库反馈
+
+
         log.info("saveTrayInfo begin..");
-        return Result.success(result);
+        return result;
     }
 }

@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="jhzh-wsm:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>jhzh-wsm</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="wms.war">
+      <element id="artifact" artifact-name="jhzh-wsm:war exploded" />
+    </root>
+  </artifact>
+</component>

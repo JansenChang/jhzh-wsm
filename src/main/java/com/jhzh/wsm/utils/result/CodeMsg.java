@@ -7,7 +7,7 @@ public class CodeMsg {
 
     public static CodeMsg SERVER_ERROR = new CodeMsg(500100, "服务端异常");
 
-    private CodeMsg(int code, String msg) {
+    public CodeMsg(int code, String msg) {
         this.code = code;
         this.msg = msg;
     }
