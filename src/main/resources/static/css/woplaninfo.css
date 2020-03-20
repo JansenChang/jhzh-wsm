@@ -1,0 +1,18 @@
+.query{
+    margin-top: 10px;
+    text-align: right;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.queryBtn{text-align: center;margin-bottom: 30px;}
+
+.head{height: 30px;background:#007bff;margin-bottom: 30px;}
+
+.table{
+    margin-bottom: 0px;
+}
+.table-responsive{
+    width: 95%;
+    margin: 0px auto;
+}

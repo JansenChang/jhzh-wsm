@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhzh.wms.dao.InvQtyDao">
+
+    <select id="queryInvQty" resultType="java.util.HashMap" parameterType="map">
+     select
+       '142' as organizationId,
+       '103' as organizationCode,
+       cell.areano as areaCode,
+       case  when locked=1 then 0
+        else 1
+        end AS itemUseStatus,
+       cell.id AS shelfCode ,
+       cell.trayno AS stockCode,
+       cell.partid AS itemCode,
+       cell.partdesc AS itemDesc,
+       partwoid AS wipEntityId,
+       cell.partlotid AS batchNo,
+       DATE_SUB(str_to_date(FROM_UNIXTIME(cell.partdate, '%Y-%m-%d'),'%Y-%m-%d'),INTERVAL -30 day) AS expertDate,
+       cell.partnum as quantity
+       from yx_ils_cell cell
+       <where>
+           partid !=0 and partnum !=0
+       <!--  organizationID=#{map.organizationID} and-->
+           <if test="map.itemUseStatus != null and map.itemUseStatus != '' and map.itemUseStatus !='0' and map.itemUseStatus !=0">
+              AND  locked = 0
+           </if>
+           <if test="map.itemCode!=null and map.itemCode !=''">
+                and partid =#{map.itemCode}
+            </if>
+            <if test="map.areaCode!=null and map.areaCode !=''">
+                and areano =#{map.areaCode}
+            </if>
+
+            <if test="map.shelfCode!=null and map.shelfCode !=''">
+                and id =#{map.shelfCode}
+            </if>
+             <if test="map.stockCode!=null and map.stockCode !=''">
+                and trayno =#{map.stockCode}
+            </if>
+             <if test="map.wipEntityId!=null and map.wipEntityId !=''">
+                and partwoid =#{map.wipEntityId}
+            </if>
+            <if test="map.batchNo!=null and map.batchNo !=''">
+                and partlotid =#{map.batchNo}
+            </if>
+        </where>
+
+    </select>
+</mapper>

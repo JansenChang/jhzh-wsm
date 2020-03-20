@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhzh.wms.dao.WsmTaskDao">
+    <resultMap id="taskStatusDto" type="com.jhzh.wms.dto.TaskStatusDto">
+        <result column="statusCode" property="statusCode"/>
+        <result column="statusInfor" property="statusInfor"/>
+    </resultMap>
+
+    <select id="queryTaskStatus" resultMap="taskStatusDto">
+      select * from  (select  taskid,status as statusCode,
+        (case
+           when status = 0 then '任务新建/等待执行'
+           when status = 11 then '任务执行中'
+           when status = 12 then '任务执行完成'
+           when status = 13 then '任务执行异常'
+           when status = 14 then '任务取消'
+        end) AS statusInfor
+    from yx_ils_whin
+    union
+    select  taskid,statuscode as statusCode,
+        (case
+           when statuscode = 0 then '任务新建/等待执行'
+           when statuscode = 11 then '任务执行中'
+           when statuscode = 12 then '任务执行完成'
+           when statuscode = 13 then '任务执行异常'
+           when statuscode = 14 then '任务取消'
+        end) AS statuscode
+    from yx_ils_whout) t
+        where taskid=#{taskId}
+    </select>
+</mapper>

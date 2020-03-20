@@ -1,11 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jhzh.wsm.dao.WmsInvOutDao">
-
-    <insert id="wmsInvOutSave" parameterType="com.jhzh.wsm.dto.WmsInvOutBean">
-        insert into yx_las_exwarehouse
-         (id,unt, app,dptid,taskid,tasksrc,invtype,woid,partcode,qty,status)
-values (#{id},#{unt},#{app},#{deptid},#{taskId},#{taskSource},#{invOutType},#{wipEntityId},#{itemCode},#{quantity},0)
+<mapper namespace="com.jhzh.wms.dao.WmsInvOutDao">
+    <resultMap id="wmsInvOutDto" type="com.jhzh.wms.dto.WmsInvOutDto">
+        <result column="id" property="id"/>
+        <result column="unt" property="unt"/>
+        <result column="app" property="app"/>
+        <result column="taskid" property="taskId"/>
+        <result column="taskSource" property="taskSource"/>
+        <result column="invOutType" property="invOutType"/>
+        <result column="wipEntityId" property="wipEntityId"/>
+        <result column="itemCode" property="itemCode"/>
+        <result column="quantity" property="quantity"/>
+    </resultMap>
+    <insert id="insertWmsInvOut" parameterType="com.jhzh.wms.dto.WmsInvOutDto">
+        insert into yx_ils_whout
+         (id,
+         unt,
+        app,
+        taskid,
+        taskSource,
+        invOutType,
+        wipEntityId,
+        itemCode,
+        quantity,
+        statuscode)
+values (#{id},#{unt},#{app},#{taskId},#{taskSource},#{invOutType},#{wipEntityId},#{itemCode},#{quantity},0)
  </insert>
+    <update id="updateStatus" parameterType="string">
+        update yx_ils_whout set statuscode=12 where taskid=#{key}
+    </update>
+
+    <select id="queryWmsInvOut" resultMap="wmsInvOutDto">
+        select
+        id,unt, app,taskid,taskSource,invOutType,wipEntityId,itemCode,quantity,statuscode
+        from yx_ils_whout
+        <where>
+            <if test="taskId !=null and taskId !=''">
+                taskid=#{taskId}
+            </if>
+            <if test="wipEntityId !=null and wipEntityId !=''">
+                wipEntityId=#{wipEntityId}
+            </if>
+        </where>
+
+
+    </select>
+
 
 </mapper>

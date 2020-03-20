@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhzh.wms.dao.TaskmesDao">
+    <resultMap id="taskmesDto" type="com.jhzh.wms.dto.TaskmesDto">
+        <result column="id"         property="id"/>
+        <result column="unt"        property="unt"/>
+        <result column="app"        property="app"/>
+        <result column="name"       property="name"/>
+        <result column="taskid"     property="taskid"/>
+        <result column="areano"     property="areano"/>
+        <result column="action"     property="action"/>
+        <result column="locator"    property="locator"/>
+        <result column="cellstrsrc" property="cellstrsrc"/>
+        <result column="cellstrdst" property="cellstrdst"/>
+        <result column="cellidsrc"  property="cellidsrc"/>
+        <result column="celliddst"  property="celliddst"/>
+        <result column="status"     property="status"/>
+    </resultMap>
+
+    <update id="updateTaskmes">
+        update yx_ils_taskmes
+        <set>
+         <if test="taskid !=null and taskid !=''">
+            taskid=#{taskid},
+        </if>
+        <if test="cellstrsrc !=null and cellstrsrc !=''">
+            cellstrsrc=#{cellstrsrc},
+        </if>
+         <if test="cellstrdst !=null and cellstrdst !=''">
+            cellstrdst=#{cellstrdst},
+        </if>
+         <if test="cellidsrc !=null and cellidsrc !=''">
+           cellidsrc =#{cellidsrc},
+        </if>
+         <if test="celliddst !=null and celliddst !=''">
+            celliddst=#{celliddst},
+        </if>
+          status =#{status}
+        </set>
+        <where>
+            <if test="locator !=null and locator !=''">
+              and  locator=#{locator}
+            </if>
+             <if test="action !=null and action !=''">
+              and  action=#{action}
+            </if>
+             <if test="areano !=null and areano !=''">
+             and areano=#{areano}
+            </if>
+                <if test="id !=null and id !=''">
+             and id=#{id}
+            </if>
+        </where>
+    </update>
+    <select id="queryTaskmes" resultMap="taskmesDto">
+        select
+            id,
+            unt,
+            app,
+            name,
+            taskid,
+            areano,
+            action,
+            locator,
+            cellstrsrc,
+            cellstrdst,
+            cellidsrc,
+            celliddst,
+            status
+        from yx_ils_taskmes
+        <where>
+            status=10
+            <if test="locator !=null and locator !=''">
+              and  locator=#{locator}
+            </if>
+             <if test="areano !=null and areano !=''">
+             and areano=#{areano}
+            </if>
+            <if test="id !=null and id !=''">
+             and id=#{id}
+            </if>
+        </where>
+    </select>
+        <select id="queryCompletedTask" resultMap="taskmesDto">
+        select
+        id,
+        unt,
+        app,
+        name,
+        taskid,
+        areano,
+        action,
+        locator,
+        cellstrsrc,
+        cellstrdst,
+        cellidsrc,
+        celliddst,
+        status
+        from
+        yx_ils_taskmes
+        <where>
+            status=500
+            <if test="locator !=null and locator !=''">
+              and  locator=#{locator}
+            </if>
+             <if test="areano !=null and areano !=''">
+             and areano=#{areano}
+            </if>
+             <if test="action !=null and action !=''">
+             and action=#{action}
+            </if>
+            <if test="id !=null and id !=''">
+             and id=#{id}
+            </if>
+        </where>
+        </select>
+
+
+</mapper>
