@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/jhzh-wsm.iml" filepath="$PROJECT_DIR$/jhzh-wsm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jhzh-wms.iml" filepath="$PROJECT_DIR$/jhzh-wms.iml" />
     </modules>
   </component>
 </project>

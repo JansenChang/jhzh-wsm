@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jhzh.wsm.dao.YxWmsCellDao">
-    <resultMap id="yxWmsCellDto" type="com.jhzh.wsm.dto.YxWmsCellDto">
+<mapper namespace="com.jhzh.wms.dao.YxWmsCellDao">
+    <resultMap id="yxWmsCellDto" type="com.jhzh.wms.dto.YxWmsCellDto">
         <result column="ROW" property="row"/>
         <result column="COL" property="col"/>
         <result column="LAYER" property="layer"/>
         <result column="TRAYID" property="trayid"/>
         <result column="TRAYNO" property="trayno"/>
+        <result column="partid" property="partid"/>
+        <result column="partnum" property="partnum"/>
     </resultMap>
     <update id="updateTrayInfo">
-        UPDATE YX_WMS_CELL SET TRAYID=#{trayid},TRAYNO=#{trayno} WHERE
+        UPDATE yx_ils_cell SET TRAYID=#{trayid},TRAYNO=#{trayno} WHERE
         ROW =#{row}
         AND COL=#{col}
         AND LAYER=#{layer}
     </update>
     <update id="update">
-        UPDATE YX_WMS_CELL SET TRAYNO=#{trayno}
+        UPDATE yx_ils_cell SET TRAYNO=#{trayno}
         WHERE
         ROW=#{row} AND
         COL=#{col} AND
@@ -25,19 +27,20 @@
 
 
     <select id="queryTrayInfo" resultMap="yxWmsCellDto">
-        SELECT ROW, COL, LAYER, TRAYID, TRAYNO FROM YX_WMS_CELL
+        SELECT ROW, COL, LAYER, TRAYID, TRAYNO FROM yx_ils_cell
         <where>
          <if test="row!=null and row !=''">ROW=#{row}</if>
          <if test="col!=null and col !=''">AND COL=#{col}</if>
         </where>
     </select>
-    <select id="selectAllTray" resultType="com.jhzh.wsm.dto.YxWmsCellDto">
+
+    <select id="selectAllTray" resultType="com.jhzh.wms.dto.YxWmsCellDto">
         select ROW,
             COL,
             LAYER,
             TRAYID,
             TRAYNO
-            FROM YX_WMS_CELL WHERE TRAYNO !='.'
+            FROM yx_ils_cell WHERE TRAYNO !='.'
     </select>
 
 </mapper>

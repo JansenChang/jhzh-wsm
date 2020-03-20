@@ -1,11 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jhzh.wsm.dao.PutInStorageDao">
-
-    <insert id="wmsInvInSave" parameterType="com.jhzh.wsm.dto.WmsInvInBean">
-        insert into yx_las_warehouse
-         (id, unt,app, dptid, taskid, tasksrc, locator, shelfcode, cellid, woid, trayid, partcode,lotcode, qty, ifhalf, status)
-values (#{id},#{unt},#{app},#{deptid},#{taskId},#{taskSource},#{locator},#{shelfCode},#{shelfLay},#{wipEntityId},#{stockNo},#{itemCode},#{lotCode},#{quantity},#{isMultiPalForLot},0)
+<mapper namespace="com.jhzh.wms.dao.PutInStorageDao">
+    <resultMap id="wmsInvInDto" type="com.jhzh.wms.dto.WmsInvInDto">
+        <result column="id" property="id"/>
+        <result column="unt" property="unt"/>
+        <result column="app" property="app"/>
+        <result column="taskid" property="taskId"/>
+        <result column="tasksource" property="taskSource" javaType="string"/>
+        <result column="locator" property="locator"/>
+        <result column="shelfcode" property="shelfCode"/>
+        <result column="shelfLay" property="shelfLay"/>
+        <result column="wipEntityId" property="wipEntityId"/>
+        <result column="stockNo" property="stockNo"/>
+        <result column="itemcode" property="itemCode"/>
+        <result column="lotcode" property="lotCode"/>
+        <result column="quantity" property="quantity"/>
+        <result column="isMultiPalForLot" property="isMultiPalForLot"/>
+    </resultMap>
+    <insert id="insertWmsInvIn" parameterType="com.jhzh.wms.dto.WmsInvInDto">
+        insert into yx_ils_whin
+         (id,
+         unt,
+         app,
+         taskid,
+         tasksource,
+          locator,
+          shelfcode,
+          shelfLay,
+          wipEntityId,
+          stockNo,
+          itemcode,
+        lotcode,
+          quantity,
+          isMultiPalForLot,
+          Partdate,
+           status)
+        values (#{id},#{unt},#{app},#{taskId},#{taskSource},#{locator},#{shelfCode},#{shelfLay},#{wipEntityId},#{stockNo},#{itemCode},#{lotCode},#{quantity},#{isMultiPalForLot},#{partdate},#{status})
  </insert>
+    <update id="updateStatus" >
+        update yx_ils_whin set status=#{status} where taskid=#{key}
+    </update>
+    <select id="QueryWarehouseFinish" resultMap="wmsInvInDto">
+    select
+        id, unt,app, taskid, tasksource, locator, shelfcode, shelfLay, wipEntityId, stockNo,itemcode, lotcode,quantity, isMultiPalForLot, status from
+        yx_ils_whin  where status=12
+</select>
+    <select id="queryItemCode" resultMap="wmsInvInDto" parameterType="integer">
+        select
+        id, unt,app, taskid, tasksource, locator, shelfcode, shelfLay, wipEntityId, stockNo, itemcode,lotcode,quantity, isMultiPalForLot, status
+          from yx_ils_whin where status=12
+        <if test="itemCode !=null">
+         AND   instr(itemCode,#{itemCode})>0
+        </if>
+    </select>
+
+    <select id="queryWmsInvInForTaskId" resultMap="wmsInvInDto">
+        select id, unt,app, taskid, tasksource, locator, shelfcode, shelfLay, wipEntityId, stockNo,itemcode,lotcode,quantity, isMultiPalForLot, status
+        from yx_ils_whin
+        where taskid=#{taskId}
+    </select>
+
 
 </mapper>

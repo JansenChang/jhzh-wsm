@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhzh.wms.dao.WoPlanInfoDao">
+
+
+    <insert id="insertWoPlanInfo" parameterType="com.jhzh.wms.dto.WoPlanInfoDto">
+        insert into yx_ils_whpick
+            (id,
+            unt,
+            app,
+            organizationid,
+            deptcode,
+            wipentityid,
+            wipentityname,
+            sortid,
+            wipqty,
+            wipqtypcs,
+            itemcode,
+            itemdesc,
+            plandate,
+            cellnum,
+            cellids,
+            status)
+     values
+             (
+             #{id},
+             #{unt},
+             #{app},
+             #{organizationId},
+             #{deptCode},
+             #{wipEntityId},
+             #{wipEntityName},
+             #{sortId},
+             #{wipQty},
+             #{wipQtyPcs},
+             #{itemCode},
+             #{itemDesc},
+             #{planDate},
+             #{cellnum},
+             #{cellids},
+             0
+     )
+
+
+
+    </insert>
+    <update id="updateStatus">
+        update yx_ils_whpick set status=12 where id=#{taskid}
+    </update>
+    <select id="queryWipEntity" resultType="com.jhzh.wms.dto.WoPlanInfoDto" parameterType="integer">
+        select
+            id,
+            unt,
+            app,
+            organizationid,
+            deptcode,
+            wipentityid,
+            wipentityname,
+            sortid,
+            wipqty,
+            wipqtypcs,
+            itemcode,
+            itemdesc,
+            plandate,
+            cellnum,
+            cellids,
+            status
+            from yx_ils_whpick
+         <where>
+            <if test="wipEntityId!=null and wipEntityId !=''">
+             and wipentityid=#{wipEntityId}
+            </if>
+            and status=0
+         </where>
+    </select>
+
+
+</mapper>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhzh.wms.dao.ItemInfoDao">
+
+
+    <insert id="insertItemInfo" parameterType="com.jhzh.wms.dto.ItemInfoDto">
+        insert into yx_las_iteminfo (
+            id,
+            unt,
+            app,
+            organizationid,
+            organizationcode,
+            itemid,
+            itemcode,
+            itemdesc,
+            itemtype,
+            invcategory,
+            unitofmeasure,
+            lifedays,
+            activestatus,
+            lastupdatedate,
+            memoinfo1,
+            memoinfo2,
+            memoinfo3,
+            memoinfo4,
+            memoinfo5
+        )
+        values (
+            #{id},
+            #{unt},
+            #{app},
+            #{organizationId},
+            #{organizationCode},
+            #{itemId},
+            #{itemCode},
+            #{itemDesc},
+            #{itemType},
+            #{invCategory},
+            #{unitOfMeasure},
+            #{lifeDays},
+            #{activeStatus},
+            #{lastUpdateDate},
+            #{memoInfo1},
+            #{memoInfo2},
+            #{memoInfo3},
+            #{memoInfo4},
+            #{memoInfo5}
+        )
+    </insert>
+    <update id="updateItemInfo">
+
+        update yx_las_iteminfo set
+            id= #{id} ,                                    
+            unt =#{unt} ,
+            app =#{app} ,
+            organizationid =#{organizationId} ,
+            organizationcode =#{organizationCode} ,
+            itemid =#{itemId} ,
+            itemcode =#{itemCode} ,
+            itemdesc =#{itemDesc} ,
+            itemtype =#{itemType} ,
+            invcategory =#{invCategory} ,
+            unitofmeasure =#{unitOfMeasure} ,
+            lifedays =#{lifeDays} ,
+            activestatus =#{activeStatus} ,
+            lastupdatedate =       #{lastUpdateDate} ,
+            memoinfo1 =#{memoInfo1} ,
+            memoinfo2 =#{memoInfo2} ,
+            memoinfo3 =#{memoInfo3} ,
+            memoinfo4 =#{memoInfo4} ,
+            memoinfo5=#{memoInfo5}
+             where itemcode = #{itemCode}
+    </update>
+    <select id="queryItemInfoByItemCode" resultType="java.lang.Integer">
+        select count(itemcode) from yx_las_iteminfo where itemcode=#{itemCode}
+    </select>
+</mapper>

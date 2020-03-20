@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="jhzh-wsm" />
+        <module name="jhzh-wms" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="jhzh-wsm" target="1.7" />
+      <module name="jhzh-wms" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

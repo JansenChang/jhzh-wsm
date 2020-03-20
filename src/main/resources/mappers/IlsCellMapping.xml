@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhzh.wms.dao.IlsCellDao">
+    <resultMap id="ilsCellDto" type="com.jhzh.wms.dto.IlsCellDto">
+     <result column="id" property="id" javaType="long"/>
+     <result column="unt" property="unt" javaType="long"/>
+     <result column="app" property="app" javaType="long"/>
+     <result column="areano" property="areano"  />
+     <result column="name" property="name"/>
+     <result column="row" property="row"/>
+     <result column="col" property="col"/>
+     <result column="layer" property="layer"/>
+     <result column="arg" property="arg"/>
+     <result column="argx" property="argx"/>
+     <result column="argy" property="argy"/>
+     <result column="argz" property="argz"/>
+     <result column="locked" property="locked"/>
+     <result column="lockedtype" property="lockedtype"/>
+     <result column="trayid" property="trayid" javaType="long"/>
+     <result column="trayno" property="trayno"/>
+     <result column="partid" property="partid" javaType="long"/>
+     <result column="partnum" property="partnum"/>
+     <result column="partdate" property="partdate" />
+     <result column="partwoid" property="partwoid" javaType="long"/>
+     <result column="partlotid" property="partlotid" javaType="long"/>
+     <result column="partlotdiv" property="partlotdiv"/>
+     <result column="cmd" property="cmd"/>
+     <result column="cmdstatus" property="cmdstatus"/>
+    </resultMap>
+ <update id="updateCellByCellId">
+  update yx_ils_cell
+  <set>
+  <if test="trayid!=null and trayid !=''">
+        trayid=#{trayid},
+   </if>
+    <if test="trayno!=null and trayno !=''">
+        trayno=#{trayno},
+   </if>
+    <if test="partid!=null and partid !=''">
+        partid=#{partid},
+   </if>
+ <if test="partdesc!=null and partdesc !=''">
+        partdesc=#{partdesc},
+   </if>
+  <if test="partnum!=null and partnum !=''">
+        partnum=#{partnum},
+   </if>
+  <if test="partdate!=null and partdate !=''">
+        partdate=#{partdate},
+   </if>
+  <if test="partwoid!=null and partwoid !=''">
+       partwoid=#{partwoid},
+   </if>
+     <if test="partlotid!=null and partlotid !=''">
+       partlotid=#{partlotid},
+   </if>
+    <if test="partlotdiv!=null and partlotdiv !=''">
+       partlotdiv=#{partlotdiv},
+   </if>
+   </set>
+   where id=#{id}
+ </update>
+ <select id="queryCell" resultMap="ilsCellDto">
+        select
+         id,
+         unt,
+         app,
+         areano,
+         name,
+         row,
+         col,
+         layer,
+         locked,
+         lockedtype,
+         trayid,
+         trayno,
+         partid,
+         partnum,
+         partdate,
+         partwoid,
+         partlotid,
+         partlotdiv,
+         cmd,
+         cmdstatus
+         from yx_ils_cell
+
+         <where>
+
+            <if test="id!=null and id !=''">
+             and id=#{id}
+            </if>
+            <if test="partid!=null and partid !=''">
+             and partid=#{partid}
+            </if>
+            <if test="partwoid!=null and partwoid !=''">
+             and partwoid=#{partwoid}
+            </if>
+            <if test="partlotid!=null and partlotid !=''">
+             and partlotid=#{partlotid}
+            </if>
+            <if test="cmdstatus!=null and cmdstatus !=''">
+             and cmdstatus=#{cmdstatus}
+            </if>
+            <if test="areano!=null and areano !=''">
+             and areano=#{areano}
+            </if>
+             and locked=0
+
+         </where>
+    </select>
+    <select id="queryUsableItem" resultType="string">
+        select partid from
+            (
+                select  substring(CONCAT(partid,''),1,LENGTH(partid)-3 ) as partid
+                 from yx_ils_cell where areano=15 and locked=0 and partid !=0
+            )t
+        group by t.partid
+    </select>
+    <select id="queryStandardCell" resultType="com.jhzh.wms.dto.IlsCellDto">
+        select
+         id,
+         unt,
+         app,
+         areano,
+         name,
+         row,
+         col,
+         layer,
+         locked,
+         lockedtype,
+         trayid,
+         trayno,
+         partid,
+         partnum,
+         partdate,
+         partwoid,
+         partlotid,
+         partlotdiv,
+         cmd,
+         cmdstatus
+         from yx_ils_cell
+
+         <where>
+
+            <if test="id!=null and id !=''">
+             and id=#{id}
+            </if>
+            <if test="partid!=null and partid !=''">
+             and partid=#{partid}
+            </if>
+            <if test="partwoid!=null and partwoid !=''">
+             and partwoid=#{partwoid}
+            </if>
+            <if test="partlotid!=null and partlotid !=''">
+             and partlotid=#{partlotid}
+            </if>
+            <if test="cmdstatus!=null and cmdstatus !=''">
+             and cmdstatus=#{cmdstatus}
+            </if>
+             and locked=0
+            and areano !=15
+         </where>
+    </select>
+    <!--<select id="queryOtherPart" resultMap="ilsCellDto">
+        select
+         id,
+         unt,
+         app,
+         areano,
+         name,
+         row,
+         col,
+         layer,
+         arg,
+         argx,
+         argy,
+         argz,
+         locked,
+         lockedtype,
+         trayid,
+         trayno,
+         partid,
+         partnum,
+         partdate,
+         partwoid,
+         partlotid,
+         partlotdiv,
+         mestaskid,
+         cmd,
+         cmdstatus
+         from yx_ils_cell
+         where partid=#{ilsCellDto.partid} and cmdstatus=1 and partlotdiv=1
+         and partlotid=#{ilsCellDto.partlotid} and id !=#{ilsCellDto.id}
+         and #{ilsCellDto.partnum} + partnum &gt; #{wipQtyTemp}
+    </select>-->
+   <!-- <select id="queryCellByPartwoid" resultMap="ilsCellDto">
+     select
+         id,
+         unt,
+         app,
+         areano,
+         name,
+         row,
+         col,
+         layer,
+         locked,
+         lockedtype,
+         trayid,
+         trayno,
+         partid,
+         partnum,
+         partdate,
+         partwoid,
+         partlotid,
+         partlotdiv,
+         cmd,
+         cmdstatus
+         from yx_ils_cell
+         where partwoid=#{wipEntityId}
+    </select>
+-->
+
+</mapper>
