@@ -9,8 +9,6 @@ public class TrayInfoIndexController {
     @RequestMapping("trayInfoView")
     public String toTrayInfoView(){
         return "check";
-
-
     }
 
 }

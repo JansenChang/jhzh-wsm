@@ -29,7 +29,7 @@ public class WoPlayInfoController {
 
     @ResponseBody
     @RequestMapping(value = "wms/woPlayInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public Result<?> wmsInvOut( @RequestBody JSONObject jsonpObject) throws Exception {
+    public Result<?> woPlayInfo( @RequestBody JSONObject jsonpObject) throws Exception {
         Map<String,Object> map=jsonpObject;
         map.put("wipEntityId",jsonpObject.get("wipEntityId"));
         map.put("itemCode","");

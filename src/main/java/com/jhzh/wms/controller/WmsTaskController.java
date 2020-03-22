@@ -26,7 +26,7 @@ public class WmsTaskController {
     @Autowired
     private InvQtyService invQtyService;
 
-    //立体库任务状态查询接
+    //立体库任务状态查询接口
     @RequestMapping(value = "wms/QueryTaskStatus", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public Result<?> queryTaskStatus(@RequestBody JSONObject jsonpObject) throws Exception {
         log.info("queryTaskStatus begin..");

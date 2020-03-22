@@ -158,10 +158,55 @@
              and cmdstatus=#{cmdstatus}
             </if>
              and locked=0
-            and areano !=15
+             and areano !=15
          </where>
     </select>
-    <!--<select id="queryOtherPart" resultMap="ilsCellDto">
+    <select id="queryMaterial" resultType="java.util.Map" parameterType="java.util.Map">
+         select
+         id,
+         unt,
+         app,
+         areano,
+         name,
+         row,
+         col,
+         layer,
+         locked,
+         lockedtype,
+         trayid,
+         trayno,
+         CONCAT(left(partid,LENGTH(partid)-4),'-',right(partid,LENGTH(partid)-9)) AS partid,
+         partnum,
+         FROM_UNIXTIME(partdate/1000, '%Y-%m-%d') AS partdate,
+         partwoid,
+         partlotid,
+         partlotdiv,
+         cmd,
+         cmdstatus
+         from yx_ils_cell
+
+         <where>
+            <if test="id!=null and id !=''">
+             and id=#{id}
+            </if>
+            <if test="partid!=null and partid !=''">
+             and partid=#{partid}
+            </if>
+            <if test="partwoid!=null and partwoid !=''">
+             and partwoid=#{partwoid}
+            </if>
+            <if test="areano!=null and areano !=''">
+             and areano=#{areano}
+            </if>
+             <if test="begindate!=null and begindate !=''">
+             and partdate between  #{begindate} and #{enddate}
+            </if>
+             and locked=0
+             and partid !=0
+         </where>
+
+    </select>
+    <select id="queryDynamicRepertroy" resultType="com.jhzh.wms.dto.IlsCellDto">
         select
          id,
          unt,
@@ -171,53 +216,20 @@
          row,
          col,
          layer,
-         arg,
-         argx,
-         argy,
-         argz,
          locked,
          lockedtype,
          trayid,
          trayno,
          partid,
          partnum,
-         partdate,
-         partwoid,
-         partlotid,
-         partlotdiv,
-         mestaskid,
-         cmd,
-         cmdstatus
-         from yx_ils_cell
-         where partid=#{ilsCellDto.partid} and cmdstatus=1 and partlotdiv=1
-         and partlotid=#{ilsCellDto.partlotid} and id !=#{ilsCellDto.id}
-         and #{ilsCellDto.partnum} + partnum &gt; #{wipQtyTemp}
-    </select>-->
-   <!-- <select id="queryCellByPartwoid" resultMap="ilsCellDto">
-     select
-         id,
-         unt,
-         app,
-         areano,
-         name,
-         row,
-         col,
-         layer,
-         locked,
-         lockedtype,
-         trayid,
-         trayno,
-         partid,
-         partnum,
-         partdate,
+         FROM_UNIXTIME(partdate/1000, '%Y-%m-%d') AS partdate,
          partwoid,
          partlotid,
          partlotdiv,
          cmd,
          cmdstatus
-         from yx_ils_cell
-         where partwoid=#{wipEntityId}
+         from yx_ils_cell where areano=55
     </select>
--->
+
 
 </mapper>
