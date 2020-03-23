@@ -56,7 +56,7 @@ public class WmsInvOutServiceImpl implements WmsInvOutService {
                 return Result.error(CodeMsg.builder().code(ErrorCode.IDALREADY_EXIST.getCode()).msg(ErrorCode.IDALREADY_EXIST.getMsg()).build());
             }
             Integer wipEntityId = wmsInvOutDto.getWipEntityId();
-             HashMap<String, Object> map = new HashMap();
+            HashMap<String, Object> map = new HashMap();
             map.put("organizationId", "142");
             map.put("lastUpdateDateFrom", "1990-01-01 00:00:00");
             map.put("lastUpdateDateTo", "9999-12-31 00:00:00");

@@ -7,4 +7,6 @@ public interface FlowRecordService {
 
 
     Result<?> wmsInvInFlow(JSONObject jsonObject);
+
+    Result<?> wmsInvOutFlow(JSONObject jsonObject);
 }

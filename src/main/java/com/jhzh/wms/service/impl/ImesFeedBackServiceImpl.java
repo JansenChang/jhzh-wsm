@@ -179,6 +179,7 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
                 IlsCellDto ilsCellDto = new IlsCellDto();//物资组件编码
                 ilsCellDto.setPartid(Long.parseLong(code));
                 ilsCellDto.setLocked(0);
+                ilsCellDto.setAreano(15);
                 List<IlsCellDto> ilsCellDtos = IlscellDao.queryCell(ilsCellDto);
                 tempMap.put(itemListBean.getComponentItemCode(), ilsCellDtos);
             }

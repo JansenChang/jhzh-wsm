@@ -298,7 +298,7 @@ public class PutInStorageServiceImpl implements PutInStorageService {
             wmsInvInDto.setDeptid(145);
             Calendar ca = Calendar.getInstance();
             ca.setTime(new Date());
-            ca.add(Calendar.DATE, 30);
+            //ca.add(Calendar.DATE, 30);
             wmsInvInDto.setPartdate(ca.getTime());
             WmsInvInDto date;
             List<WmsInvInDto.ItemListBean> itemList = wmsInvInDto.getItemList();

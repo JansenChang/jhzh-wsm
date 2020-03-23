@@ -35,4 +35,16 @@ public class FlowRecordController {
         return result;
     }
 
+    /**
+     * 出库流水查询
+     * @param jsonObject
+     * @return
+     */
+    @PostMapping(value = "wmsInvOutFlow")
+    public Result<?> wmsInvOutFlow(@RequestBody JSONObject jsonObject) {
+        log.info("wmsInvOutFlow begin..");
+        Result<?> result = flowRecordService.wmsInvOutFlow(jsonObject);
+        log.info("wmsInvOutFlow end..");
+        return result;
+    }
 }

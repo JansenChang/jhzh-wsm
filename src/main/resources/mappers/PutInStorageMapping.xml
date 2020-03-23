@@ -98,6 +98,12 @@
              <if test="stockno!=null and stockno !=''">
              and stockno=#{stockno}
             </if>
+            <if test="locator!=null and locator !='' and locator ==3">
+             and locator=#{locator}
+            </if>
+            <if test="locator!=null and locator !='' and locator !=3">
+             and locator !=3
+            </if>
         </where>
         order by partdate desc
     </select>

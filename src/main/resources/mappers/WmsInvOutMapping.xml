@@ -45,6 +45,28 @@ values (#{id},#{unt},#{app},#{taskId},#{taskSource},#{invOutType},#{wipEntityId}
 
 
     </select>
+    <select id="queryWmsInvOutFlow" resultType="java.util.Map">
+        select
+        id,
+        unt,
+        app,
+        taskid,
+        tasksource,
+        invouttype,
+        locator,
+        shelfcode,
+        wipentityid,
+        stockno,
+        itemcode,
+        quantity,
+        outtime,
+        statuscode,
+        statusinfor,
+        memoinfo1,
+        memoinfo2
+        from
+        yx_ils_whout
 
+    </select>
 
 </mapper>
