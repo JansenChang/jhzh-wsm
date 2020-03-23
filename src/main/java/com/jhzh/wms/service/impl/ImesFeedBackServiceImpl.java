@@ -89,12 +89,14 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
     public Map<String, String> wmsInvOutResult(List<TaskmesDto> taskmesList) {
         //返回信息
         Map<String, String> resultMap = new HashMap<>();
+
         taskmesList.forEach(taskmesDto -> {
             Map<String, Object> map = new HashMap<>();
             String taskid = taskmesDto.getTaskid();
             List<WmsInvOutDto> dtos = wmsInvOutDao.queryWmsInvOut(
                     WmsInvOutDto.builder()
                     .taskId(taskid)
+                    .statuscode(0)
                     .build());
             WmsInvOutDto dto = dtos.get(0);
             String celliddst = taskmesDto.getCelliddst();
@@ -109,7 +111,7 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
             map.put("locator", taskmesDto.getLocator());//立体库出口位编码
             map.put("shelfCode", ilsCellDto.getTrayno());//多层载具载具号/托盘号
             map.put("wipEntityId", dto.getWipEntityId());//工单 ID 号
-            map.put("stockNo", ilsCellDto.getTrayno());//托盘编号"
+            map.put("stockNo", ilsCellDto.getTrayno());//托盘编号
             map.put("itemCode", dto.getItemCode());//物料编码
             map.put("lotCode", dto.getWipEntityId());//物料批次号 系统时间+30
             map.put("quantity", ilsCellDto.getPartnum());//数量 ？？跟周总要？？
@@ -120,6 +122,8 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
             map.put("memoInfo3", null);
             map.put("memoInfo4", null);
             map.put("memoInfo5", null);
+            taskmesDto.setStatus(0);
+            taskmesDao.updateTaskmes(taskmesDto);
             resultMap.putAll(doHttp(map, wmsInvOutResultUrl));
         });
         return resultMap;

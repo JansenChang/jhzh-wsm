@@ -104,6 +104,9 @@
             <if test="areano!=null and areano !=''">
              and areano=#{areano}
             </if>
+             <if test="trayno!=null and trayno !=''">
+                and trayno=#{trayno}
+            </if>
              and locked=0
 
          </where>

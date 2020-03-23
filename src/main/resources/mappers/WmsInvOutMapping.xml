@@ -36,11 +36,15 @@ values (#{id},#{unt},#{app},#{taskId},#{taskSource},#{invOutType},#{wipEntityId}
         from yx_ils_whout
         <where>
             <if test="taskId !=null and taskId !=''">
-                taskid=#{taskId}
+              and   taskid=#{taskId}
             </if>
             <if test="wipEntityId !=null and wipEntityId !=''">
-                wipEntityId=#{wipEntityId}
+              and  wipEntityId=#{wipEntityId}
             </if>
+            <if test="wipEntityId !=null and wipEntityId !=''">
+              and  wipEntityId=#{wipEntityId}
+            </if>
+              and  statuscode=#{statuscode}
         </where>
 
 

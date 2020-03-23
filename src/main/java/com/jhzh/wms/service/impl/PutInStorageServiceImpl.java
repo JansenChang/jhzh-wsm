@@ -168,10 +168,15 @@ public class PutInStorageServiceImpl implements PutInStorageService {
             if (existTaskId) {
                 return Result.error(CodeMsg.builder().code(ErrorCode.IDALREADY_EXIST.getCode()).msg(ErrorCode.IDALREADY_EXIST.getMsg()).build());
             }
+
+            //locator转换
+            Map<String,String>stringMap=new HashMap<>();
+            stringMap.put("1","2");
+            stringMap.put("2","1");
+            stringMap.put("3","3");
             //校验locator
             String locator = (String) jsonpObject.get("locator");
-            //TODO  locator转换
-            locator=locator.equals("1")?"2":"1";
+            locator=stringMap.get(locator);
             boolean invalidLocator = validateLocator(locator);
             if (!invalidLocator) {
                 return Result.error(CodeMsg.builder().code(ErrorCode.NVALIDI_LIB_CODE.getCode()).msg(ErrorCode.NVALIDI_LIB_CODE.getMsg()).build());
@@ -181,6 +186,13 @@ public class PutInStorageServiceImpl implements PutInStorageService {
             if (!invalidItemCode) {
                 return Result.error(CodeMsg.builder().code(ErrorCode.NVALID_ITEM_CODE.getCode()).msg(ErrorCode.NVALID_ITEM_CODE.getMsg()).build());
             }
+            //TODO 托盘校验
+
+            boolean taryCode = validateTaryNo(jsonpObject);
+            if(!taryCode){
+                return Result.error(CodeMsg.builder().code(ErrorCode.REPEAT_ITEM_CODE.getCode()).msg(ErrorCode.REPEAT_ITEM_CODE.getMsg()).build());
+            }
+
             TaskmesDto dto;
             Map<String, Object> map = new HashMap<>();
             map.put("locator", jsonpObject.get("locator"));
@@ -324,6 +336,18 @@ public class PutInStorageServiceImpl implements PutInStorageService {
         return Result.success(jsonpObject);
     }
 
+    private boolean   validateTaryNo(JSONObject jsonpObject) {
+        List<Map<String, String>> itemList = (List<Map<String, String>>) jsonpObject.get("itemList");
+        for (Map<String, String> map : itemList) {
+            String stockNo = map.get("stockNo");
+            List<IlsCellDto> ilsCellDtos = IlscellDao.queryCell(IlsCellDto.builder().trayno(stockNo).build());
+            if (EmptyUtils.isNotEmpty(ilsCellDtos)){
+                return false;
+            }
+        }
+        return true;
+    }
+
     private boolean validateItemCode(JSONObject jsonpObject) {
         List<Map<String, String>> itemList = (List<Map<String, String>>) jsonpObject.get("itemList");
         for (Map<String, String> map : itemList) {
@@ -464,6 +488,7 @@ public class PutInStorageServiceImpl implements PutInStorageService {
             //查询已经出库的工单信息  状态???
             List<WmsInvOutDto> wmsInvOutDtos = wmsInvOutDao.queryWmsInvOut(WmsInvOutDto.builder()
                     .wipEntityId(Integer.parseInt(wipEntityId))
+                    .statuscode(12)
                     .build());
 
             map.put("woTstockNum",ilsCellDtos.size()+wmsInvOutDtos.size());

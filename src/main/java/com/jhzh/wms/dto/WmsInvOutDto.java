@@ -29,6 +29,8 @@ public class WmsInvOutDto {
     private String itemCode;//物料编码
     private Integer quantity;//数量
     private Integer wipEntityId;//工单ID
+    private Integer statuscode;//任务状态
+    private String statusinfor;//任务描述
     private String memoInfo1;
     private String memoInfo2;
     private String memoInfo3;
