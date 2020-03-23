@@ -177,7 +177,14 @@
          trayno,
          CONCAT(left(partid,LENGTH(partid)-4),'-',right(partid,LENGTH(partid)-9)) AS partid,
          partnum,
-         FROM_UNIXTIME(partdate/1000, '%Y-%m-%d') AS partdate,
+         case
+             when partdate=0
+                 then ''
+             when partdate !=0
+                 then
+             FROM_UNIXTIME(partdate/1000, '%Y-%m-%d')
+             end
+                        AS partdate,
          partwoid,
          partlotid,
          partlotdiv,
@@ -222,7 +229,14 @@
          trayno,
          partid,
          partnum,
-         FROM_UNIXTIME(partdate/1000, '%Y-%m-%d') AS partdate,
+         case
+             when partdate=0
+                 then ''
+             when partdate !=0
+                 then
+             FROM_UNIXTIME(partdate/1000, '%Y-%m-%d')
+             end
+                        AS partdate,
          partwoid,
          partlotid,
          partlotdiv,
