@@ -13,7 +13,5 @@ public interface WoPlanInfoDao {
 
     List<WoPlanInfoDto> queryWipEntity(WoPlanInfoDto woPlanInfoDto);
 
-
-
     void updateStatus(@Param("taskid") String taskid);
 }

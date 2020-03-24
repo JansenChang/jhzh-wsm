@@ -33,9 +33,9 @@
         lotcode,
           quantity,
           isMultiPalForLot,
-          Partdate,
+          partdate,
            status)
-        values (#{id},#{unt},#{app},#{taskId},#{taskSource},#{locator},#{shelfCode},#{shelfLay},#{wipEntityId},#{stockNo},#{itemCode},#{lotCode},#{quantity},#{isMultiPalForLot},#{partdate},#{status})
+        values (#{id},#{unt},#{app},#{taskId},#{taskSource},#{locator},#{shelfCode},#{shelfLay},#{wipEntityId},#{stockNo},#{itemCode},#{lotCode},#{quantity},#{isMultiPalForLot},CURRENT_TIMESTAMP,#{status})
  </insert>
     <update id="updateStatus" >
         update yx_ils_whin set status=#{status} where taskid=#{key}
@@ -75,7 +75,7 @@
         lotcode,
         quantity,
         itemcode,
-        date_format(partdate,'%Y-%m-%d') as partdate,
+        date_format(partdate,'%Y-%m-%d %H:%i') as partdate,
         (case
            when status = 0 then '任务新建/等待执行'
            when status = 11 then '任务执行中'
@@ -90,7 +90,7 @@
              and taskid=#{taskid}
             </if>
             <if test="partwoid!=null and partwoid !=''">
-             and partwoid=#{partwoid}
+             and wipentityid=#{partwoid}
             </if>
              <if test="itemcode!=null and itemcode !=''">
              and itemcode=#{itemcode}
@@ -103,6 +103,9 @@
             </if>
             <if test="locator!=null and locator !='' and locator !=3">
              and locator !=3
+            </if>
+            <if test="begindate !=null and begindate !=''">
+                and   UNIX_TIMESTAMP(partdate) between #{begindate}/1000 and #{enddate}/1000
             </if>
         </where>
         order by partdate desc

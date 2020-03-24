@@ -23,8 +23,10 @@
         wipEntityId,
         itemCode,
         quantity,
-        statuscode)
-values (#{id},#{unt},#{app},#{taskId},#{taskSource},#{invOutType},#{wipEntityId},#{itemCode},#{quantity},0)
+        statuscode,
+        outtime
+        )
+values (#{id},#{unt},#{app},#{taskId},#{taskSource},#{invOutType},#{wipEntityId},#{itemCode},#{quantity},0,CURRENT_TIMESTAMP)
  </insert>
     <update id="updateStatus" parameterType="string">
         update yx_ils_whout set statuscode=12 where taskid=#{key}
@@ -63,14 +65,33 @@ values (#{id},#{unt},#{app},#{taskId},#{taskSource},#{invOutType},#{wipEntityId}
         stockno,
         itemcode,
         quantity,
-        outtime,
+        date_format(outtime,'%Y-%m-%d %H:%i') as outtime,
         statuscode,
-        statusinfor,
+        (case
+           when statuscode = 0 then '任务新建/等待执行'
+           when statuscode = 11 then '任务执行中'
+           when statuscode = 12 then '任务执行完成'
+           when statuscode = 13 then '任务执行异常'
+           when statuscode = 14 then '任务取消'
+        end) AS statusinfor,
         memoinfo1,
         memoinfo2
         from
         yx_ils_whout
-
+        <where>
+            <if test="taskid !=null and taskid !=''">
+              and   taskid=#{taskid}
+            </if>
+            <if test="wipentityid !=null and wipentityid !=''">
+              and  wipentityid=#{wipentityid}
+            </if>
+            <if test="itemcode !=null and itemcode !=''">
+              and  itemcode=#{itemcode}
+            </if>
+            <if test="begindate !=null and begindate !=''">
+                and   UNIX_TIMESTAMP(outtime) between #{begindate}/1000 and #{enddate}/1000
+            </if>
+        </where>
     </select>
 
 </mapper>

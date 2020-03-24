@@ -215,8 +215,7 @@ public class PutInStorageServiceImpl implements PutInStorageService {
                         cellId = shortCage.get(shelfLay);
                     }
                     sb.append(cellId + ",");
-                    if (trayno.contains("P") && trayno.indexOf("P") == 0) {
-                        trayno = trayno;
+                    if (trayno.contains("P")) {
                         trayid = Integer.parseInt(trayno.replaceAll("P", ""));
                     }
                     if (trayno.indexOf("666") == 0) {
@@ -285,10 +284,6 @@ public class PutInStorageServiceImpl implements PutInStorageService {
                 List<Map<String, Object>> itemList = (List<Map<String, Object>>) jsonpObject.get("itemList");
                 String trayno = (String) itemList.get(0).get("stockNo");
                 Integer trayid = null;
-                if (trayno.contains("P") && trayno.indexOf("P") == 0) {
-                    trayno = trayno.replaceAll("P", "");
-                    trayid = Integer.parseInt(trayno);
-                }
                 if (trayno.indexOf("666") == 0) {
                     trayid = Integer.parseInt(trayno);
                 }
@@ -307,11 +302,11 @@ public class PutInStorageServiceImpl implements PutInStorageService {
 
             wmsInvInDto.setUnt(9);
             wmsInvInDto.setApp(900);
-            wmsInvInDto.setDeptid(145);
+            wmsInvInDto.setDeptid(145);/*
             Calendar ca = Calendar.getInstance();
             ca.setTime(new Date());
             //ca.add(Calendar.DATE, 30);
-            wmsInvInDto.setPartdate(ca.getTime());
+            wmsInvInDto.setPartdate(ca.getTime());*/
             WmsInvInDto date;
             List<WmsInvInDto.ItemListBean> itemList = wmsInvInDto.getItemList();
             for (WmsInvInDto.ItemListBean itemListBean : itemList) {

@@ -18,7 +18,6 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -55,8 +54,6 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
 
 
     private Integer wipQtyTemp;
-
-    private Boolean flag = true;
 
 
     @Override
@@ -95,16 +92,16 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
             String taskid = taskmesDto.getTaskid();
             List<WmsInvOutDto> dtos = wmsInvOutDao.queryWmsInvOut(
                     WmsInvOutDto.builder()
-                    .taskId(taskid)
-                    .statuscode(0)
-                    .build());
+                            .taskId(taskid)
+                            .statuscode(0)
+                            .build());
             WmsInvOutDto dto = dtos.get(0);
             String celliddst = taskmesDto.getCelliddst();
 
-            List<IlsCellDto> ilsCellDtos=IlscellDao.queryCell(IlsCellDto.builder()
+            List<IlsCellDto> ilsCellDtos = IlscellDao.queryCell(IlsCellDto.builder()
                     .id(Long.parseLong(celliddst))
                     .build());
-            IlsCellDto ilsCellDto=ilsCellDtos.get(0);
+            IlsCellDto ilsCellDto = ilsCellDtos.get(0);
             map.put("taskId", taskid);//任务 ID 号
             map.put("taskSource", "103-C");//任务来源标识
             map.put("invOutType", dto.getInvOutType());//出库类型
@@ -169,12 +166,8 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
             map.put("itemCode", itemCode);
             //根据物资编码获取物资组件信息
             ItemBomInfoDto itemBomInfoDto = httpAPIService.getResultData(queryItemBomInfoUrl, JSONObject.toJSONString(map), ItemBomInfoDto.class);
-            ItemBomInfoDto data;
             List<ItemBomInfoDto.ItemListBean> itemList = itemBomInfoDto.getItemList();
             itemList.sort(Comparator.comparing(ItemBomInfoDto.ItemListBean::getComponentItemCode).reversed());
-            /*//物资组件的条数存入全局变量中
-            wipCountTemp = itemList.size();*/
-
             //查询物资组件数量并存入MAP
             TreeMap<String, List<IlsCellDto>> tempMap = new TreeMap<>();
             for (ItemBomInfoDto.ItemListBean itemListBean : itemList) {
@@ -185,14 +178,19 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
                 ilsCellDto.setLocked(0);
                 ilsCellDto.setAreano(15);
                 List<IlsCellDto> ilsCellDtos = IlscellDao.queryCell(ilsCellDto);
+
+                //假如不存在对应的内层物资则直接返回
+                if (EmptyUtils.isEmpty(ilsCellDtos)) {
+                    return null;
+                }
                 tempMap.put(itemListBean.getComponentItemCode(), ilsCellDtos);
             }
+
 
             //循环判断是否每一个物资组件数量都满足要求
             tempMap.forEach((key, value) -> {
                 List<IlsCellDto> ilsCellDtos = matchData(value);
                 if (ilsCellDtos.size() > 0) {
-                    flag = true;
                     lists.add(ilsCellDtos);
                 }
             });
@@ -200,7 +198,6 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
         } catch (Exception e) {
             log.error(e.getMessage());
         } finally {
-            flag = true;
             wipQtyTemp = 0;
         }
         return lists;
@@ -229,14 +226,14 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
     @Override
     public void QueryCompletedTask() {
         TaskmesDto dto2 = TaskmesDto.builder()
-                        .areano(15)
-                        .action(500)
-                        .status(500)
-                        .build();
+                .areano(15)
+                .action(500)
+                .status(500)
+                .build();
         //查询拣选已完成任务修改状态
         List<TaskmesDto> taskmesDtos2 = taskmesDao.queryCompletedTask(dto2);
         //TODO 记录总盘数
-        taskmesDtos2.forEach(taskmesDto2 ->{
+        taskmesDtos2.forEach(taskmesDto2 -> {
             String taskid = taskmesDto2.getTaskid();
             taskmesDto2.setTaskid("");
             taskmesDto2.setStatus(0);
@@ -245,9 +242,8 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
         });
     }
 
-    private List<IlsCellDto> matchData(List<IlsCellDto> value) {
-        List<IlsCellDto> qtyGt = value.stream().filter(ilsCellDto -> ilsCellDto.getPartnum() >= wipQtyTemp).collect(Collectors.toList());
-
+    private List<IlsCellDto> matchData(List<IlsCellDto> qtyGt) {
+        //List<IlsCellDto> qtyGt = value.stream().filter(ilsCellDto -> ilsCellDto.getPartnum() >= wipQtyTemp).collect(Collectors.toList());
         if (qtyGt.size() > 0) {
             //如果大于两个则按日期逆序排序，如果日期相同则按数量排序
             if (qtyGt.size() > 2) {
@@ -298,7 +294,7 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
             //WoPlanInfoDto woPlanInfoDto = httpAPIService.getResultData(queryWoPlanInfoUrl, "{\"organizationId\":\"142\",\"deptCode\":\"LMT\",\"itemCode\":\"\",\"lineNumber\":\"1\",\"lineTotal\":\"2000\"}", WoPlanInfoDto.class);
             WoPlanInfoDto data;
             List<WoPlanInfoDto.ItemListBean> itemList = woPlanInfoDto.getItemList();
-            if(EmptyUtils.isEmpty(itemList)){
+            if (EmptyUtils.isEmpty(itemList)) {
                 return "";
             }
             for (WoPlanInfoDto.ItemListBean item : itemList) {
@@ -330,16 +326,37 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
                 }
                 //查询bom是否满足查询条件
                 List<List<IlsCellDto>> lists = QueryItemBomInfo(item.getItemCode());
-                if (lists.size() == 0) {
+                if (EmptyUtils.isEmpty(lists)) {
                     continue;
                 }
                 //拼接小料库位信息
                 StringBuffer sb = new StringBuffer();
+                int setNum = 0;
                 for (List<IlsCellDto> list : lists) {
+                    int listMin = 0;
                     for (IlsCellDto dto : list) {
-                         sb.append(dto.getId() + ",");
+                        Integer partnum = dto.getPartnum();
+                        if (0 == listMin) {
+                            listMin = partnum;
+                        } else if (partnum < listMin) {
+                            listMin = partnum;
+                        }
+                        sb.append(dto.getId() + ",");
+                    }
+                    if (0 == setNum) {
+                        setNum = listMin;
+                    } else if (listMin < setNum) {
+                        setNum = listMin;
                     }
                 }
+
+                if(setNum<item.getWipQty()){
+
+                }
+
+
+
+
                 String str = sb.substring(0, sb.length() - 1);
                 data.setCellnum(lists.size());
                 data.setCellids(str);
@@ -356,15 +373,15 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
                 }
                 //往160101拣选台空位插入工单信息
                 IlscellDao.updateCellByCellId(IlsCellDto.builder()
-                            .id(Long.parseLong("160101"))
-                            .partid(Long.parseLong(item.getItemCode()))//物料号
-                            .partdesc(item.getItemDesc())
-                            .partwoid(Long.parseLong(String.valueOf(item.getWipEntityId())))//工单号
-                            //.cmdstatus(10)
-                            .partnum(0)
-                            .locked(0)
-                            //TODO 批号
-                            .build());
+                        .id(Long.parseLong("160101"))
+                        .partid(Long.parseLong(item.getItemCode()))//物料号
+                        .partdesc(item.getItemDesc())
+                        .partwoid(Long.parseLong(String.valueOf(item.getWipEntityId())))//工单号
+                        //.cmdstatus(10)
+                        .partnum(0)
+                        .locked(0)
+                        //TODO 批号
+                        .build());
                 //任务号
                 dto.setTaskid(uuid);
                 //修改任务表等待后台拣选
