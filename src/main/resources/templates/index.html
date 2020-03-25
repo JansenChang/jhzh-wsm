@@ -1,0 +1,251 @@
+<html>
+
+<head>
+    <title>DPH</title>
+    <meta charset="UTF-8"> <!-- for HTML5 -->
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/css/bootstrap.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+    <link href="bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="head"></div>
+    <div class="nav-head">
+        <div class="container">
+            <div class="row">
+                <div class="span6">
+                    <ul class="nav nav-tabs">
+                        <li class="active" data-id="1"><a href="#material">库存物资查询</a></li>
+                        <li data-id="2"><a href="#inStorage">入库信息记录</a></li>
+                        <li data-id="3"><a href="#outStorage">出库信息记录</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content">
+
+        <div class="tab-pane active" >
+            <!-- 查询条件 -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col col-md-1">
+                        <p>查询条件：<p>
+                    </div>
+                    <div class="col col-md-10">
+
+                        <!-- 物资编码查询 -->
+                        <div class="row material">
+                            <div class="col col-md-2"> <input type="text" class="form-control partid"
+                                    placeholder="物资编码"></div>
+                            <div class="col col-md-2"> <input type="text" class="form-control partwoid "
+                                    placeholder="工单编号"></div>
+                            <div class="col col-md-2"> <input type="text" class="form-control id" placeholder="库位号">
+                            </div>
+                            <div class="col">
+                                <form class="form-inline">
+                                    <div class="form-group">
+                                        <label for="time">从</label>
+                                        <div class='input-group date' id='datetimepicker1'>
+                                            <input type='text' class="form-control" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="time2">至</label>
+                                        <div class='input-group date' id='datetimepicker2'>
+                                            <input type='text' class="form-control" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- 物资入库查询 -->
+                        <div class="row inStorage">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col col-md-2"> <input type="text" class="form-control inStorage_taskid"
+                                            placeholder="任务号"></div>
+                                    <div class="col col-md-2"> <input type="text" class="form-control inStorage_partwoid"
+                                            placeholder="工单号"></div>
+                                    <div class="col col-md-2"> <input type="text" class="form-control inStorage_Itemcode"
+                                            placeholder="物料号"></div>
+                                    <div class="col col-md-2"> <input type="text" class="form-control inStorage_stockno"
+                                            placeholder="托盘号"></div>
+                                    <div class="col">
+                                        <form class="form-inline">
+                                            <div class="form-group">
+                                                <label for="time">从</label>
+                                                <div class='input-group date' id='datetimepicker3'>
+                                                    <input type='text' class="form-control" />
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="time2">至</label>
+                                                <div class='input-group date' id='datetimepicker4'>
+                                                    <input type='text' class="form-control" />
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="radio-inline">
+                                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" checked>
+                                            料盘入库
+                                        </label>
+                                        <label class="radio-inline">
+                                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="3">
+                                            空盘入库
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 物资出库查询 -->
+                        <div class="row outStorage">
+                            <div class="col col-md-2"> <input type="text" class="form-control outStorage_taskid"
+                                    placeholder="任务号"></div>
+                            <div class="col col-md-2"> <input type="text" class="form-control outStorage_wipentityid"
+                                    placeholder="工单号"></div>
+                            <div class="col col-md-2"> <input type="text" class="form-control outStorage_Itemcode" placeholder="物料号">
+                            </div>
+                            <div class="col">
+                                <form class="form-inline">
+                                    <div class="form-group">
+                                        <label for="time">从</label>
+                                        <div class='input-group date' id='datetimepicker5'>
+                                            <input type='text' class="form-control" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="time2">至</label>
+                                        <div class='input-group date' id='datetimepicker6'>
+                                            <input type='text' class="form-control" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col col-md-1"><button type="button" class="btn btn-primary materialBtn">查询</button>
+                        <button type="button" class="btn btn-info resetBtn">重置</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 查询结果 -->
+            <div class="table-responsive">
+                <table class="table" id="dataTable">
+                    <thead class="material">
+                        <tr>
+                            <td>物资编码</td>
+                            <td>工单编号</td>
+                            <td>库位号</td>
+                            <td>托盘号</td>
+                            <td>数量</td>
+                            <td>入库时间</td>
+                            <td>过期时间</td>
+                    </thead>
+                    <thead class="inStorage">
+                        <tr>
+                            <td>任务号</td>
+                            <td>任务来源标识</td>
+                            <td>入口位编码</td>
+                            <td>多层载具载具号</td>
+                            <td>层次号</td>
+                            <td>工单号</td>
+                            <td>托盘编号</td>
+                            <td>允许分拆批次号</td>
+                            <td>物料批次号</td>
+                            <td>数量</td>
+                            <td>物料号</td>
+                            <td>状态</td>
+                            <td>存入日期</td>
+                    </thead>
+                    <thead class="outStorage">
+                        <tr>
+                            <td>任务号</td>
+                            <td>任务来源标识</td>
+                            <td>入口位编码</td>
+                            <td>载具号</td>
+                            <td>出库类型</td>
+                            <td>工单号</td>
+                            <td>托盘编号</td>
+                            <td>物料号</td>
+                            <td>数量</td>
+                            <td>出库时间</td>
+                            <td>任务状态</td>
+                            <td>任务状态描述</td>
+                    </thead>
+                    <tbody class="listData"></tbody>
+                </table>
+            </div>
+            <div class="storage_box" id="storage_box"><button type="button" class="btn btn-success" >下载 Excel</button></div>
+        </div>
+
+        <div class="page">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default prevPage">上一页</button>
+                <button type="button" class="btn btn-default num">1</button>
+                <button type="button" class="btn btn-primary nextPage">下一页 </button>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+        id="myModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">信息提示</h4>
+                </div>
+                <div class="modal-body">
+                    <p></p>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+</body>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="bootstrap-datetimepicker-master/js/moment-with-locales.min.js"></script>
+<script src="bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
+<script src="js/pages-min.js"></script>
+<script src="js/uilt.js"></script>
+<script src="js/index.js"></script>
+
+</html>

@@ -65,15 +65,15 @@ public class WmsInvOutServiceImpl implements WmsInvOutService {
             map.put("lineTotal", "2000");
             map.put("wipEntityId",wipEntityId);
             //根据工单获取待产信息,取得出库的物资编码
-            WoPlanInfoDto resultData = httpAPIService.getResultData(queryWoPlanInfoUrl, JSONObject.toJSONString(map), WoPlanInfoDto.class);
+            /*WoPlanInfoDto resultData = httpAPIService.getResultData(queryWoPlanInfoUrl, JSONObject.toJSONString(map), WoPlanInfoDto.class);
             if(EmptyUtils.isEmpty(resultData.getItemList())){
                 return Result.error(CodeMsg.builder().code(ErrorCode.IS_NULL_BOM.getCode()).msg(ErrorCode.IS_NULL_BOM.getMsg()).build());
-            }
+            }*/
             //获盘信息去库中查找
-            List<WoPlanInfoDto.ItemListBean> itemList = resultData.getItemList();
-            WoPlanInfoDto.ItemListBean itemListBean = itemList.get(0);
+            /*List<WoPlanInfoDto.ItemListBean> itemList = resultData.getItemList();
+            WoPlanInfoDto.ItemListBean itemListBean = itemList.get(0);*/
             IlsCellDto ilsCell = new IlsCellDto();
-            ilsCell.setPartid(Long.parseLong(itemListBean.getItemCode()));
+            ilsCell.setPartid(Long.parseLong((String) jsonObject.get("wipEntityId")));
             ilsCell.setLocked(0);
             ilsCell.setAreano(10);
             List<IlsCellDto> ilsCellDtos = ilsCellDao.queryCell(ilsCell);
