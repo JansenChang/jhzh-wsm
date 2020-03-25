@@ -26,6 +26,7 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * WSM入库查询接口业务处理类
@@ -336,7 +337,14 @@ public class PutInStorageServiceImpl implements PutInStorageService {
         for (Map<String, String> map : itemList) {
             String stockNo = map.get("stockNo");
             List<IlsCellDto> ilsCellDtos = IlscellDao.queryCell(IlsCellDto.builder().trayno(stockNo).build());
-            if (EmptyUtils.isNotEmpty(ilsCellDtos)){
+            List<IlsCellDto> lt=new ArrayList<>();
+            if("3".equals((String) jsonpObject.get("locator"))){
+                lt = ilsCellDtos.stream().filter(ilsCellDto -> ilsCellDto.getAreano() == 10).collect(Collectors.toList());
+            }else{
+                 lt = ilsCellDtos.stream().filter(ilsCellDto ->ilsCellDto.getAreano() == 15).collect(Collectors.toList());
+            }
+
+            if (EmptyUtils.isNotEmpty(lt)){
                 return false;
             }
         }

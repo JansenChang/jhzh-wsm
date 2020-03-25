@@ -73,7 +73,7 @@ public class WmsInvOutServiceImpl implements WmsInvOutService {
             /*List<WoPlanInfoDto.ItemListBean> itemList = resultData.getItemList();
             WoPlanInfoDto.ItemListBean itemListBean = itemList.get(0);*/
             IlsCellDto ilsCell = new IlsCellDto();
-            ilsCell.setPartid(Long.parseLong((String) jsonObject.get("wipEntityId")));
+            ilsCell.setPartwoid(Long.parseLong((String) jsonObject.get("wipEntityId")));
             ilsCell.setLocked(0);
             ilsCell.setAreano(10);
             List<IlsCellDto> ilsCellDtos = ilsCellDao.queryCell(ilsCell);

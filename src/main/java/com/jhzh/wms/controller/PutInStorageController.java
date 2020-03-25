@@ -35,7 +35,7 @@ public class PutInStorageController {
         log.info("WmsInvIn begin..");
         log.info("In Param : \n"+jsonpObject.toJSONString());
         Result<?> result=putInStorageService.wmsInvIn(jsonpObject);
-        log.info("WmsInvIn begin..");
+        log.info("WmsInvIn EndSS..");
         return result;
     }
     //工单配套拣选后总盘数查询接口(wmsWoTStockNum)
