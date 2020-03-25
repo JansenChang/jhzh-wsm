@@ -1,5 +1,6 @@
 package com.jhzh.wms.controller;
 
+import com.jhzh.wms.base.result.Result;
 import com.jhzh.wms.dao.InfNewDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,9 @@ public class InfNewsController {
 
     @GetMapping(value = "infonews")
     @ResponseBody
-    public String infoNews (){
-        return infNewDao.getInfNews();
+    public Result<?> infoNews (){
+        String infNews = infNewDao.getInfNews();
+        infNews=infNews.replace("{","").replace("}","");
+        return Result.success(infNews);
     }
 }
