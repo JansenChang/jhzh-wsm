@@ -58,7 +58,6 @@ public class QueryTask {
                  * 修改已完成的入库记录 -->12
                  */
                 taskmesList.forEach(taskmes -> {
-
                     List<WmsInvInDto> wmsInvInDtos = putInStorageDao.queryWmsInvInForTaskId(taskmes.getTaskid());
                     Map<String, String> map = imesFeedBackService.wmsInvInResult(wmsInvInDtos);
                     putInStorageDao.updateStatus(taskmes.getTaskid(),Long.parseLong("12"));

@@ -37,7 +37,7 @@ function page(data,fun) {
 function ajaxData(url, data, fun) {
     $.ajax({
         type: "POST",
-        url: "http://127.0.0.1:8093/wms/" + url,
+        url: "/wms/" + url,
         contentType: "application/json;charset=utf-8",
         dataType: "JSON",
         async: false,

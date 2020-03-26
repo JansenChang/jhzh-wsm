@@ -162,11 +162,13 @@ public class PutInStorageServiceImpl implements PutInStorageService {
             WmsInvInDto wmsInvInDto = jsonpObject.toJavaObject(WmsInvInDto.class);
             boolean massValue = validateFull(jsonpObject);
             if (!massValue) {
+                log.error("入库接口数据不完整，请检查：\n"+jsonpObject.toJSONString());
                 return Result.error(CodeMsg.builder().code(ErrorCode.NULL_OBJ.getCode()).msg(ErrorCode.NULL_OBJ.getMsg()).build());
             }
              //校验TaskId是否已存在
             boolean existTaskId = validateTaskId(jsonpObject);
             if (existTaskId) {
+                log.error("入库接口TaskId异常，请检查：\n"+jsonpObject.toJSONString());
                 return Result.error(CodeMsg.builder().code(ErrorCode.IDALREADY_EXIST.getCode()).msg(ErrorCode.IDALREADY_EXIST.getMsg()).build());
             }
 
@@ -180,11 +182,13 @@ public class PutInStorageServiceImpl implements PutInStorageService {
             locator=stringMap.get(locator);
             boolean invalidLocator = validateLocator(locator);
             if (!invalidLocator) {
+                log.error("入库接口无效立体库提升机入口位编码，请检查：\n"+jsonpObject.toJSONString());
                 return Result.error(CodeMsg.builder().code(ErrorCode.NVALIDI_LIB_CODE.getCode()).msg(ErrorCode.NVALIDI_LIB_CODE.getMsg()).build());
             }
             //校验物料编号
             boolean invalidItemCode = validateItemCode(jsonpObject);
             if (!invalidItemCode) {
+                log.error("入库接口物料编号有误，请检查：\n"+jsonpObject.toJSONString());
                 return Result.error(CodeMsg.builder().code(ErrorCode.NVALID_ITEM_CODE.getCode()).msg(ErrorCode.NVALID_ITEM_CODE.getMsg()).build());
             }
             //TODO 托盘校验
@@ -303,11 +307,7 @@ public class PutInStorageServiceImpl implements PutInStorageService {
 
             wmsInvInDto.setUnt(9);
             wmsInvInDto.setApp(900);
-            wmsInvInDto.setDeptid(145);/*
-            Calendar ca = Calendar.getInstance();
-            ca.setTime(new Date());
-            //ca.add(Calendar.DATE, 30);
-            wmsInvInDto.setPartdate(ca.getTime());*/
+            wmsInvInDto.setDeptid(145);
             WmsInvInDto date;
             List<WmsInvInDto.ItemListBean> itemList = wmsInvInDto.getItemList();
             for (WmsInvInDto.ItemListBean itemListBean : itemList) {

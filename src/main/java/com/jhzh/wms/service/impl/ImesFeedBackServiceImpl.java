@@ -350,13 +350,6 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
                     }
                 }
 
-                if(setNum<item.getWipQty()){
-
-                }
-
-
-
-
                 String str = sb.substring(0, sb.length() - 1);
                 data.setCellnum(lists.size());
                 data.setCellids(str);
