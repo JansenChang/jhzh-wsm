@@ -7,22 +7,16 @@ import java.util.*;
 
 public class ExportUtil {
     public static HSSFWorkbook exportExcel(List<Map<String, Object>> data, Map<String, String> map) throws Exception {
-        /*List<String> title = new ArrayList<>();
-        for (Map<String, Object> datum : data) {
-
+        List<String> lists=new ArrayList();
+        for(Map.Entry<String, String> entry : map.entrySet()){
+            String key = entry.getKey();
+            lists.add(key);
         }
-       for(Map.Entry<String, Object> entry : data.get(0).entrySet()) {
-           title.add((String) map.get(entry.getKey()));
-           if(!map.containsKey(entry.getKey())){
-
-           }
-       }*/
-        Set<String> strings = map.keySet();
         List<String> title = new ArrayList<>(map.values());
         List<Map<String, Object>> list=new ArrayList<>();
         for (Map<String, Object> datum : data) {
             Map<String,Object> m=new HashMap<>();
-            for (String string : strings) {
+            for (String string : lists) {
                 if(datum.containsKey(string)){
                     Object o = datum.get(string);
                     m.put(map.get(string),o);
@@ -30,6 +24,7 @@ public class ExportUtil {
             }
             list.add(m);
         }
+        Collections.reverse(title);
         return exportExcel(list,title);
     }
     public static HSSFWorkbook exportExcel(List<Map<String, Object>> data,List<String> title) throws Exception {

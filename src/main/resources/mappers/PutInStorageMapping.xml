@@ -108,7 +108,7 @@
                 and   UNIX_TIMESTAMP(partdate) between #{begindate}/1000 and #{enddate}/1000
             </if>
         </where>
-        order by partdate desc
+        order by partdate desc,taskid asc
     </select>
 
 

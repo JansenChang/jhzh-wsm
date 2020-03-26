@@ -22,10 +22,10 @@ public class WmsInvOutController {
     //芯板出库
     @RequestMapping(value = "wms/WmsInvOut", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public Result<?> wmsInvOut(@RequestBody JSONObject jsonpObject) throws Exception {
-        log.info("wmsInvOut begin..");
-        log.info("In Param : \n" + jsonpObject.toJSONString());
+        log.info("芯板出库请求 begin..");
+        log.info("请求参数 : \n" + jsonpObject.toJSONString());
         Result<?> result = wmsInvOutService.wmsInvOut(jsonpObject);
-        log.info("wmsInvOut begin..");
+        log.info("芯板出库请求 End..");
         return result;
     }
 }
