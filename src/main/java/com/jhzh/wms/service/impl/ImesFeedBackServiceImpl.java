@@ -86,8 +86,7 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
     public Map<String, String> wmsInvOutResult(List<TaskmesDto> taskmesList) {
         //返回信息
         Map<String, String> resultMap = new HashMap<>();
-
-        taskmesList.forEach(taskmesDto -> {
+        for (TaskmesDto taskmesDto : taskmesList) {
             Map<String, Object> map = new HashMap<>();
             String taskid = taskmesDto.getTaskid();
             List<WmsInvOutDto> dtos = wmsInvOutDao.queryWmsInvOut(
@@ -95,6 +94,9 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
                             .taskId(taskid)
                             .statuscode(0)
                             .build());
+            if(EmptyUtils.isEmpty(dtos)){
+                continue;
+            }
             WmsInvOutDto dto = dtos.get(0);
             String celliddst = taskmesDto.getCelliddst();
 
@@ -122,7 +124,7 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
             taskmesDto.setStatus(0);
             taskmesDao.updateTaskmes(taskmesDto);
             resultMap.putAll(doHttp(map, wmsInvOutResultUrl));
-        });
+        }
         return resultMap;
     }
 
@@ -290,6 +292,7 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
         map.put("lineNumber", "1");
         String JSONString = JSONObject.toJSONString(map);
         try {
+            log.info("配套请求\n"+JSONString);
             WoPlanInfoDto woPlanInfoDto = httpAPIService.getResultData(queryWoPlanInfoUrl, JSONString, WoPlanInfoDto.class);
             //WoPlanInfoDto woPlanInfoDto = httpAPIService.getResultData(queryWoPlanInfoUrl, "{\"organizationId\":\"142\",\"deptCode\":\"LMT\",\"itemCode\":\"\",\"lineNumber\":\"1\",\"lineTotal\":\"2000\"}", WoPlanInfoDto.class);
             WoPlanInfoDto data;

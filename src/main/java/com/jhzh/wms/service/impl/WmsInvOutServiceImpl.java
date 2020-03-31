@@ -87,7 +87,6 @@ public class WmsInvOutServiceImpl implements WmsInvOutService {
             TaskmesDto dto = TaskmesDto.builder()
                     .areano(10)
                     .action(220)
-                    .locator(4)
                     .cellidsrc(ilsCellDto.getId().toString())
                     .taskid((String) jsonObject.get("taskId"))
                     .status(10)

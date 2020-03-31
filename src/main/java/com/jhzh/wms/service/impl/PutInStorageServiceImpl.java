@@ -338,10 +338,10 @@ public class PutInStorageServiceImpl implements PutInStorageService {
             String stockNo = map.get("stockNo");
             List<IlsCellDto> ilsCellDtos = IlscellDao.queryCell(IlsCellDto.builder().trayno(stockNo).build());
             List<IlsCellDto> lt=new ArrayList<>();
-            if("3".equals((String) jsonpObject.get("locator"))){
-                lt = ilsCellDtos.stream().filter(ilsCellDto -> ilsCellDto.getAreano() == 10).collect(Collectors.toList());
+            if(("345").indexOf((String) jsonpObject.get("locator"))==0){
+                lt = ilsCellDtos.stream().filter(ilsCellDto -> ilsCellDto.getAreano() == 10 &&ilsCellDto.getId()!=310201&&ilsCellDto.getId()!=310301).collect(Collectors.toList());
             }else{
-                 lt = ilsCellDtos.stream().filter(ilsCellDto ->ilsCellDto.getAreano() == 15).collect(Collectors.toList());
+                lt = ilsCellDtos.stream().filter(ilsCellDto ->ilsCellDto.getAreano() == 15).collect(Collectors.toList());
             }
 
             if (EmptyUtils.isNotEmpty(lt)){
