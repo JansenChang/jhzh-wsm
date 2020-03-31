@@ -21,6 +21,6 @@ public class WcsMsgController {
     @RequestMapping(value = "wcsMsg", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public Result<?> wcsmsg() throws Exception {
         List<Map> maps=usrlogDao.getWcsMsg();
-        return null;
+        return Result.success(maps);
     }
 }

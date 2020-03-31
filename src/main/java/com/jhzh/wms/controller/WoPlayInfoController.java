@@ -54,6 +54,6 @@ public class WoPlayInfoController {
      @RequestMapping(value = "/woPlayInfoView")
      public String woPlayInfoView() throws Exception {
         return "woplaninfo";
-    }
+     }
 
 }

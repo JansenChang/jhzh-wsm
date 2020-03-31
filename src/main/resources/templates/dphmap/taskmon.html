@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+    <!-- Set the viewport width to device width for mobile -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+    <title>WCS任务监控</title>
+    <link rel="stylesheet" href="../css/css_0_0_normalize.css">
+    <link rel="stylesheet" href="../css/css_0_0_f5.css">
+    <link rel="stylesheet" href="../css/css_0_0_back.css">
+    <link rel="stylesheet" href="../css/standardization.css">
+
+
+    <script type="text/javascript" src="../js/vendor/modernizr.js"></script>
+    <script type="text/javascript" src="../js/vendor/jquery.js"></script>
+    <script type="text/javascript" src="../js/js_0_0_f5m.js"></script>
+
+    <script type="text/javascript" src="../js/fun.js"></script>
+    <script type="text/javascript" src="../js/commonframe.js"></script>
+    <script type="text/javascript" src="../js/timer/WdatePicker.js"></script>
+    <style>
+        body {
+            padding: 1rem;
+        }
+        table {
+            width: 100%;
+        }
+        .tablecontainer {
+            width: 100%;
+        }
+        table tr td {
+            border: 1px #DDDDDD solid;
+            padding: 0.2rem;
+            background-color: white;
+        }
+        .accordion .accordion-navigation > a {
+            display: block;
+            line-height: 1rem;
+        }
+        input[type="text"].smallinput {
+            width: 4.5rem;
+            height: 1rem;
+            margin: 0;
+            margin-top: 0.3rem;
+            float: left;
+            border: none;
+            background-color: inherit;
+            box-shadow: none;
+            display: table-cell;
+        }
+        button {
+            margin: 0;
+            height: 1.4rem;
+            line-height: 0.9rem;
+            background-color: #63B8FF;
+            padding: 0.3rem;
+            display: table-cell;
+            border-radius: 3px;
+        }
+        button[disabled] {
+            background-color: lightgrey;
+        }
+        button[disabled]:hover {
+            background-color: grey;
+        }
+       .devname {
+            margin-top: 0.3rem;
+            display: block;
+            float: left
+        }
+    </style>
+</head>
+<body>
+
+<div class="row" id="box">
+    <div class="medium-6 columns" style="padding:0px;">
+        <div class="tablecontainer">
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="8">MES-WMS</th>
+                        <th colspan="6">WCS</th>
+                    </tr>
+                    <tr>
+                        <th>类别</th>
+                        <th>启动</th>
+                        <th>当前</th>
+                        <th>源库位</th>
+                        <th>目库位</th>
+                        <th>盘号</th>
+                        <th>料号</th>
+                        <th>状态</th>
+                        <th>动作</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1F空入</td>
+                        <td><button id="mes_id_101000">启动</button></td>
+                        <td>.</td>
+                        <td><input type="text" class="smallinput" value="310101" id="text1-1" disabled="disabled" /></td>
+                        <td><input type="text" class="smallinput" value="320503" id="text1-1" /></td>
+                        <td><input type="text" class="smallinput" value="666111" id="text1-1" /></td>
+                        <td><input type="text" class="smallinput" value="." id="text1-1" /></td>
+                        <td><span>待调度</span></td>
+                        <td><button id="implement1-1">移库</button></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>1F料出</td>
+                        <td><button id="mes_id_102000">启动</button></td>
+                        <td>..112B</td>
+                        <td><input type="text" class="smallinput" value="325304" id="text1-1" /></td>
+                        <td><input type="text" class="smallinput" value="310201" id="text1-1" disabled="disabled" /></td>
+                        <td><input type="text" class="smallinput" value="666222" id="text1-1" /></td>
+                        <td><input type="text" class="smallinput" value="1234567" id="text1-1" /></td>
+                        <td><span>空闲</span></td>
+                        <td><button id="implement1-1">移库</button></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>1F空出</td>
+                        <td><button id="mes_id_103000">启动</button></td>
+                        <td></td>
+                        <td><input type="text" class="smallinput" value="325304" id="text1-1" /></td>
+                        <td><input type="text" class="smallinput" value="161101" id="text1-1" disabled="disabled" /></td>
+                        <td><input type="text" class="smallinput" value="666333" id="text1-1" /></td>
+                        <td><input type="text" class="smallinput" value="." id="text1-1" /></td>
+                        <td><span>空闲</span></td>
+                        <td><button id="implement1-1">出库</button></td>
+                        <td><button id="implement1-1">取盘</button></td>
+                        <td><button id="implement1-1">放盘</button></td>
+                        <td><button id="implement1-1">送盘</button></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>1F料入</td>
+                        <td><button id="mes_id_104000">启动</button></td>
+                        <td></td>
+                        <td><input type="text" class="smallinput" value="160101" id="text1-1" disabled="disabled" /></td>
+                        <td><input type="text" class="smallinput" value="325305" id="text1-1" /></td>
+                        <td><input type="text" class="smallinput" value="666201" id="text1-1" /></td>
+                        <td><input type="text" class="smallinput" value="1234567" id="text1-1" /></td>
+                        <td><span>空闲</span></td>
+                        <td><button id="implement1-1">送盘</button></td>
+                        <td><button id="implement1-1">取盘</button></td>
+                        <td><button id="implement1-1">放盘</button></td>
+                        <td><button id="implement1-1">入库</button></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>1F移库</td>
+                        <td><button id="mes_id_105000">启动</button></td>
+                        <td></td>
+                        <td><input type="text" class="smallinput" value="320505" id="text1-1" /></td>
+                        <td><input type="text" class="smallinput" value="310510" id="text1-1" /></td>
+                        <td><input type="text" class="smallinput" value="666202" id="text1-1" /></td>
+                        <td><input type="text" class="smallinput" value="2234567" id="text1-1" /></td>
+                        <td><span>空闲</span></td>
+                        <td><button id="implement1-1">移库</button></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+
+
+                    <tr><td rowspan="6">JF1#入库</td><td  rowspan="6"><button id="mes_id_106000">启动</button></td><td></td><td><input type="text" class="smallinput" value="250101" id="text1-1" /></td><td><input type="text" class="smallinput" value="325305" id="text1-1" /></td> <td><input type="text" class="smallinput" value="666202" id="text1-1" /></td> <td><input type="text" class="smallinput" value="2234567" id="text1-1" /></td><td><span>空闲</span></td><td><button id="implement1-1">送盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">送盘</button></td></tr>
+                    <tr><td></td><td><input type="text" class="smallinput" value="250102" id="text1-1" /></td><td><input type="text" class="smallinput" value="325305" id="text1-1" /></td> <td><input type="text" class="smallinput" value="666202" id="text1-1" /></td> <td><input type="text" class="smallinput" value="2234567" id="text1-1" /></td><td><span>空闲</span></td><td><button id="implement1-1">送盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">送盘</button></td></tr>
+                    <tr><td></td><td><input type="text" class="smallinput" value="250103" id="text1-1" /></td><td><input type="text" class="smallinput" value="325305" id="text1-1" /></td> <td><input type="text" class="smallinput" value="666202" id="text1-1" /></td> <td><input type="text" class="smallinput" value="2234567" id="text1-1" /></td><td><span>空闲</span></td><td><button id="implement1-1">送盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">送盘</button></td></tr>
+                    <tr><td></td><td><input type="text" class="smallinput" value="250104" id="text1-1" /></td><td><input type="text" class="smallinput" value="325305" id="text1-1" /></td> <td><input type="text" class="smallinput" value="666202" id="text1-1" /></td> <td><input type="text" class="smallinput" value="2234567" id="text1-1" /></td><td><span>空闲</span></td><td><button id="implement1-1">送盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">送盘</button></td></tr>
+                    <tr><td></td><td><input type="text" class="smallinput" value="250105" id="text1-1" /></td><td><input type="text" class="smallinput" value="325305" id="text1-1" /></td> <td><input type="text" class="smallinput" value="666202" id="text1-1" /></td> <td><input type="text" class="smallinput" value="2234567" id="text1-1" /></td><td><span>空闲</span></td><td><button id="implement1-1">送盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">送盘</button></td></tr>
+                    <tr><td></td><td><input type="text" class="smallinput" value="250106" id="text1-1" /></td><td><input type="text" class="smallinput" value="325305" id="text1-1" /></td> <td><input type="text" class="smallinput" value="666202" id="text1-1" /></td> <td><input type="text" class="smallinput" value="2234567" id="text1-1" /></td><td><span>空闲</span></td><td><button id="implement1-1">送盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">送盘</button></td></tr>
+
+                    <tr><td rowspan="6">JF2#入库</td><td rowspan="6"><button id="mes_id_107000">启动</button></td><td></td><td><input type="text" class="smallinput" value="260101" id="text1-1" /></td><td><input type="text" class="smallinput" value="325305" id="text1-1" /></td> <td><input type="text" class="smallinput" value="666202" id="text1-1" /></td> <td><input type="text" class="smallinput" value="2234567" id="text1-1" /></td><td><span>空闲</span></td><td><button id="implement1-1">送盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">送盘</button></td></tr>
+                    <tr><td></td><td><input type="text" class="smallinput" value="260102" id="text1-1" /></td><td><input type="text" class="smallinput" value="325305" id="text1-1" /></td> <td><input type="text" class="smallinput" value="666202" id="text1-1" /></td> <td><input type="text" class="smallinput" value="2234567" id="text1-1" /></td><td><span>空闲</span></td><td><button id="implement1-1">送盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">送盘</button></td></tr>
+                    <tr><td></td><td><input type="text" class="smallinput" value="260103" id="text1-1" /></td><td><input type="text" class="smallinput" value="325305" id="text1-1" /></td> <td><input type="text" class="smallinput" value="666202" id="text1-1" /></td> <td><input type="text" class="smallinput" value="2234567" id="text1-1" /></td><td><span>空闲</span></td><td><button id="implement1-1">送盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">送盘</button></td></tr>
+                    <tr><td></td><td><input type="text" class="smallinput" value="260104" id="text1-1" /></td><td><input type="text" class="smallinput" value="325305" id="text1-1" /></td> <td><input type="text" class="smallinput" value="666202" id="text1-1" /></td> <td><input type="text" class="smallinput" value="2234567" id="text1-1" /></td><td><span>空闲</span></td><td><button id="implement1-1">送盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">送盘</button></td></tr>
+                    <tr><td></td><td><input type="text" class="smallinput" value="260105" id="text1-1" /></td><td><input type="text" class="smallinput" value="325305" id="text1-1" /></td> <td><input type="text" class="smallinput" value="666202" id="text1-1" /></td> <td><input type="text" class="smallinput" value="2234567" id="text1-1" /></td><td><span>空闲</span></td><td><button id="implement1-1">送盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">送盘</button></td></tr>
+                    <tr><td></td><td><input type="text" class="smallinput" value="260106" id="text1-1" /></td><td><input type="text" class="smallinput" value="325305" id="text1-1" /></td> <td><input type="text" class="smallinput" value="666202" id="text1-1" /></td> <td><input type="text" class="smallinput" value="2234567" id="text1-1" /></td><td><span>空闲</span></td><td><button id="implement1-1">送盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">取盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">放盘</button></td><td><button id="implement1-1">送盘</button></td></tr>
+
+                    <tr>
+                        <td>JF移库</td>
+                        <td><button id="mes_id_108000">启动</button></td>
+                        <td></td>
+                        <td><input type="text" class="smallinput" value="140102" id="text1-1" /></td>
+                        <td><input type="text" class="smallinput" value="150102" id="text1-1" /></td>
+                        <td><input type="text" class="smallinput" value="666202" id="text1-1" /></td>
+                        <td><input type="text" class="smallinput" value="2234567" id="text1-1" /></td>
+                        <td><span>空闲</span></td>
+                        <td><button id="implement1-1">移库</button></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+        <div>
+        	<table><tr>
+        	<td>
+        		<input name="go_name_devid" id="go_id_dev1001"		type="radio" value="1001" />SRM&nbsp;
+        		<input name="go_name_devid" id="go_id_dev2001"		type="radio" value="2001" />HOV1&nbsp;
+        		<input name="go_name_devid" id="go_id_dev2002"		type="radio" value="2002" />HOV22&nbsp;
+        		<input name="go_name_devid" id="go_id_dev3000"		type="radio" value="3000" />AGV&nbsp;
+        		</td> 
+        	<td><span>操作</span></td>  
+        	<td>
+        		<input name="go_name_cmdtype"  id="go_id_srmcmd1"	type="radio" value="1" />入库
+        		<input name="go_name_cmdtype"  id="go_id_srmcmd2"	type="radio" value="2" />出库
+        		<input name="go_name_cmdtype"  id="go_id_srmcmd3"	type="radio" value="3" />移库
+        		<input name="go_name_cmdtype"  id="go_id_hovcmd1"	type="radio" value="1" />取盘
+        		<input name="go_name_cmdtype"  id="go_id_hovcmd2"	type="radio" value="2" />放盘
+        		<input name="go_name_cmdtype"  id="go_id_agvcmd1"	type="radio" value="1" />移库
+        	</td> 
+        	<td><span>1库位</span></td><td><input type="text" class="smallinput" value="111111" id="go_id_cellidsrc"   /></td>  
+        	<td><span>2库位</span></td><td><input type="text" class="smallinput" value="222222" id="go_id_celliddst"   /></td>  
+        	<td><button id="go_id_button"  onclick="las_go()"    >执行</button></td>
+        	
+  			</tr></table>
+        
+        
+        <table><tr>
+        	<td><span>库位</span></td><td><input name="bind_name_cellid" 		id="bind_id_cellid" 	type="text"  class="smallinput" value="10101" /></td>
+        	<td><span>盘号</span></td><td><input name="bind_name_trayid" 		id="bind_id_trayid" 	type="text"  class="smallinput" value="11111" /></td>
+        	<td><span>料号</span></td><td><input name="bind_name_partid" 		id="bind_id_partid" 	type="text"  class="smallinput" value="1234567" /></td>
+        	<td><span>描述</span></td><td><input name="bind_name_partdesc" 		id="bind_id_partdesc" 	type="text"  class="smallinput" value="zzz" /></td>
+        	<td><span>数量</span></td><td><input name="bind_name_partnum" 		id="bind_id_partnum" 	type="text"  class="smallinput" value="40" /></td>
+        	<td><span>工单号</span></td><td><input name="bind_name_partwoid" 	id="bind_id_partwoid" 	type="text"  class="smallinput" value="12341234" /></td>
+        	<td><span>批号</span></td><td><input name="bind_name_partlotid" 		id="bind_id_partlotid" 	type="text"  class="smallinput" value="1234" /></td>
+        	<td><button id="bind_id_button"  onclick="las_bind()"    >绑定</button></td>
+  			</tr></table>
+        
+        </div>
+    </div>
+    <div class="medium-6 columns">
+        <table>
+            <tbody>
+                <tr>
+                    <td>一拣</td>
+                    <td><button id="implement1-1">上架</button></td>
+                    <td><button id="implement1-1">下架</button></td>
+                    <td><input name="pick1sel" id="1" type="radio" value="160101" />160101<input name="pick1sel" id="2" type="radio" value="160102" />160102</td>
+                    <td>计划</td>
+                    <td><input type="text" class="smallinput" value="40" id="text1-1" /></td>
+                    <td>本盘</td>
+                    <td><input type="text" class="smallinput" value="10" id="text1-1" /></td>
+                    <td><button id="implement1-1">+</button></td>
+                    <td><button id="implement1-1">-</button></td>
+                    <td>盘数</td>
+                    <td><input type="text" class="smallinput" value="5" id="text1-1" /></td>
+                    <td><button id="implement1-1">+</button></td>
+                    <td><button id="implement1-1">-</button></td>
+
+                    <td>工单号</td>
+                    <td><input type="text" class="smallinput" value="1234567" id="text1-1" /></td>
+                    <td>料号</td>
+                    <td><input type="text" class="smallinput" value="1234567" id="text1-1" /></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <thead>
+                <tr>
+                    <td> </td>
+                    <td>9</td>
+                    <td>8</td>
+                    <td>7</td>
+                    <td>6</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>1</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>4</td>
+                    <td><span>110101</span>-<span>40</span></td>
+                    <td><span>110101</span>-<span>40</span></td>
+                    <td><span>110101</span>-<span>40</span></td>
+                    <td><span>110101</span>-<span>40</span></td>
+                    <td><span>110101</span>-<span>40</span></td>
+                    <td><span>110101</span>-<span>40</span></td>
+                    <td><span>110101</span>-<span>40</span></td>
+                    <td><span>110101</span>-<span>40</span></td>
+                    <td><span>110101</span>-<span>40</span></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                </tr>
+
+            </tbody>
+        </table>
+
+
+
+        <table>
+            <tbody>
+                <tr>
+                    <td>二拣</td>
+                    <td><button id="implement1-1">上架</button></td>
+                    <td><button id="implement1-1">下架</button></td>
+                    <td><input name="pick1sel" id="1" type="radio" value="160101" />160101<input name="pick1sel" id="2" type="radio" value="160102" />160102</td>
+                    <td>数量</td>
+                    <td><input type="text" class="smallinput" value="40" id="text1-1" /></td>
+                    <td><button id="implement1-1">+1</button></td>
+                    <td><button id="implement1-1">-1</button></td>
+                    <td>总盘数</td>
+                    <td><input type="text" class="smallinput" value="5" id="text1-1" /></td>
+                    <td><button id="implement1-1">+1</button></td>
+                    <td><button id="implement1-1">-1</button></td>
+
+                    <td>工单号</td>
+                    <td><input type="text" class="smallinput" value="" id="text1-1" /></td>
+                    <td>料号</td>
+                    <td><input type="text" class="smallinput" value="" id="text1-1" /></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <thead>
+                <tr>
+                    <th> </th>
+                    <th>9</th>
+                    <th>8</th>
+                    <th>7</th>
+                    <th>6</th>
+                    <th>5</th>
+                    <th>4</th>
+                    <th>3</th>
+                    <th>2</th>
+                    <th>1</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>4</td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                </tr>
+
+            </tbody>
+        </table>
+
+
+        <table>
+            <tbody>
+                <tr>
+                    <td>三拣</td>
+                    <td><button id="implement1-1">上架</button></td>
+                    <td><button id="implement1-1">下架</button></td>
+                    <td><input name="pick1sel" id="1" type="radio" value="160101" />160101<input name="pick1sel" id="2" type="radio" value="160102" />160102</td>
+                    <td>数量</td>
+                    <td><input type="text" class="smallinput" value="40" id="text1-1" /></td>
+                    <td><button id="implement1-1">+1</button></td>
+                    <td><button id="implement1-1">-1</button></td>
+                    <td>总盘数</td>
+                    <td><input type="text" class="smallinput" value="1" id="text1-1" /></td>
+                    <td><button id="implement1-1">+1</button></td>
+                    <td><button id="implement1-1">-1</button></td>
+
+                    <td>工单号</td>
+                    <td><input type="text" class="smallinput" value="" id="text1-1" /></td>
+                    <td>料号</td>
+                    <td><input type="text" class="smallinput" value="" id="text1-1" /></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <thead>
+                <tr>
+                    <th> </th>
+                    <th>9</th>
+                    <th>8</th>
+                    <th>7</th>
+                    <th>6</th>
+                    <th>5</th>
+                    <th>4</th>
+                    <th>3</th>
+                    <th>2</th>
+                    <th>1</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>4</td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                    <td><span></span>-<span></span></td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+<script>
+//初始化 Foundation JS
+	$(document).ready(    function() {	$(document).foundation();}             );
+	$(".smallinput").attr("disabled",true);//所有输入框设为disabled
+	
+	$("button").attr("disabled",true);//所有按钮设为disabled
+	
+	function enabletag(eleid){//使input和button从disabled状态恢复正常的函数,参数为input或button的id(字符串类型)
+		$('#'+eleid).attr("disabled",false);	
+	}
+
+
+function las_mesgo(mesid){//  
+	//如果没有填写  锁定库位信息， 告诉由系统自动分配库位
+	//系统自动填写MES信息，目前是自动的
+
+	$.ajax({  
+		type : "get", //使用get方法访问后台        
+		url : "/yxpower/ajax",		
+		dataType : "html",  			
+		data : "a=las_mesgo&id="+mesid    , //要发送的参数  
+		async : false,//同步调用   			
+		success : function(msg) {
+			alert("已发送指令");
+		}
+	});
+}
+
+
+
+
+
+
+
+function las_go(){//  
+
+	go_devid = $('input[type="radio"][name="go_name_devid"]:checked').val(); // 获取一组radio被选中项的值  	
+	go_cmdtype = $('input[type="radio"][name="go_name_cmdtype"]:checked').val(); // 获取一组radio被选中项的值  	
+	go_cellidsrc=$("#go_id_cellidsrc").val(); 
+	go_celliddst=$("#go_id_celliddst").val(); 
+
+	$.ajax({  
+		type : "get", //使用get方法访问后台        
+		url : "/yxpower/ajax",		
+		dataType : "html",  			
+		data : "a=las_go&devid="+go_devid+"&cmdtype="+go_cmdtype+"&cellidsrc="+go_cellidsrc+"&celliddst="+go_celliddst, //要发送的参数  
+		async : false,//同步调用   			
+		success : function(msg) {
+			//$("#patinfo").val(msg); 
+			//getlistjust(15);
+			alert("已发送指令");
+		}
+	});
+}
+
+function las_bind(){//  
+
+	bind_cellid=$("#bind_id_cellid").val(); 
+	bind_trayid=$("#bind_id_trayid").val(); 
+	bind_partid=$("#bind_id_partid").val(); 
+	bind_partdesc=$("#bind_id_partdesc").val(); 
+	if(checksum(bind_partdesc)>=32)  //字符串截断
+		bind_partdesc.substr(0,30);
+	
+	bind_partnum=$("#bind_id_partnum").val(); 
+	bind_partwoid=$("#bind_id_partwoid").val(); 
+	bind_partlotid=$("#bind_id_partlotid").val(); 
+
+	$.ajax({  
+		type : "get", //使用get方法访问后台        
+		url : "/yxpower/ajax",		
+		dataType : "html",  			
+		data : "a=las_bind&cellid="+bind_cellid+"&trayid="+bind_trayid+"&partid="+bind_partid+"&partdesc="+bind_partdesc    +"&partnum="+bind_partnum   +"&partwoid="+bind_partwoid+"&partlotid="+bind_partlotid     , //要发送的参数  
+		async : false,//同步调用   			
+		success : function(msg) {
+			//$("#patinfo").val(msg); 
+			//getlistjust(15);
+			alert("已发送指令");
+		}
+	});
+}
+
+
+	enabletag("go_id_cellidsrc");
+	enabletag("go_id_celliddst");
+	enabletag("go_id_button");
+
+	enabletag("bind_id_cellid");
+	enabletag("bind_id_trayid");
+	enabletag("bind_id_partid");
+	enabletag("bind_id_partdesc");
+	enabletag("bind_id_partnum");
+	enabletag("bind_id_partwoid");
+	enabletag("bind_id_partlotid");
+	enabletag("bind_id_button");
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,873 @@
+<html>
+<head>
+    <title>DPH</title>
+    <meta charset="UTF-8"> <!-- for HTML5 -->
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/css_0_0_normalize.css">
+    <link rel="stylesheet" href="../css/css_0_0_f5.css">
+    <link rel="stylesheet" href="../css/css_0_0_back.css">
+    <link rel="stylesheet" href="../css/standardization.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/bootstrap-table.css">
+    <script src="../js/mapnode.js"></script>
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/bootstrap-table.js"></script>
+    <script src="../js/bootstrap-table-zh-CN.min.js"></script>
+    <script src="../js/js_0_0_f5m.js"></script>
+    <script src="../js/vendor/modernizr.js"></script>
+    <script src="../js/svg.min.js" type="text/javascript" ></script>
+
+    <style>
+       body{
+           padding:1rem;
+
+       }
+       table{
+           width:100%;
+
+       }
+       .tablecontainer{
+
+           width:100%;
+       }
+       table tr td{
+           border:1px #DDDDDD solid;
+           padding:0.2rem;
+           background-color: white;
+
+
+       }
+
+        .accordion .accordion-navigation > a{
+            display: block;
+            line-height: 1rem;
+
+        }
+
+       input[type="text"].smallinput{
+           width:4.5rem;
+           height:1rem;
+           margin: 0;
+           margin-top: 0.3rem;
+           float:left;
+           border:none;
+           background-color: inherit;
+           box-shadow:none;
+           display: table-cell;
+       }
+        button{
+            margin:0;
+            height:1.4rem;
+            line-height: 0.9rem;
+            background-color:#63B8FF ;
+            padding:0.3rem;
+            display: table-cell;
+            border-radius: 3px;
+        }
+
+       button[disabled]{
+           background-color: grey;
+       }
+       button[disabled]:hover{
+           background-color: grey;
+       }
+        .devname{
+            margin-top: 0.3rem;
+            display: block;
+            float:left
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="tablecontainer">
+    <table>
+        <thead>
+        <tr>
+            <th colspan="4">MES</th>
+            <th colspan="5">WMS</th>
+            <th colspan="6">WCS</th>
+
+
+        </tr>
+        <tr>
+            <th>时间</th>
+            <th>任务号</th>
+            <th>任务类别</th>
+            <th>操作</th>
+
+            <th>任务号</th>
+            <th>起点</th>
+            <th>盘号</th>
+            <th>料号</th>
+            <th>目标位</th>
+            <th colspan="6">动作</th>
+
+        </tr>
+
+        </thead>
+        <tbody>
+        <tr>
+            <td>0:00</td>
+            <td>A1B2C31234C1</td>
+            <td>一楼空盘入库</td>
+            <td> <button id="feedback1">反馈</button></td>
+            <td>10010</td>
+            <td>310101</td>
+            <td>666178</td>
+            <td>WWWWWWWWW</td>
+            <td>310405</td>
+            <td><input type="text"class="smallinput"  value="310101" id="text1-1"/><span  class="devname">-SRM-</span><input type="text"class="smallinput"  value="310404" id="text1-2"/>
+                <button id="implement1-1">执行</button>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+
+
+        </tr>
+        <tr>
+            <td>1:00</td>
+            <td>A1B2C31234C2</td>
+            <td>一楼出库</td>
+            <td><button id="feedback2">反馈</button></td>
+            <td>12010</td>
+            <td>310101</td>
+            <td>666219</td>
+            <td>123456789</td>
+            <td>310405</td>
+            <td><input type="text"class="smallinput"  value="310402" id="text2-1"/><span class="devname">-SRM-</span><input type="text"class="smallinput"  value="310101" id="text2-2"/>
+                <button id="implement2-1">执行</button>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>2:00</td>
+            <td>A1B2C31234C3</td>
+            <td>拣选回空盘</td>
+            <td></td>
+            <td>13010</td>
+            <td>310405</td>
+            <td>666170</td>
+            <td>WWWWWWWWW</td>
+            <td>160101</td>
+            <td><input type="text"class="smallinput"  value="310402" id="text3-1"/><span class="devname">-SRM-</span><input type="text"class="smallinput"  value="310101" id="text3-2"/>
+                <button id="implement3-1">执行</button>
+            </td>
+            <td><span class="devname">HOV1</span><input type="text"class="smallinput"  value="220201" id="text3-3"/>
+                <button id="implement3-2">执行</button>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="220201" id="text3-4"/>
+                <button id="implement3-3">执行</button></td>
+        </tr>
+        <tr>
+            <td>3:00</td>
+            <td>A1B2C31234C4</td>
+            <td>拣选出料盘</td>
+            <td></td>
+            <td>14010</td>
+            <td>160101</td>
+            <td>666171</td>
+            <td>123456789</td>
+            <td>310401</td>
+            <td><input type="text"class="smallinput"  value="160101" id="text4-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text4-2"/>
+                <button id="implement4-1">执行</button>
+            </td>
+            <td><span class="devname">HOV1</span><input type="text"class="smallinput"  value="310101" id="text4-3"/>
+                <button id="implement4-2">执行</button>
+            </td>
+            <td></td>
+            <td></td>
+            <td><span class="devname">SRM-</span><input type="text"class="smallinput"  value="310403" id="text4-4"/>
+                <button id="implement4-3">执行</button></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>4:00</td>
+            <td>A1B2C31234C5</td>
+            <td>夹层入库</td>
+            <td><button id="feedback3">反馈</button></td>
+            <td>15011</td>
+            <td>260101</td>
+            <td>P12345</td>
+            <td>124572890</td>
+            <td>110401</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text5-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text5-2"/>
+                <button id="implement5-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text5-3"/>
+                <button id="implement5-2">执行</button></td>
+            <td><span class="devname">HOV2</span> <button id="get1">取盘</button></td>
+            <td><span class="devname">HOV2</span> <button id="put1">放盘</button></td>
+            <td><span class="devname">HOV2</span><input type="text"class="smallinput"  value="220101" id="text5-4"/>
+                <button id="implement5-3">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="110401" id="text5-5"/>
+                <button id="implement5-4">执行</button>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15012</td>
+            <td>260102</td>
+            <td>P22346</td>
+            <td>224572890</td>
+            <td>110402</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text6-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text6-2"/>
+                <button id="implement6-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text6-3"/>
+                <button id="implement6-2">执行</button></td>
+            <td><span class="devname">HOV2</span> <button id="get2">取盘</button></td>
+            <td><span class="devname">HOV2</span> <button id="put2">放盘</button></td>
+            <td><span class="devname">HOV2</span><input type="text"class="smallinput"  value="220101" id="text6-4"/>
+                <button id="implement6-3">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="110402" id="text6-5"/>
+                <button id="implement6-4">执行</button>
+            </td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15013</td>
+            <td>260102</td>
+            <td>P32347</td>
+            <td>224572890</td>
+            <td>110403</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text7-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text7-2"/>
+                <button id="implement7-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text7-3"/>
+                <button id="implement7-2">执行</button></td>
+            <td><span class="devname">HOV2</span> <button id="get3">取盘</button></td>
+            <td><span class="devname">HOV2</span> <button id="put3">放盘</button></td>
+            <td><span class="devname">HOV2</span><input type="text"class="smallinput"  value="220101" id="text7-4"/>
+                <button id="implement7-3">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="110403" id="text7-5"/>
+                <button id="implement7-4">执行</button>
+            </td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15014</td>
+            <td>260102</td>
+            <td>P42348</td>
+            <td>224572890</td>
+            <td>110404</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text8-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text8-2"/>
+                <button id="implement8-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text8-3"/>
+                <button id="implement8-2">执行</button></td>
+            <td><span class="devname">HOV2</span> <button id="get4">取盘</button></td>
+            <td><span class="devname">HOV2</span> <button id="put4">放盘</button></td>
+            <td><span class="devname">HOV2</span><input type="text"class="smallinput"  value="220101"id="text8-4" />
+                <button id="implement8-3">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="110404" id="text8-5"/>
+                <button id="implement8-4">执行</button>
+            </td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15015</td>
+            <td>260102</td>
+            <td>P52349</td>
+            <td>224572890</td>
+            <td>110405</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text9-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text9-2"/>
+                <button id="implement9-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text9-3"/>
+                <button id="implement9-2">执行</button></td>
+            <td><span class="devname">HOV2</span> <button id="get5">取盘</button></td>
+            <td><span class="devname">HOV2</span> <button id="put5">放盘</button></td>
+            <td><span class="devname">HOV2</span><input type="text"class="smallinput"  value="220101" id="text9-4"/>
+                <button id="implement9-3">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="110405" id="text9-5"/>
+                <button id="implement9-4">执行</button>
+            </td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15016</td>
+            <td>260102</td>
+            <td>P62350</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text10-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text10-2"/>
+                <button id="implement10-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text10-3"/>
+                <button id="implement10-2">执行</button></td>
+            <td><span class="devname">HOV2</span> <button id="get6">取盘</button></td>
+            <td><span class="devname">HOV2</span> <button id="put6">放盘</button></td>
+            <td><span class="devname">HOV2</span><input type="text"class="smallinput"  value="220101" id="text10-4"/>
+                <button id="implement10-3">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="110406" id="text10-5"/>
+                <button id="implement10-4">执行</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>10:00</td>
+            <td>A1B2C31234C9</td>
+            <td>拣选出库到拣架</td>
+            <td></td>
+            <td>15016</td>
+            <td>120101</td>
+            <td>P62350</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text11-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text11-2"/>
+                <button id="implement11-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text11-3"/>
+                <button id="implement11-2">执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15016</td>
+            <td>120102</td>
+            <td>P62350</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text12-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text12-2"/>
+                <button id="implement12-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text12-3"/>
+                <button id="implement12-2">执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15016</td>
+            <td>120103</td>
+            <td>P62350</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text13-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text13-2"/>
+                <button id="implement13-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text13-3"/>
+                <button id="implement13-2">执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15016</td>
+            <td>120104</td>
+            <td>P62350</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text14-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text14-2"/>
+                <button id="implement14-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text14-3"/>
+                <button id="implement14-2">执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15016</td>
+            <td>120105</td>
+            <td>P62350</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text15-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text15-2"/>
+                <button id="implement15-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text15-3"/>
+                <button id="implement15-2">执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15016</td>
+            <td>120106</td>
+            <td>P62350</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text16-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text16-2"/>
+                <button id="implement16-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text16-3"/>
+                <button id="implement16-2">执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15016</td>
+            <td>120107</td>
+            <td>P62350</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text17-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text17-2"/>
+                <button id="implement17-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text17-3"/>
+                <button id="implement17-2">执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15016</td>
+            <td>120108</td>
+            <td>P62350</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text18-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text18-2"/>
+                <button id="implement18-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text18-3"/>
+                <button id="implement18-2">执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15016</td>
+            <td>120109</td>
+            <td>P62350</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text19-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text19-2"/>
+                <button id="implement19-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text19-3"/>
+                <button id="implement19-2">执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15016</td>
+            <td>120110</td>
+            <td>P62350</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text20-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text20-2"/>
+                <button id="implement20-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text20-3"/>
+                <button id="implement20-2">执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15016</td>
+            <td>120111</td>
+            <td>P62350</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text21-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text21-2"/>
+                <button id="implement21-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text21-3"/>
+                <button id="implement21-2" >执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15016</td>
+            <td>120112</td>
+            <td>P62350</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text22-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text22-2"/>
+                <button id="implement22-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text22-3"/>
+                <button id="implement22-2">执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>12:00</td>
+            <td>A1B2C31234C9</td>
+            <td>拣选回库到立库</td>
+            <td></td>
+            <td>15016</td>
+            <td>120101</td>
+            <td>P62351</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text23-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text23-2"/>
+                <button id="implement23-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text23-3"/>
+                <button id="implement23-2">执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15016</td>
+            <td>120102</td>
+            <td>P62352</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text24-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text24-2"/>
+                <button id="implement24-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text24-3"/>
+                <button id="implement24-2">执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15016</td>
+            <td>120103</td>
+            <td>P62353</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text25-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text25-2"/>
+                <button id="implement25-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text25-3"/>
+                <button id="implement25-2">执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15016</td>
+            <td>120104</td>
+            <td>P62354</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text26-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text26-2"/>
+                <button id="implement26-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text26-3"/>
+                <button id="implement26-2">执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15016</td>
+            <td>120105</td>
+            <td>P62355</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text27-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text27-2"/>
+                <button id="implement27-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text27-3"/>
+                <button id="implement27-2">执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15016</td>
+            <td>120106</td>
+            <td>P62356</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text28-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text28-2"/>
+                <button id="implement28-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text28-3"/>
+                <button id="implement28-2">执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15016</td>
+            <td>120107</td>
+            <td>P62357</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text29-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text29-2"/>
+                <button id="implement29-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text29-3"/>
+                <button id="implement29-2">执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15016</td>
+            <td>120108</td>
+            <td>P62358</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text30-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text30-2"/>
+                <button id="implement30-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text30-3"/>
+                <button id="implement30-2">执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15016</td>
+            <td>120109</td>
+            <td>P62359</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text31-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text31-2"/>
+                <button id="implement31-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text31-3"/>
+                <button id="implement31-2">执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15016</td>
+            <td>120110</td>
+            <td>P62360</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text32-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text32-2"/>
+                <button id="implement32-1" >执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text32-3"/>
+                <button id="implement32-2">执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15016</td>
+            <td>120111</td>
+            <td>P62361</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text33-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text33-2"/>
+                <button id="implement33-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text33-3"/>
+                <button id="implement33-2">执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>15016</td>
+            <td>120112</td>
+            <td>P62362</td>
+            <td>224572890</td>
+            <td>110406</td>
+            <td><input type="text"class="smallinput"  value="110401" id="text34-1"/><span class="devname">-AGV-</span><input type="text"class="smallinput"  value="220201" id="text34-2"/>
+                <button id="implement34-1">执行</button>
+            </td>
+            <td><span class="devname">AGV</span><input type="text"class="smallinput"  value="260101" id="text34-3"/>
+                <button id="implement34-2">执行</button></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+
+
+
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+
+
+
+
+
+
+<script>
+     //初始化 Foundation JS
+    $(document).ready(function() {
+        $(document).foundation();
+    });
+
+
+
+
+    $(".smallinput").attr("disabled",true);//所有输入框设为disabled
+    $("button").attr("disabled",true);//所有按钮设为disabled
+
+
+    function elementenabled(eleid){//使input和button从disabled状态恢复正常的函数,参数为input或button的id(字符串类型)
+        $('#'+eleid).attr("disabled",false);
+    }
+
+
+
+
+</script>
+
+</body>
+</html>

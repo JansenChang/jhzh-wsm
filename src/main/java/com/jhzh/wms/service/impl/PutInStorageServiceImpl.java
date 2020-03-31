@@ -76,13 +76,13 @@ public class PutInStorageServiceImpl implements PutInStorageService {
     };
 
 
-    static {
+ /*   static {
         try {
             serverSocket = new ServerSocket(4567);
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     @Override
     public Result<?> queryFreeSpace(JSONObject jsonpObject) {
@@ -95,7 +95,7 @@ public class PutInStorageServiceImpl implements PutInStorageService {
         resultData.put("memoInfo4", "");
         resultData.put("memoInfo5", "");
         try {
-            SendTcp(jsonpObject);
+            //SendTcp(jsonpObject);
             //TcpService();
         } catch (Exception e) {
             e.printStackTrace();
