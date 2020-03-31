@@ -29,11 +29,11 @@ public class WmsTaskController {
     //立体库任务状态查询接口
     @RequestMapping(value = "wms/QueryTaskStatus", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public Result<?> queryTaskStatus(@RequestBody JSONObject jsonpObject) throws Exception {
-        log.info("queryTaskStatus begin..");
+        log.info("立体库任务状态查询接口 begin..");
         String taskId = jsonpObject.get("taskId").toString();
+        log.info(jsonpObject.toJSONString());
         List<TaskStatusDto> taskStatusDtos = wmsTaskService.queryTaskStatus(taskId);
-
-        log.info("queryTaskStatus end..");
+        log.info("立体库任务状态查询接口 end..");
         return Result.success(taskStatusDtos.get(0));
     }
 
