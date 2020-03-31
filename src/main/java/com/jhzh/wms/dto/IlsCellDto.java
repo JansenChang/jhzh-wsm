@@ -25,7 +25,7 @@ public class IlsCellDto {
     private Long partid;
     private String partdesc;
     private Integer partnum;
-    private Integer partdate;
+    private Long partdate;
     private Long partwoid;
     private Long partlotid;
     private Integer partlotdiv;
@@ -37,7 +37,7 @@ public class IlsCellDto {
     public IlsCellDto() {
     }
 
-    public IlsCellDto(Long id, Long unt, Long app, Integer areano, String name, Integer row, Integer col, Integer layer, Integer arg, Integer argx, Integer argy, Integer argz, Integer locked, Integer lockedtype, Long trayid, String trayno, Long partid, String partdesc, Integer partnum, Integer partdate, Long partwoid, Long partlotid, Integer partlotdiv, String mestaskid, Integer cmd, Integer cmdstatus) {
+    public IlsCellDto(Long id, Long unt, Long app, Integer areano, String name, Integer row, Integer col, Integer layer, Integer arg, Integer argx, Integer argy, Integer argz, Integer locked, Integer lockedtype, Long trayid, String trayno, Long partid, String partdesc, Integer partnum, Long partdate, Long partwoid, Long partlotid, Integer partlotdiv, String mestaskid, Integer cmd, Integer cmdstatus) {
         this.id = id;
         this.unt = unt;
         this.app = app;

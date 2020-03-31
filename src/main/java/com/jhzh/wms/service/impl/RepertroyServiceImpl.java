@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class RepertroyServiceImpl implements RepertroyService {
@@ -15,8 +16,20 @@ public class RepertroyServiceImpl implements RepertroyService {
     private IlsCellDao IlscellDao;
 
     @Override
-    public Result<?> queryDynamicRepertroy() {
-        List<IlsCellDto> ilsCellDtoList= IlscellDao.queryDynamicRepertroy();
+    public Result<?> queryDynamicRepertroy(Map<String, Object> map) {
+        List<IlsCellDto> ilsCellDtoList= IlscellDao.queryDynamicRepertroy(map);
         return Result.success(ilsCellDtoList);
+    }
+
+    @Override
+    public Result<?> queryDynamicRepertroyById(Map<String, Object> map) {
+        List<IlsCellDto> ilsCellDtoList= IlscellDao.queryDynamicRepertroyById(map);
+        return Result.success(ilsCellDtoList);
+    }
+
+    @Override
+    public Result<?> dynamicRepertroyFirstlayer() {
+        List<String> firstLayer= IlscellDao.dynamicRepertroyFirstlayer();
+        return Result.success(firstLayer);
     }
 }

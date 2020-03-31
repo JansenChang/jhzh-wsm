@@ -30,6 +30,7 @@
  <update id="updateCellByCellId">
   update yx_ils_cell
   <set>
+  partdate=unix_timestamp(),
   <if test="trayid!=null and trayid !=''">
         trayid=#{trayid},
    </if>
@@ -44,9 +45,6 @@
    </if>
   <if test="partnum!=null and partnum !=''">
         partnum=#{partnum},
-   </if>
-  <if test="partdate!=null and partdate !=''">
-        partdate=#{partdate},
    </if>
   <if test="partwoid!=null and partwoid !=''">
        partwoid=#{partwoid},
@@ -216,7 +214,7 @@
          </where>
 
     </select>
-    <select id="queryDynamicRepertroy" resultType="com.jhzh.wms.dto.IlsCellDto">
+    <select id="queryDynamicRepertroy" resultType="com.jhzh.wms.dto.IlsCellDto" >
         select
          id,
          unt,
@@ -245,7 +243,49 @@
          partlotdiv,
          cmd,
          cmdstatus
-         from yx_ils_cell where areano=55
+         from yx_ils_cell
+          <where>
+             and  areano=#{areano}
+          </where>
+
+    </select>
+    <select id="queryDynamicRepertroyById" resultType="com.jhzh.wms.dto.IlsCellDto">
+        select
+         id,
+         unt,
+         app,
+         areano,
+         name,
+         row,
+         col,
+         layer,
+         locked,
+         lockedtype,
+         trayid,
+         trayno,
+         partid,
+         partnum,
+         case
+             when partdate=0
+                 then ''
+             when partdate !=0
+                 then
+             FROM_UNIXTIME(partdate/1000, '%Y-%m-%d')
+             end
+                        AS partdate,
+         partwoid,
+         partlotid,
+         partlotdiv,
+         cmd,
+         cmdstatus
+         from yx_ils_cell
+         <where>
+           and  instr(CAST(name AS CHAR),CAST(#{rowandcol} AS CHAR))>0
+         </where>
+    </select>
+    <select id="dynamicRepertroyFirstlayer" resultType="java.lang.String">
+        select firstlayer from (
+select CONCAT(substring(CONCAT(name,''),1,4),'01') as firstlayer   from yx_ils_cell c  where c.areano=15 and c.partid !=0) c group by firstlayer
     </select>
 
 
