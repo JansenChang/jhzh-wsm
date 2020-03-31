@@ -248,7 +248,7 @@ public class PutInStorageServiceImpl implements PutInStorageService {
                             .partid(Long.parseLong(itemCode.replace("-", "")))//物料号
                             .partdesc(itemBomInfoDto.getItemDesc())
                             .partnum(itemListBean.getQuantity())//数量
-                            .partdate(Integer.parseInt(String.valueOf(System.currentTimeMillis() / 1000)))//入库时间 TODO System.currentTimeMillis()/1000
+                            .partdate(System.currentTimeMillis())//入库时间 TODO System.currentTimeMillis()/1000
                             .partwoid(Long.parseLong(itemListBean.getWipEntityId().toString()))//工单号
                             .partlotid(Long.parseLong(itemListBean.getLotCode().toString()))//批号
                             .partlotdiv(0)//可拆批
@@ -298,7 +298,7 @@ public class PutInStorageServiceImpl implements PutInStorageService {
                         .trayno(trayno)
                         .partid(Long.parseLong("000000000"))//物料号
                         .partnum(0)//数量
-                        .partdate(Integer.parseInt(String.valueOf(System.currentTimeMillis() / 1000)))//入库时间 TODO System.currentTimeMillis()/1000
+                        .partdate(System.currentTimeMillis())//入库时间 TODO System.currentTimeMillis()/1000
                         .partwoid(Long.parseLong("-1"))//工单号
                         .partlotid(Long.parseLong("0"))//批号
                         .partlotdiv(0)//可拆批
@@ -519,4 +519,6 @@ public class PutInStorageServiceImpl implements PutInStorageService {
 
         return true;
     }
+
+
 }
