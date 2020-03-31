@@ -21,9 +21,9 @@ public interface IlsCellDao {
     List<Map<String,Object>> queryMaterial(Map map);
 
 
-    List<IlsCellDto> queryDynamicRepertroy(Map<String, Object> map);
+     List<Map> queryDynamicRepertroy(Map<String, Object> map);
 
-    List<IlsCellDto> queryDynamicRepertroyById(Map map);
+    List<Map> queryDynamicRepertroyById(Map map);
 
     List<String> dynamicRepertroyFirstlayer();
 

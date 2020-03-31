@@ -2,7 +2,6 @@ package com.jhzh.wms.service.impl;
 
 import com.jhzh.wms.base.result.Result;
 import com.jhzh.wms.dao.IlsCellDao;
-import com.jhzh.wms.dto.IlsCellDto;
 import com.jhzh.wms.service.RepertroyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,13 +16,13 @@ public class RepertroyServiceImpl implements RepertroyService {
 
     @Override
     public Result<?> queryDynamicRepertroy(Map<String, Object> map) {
-        List<IlsCellDto> ilsCellDtoList= IlscellDao.queryDynamicRepertroy(map);
+        List<Map> ilsCellDtoList= IlscellDao.queryDynamicRepertroy(map);
         return Result.success(ilsCellDtoList);
     }
 
     @Override
     public Result<?> queryDynamicRepertroyById(Map<String, Object> map) {
-        List<IlsCellDto> ilsCellDtoList= IlscellDao.queryDynamicRepertroyById(map);
+        List<Map> ilsCellDtoList= IlscellDao.queryDynamicRepertroyById(map);
         return Result.success(ilsCellDtoList);
     }
 

@@ -214,7 +214,7 @@
          </where>
 
     </select>
-    <select id="queryDynamicRepertroy" resultType="com.jhzh.wms.dto.IlsCellDto" >
+    <select id="queryDynamicRepertroy"  resultType="java.util.Map" >
         select
          id,
          unt,
@@ -235,7 +235,7 @@
                  then ''
              when partdate !=0
                  then
-             FROM_UNIXTIME(partdate/1000, '%Y-%m-%d')
+             FROM_UNIXTIME(partdate, '%Y-%m-%d %H:%i:%S')
              end
                         AS partdate,
          partwoid,
@@ -249,7 +249,7 @@
           </where>
 
     </select>
-    <select id="queryDynamicRepertroyById" resultType="com.jhzh.wms.dto.IlsCellDto">
+    <select id="queryDynamicRepertroyById" resultType="java.util.Map" >
         select
          id,
          unt,
@@ -270,7 +270,7 @@
                  then ''
              when partdate !=0
                  then
-             FROM_UNIXTIME(partdate/1000, '%Y-%m-%d')
+             FROM_UNIXTIME(partdate, '%Y-%m-%d %H:%i:%S')
              end
                         AS partdate,
          partwoid,
