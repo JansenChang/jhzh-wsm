@@ -199,8 +199,6 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
 
         } catch (Exception e) {
             log.error(e.getMessage());
-        } finally {
-            wipQtyTemp = 0;
         }
         return lists;
     }
@@ -246,10 +244,30 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
 
     private List<IlsCellDto> matchData(List<IlsCellDto> qtyGt) {
         //List<IlsCellDto> qtyGt = value.stream().filter(ilsCellDto -> ilsCellDto.getPartnum() >= wipQtyTemp).collect(Collectors.toList());
+        String data1[]={"0","0","0","0","0","0","0","0","0","0"};
+        String data2[]={"0","0","0","0","0","0","0","0","0","0"};
+        String data3[]={"0","0","0","0","0","0","0","0","0","0"};
+        String data4[]={"0","0","0","0","0","0","0","0","0","0"};
+
         if (qtyGt.size() > 0) {
             //如果大于两个则按日期逆序排序，如果日期相同则按数量排序
             if (qtyGt.size() > 2) {
-                qtyGt.sort(Comparator.comparing(IlsCellDto::getPartdate).reversed().thenComparing(IlsCellDto::getPartnum));
+                qtyGt.sort(Comparator.comparing(IlsCellDto::getPartdate).reversed());
+                IlsCellDto ilsCellDto = qtyGt.get(0);
+                Integer partnum = ilsCellDto.getPartnum();
+                if(partnum<wipQtyTemp){
+                    //判断第一个数组是否填满值
+                    if("0".equals(data1[data1.length - 1])){
+                        for (int i = 0; i < data2.length; i++) {
+
+                        }
+                    }else{
+                        for (int i = 0; i < data1.length; i++) {
+
+                        }
+                    }
+                }
+
                 return qtyGt;
                 //等于1则直接返回
             } else if (qtyGt.size() == 1) {
@@ -320,13 +338,10 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
                 if (woPlanInfoDtoList.size() > 0) {
                     continue;
                 }
-                //初步筛选库存是否含有组成大板的小板材料入库记录，如无关联小板则跳过待产计划
-                List<WmsInvInDto> wmsInvInList = putInStorageDao.queryItemCode(item.getItemCode());
+
                 //将执行单条执行计划的信息存入全局变量中
                 wipQtyTemp = item.getWipQty();
-                if (wmsInvInList.size() == 0) {
-                    continue;
-                }
+
                 //查询bom是否满足查询条件
                 List<List<IlsCellDto>> lists = QueryItemBomInfo(item.getItemCode());
                 if (EmptyUtils.isEmpty(lists)) {

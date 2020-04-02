@@ -276,7 +276,7 @@ class mapNode { //定义了一个绘制节点类
         // 3楼存盘
         if (_this.explain == 'trayno') {
             // console.log(_this.dataobj);
-            html += '<h1>' + _this.name + '</h1>' +
+            html += '<h1>' + _this.name + '<span class="clos">x</span></h1>' +
                 '<table class = "table-responsive" width = "100%">' +
                 '<tr><th width="25%"> 托盘号 </th><td width="25%">' + (_this.dataobj?_this.dataobj:'-') + '</td></tr>'
             '<table>';
@@ -317,7 +317,7 @@ class mapNode { //定义了一个绘制节点类
     draw(draw) {
         var _this = this;
         if (_this.svgtype == "rect") {
-            var obj = draw.rect(this.w, this.h);
+            var obj = draw.rect(_this.w, _this.h);
             // if (_this.color == '#dfdfe7') {
             //     _this.svgobj = obj.addClass('pointer');
             // }

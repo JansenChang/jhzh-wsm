@@ -10,4 +10,6 @@ public interface RepertroyService {
     Result<?> queryDynamicRepertroyById(Map<String, Object> map);
 
     Result<?> dynamicRepertroyFirstlayer();
+
+    Result<?> updateRepertroy(Map<String, Object> map);
 }

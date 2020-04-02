@@ -66,11 +66,11 @@ class mapNode { //定义了一个绘制节点类
         this.x = x0 + this.x * w_ratio;
         this.y = y0 + this.y * h_ratio;
     }
-    getPartdate(time){
+    getPartdate(time) {
         var date1 = new Date(time);
         var date2 = new Date(date1);
         date2.setDate(date1.getDate() + 30);
-        return date2.getFullYear() + "-" + (date2.getMonth() + 1) + "-" + date2.getDate()+ '  ' +date2.getHours()+ "-"+ date2.getMinutes()+ "-"+ date2.getSeconds()
+        return date2.getFullYear() + "-" + (date2.getMonth() + 1) + "-" + date2.getDate() + '  ' + date2.getHours() + "-" + date2.getMinutes() + "-" + date2.getSeconds()
     }
     getMousePos(event) {
         var _this = this;
@@ -81,7 +81,7 @@ class mapNode { //定义了一个绘制节点类
         var x = e.pageX || e.clientX + scrollX;
         var y = e.pageY || e.clientY + scrollY;
 
-          if (_this.explain == 'cabinet') {
+        if (_this.explain == 'cabinet') {
             var dynData = {
                 "rowandcol": _this.name
             }
@@ -93,18 +93,72 @@ class mapNode { //定义了一个绘制节点类
                 async: false,
                 data: JSON.stringify(dynData),
                 success: function (resul) {
-                    $(".title_name").empty().html('夹层'+ _this.name +'立库');
-                    html += '<tr><th></th><th>托盘号</th><th>工单号</th><th>物料号</th><th>数量</th><th>到期时间</th></tr>' ;
+                    $(".title_name").empty().html('夹层' + _this.name + '立库');
+                    html += '<tr><th></th><th>托盘号</th><th>工单号</th><th>物料号</th><th width="7%">数量</th><th width="25%">时间</th><th width="9%">操作</th></tr>';
                     $(resul.resultData).each(function (i, obj) {
-                        html += '<tr><td>' + (i + 1) + '层</td><td>' + obj.trayno + '</td><td>' + (obj.partwoid == 0 ? '-' : obj.partwoid) + '</td><td>' + (obj.partid == 0 ? '-' : obj.partid) + '</td><td>' + (obj.partnum == 0 ? '-' : obj.partnum) + '</td><td>' + (obj.partdate?_this.getPartdate(obj.partdate):'-') + '</td></tr>'
+
+                        var startTime = new Date(Date.parse(_this.getPartdate(_this.dataobj.partdate)));
+                        var endTime = new Date();
+
+                        if (startTime < endTime) {
+                            html += '<tr class="bg-pink"><td>' + (i + 1) + '层</td><td>' + obj.trayno + '</td><td>' + (obj.partwoid == 0 ? '-' : obj.partwoid) + '</td><td>' + (obj.partid == 0 ? '-' : obj.partid) + '</td><td>' + (obj.partnum == 0 ? '-' : obj.partnum) + '</td><td>' + (obj.partdate ? _this.getPartdate(obj.partdate) : '-') + '</td><td><button type="button" class="btn btn-success bc">保存</button></td></tr>'
+                        }
+
+                        html += '<tr><td>' + (i + 1) + '层</td><td><input type="text" id="newtrayno_'+ i +'" value="' + obj.trayno + '"></td><td><input type="text" id="newpartwoid_'+ i +'" value="' + (obj.partwoid == 0 ? '-' : obj.partwoid) + '"></td><td><input type="text" id="newpartid_'+ i +'" value="' + (obj.partid == 0 ? '-' : obj.partid) + '"></td><td><input type="text" id="newpartnum_'+ i +'" value="' + (obj.partnum == 0 ? '-' : obj.partnum) + '"></td><td><input type="text" id="newpartdate_'+ i +'" value="' + obj.partdate + '"></td><td><button type="button" class="btn btn-success bc" orderID="'+ i +'">保存</button></td></tr>'
                     })
                     $(".piler_box").empty().html(html);
                     $(".whcell_15f").show();
-                },
-                error: function (jqxhr, textStatus, error) {
-                    console.log(error);
 
-                }
+                    var strs = _this.name.split("");
+                    // 修改一楼数据库
+                    $(".btn-success").click(function () {
+                        var orderID=$(this).attr("orderID");
+                        var changeData = {
+                            "app": 900,
+                            "areano": 10,
+                            "cmd": 0,
+                            "cmdstatus": 0,
+                            "col": strs[2] + strs[3],
+                            "id": _this.name,
+                            "layer": strs[4] + strs[5],
+                            "locked": 0,
+                            "lockedtype": 0,
+                            "name": _this.name,
+                            "partdate": $("#newpartdate_"+orderID).val(),
+                            "partid": $("#newpartid_"+orderID).val(),
+                            "partlotdiv": 0,
+                            "partlotid": 0,
+                            "partnum": $("#newpartnum_"+orderID).val(),
+                            "partwoid": $("#newpartwoid_"+orderID).val(),
+                            "row": strs[0] + strs[1],
+                            "trayid": 0,
+                            "trayno": $("#newtrayno_"+orderID).val(),
+                            "unt": 9,
+                        }
+                        $.ajax({
+                            type: "POST",
+                            url: url + "/wms/updateRepertroy",
+                            contentType: "application/json;charset=utf-8",
+                            dataType: "JSON",
+                            async: false,
+                            data: JSON.stringify(changeData),
+                            success: function (resul) {
+                                if (resul.errorMsg == "ok") {
+                                    alert('修改成功')
+                                }
+                            },
+                            error: function (jqxhr, textStatus, error) {
+                                console.log(error);
+
+                            }
+
+                        })
+                    })
+                    },
+                        error: function (jqxhr, textStatus, error) {
+                            console.log(error);
+
+                        }
 
             })
         }
@@ -114,21 +168,18 @@ class mapNode { //定义了一个绘制节点类
 
     draw(draw) {
         var _this = this;
-        var html ='';
+        var html = '';
         if (_this.svgtype == "rect") {
             var obj = draw.rect(this.w, this.h);
-            var  piler_1 = localStorage.getItem("piler_1"),
-                piler_2 = localStorage.getItem("piler_2");
+            // 是否到期
+            if (_this.dataobj.partdate) {
+                var startTime = new Date(Date.parse(_this.getPartdate(_this.dataobj.partdate)));
+                var endTime = new Date();
 
-            if (piler_1 && piler_2) {
-                if (_this.name == _this.piler_1) {
-                    _this.svgobj = obj.addClass('lv');
-                }
-                if (_this.name == _this.piler_2) {
-                    _this.svgobj = obj.addClass('lv');
+                if (startTime < endTime) {
+                    _this.svgobj = obj.addClass('my-tips');
                 }
             }
-
 
             _this.svgobj = obj.fill(_this.color).move(_this.x, _this.y).addClass('pointer');
 
@@ -139,9 +190,9 @@ class mapNode { //定义了一个绘制节点类
             })
 
         } else if (this.svgtype == "text") {
-         
-                this.svgobj = draw.text(this.text).fill(this.color).move(this.x, this.y).size(15);
-            }
+
+            this.svgobj = draw.text(this.text).fill(this.color).move(this.x, this.y).size(15);
+        }
     }
 }
 

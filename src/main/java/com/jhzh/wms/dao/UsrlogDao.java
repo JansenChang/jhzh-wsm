@@ -7,6 +7,6 @@ import java.util.Map;
 
 @Mapper
 public interface UsrlogDao {
-    List<Map> getWcsMsg();
+    List<Map<String,Object>> getWcsMsg();
 
 }

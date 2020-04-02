@@ -100,11 +100,11 @@ class mapNode { //定义了一个绘制节点类
                 break;
         }
     }
-    getPartdate(time){
+    getPartdate(time) {
         var date1 = new Date(time);
         var date2 = new Date(date1);
         date2.setDate(date1.getDate() + 30);
-        return date2.getFullYear() + "-" + (date2.getMonth() + 1) + "-" + date2.getDate()+ '  ' +date2.getHours()+ ":"+ date2.getMinutes()+ ":"+ date2.getSeconds()
+        return date2.getFullYear() + "-" + (date2.getMonth() + 1) + "-" + date2.getDate() + '  ' + date2.getHours() + ":" + date2.getMinutes() + ":" + date2.getSeconds()
     }
     getMousePos(event) {
         var _this = this;
@@ -115,36 +115,86 @@ class mapNode { //定义了一个绘制节点类
         var x = e.pageX || e.clientX + scrollX;
         var y = e.pageY || e.clientY + scrollY;
 
-          // 堆垛机
-          if (_this.explain == 'piler') {
+        // 堆垛机
+        if (_this.explain == 'piler') {
             $(".title_name").empty().html('堆垛机')
-            html += '<tr><th width="25%"> 控制模式 </th><td width="25%">' + _this.pilerState(_this.dataobj[0]) + ' </td><th width="25%"> 作业类型 </th ><td width="25%" > ' + _this.pilerType(_this.dataobj[1]) + ' </td></tr>' +
+            html += '<table class = "table table-responsive table-bordered table-hover piler_box" width = "100%">' +
+                '<tr><th width="25%"> 控制模式 </th><td width="25%">' + _this.pilerState(_this.dataobj[0]) + ' </td><th width="25%"> 作业类型 </th ><td width="25%" > ' + _this.pilerType(_this.dataobj[1]) + ' </td></tr>' +
                 '<tr><th width="25%"> 警报 </th><td width="25%">' + pilerTips(_this.dataobj[2]) + '</td><th width = "25%"> 取货站台 </th> <td width="25%">' + (_this.dataobj[3] ? _this.dataobj[3] : '-') + '</td></tr>' +
-                '<tr><th width="25%"> 入库号 </th><td width="25%"> ' + _this.dataobj[4]  + ' </td><th width="25%">出库号 </th><td width="25%"> ' + _this.dataobj[5]  + ' </td></tr>' +
-                '<tr><th width="25%"> 任务号 </th><td width="25%"> ' + (_this.dataobj[6]) + ' </td><th width="25%"> 当前位置 </th><td width="25%"> ' + _this.dataobj[7] + ' </td></tr>' ;
-            $(".piler_box").empty().html(html)  .show();
+                '<tr><th width="25%"> 入库号 </th><td width="25%"> ' + _this.dataobj[4] + ' </td><th width="25%">出库号 </th><td width="25%"> ' + _this.dataobj[5] + ' </td></tr>' +
+                '<tr><th width="25%"> 任务号 </th><td width="25%"> ' + (_this.dataobj[6]) + ' </td><th width="25%"> 当前位置 </th><td width="25%"> ' + _this.dataobj[7] + ' </td></tr>' +
+                '</table>';
+            $(".plist").empty().html(html).show();
             $(".whcell_15f").show();
         }
-        
+
         //一楼库位查询
-        if(_this.explain=='pilerSeat'){
-            $(".title_name").empty().html('一楼'+_this.name+'库位');
-            html += '<tr><th>托盘号</th><td>'+ (_this.dataobj.trayno?_this.dataobj.trayno:'-') +'</td><th>物料号</th><td>'+ (_this.dataobj.partid?_this.dataobj.partid:'-') +'</td></tr>'+
-                '<tr><th>工单号</th><td>'+ (_this.dataobj.partwoid?_this.dataobj.partwoid:'-') +'</td><th>数量</th><td>'+ (_this.dataobj.partnum?_this.dataobj.partnum:'-') +'</td></tr>'+
-                '<tr><th>到期时间</th><td>'+ (_this.dataobj.partdate?_this.getPartdate(_this.dataobj.partdate):'-') +'</td><th></th><td></td></tr>';
-                $(".piler_box").empty().html(html).show();
-                $(".whcell_15f").show();
-               
+        if (_this.explain == 'pilerSeat') {
+            $(".title_name").empty().html('一楼' + _this.name + '库位');
+            html += '<table class = "table table-responsive table-bordered table-hover piler_box" width = "100%">' +
+                '<tr><th width="15%">托盘号</th><td width="35%"><input type="text" id="newtrayno" value="' + (_this.dataobj.trayno ? _this.dataobj.trayno : '-') + '"></td><th width="15%">物料号</th><td><input type="text" id="newpartid" value="' + (_this.dataobj.partid ? _this.dataobj.partid : '-') + '"></td></tr>' +
+                '<tr><th>工单号</th><td><input type="text" id="newpartwoid" value="' + (_this.dataobj.partwoid ? _this.dataobj.partwoid : '-') + '"></td><th>数量</th><td><input type="text" id="newpartnum" value="' + (_this.dataobj.partnum ? _this.dataobj.partnum : '-') + '"></td></tr>' +
+                '<tr><th>时间</th><td><input type="text" id="newpartdate" value="' + _this.dataobj.partdate + '"></td><th></th><td></td></tr>' +
+                '</table><div class="btn_box"><button type="button" class="btn btn-success">保存</button></div>';
+            $(".list").empty().html(html).show();
+            $(".whcell_15f").show();
+            var strs=_this.name.split("");
+            // 修改一楼数据库
+            $(".btn-success").click(function () {
+                var changeData = {
+                    "app": 900,
+                    "areano": 10,
+                    "cmd": 0,
+                    "cmdstatus": 0,
+                    "col": strs[2]+strs[3],
+                    "id": _this.name,
+                    "layer": strs[4]+strs[5],
+                    "locked": 0,
+                    "lockedtype": 0,
+                    "name": _this.name,
+                    "partdate":$("#newpartdate").val(),
+                    "partid":$("#newpartid").val(),
+                    "partlotdiv": 0,
+                    "partlotid": 0,
+                    "partnum": $("#newpartnum").val(),
+                    "partwoid":$("#newpartwoid").val(),
+                    "row": strs[0]+strs[1],
+                    "trayid": 0,
+                    "trayno": $("#newtrayno").val(),
+                    "unt": 9,
+                }
+                console.log(changeData);
+                $.ajax({
+                    type: "POST",
+                    url: url+"/wms/updateRepertroy",
+                    contentType: "application/json;charset=utf-8",
+                    dataType: "JSON",
+                    async: false,
+                    data: JSON.stringify(changeData),
+                    success: function (resul) {
+                       if(resul.errorMsg == "ok"){
+                           alert('修改成功')
+                       }
+                    },
+                    error: function (jqxhr, textStatus, error) {
+                        console.log(error);
+                
+                    }
+                
+                })
+            })
+
         }
+
 
     }
 
     draw(draw) {
         var _this = this;
-        var html ='';
+        var html = '';
         if (_this.svgtype == "rect") {
             var obj = draw.rect(this.w, this.h);
-            var  piler_1 = localStorage.getItem("piler_1"),
+            var piler_1 = localStorage.getItem("piler_1"),
                 piler_2 = localStorage.getItem("piler_2");
 
             if (piler_1 && piler_2) {
@@ -168,30 +218,30 @@ class mapNode { //定义了一个绘制节点类
                 }
             }
             // 是否到期
-            if(_this.dataobj.partdate){
-                var startTime= new Date(Date.parse(_this.getPartdate(_this.dataobj.partdate)));
-                var endTime=new Date();
-              
-                if(startTime<endTime){
+            if (_this.dataobj.partdate) {
+                var startTime = new Date(Date.parse(_this.getPartdate(_this.dataobj.partdate)));
+                var endTime = new Date();
+
+                if (startTime < endTime) {
                     _this.svgobj = obj.addClass('my-tips');
                 }
             }
             // 堆垛机位移
             if (_this.explain == 'piler') {
-                if(_this.dataobj[1] == 0){
+                if (_this.dataobj[1] == 0) {
                     _this.changecolor(color2);
                 }
 
-                if(_this.dataobj[10] ==2 ){
-                    _this.changeposition(_this.dataobj[10]*123, _this.y);    
-                }else if(_this.dataobj[10] ==3){
-                    _this.changeposition(_this.dataobj[10]*129, _this.y);   
-                }else if(_this.dataobj[10] ==4){
-                    _this.changeposition(_this.dataobj[10]*132, _this.y);   
-                }else if(_this.dataobj[10] ==5){
-                    _this.changeposition(_this.dataobj[10]*134, _this.y);   
+                if (_this.dataobj[10] == 2) {
+                    _this.changeposition(_this.dataobj[10] * 123, _this.y);
+                } else if (_this.dataobj[10] == 3) {
+                    _this.changeposition(_this.dataobj[10] * 129, _this.y);
+                } else if (_this.dataobj[10] == 4) {
+                    _this.changeposition(_this.dataobj[10] * 132, _this.y);
+                } else if (_this.dataobj[10] == 5) {
+                    _this.changeposition(_this.dataobj[10] * 134, _this.y);
                 }
-                
+
             }
 
             _this.svgobj = obj.fill(_this.color).move(_this.x, _this.y).addClass('pointer');
@@ -203,9 +253,9 @@ class mapNode { //定义了一个绘制节点类
             })
 
         } else if (this.svgtype == "text") {
-         
-                this.svgobj = draw.text(this.text).fill(this.color).move(this.x, this.y).size(15);
-            }
+
+            this.svgobj = draw.text(this.text).fill(this.color).move(this.x, this.y).size(15);
+        }
     }
 }
 

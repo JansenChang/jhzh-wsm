@@ -4,24 +4,26 @@
 
     <select id="getWcsMsg" resultType="java.util.Map">
         select
-            id,
-            unt,
-            app,
-            ip,
-            uid,
-            tbl,
-            rowid,
-            act,
-            msg,
-            result,
-            case
-                         when atrec=0
-                             then ''
-                         when atrec !=0
-                             then
-                         FROM_UNIXTIME(atrec, '%Y-%m-%d %H:%i:%S')
-            end
-                        AS atrec from
-                         yx_sys_usrlog
+        id,
+        unt,
+        app,
+        ip,
+        uid,
+        tbl,
+        rowid,
+        act,
+        msg,
+        result,
+        case
+                                 when atrec=0
+                                     then ''
+                                 when atrec !=0
+                                     then
+                                 FROM_UNIXTIME(atrec, '%Y-%m-%d %H:%i:%S')
+                    end
+                                AS atrec
+
+        from yx_sys_usrlog
+         group by atrec order by atrec desc
     </select>
 </mapper>

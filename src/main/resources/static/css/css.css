@@ -67,6 +67,7 @@ h1 {
   border-radius: 5px;
   box-shadow: 0px 4px 20px #999;
   display: none;
+  padding-bottom: 15px;
 }
 .whcell_15f h2 {
   font-size: 22px;
@@ -117,6 +118,7 @@ h1 {
   position: absolute;
   right: 0px;
   top: 8px;
+  cursor: pointer;
 }
 .lv {
   fill:#6a21af;
@@ -184,33 +186,27 @@ h1 {
 .legend .leisure{background: #444653;}
 .legend  .car{background: #4545ad;}
 .legend  .relation{background: #6a21af;}
-/* 跑马灯 */
-
-ui,li { 
-  list-style: none; 
-  } 
-  #news{ 
-  height: 40px; 
-  overflow: hidden; 
+.whcell_15f .bg-pink{background: pink;}
+.whcell_15f .list input{
+  width: 90%;
+  margin: 0 auto;
+  border: none;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+.whcell_15f  .bc{
+  padding: 5px 10px;
+    margin: 0;
+    background: #313f4e;
+    border-radius: 5px;
+}
+.text_row{
   background: #27282f;
-  border-bottom:1px solid #383d52 ;
-  } 
-  #news li{
-  height: 40px; 
-  line-height: 40px;
-  color: red;
-  font-size:16px ;
-  }
-@keyframes move {
-  /* 原理 left值的变化 移动一个容器的宽度 */
-
-  0% {
-    left: 0;
-  }
-
-  100% {
-    left: -100%;
-  }
+    color: red;
+    font-size: 22px;
+    padding: 10px;
+    border-bottom: 1px solid #444653;
 }
 
 @keyframes breath {

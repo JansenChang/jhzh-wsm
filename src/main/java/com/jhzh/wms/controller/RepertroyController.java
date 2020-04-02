@@ -40,5 +40,11 @@ public class RepertroyController {
         log.info("dynamicRepertroyInterlayer end..");
         return result;
     }
-
+    @PostMapping(value = "updateRepertroy")
+    public Result<?> updateRepertroy(@RequestBody JSONObject jsonObject) {
+        log.info("updateRepertroy begin..");
+        Result<?> result = repertroyService.updateRepertroy(jsonObject);
+        log.info("updateRepertroy end..");
+        return result;
+    }
 }

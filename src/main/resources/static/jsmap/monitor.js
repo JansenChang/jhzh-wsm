@@ -30,49 +30,42 @@ $(function () {
 	localStorage.setItem("piler_2", '');
 	localStorage.setItem("piler_3", '');
 
+http://192.168.8.51:8096/yxpower/ajax?a=las_bind&cellid=10101&trayid=11111&partid=1234567&partdesc=zzz&partnum=40&partwoid=12341234&partlotid=1234
+var d={
+	"a": 'las_bind',
+	"cellid": 10101,
+	"trayid": 11111,
+	"partid": 1234567,
+	"partdesc": 'zzz',
+	"partnum": 40,
+	"partwoid": 12341234,
+	"partlotid": 1234,
+}
 
+$.get('http://192.168.8.51:8096/yxpower/ajax',d,function(q){
+	console.log(q);
+})
 
 	function init() {
-
-		var $this = $("#news");
-		var scrollTimer;
-		$this.hover(function () {
-			clearInterval(scrollTimer);
-		}, function () {
-			scrollTimer = setInterval(function () {
-				scrollNews($this);
-			}, 2000);
-		}).trigger("mouseleave");
-
-		function scrollNews(obj) {
-			$.ajax({
-				type: "POST",
-				url: url + "/wms/wcsMsg",
-				contentType: "application/json;charset=utf-8",
-				dataType: "JSON",
-				async: false,
-				data: "",
-				success: function (resul) {
-					var html='';
-					if(resul.resultData.length>0){
-						$(resul.resultData).each(function(i,item){
-							html+='<li>操作人员：'+ item.uid +','+ item.act +'报错：'+ item.msg +'  '+ item.atrec +'</li> '
-						})
-						$('#news ul').empty().html(html);
-					}
-					var $self = obj.find("ul");
-					var lineHeight = $self.find("li:first").height();
-					$self.animate({
-						"marginTop": -lineHeight + "px"
-					}, 600, function () {
-						$self.css({
-							marginTop: 0
-						}).find("li:first").appendTo($self);
+		$.ajax({
+			type: "POST",
+			url: url + "/wms/wcsMsg",
+			contentType: "application/json;charset=utf-8",
+			dataType: "JSON",
+			async: false,
+			data: "",
+			success: function (resul) {
+				var html = '';
+				var list=resul.resultData.list;
+				if (list.length > 0) {
+					$(list).each(function (i, item) {
+						html += '<span style="margin:0 20px">操作人员：' + item.uid + ',' + item.act + '报错：' + item.msg + '  ' + item.atrec + '</span> '
 					})
+					$('.text_box').empty().html(html);
 				}
-			})
-		}
 
+			}
+		})
 
 		$.ajax({
 			type: "GET",
