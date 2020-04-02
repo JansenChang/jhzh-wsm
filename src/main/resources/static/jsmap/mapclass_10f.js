@@ -135,7 +135,7 @@ class mapNode { //定义了一个绘制节点类
                 '<tr><th width="15%">托盘号</th><td width="35%"><input type="text" id="newtrayno" value="' + (_this.dataobj.trayno ? _this.dataobj.trayno : '-') + '"></td><th width="15%">物料号</th><td><input type="text" id="newpartid" value="' + (_this.dataobj.partid ? _this.dataobj.partid : '-') + '"></td></tr>' +
                 '<tr><th>工单号</th><td><input type="text" id="newpartwoid" value="' + (_this.dataobj.partwoid ? _this.dataobj.partwoid : '-') + '"></td><th>数量</th><td><input type="text" id="newpartnum" value="' + (_this.dataobj.partnum ? _this.dataobj.partnum : '-') + '"></td></tr>' +
                 '<tr><th>时间</th><td><input type="text" id="newpartdate" value="' + _this.dataobj.partdate + '"></td><th></th><td></td></tr>' +
-                '</table><div class="btn_box"><button type="button" class="btn btn-success">保存</button></div>';
+                '</table><div class="btn_box"></div>';
             $(".list").empty().html(html).show();
             $(".whcell_15f").show();
             var strs=_this.name.split("");

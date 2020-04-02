@@ -244,30 +244,10 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
 
     private List<IlsCellDto> matchData(List<IlsCellDto> qtyGt) {
         //List<IlsCellDto> qtyGt = value.stream().filter(ilsCellDto -> ilsCellDto.getPartnum() >= wipQtyTemp).collect(Collectors.toList());
-        String data1[]={"0","0","0","0","0","0","0","0","0","0"};
-        String data2[]={"0","0","0","0","0","0","0","0","0","0"};
-        String data3[]={"0","0","0","0","0","0","0","0","0","0"};
-        String data4[]={"0","0","0","0","0","0","0","0","0","0"};
-
         if (qtyGt.size() > 0) {
             //如果大于两个则按日期逆序排序，如果日期相同则按数量排序
             if (qtyGt.size() > 2) {
-                qtyGt.sort(Comparator.comparing(IlsCellDto::getPartdate).reversed());
-                IlsCellDto ilsCellDto = qtyGt.get(0);
-                Integer partnum = ilsCellDto.getPartnum();
-                if(partnum<wipQtyTemp){
-                    //判断第一个数组是否填满值
-                    if("0".equals(data1[data1.length - 1])){
-                        for (int i = 0; i < data2.length; i++) {
-
-                        }
-                    }else{
-                        for (int i = 0; i < data1.length; i++) {
-
-                        }
-                    }
-                }
-
+                qtyGt.sort(Comparator.comparing(IlsCellDto::getPartdate).reversed().thenComparing(IlsCellDto::getPartnum));
                 return qtyGt;
                 //等于1则直接返回
             } else if (qtyGt.size() == 1) {

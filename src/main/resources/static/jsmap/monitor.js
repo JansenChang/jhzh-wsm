@@ -42,9 +42,7 @@ var d={
 	"partlotid": 1234,
 }
 
-$.get('http://192.168.8.51:8096/yxpower/ajax',d,function(q){
-	console.log(q);
-})
+
 
 	function init() {
 		$.ajax({

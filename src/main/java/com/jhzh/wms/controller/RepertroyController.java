@@ -19,25 +19,19 @@ public class RepertroyController {
 
     @PostMapping(value = "dynamicRepertroy")
     public Result<?> dynamicRepertroy(@RequestBody JSONObject jsonObject) {
-        log.info("DynamicRepertroy begin..");
         Result<?> result = repertroyService.queryDynamicRepertroy(jsonObject);
-        log.info("DynamicRepertroy end..");
         return result;
     }
     @PostMapping(value = "dynamicRepertroyById")
     public Result<?> dynamicRepertroyById(@RequestBody JSONObject jsonObject) {
-        log.info("dynamicRepertroyById begin..");
         String rowandcol = (String) jsonObject.get("rowandcol");
         jsonObject.put("rowandcol",rowandcol.substring(0,rowandcol.length()-2));
         Result<?> result = repertroyService.queryDynamicRepertroyById(jsonObject);
-        log.info("dynamicRepertroyById end..");
         return result;
     }
     @PostMapping(value = "dynamicRepertroyInterlayer")
     public Result<?> dynamicRepertroyInterlayer() {
-        log.info("dynamicRepertroyInterlayer begin..");
         Result<?> result = repertroyService.dynamicRepertroyFirstlayer();
-        log.info("dynamicRepertroyInterlayer end..");
         return result;
     }
     @PostMapping(value = "updateRepertroy")
