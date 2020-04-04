@@ -1,0 +1,245 @@
+html,
+body {
+  height: 100%;
+}
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.tips {
+  display: none;
+  position: fixed;
+  background: #fff;
+  /* padding: 20px 5px; */
+  width: 600px;
+  height: auto;
+  border-radius: 5px;
+  border: 10px solid #dbe7f4;
+}
+.tips table {
+  margin-bottom: 0;
+}
+.tips td,
+.tips th {
+  height: 50px;
+  font-size: 15px;
+  border-right: 1px solid #eee;
+}
+.red {
+  font-size: 18px;
+  color: red;
+}
+h1 {
+  padding: 0px 0 10px;
+  background: #dbe7f4;
+  color: #000;
+  font-size: 21px;
+  text-align: center;
+  margin: 0 auto;
+}
+.tips ul {
+  margin: 0 auto;
+  padding: 15px;
+}
+.tips span {
+  font-size: 16px;
+  color: #666;
+}
+.btn_box button {
+  margin: 0 40px;
+  padding: 10px 30px;
+  border-radius: 5px;
+  background: #345;
+}
+.btn_box .btn-info {
+  background: #246db7;
+}
+.whcell_15f table {
+  width: 96%;
+  margin: 15px auto;
+}
+.whcell_15f {
+  width: 60%;
+  margin: 20px auto;
+  text-align: center;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 4px 20px #999;
+  display: none;
+  padding-bottom: 15px;
+}
+.whcell_15f h2 {
+  font-size: 22px;
+  color: #fff;
+  font-weight: bold;
+  padding: 20px 0;
+  background: #345;
+  margin: 0;
+  border-radius: 5px 5px 0 0;
+}
+.whcell_15f tr,
+.whcell_15f td,
+.whcell_15f th {
+  height: 50px;
+  font-size: 15px;
+}
+/* 提示 */
+#container {
+  max-width: 900px;
+  width: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+.pointer {
+  cursor: pointer;
+}
+/* color:56a6ff 62acff 3b82d2 */
+/* Bottom hack for IE*/
+#container svg {
+  width: 100%;
+  padding-bottom: 36.67%;
+  height: 100px;
+  overflow: visible;
+}
+
+.clos {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #999;
+  border-radius: 100%;
+  padding: -4px;
+  line-height: 16px;
+  position: absolute;
+  right: 0px;
+  top: 8px;
+  cursor: pointer;
+}
+.lv {
+  fill:#6a21af;
+  /* IE10、Firefox and Opera，IE9以及更早的版本不支持 */
+  animation-name: breath; /* 动画名称 */
+  animation-duration: 3s; /* 动画时长3秒 */
+  animation-timing-function: ease-in-out; /* 动画速度曲线：以低速开始和结束 */
+  animation-iteration-count: infinite; /* 播放次数：无限 */
+
+  /* Safari and Chrome */
+  -webkit-animation-name: breath; /* 动画名称 */
+  -webkit-animation-duration: 3s; /* 动画时长3秒 */
+  -webkit-animation-timing-function: ease-in-out; /* 动画速度曲线：以低速开始和结束 */
+  -webkit-animation-iteration-count: infinite; /* 播放次数：无限 */
+}
+.my-clsss {
+  fill: red;
+  /* IE10、Firefox and Opera，IE9以及更早的版本不支持 */
+  animation-name: breath; /* 动画名称 */
+  animation-duration: 1s; /* 动画时长3秒 */
+  animation-timing-function: ease-in-out; /* 动画速度曲线：以低速开始和结束 */
+  animation-iteration-count: infinite; /* 播放次数：无限 */
+
+  /* Safari and Chrome */
+  -webkit-animation-name: breath; /* 动画名称 */
+  -webkit-animation-duration: 1s; /* 动画时长3秒 */
+  -webkit-animation-timing-function: ease-in-out; /* 动画速度曲线：以低速开始和结束 */
+  -webkit-animation-iteration-count: infinite; /* 播放次数：无限 */
+}
+
+.my-tips {
+  /* IE10、Firefox and Opera，IE9以及更早的版本不支持 */
+  animation-name: breath; /* 动画名称 */
+  animation-duration: 1s; /* 动画时长3秒 */
+  animation-timing-function: ease-in-out; /* 动画速度曲线：以低速开始和结束 */
+  animation-iteration-count: infinite; /* 播放次数：无限 */
+
+  /* Safari and Chrome */
+  -webkit-animation-name: breath; /* 动画名称 */
+  -webkit-animation-duration: 1s; /* 动画时长3秒 */
+  -webkit-animation-timing-function: ease-in-out; /* 动画速度曲线：以低速开始和结束 */
+  -webkit-animation-iteration-count: infinite; /* 播放次数：无限 */
+}
+.tis .legend{height: 180px;}
+.legend{
+  width: 100%;
+  height: 53px;
+  border: 1px solid #27282f;
+  line-height: 40px;
+  padding: 5px 10px;
+  margin-top: 10px;
+  background: #27282f;
+  color: #fff;
+}
+.legend span{display: inline-block;width:15px;height:15px;margin-right: 5px;vertical-align: middle;}
+.legend div{
+  float: left;
+  margin-right: 15px;
+}
+.legend .kong{background: #dfdfe7ed;}
+.legend .alarm{background: red;}
+.legend .has{background: #61a51e;}
+.legend .noMaterial{background: #7c9266ed;}
+.legend .operation{background: #f39e18;}
+.legend .leisure{background: #444653;}
+.legend  .car{background: #4545ad;}
+.legend  .relation{background: #6a21af;}
+.whcell_15f .bg-pink{background: pink;}
+.whcell_15f .list input{
+  width: 90%;
+  margin: 0 auto;
+  border: none;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+.whcell_15f  .bc{
+  padding: 5px 10px;
+    margin: 0;
+    background: #313f4e;
+    border-radius: 5px;
+}
+.text_row{
+  background: #27282f;
+    color: red;
+    font-size: 22px;
+    padding: 10px;
+    border-bottom: 1px solid #444653;
+}
+.wrap{
+  border: 2px solid red;
+    margin: 10px 0;
+    padding: 10px;
+    display: none;
+}
+.wrap p{
+  margin: 0;
+  font-size: 28px;
+  color: red;
+}
+
+@keyframes breath {
+  from {
+    opacity: 0.5;
+  } /* 动画开始时的不透明度 */
+  50% {
+    opacity: 1;
+  } /* 动画50% 时的不透明度 */
+  to {
+    opacity: 0.5;
+  } /* 动画结束时的不透明度 */
+}
+
+@-webkit-keyframes breath {
+  from {
+    opacity: 0.5;
+  } /* 动画开始时的不透明度 */
+  50% {
+    opacity: 1;
+  } /* 动画50% 时的不透明度 */
+  to {
+    opacity: 0.5;
+  } /* 动画结束时的不透明度 */
+}
