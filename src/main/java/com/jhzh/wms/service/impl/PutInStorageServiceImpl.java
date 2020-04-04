@@ -238,9 +238,6 @@ public class PutInStorageServiceImpl implements PutInStorageService {
                             .partid(Long.parseLong(itemCode.replace("-", "")))
                             .partlotid(Long.parseLong(itemListBean.getLotCode().toString()))
                             .build());
-
-
-
                     IlscellDao.updateCellByCellId(IlsCellDto.builder()
                             .id(Long.parseLong(cellId.toString()))
                             .trayid(Long.parseLong(trayid.toString()))

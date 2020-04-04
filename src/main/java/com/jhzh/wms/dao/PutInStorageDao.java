@@ -19,5 +19,8 @@ public interface PutInStorageDao {
 
      List<WmsInvInDto> queryWmsInvInForTaskId(@Param("taskId") String taskId);
 
-      List<Map<String, Object>> queryWmsInvInFlow(Map map);
+     List<Map<String, Object>> queryWmsInvInFlow(Map map);
+
+
+
 }

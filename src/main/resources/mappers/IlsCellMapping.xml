@@ -245,7 +245,12 @@
          cmdstatus
          from yx_ils_cell
           <where>
-             and  areano=#{areano}
+            <if test="areano !=null and areano !=''">
+               and  areano=#{areano}
+            </if>
+            <if test="row !=null and row !=''">
+               and  row=#{row}
+            </if>
           </where>
 
     </select>

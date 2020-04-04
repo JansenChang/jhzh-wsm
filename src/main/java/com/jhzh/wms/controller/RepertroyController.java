@@ -18,8 +18,8 @@ public class RepertroyController {
     private RepertroyService repertroyService;
 
     @PostMapping(value = "dynamicRepertroy")
-    public Result<?> dynamicRepertroy(@RequestBody JSONObject jsonObject) {
-        Result<?> result = repertroyService.queryDynamicRepertroy(jsonObject);
+    public Result<?> dynamicRepertroy() {
+        Result<?> result = repertroyService.queryDynamicRepertroy();
         return result;
     }
     @PostMapping(value = "dynamicRepertroyById")

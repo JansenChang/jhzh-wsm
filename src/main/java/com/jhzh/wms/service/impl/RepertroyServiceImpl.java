@@ -8,6 +8,7 @@ import com.jhzh.wms.service.RepertroyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,9 +18,21 @@ public class RepertroyServiceImpl implements RepertroyService {
     private IlsCellDao IlscellDao;
 
     @Override
-    public Result<?> queryDynamicRepertroy(Map<String, Object> map) {
-        List<Map> ilsCellDtoList= IlscellDao.queryDynamicRepertroy(map);
-        return Result.success(ilsCellDtoList);
+    public Result<?> queryDynamicRepertroy() {
+        Map<String,Object>resultMap=new HashMap<>();
+        Map<String,Object>map=new HashMap<>();
+        map.put("areano",10);
+        resultMap.put("var10",IlscellDao.queryDynamicRepertroy(map));
+        map.put("areano","");
+        map.put("row",16);
+        resultMap.put("var16",IlscellDao.queryDynamicRepertroy(map));
+        map.put("row",17);
+        resultMap.put("var17",IlscellDao.queryDynamicRepertroy(map));
+        map.put("row",18);
+        resultMap.put("var18",IlscellDao.queryDynamicRepertroy(map));
+        map.put("row",19);
+        resultMap.put("var19",IlscellDao.queryDynamicRepertroy(map));
+        return Result.success(resultMap);
     }
 
     @Override

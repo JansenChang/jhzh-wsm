@@ -38,6 +38,8 @@ public class WmsInvInDto {
     private Integer isMultiPalForLot;
     private Integer status;
     private Date partdate;
+    private String partdatestr;
+
 
     private String memoInfo1;//备用字段
     private String memoInfo2;//备用字段

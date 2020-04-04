@@ -17,6 +17,8 @@
         <result column="quantity" property="quantity"/>
         <result column="isMultiPalForLot" property="isMultiPalForLot"/>
     </resultMap>
+
+
     <insert id="insertWmsInvIn" parameterType="com.jhzh.wms.dto.WmsInvInDto">
         insert into yx_ils_whin
          (id,
@@ -110,6 +112,7 @@
         </where>
         order by partdate desc,taskid asc
     </select>
+
 
 
 </mapper>

@@ -27,6 +27,7 @@ public class FlowRecordServiceImpl implements FlowRecordService {
         PageHelper.startPage(pagenum,pagesize);
         Map map=jsonObject;
         List<Map<String, Object>> maps = putInStorageDao.queryWmsInvInFlow(map);
+
         PageInfo<Map<String, Object>> pageInfo=new PageInfo<>(maps);
         return Result.success(pageInfo);
     }
