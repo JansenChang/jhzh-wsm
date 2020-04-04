@@ -30,20 +30,6 @@ $(function () {
 	localStorage.setItem("piler_2", '');
 	localStorage.setItem("piler_3", '');
 
-http://192.168.8.51:8096/yxpower/ajax?a=las_bind&cellid=10101&trayid=11111&partid=1234567&partdesc=zzz&partnum=40&partwoid=12341234&partlotid=1234
-var d={
-	"a": 'las_bind',
-	"cellid": 10101,
-	"trayid": 11111,
-	"partid": 1234567,
-	"partdesc": 'zzz',
-	"partnum": 40,
-	"partwoid": 12341234,
-	"partlotid": 1234,
-}
-
-
-
 	function init() {
 		$.ajax({
 			type: "POST",
@@ -54,7 +40,7 @@ var d={
 			data: "",
 			success: function (resul) {
 				var html = '';
-				var list=resul.resultData.list;
+				var list = resul.resultData.list;
 				if (list.length > 0) {
 					$(list).each(function (i, item) {
 						html += '<span style="margin:0 20px">操作人员：' + item.uid + ',' + item.act + '报错：' + item.msg + '  ' + item.atrec + '</span> '
@@ -190,44 +176,147 @@ var d={
 
 		})
 
-		var dynamicRepertroy = {
-			"areano": 10
-		}
+
 		$.ajax({
 			type: "POST",
 			url: url + "/wms/dynamicRepertroy",
 			contentType: "application/json;charset=utf-8",
 			dataType: "JSON",
 			async: false,
-			data: JSON.stringify(dynamicRepertroy),
+			data: "",
 			success: function (resul) {
-				var hasMaterial = [];
-				var hasTrayno = [];
-				$(resul.resultData).each(function (num, itme) {
-					if (itme.partnum > 0) {
-						hasMaterial.push(itme);
-					}
-					if (itme.trayno != '000000' && itme.partnum < 1) {
-						hasTrayno.push(itme);
-					}
-				})
-				for (var i = 0; i < mapnode_pri_10f.length; i++) {
-					if (mapnode_pri_10f[i][13] == 'pilerSeat') {
-						for (var j = 0; j < hasMaterial.length; j++) {
-							if (mapnode_pri_10f[i][3] == hasMaterial[j].name) {
-								mapnode_pri_10f[i][12] = "#61a51e";
-								mapnode_pri_10f[i][11] = hasMaterial[j];
-							}
-						}
-						for (var j = 0; j < hasTrayno.length; j++) {
-							if (mapnode_pri_10f[i][3] == hasTrayno[j].name) {
-								mapnode_pri_10f[i][12] = "#7c9266";
-								mapnode_pri_10f[i][11] = hasTrayno[j];
-							}
-						}
-					}
 
+				// 一楼立库
+				if (resul.resultData.var10) {
+					var hasMaterial = [];
+					var hasTrayno = [];
+					$(resul.resultData.var10).each(function (num, itme) {
+						if (itme.partnum > 0) {
+							hasMaterial.push(itme);
+						}
+						if (itme.trayno != '000000' && itme.partnum < 1) {
+							hasTrayno.push(itme);
+						}
+					})
+					for (var i = 0; i < mapnode_pri_10f.length; i++) {
+						if (mapnode_pri_10f[i][13] == 'pilerSeat') {
+							for (var j = 0; j < hasMaterial.length; j++) {
+								if (mapnode_pri_10f[i][3] == hasMaterial[j].name) {
+									mapnode_pri_10f[i][12] = "#61a51e";
+									mapnode_pri_10f[i][11] = hasMaterial[j];
+								}
+							}
+							for (var j = 0; j < hasTrayno.length; j++) {
+								if (mapnode_pri_10f[i][3] == hasTrayno[j].name) {
+									mapnode_pri_10f[i][12] = "#7c9266";
+									mapnode_pri_10f[i][11] = hasTrayno[j];
+								}
+							}
+						}
+
+					}
 				}
+
+				// 大托盘
+				if (resul.resultData.var16) {
+					var pan  = resul.resultData.var16,hasMaterial16=[],hasTrayno16=[];
+					// $(pan).each(function (num, itme) {
+					// 	if (itme.partnum > 0) {
+					// 		hasMaterial16.push(itme);
+					// 	}
+					// 	if (itme.trayno != '000000' && itme.partnum < 1) {
+					// 		hasTrayno16.push(itme);
+					// 	}
+					// })
+					for (var i = 0; i < mapnode_pri_pick.length; i++) {
+						if (mapnode_pri_pick[i][4] == '160102') {
+							if(pan[0].partnum>0){
+								mapnode_pri_pick[i][12] = "#61a51e";
+							}else if(pan[0].trayno != '000000'){
+								mapnode_pri_pick[i][12] = "#7c9266";
+							}
+							mapnode_pri_pick[i][11] = pan[0];
+						}
+
+						if (mapnode_pri_pick[i][4] == '160101') {
+							if(pan[1].partnum>0){
+								mapnode_pri_pick[i][12] = "#61a51e";
+							}else if(pan[1].trayno != '000000'){
+								mapnode_pri_pick[i][12] = "#7c9266";
+							}
+							mapnode_pri_pick[i][11] = pan[1];
+						}
+
+					}
+				}
+
+				// 拣选架
+				if (resul.resultData.var17) {
+					var hasMaterial_17 = [];
+					var hasTrayno_17 = [];
+					$(resul.resultData.var17).each(function (num, itme) {
+						if (itme.partnum > 0) {
+							hasMaterial_17.push(itme);
+						}
+						if (itme.trayno != '000000' && itme.partnum < 1) {
+							hasTrayno_17.push(itme);
+						}
+					})
+					for (var i = 0; i < mapnode_pri_pick.length; i++) {
+						if (mapnode_pri_pick[i][13] == 'pick') {
+							for (var j = 0; j < hasMaterial_17.length; j++) {
+								if (mapnode_pri_pick[i][3] == hasMaterial_17[j].name) {
+									mapnode_pri_pick[i][12] = "#61a51e";
+									mapnode_pri_pick[i][11] = hasMaterial_17[j];
+								}
+							}
+							for (var j = 0; j < hasTrayno_17.length; j++) {
+								if (mapnode_pri_pick[i][3] == hasTrayno_17[j].name) {
+									mapnode_pri_pick[i][12] = "#7c9266";
+									mapnode_pri_pick[i][11] = hasTrayno_17[j];
+								}
+							}
+						}
+
+					}
+				}
+
+				var wasteList=resul.resultData.var18;
+				$(resul.resultData.var19).each(function(i,itme){
+					wasteList.push(itme);
+				})
+				// 拣选架
+				if (wasteList) {
+					var hasMaterial_18 = [];
+					var hasTrayno_18 = [];
+					$(wasteList).each(function (num, itme) {
+						if (itme.partnum > 0) {
+							hasMaterial_18.push(itme);
+						}
+						if (itme.trayno != '000000' && itme.partnum < 1) {
+							hasTrayno_18.push(itme);
+						}
+					})
+					for (var i = 0; i < mapnode_pri_pick.length; i++) {
+						if (mapnode_pri_pick[i][13] == 'waste') {
+							for (var j = 0; j < hasMaterial_18.length; j++) {
+								if (mapnode_pri_pick[i][3] == hasMaterial_18[j].name) {
+									mapnode_pri_pick[i][12] = "#61a51e";
+									mapnode_pri_pick[i][11] = hasMaterial_18[j];
+								}
+							}
+							for (var j = 0; j < hasTrayno_18.length; j++) {
+								if (mapnode_pri_pick[i][3] == hasTrayno_18[j].name) {
+									mapnode_pri_pick[i][12] = "#7c9266";
+									mapnode_pri_pick[i][11] = hasTrayno_18[j];
+								}
+							}
+						}
+
+					}
+				}
+
+
 			},
 			error: function (jqxhr, textStatus, error) {
 				console.log(error);
@@ -235,6 +324,7 @@ var d={
 			}
 
 		})
+
 
 		$.ajax({
 			type: "POST",
@@ -368,8 +458,8 @@ var d={
 		draw_hov(x0_hov, y0_hov, w_hov, h_hov, svgdraw);
 		draw_pick(x0_pick, y0_pick, w_pick, h_pick, svgdraw);
 	}
-	intervalId = setInterval(function () {
+	// intervalId = setInterval(function () {
 	init();
 	draw_all();
-	}, 2000);
+	// }, 2000);
 })

@@ -262,7 +262,7 @@ class mapNode { //定义了一个绘制节点类
 
         }
         //一楼库位查询
-        if(_this.explain=='pilerSeat'){
+        if((_this.explain=='pilerSeat') || (_this.name=="160102") || (_this.name=="160101") || (_this.explain=="pick") || (_this.explain=="waste")){
                     html += '<h1>' + _this.name + '库位详情 <span class="clos">x</span>   </h1>' +
                         '<table class = "table-responsive" width = "100%">' +
                         '<tr><th>托盘号</th><td>'+ (_this.dataobj.trayno?_this.dataobj.trayno:'-') +'</td><th>物料号</th><td>'+ (_this.dataobj.partid?_this.dataobj.partid:'-') +'</td></tr>'+
@@ -272,6 +272,8 @@ class mapNode { //定义了一个绘制节点类
                     $(".tips").empty().html(html).show();
                
         }
+
+
 
         // 3楼存盘
         if (_this.explain == 'trayno') {
@@ -383,6 +385,8 @@ class mapNode { //定义了一个绘制节点类
                     $(".dui").empty().html(_this.explain + '吊笼：' + tip);
                 }
                 $(".wrap").show();
+            }else{
+                $(".wrap").hide();
             }
             // 3楼存放托盘
             if (_this.explain == 'conveyor') {
