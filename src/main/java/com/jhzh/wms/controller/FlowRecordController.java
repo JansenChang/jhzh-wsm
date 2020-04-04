@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 流水记录接口
  */
 @RestController
-@RequestMapping("wms")
+@RequestMapping
 @Slf4j
 public class FlowRecordController {
 

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("wms")
+@RequestMapping
 @Slf4j
 public class WcsMsgController {
     @Autowired

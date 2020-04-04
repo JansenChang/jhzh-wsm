@@ -193,11 +193,11 @@ public class PutInStorageServiceImpl implements PutInStorageService {
             }
             //TODO 托盘校验
 
-            boolean taryCode = validateTaryNo(jsonpObject);
+           /* boolean taryCode = validateTaryNo(jsonpObject);
             if(!taryCode){
                 return Result.error(CodeMsg.builder().code(ErrorCode.REPEAT_ITEM_CODE.getCode()).msg(ErrorCode.REPEAT_ITEM_CODE.getMsg()).build());
             }
-
+*/
             TaskmesDto dto;
             Map<String, Object> map = new HashMap<>();
             map.put("locator", jsonpObject.get("locator"));
