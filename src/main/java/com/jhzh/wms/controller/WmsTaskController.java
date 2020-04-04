@@ -27,7 +27,7 @@ public class WmsTaskController {
     private InvQtyService invQtyService;
 
     //立体库任务状态查询接口
-    @RequestMapping(value = "wms/QueryTaskStatus", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/QueryTaskStatus", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public Result<?> queryTaskStatus(@RequestBody JSONObject jsonpObject) throws Exception {
         log.info("立体库任务状态查询接口 begin..");
         String taskId = jsonpObject.get("taskId").toString();
@@ -38,7 +38,7 @@ public class WmsTaskController {
     }
 
      // 立体库库存查询接口
-    @RequestMapping(value = "wms/queryInvQty", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/queryInvQty", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public Result<?> queryInvQty(@RequestBody JSONObject jsonObject) throws Exception {
         log.info("queryInvQty begin..");
         log.info("In Param : \n"+jsonObject.toJSONString());

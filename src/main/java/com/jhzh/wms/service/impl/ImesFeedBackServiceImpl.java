@@ -365,7 +365,7 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
                 //往160101拣选台空位插入工单信息
                 IlscellDao.updateCellByCellId(IlsCellDto.builder()
                         .id(Long.parseLong("160101"))
-                        .partid(Long.parseLong(item.getItemCode()))//物料号
+                        .partid(Long.parseLong(item.getItemCode().replace("-","")))//物料号
                         .partdesc(item.getItemDesc())
                         .partwoid(Long.parseLong(String.valueOf(item.getWipEntityId())))//工单号
                         //.cmdstatus(10)

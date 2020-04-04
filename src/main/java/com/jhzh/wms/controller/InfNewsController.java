@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("wms")
+@RequestMapping
 public class InfNewsController {
     @Autowired
     private InfNewDao infNewDao;

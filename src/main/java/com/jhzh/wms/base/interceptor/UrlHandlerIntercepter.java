@@ -23,7 +23,7 @@ public class UrlHandlerIntercepter implements HandlerInterceptor {
 		// 从session作用域中取值
 		//request.getSession().getAttribute("user");
 		// 判断是否为空
-        log.info("HttpServletRequest:" +request.getRequestURL());
+        //log.info("HttpServletRequest:" +request.getRequestURL());
 
 		return true;
     }

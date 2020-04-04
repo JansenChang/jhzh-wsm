@@ -39,7 +39,7 @@ public class ImesFeedBackController {
     private ImesFeedBackService ImesFeedBackservice;
 
     //物资编码查询接口
-    @RequestMapping(value = "wms/queryItemInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/queryItemInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public Result<?> queryItemInfo(@RequestBody JSONObject jsonpObject) throws Exception {
         log.info("queryItemInfo begin..");
         log.info("In Param : \n"+jsonpObject.toJSONString());

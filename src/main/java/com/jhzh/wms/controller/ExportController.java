@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("wms")
+@RequestMapping
 
 public class ExportController {
     @Autowired
