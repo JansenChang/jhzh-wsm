@@ -1,16 +1,20 @@
 package com.jhzh.wms.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
+import com.jhzh.wms.base.result.CodeMsg;
+import com.jhzh.wms.base.result.Result;
+import com.jhzh.wms.base.utils.EmptyUtils;
 import com.jhzh.wms.dao.YxWmsCellDao;
 import com.jhzh.wms.dto.YxWmsCellDto;
 import com.jhzh.wms.service.TrayInfoService;
-import com.jhzh.wms.base.result.CodeMsg;
-import com.jhzh.wms.base.result.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 @Slf4j
 @Service
 public class TrayInfoServiceImpl implements TrayInfoService {
@@ -81,6 +85,48 @@ public class TrayInfoServiceImpl implements TrayInfoService {
             dto.setTrayno(str);
             yxWmsCellDao.update(dto);
         }
+    }
+
+    @Override
+    public Result<?> queryTaryByRowCol(Map<String,Object>map) {
+        List<YxWmsCellDto>dtos=yxWmsCellDao.queryTaryByRowCol(map);
+        return Result.success(dtos);
+    }
+
+    @Override
+    public Result<?> queryByTrayno(JSONObject jsonObject) {
+        String trayno = (String) jsonObject.get("trayno");
+        List<YxWmsCellDto>dtos=yxWmsCellDao.queryByTrayno(trayno);
+        return Result.success(dtos);
+    }
+
+    @Override
+    public Result<?> updateData(JSONObject jsonObject) {
+        YxWmsCellDto updateDto=new YxWmsCellDto();
+        updateDto.setRow((Integer) jsonObject.get("row"));
+        updateDto.setCol((Integer) jsonObject.get("col"));
+        updateDto.setLayer((Integer) jsonObject.get("layer"));
+        updateDto.setTrayid((Integer) jsonObject.get("trayid"));
+        updateDto.setTrayno((String) jsonObject.get("trayno"));
+        String trayno = (String) jsonObject.get("trayno");
+        if(trayno.equals("0")){
+            updateDto.setTrayid(0);
+            updateDto.setTrayno("000000");
+        }
+        if(trayno.indexOf("666")==0){
+            updateDto.setTrayid(Integer.parseInt(trayno));
+        }
+        if(EmptyUtils.isEmpty(trayno)){
+            updateDto.setTrayid(0);
+            updateDto.setTrayno("000000");
+        }
+        return Result.success(yxWmsCellDao.updateTrayInfo(updateDto));
+    }
+
+    @Override
+    public Result<?> delByRowAndCol(Map<String,Object> map) {
+
+         return Result.success(yxWmsCellDao.delByRowAndCol(map));
     }
 
    /*

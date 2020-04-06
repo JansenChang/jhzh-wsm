@@ -214,7 +214,7 @@
          </where>
 
     </select>
-    <select id="queryDynamicRepertroy"  resultType="java.util.Map" >
+    <select flushCache="true" id="queryDynamicRepertroy"  resultType="java.util.Map" >
         select
          id,
          unt,

@@ -30,4 +30,42 @@ public class TrayInfoController {
         log.info("saveTrayInfo begin..");
         return result;
     }
+
+
+
+    @RequestMapping(value = "queryTaryByRowCol", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public Result<?> queryTaryByRowCol(@RequestBody JSONObject jsonObject) throws Exception {
+        log.info("queryTaryByRowCol begin..");
+        log.info("In Param : \n"+jsonObject.toJSONString());
+        Result<?> result = trayInfoService.queryTaryByRowCol(jsonObject);
+        log.info("queryTaryByRowCol end..");
+        return result;
+    }
+
+    @RequestMapping(value = "queryByTrayno", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public Result<?> queryByTrayno(@RequestBody JSONObject jsonObject) throws Exception {
+        log.info("queryByTaryno begin..");
+        log.info("In Param : \n"+jsonObject.toJSONString());
+        Result<?> result = trayInfoService.queryByTrayno(jsonObject);
+        log.info("queryByTaryno end..");
+        return result;
+    }
+    @RequestMapping(value = "updateData", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public Result<?> updateData(@RequestBody JSONObject jsonObject) throws Exception {
+        log.info("updatedata begin..");
+        log.info("In Param : \n"+jsonObject.toJSONString());
+        Result<?> result = trayInfoService.updateData(jsonObject);
+        log.info("updatedata end..");
+        return result;
+    }
+
+
+     @RequestMapping(value = "delByRowAndCol", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public Result<?> delByRowAndCol(@RequestBody JSONObject jsonObject) throws Exception {
+        log.info("delByRowAndCol begin..");
+        log.info("In Param : \n"+jsonObject.toJSONString());
+        Result<?> result = trayInfoService.delByRowAndCol(jsonObject);
+        log.info("delByRowAndCol end..");
+        return result;
+    }
 }

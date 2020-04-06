@@ -123,6 +123,7 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
             map.put("memoInfo5", null);
             taskmesDto.setStatus(0);
             taskmesDao.updateTaskmes(taskmesDto);
+            wmsInvOutDao.updateStatus(taskid);
             resultMap.putAll(doHttp(map, wmsInvOutResultUrl));
         }
         return resultMap;
@@ -363,7 +364,7 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
                     continue;
                 }
                 //往160101拣选台空位插入工单信息
-                IlscellDao.updateCellByCellId(IlsCellDto.builder()
+                /*IlscellDao.updateCellByCellId(IlsCellDto.builder()
                         .id(Long.parseLong("160101"))
                         .partid(Long.parseLong(item.getItemCode().replace("-","")))//物料号
                         .partdesc(item.getItemDesc())
@@ -372,7 +373,7 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
                         .partnum(0)
                         .locked(0)
                         //TODO 批号
-                        .build());
+                        .build());*/
                 //任务号
                 dto.setTaskid(uuid);
                 //修改任务表等待后台拣选

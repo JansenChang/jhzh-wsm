@@ -24,6 +24,12 @@
         LAYER=#{layer}
         AND TRAYNO !='.'
     </update>
+    <update id="delByRowAndCol">
+        UPDATE yx_ils_cell SET TRAYNO='000000',trayid=0
+        WHERE
+        ROW=#{row} AND
+        COL=#{col}
+    </update>
 
 
     <select id="queryTrayInfo" resultMap="yxWmsCellDto">
@@ -41,6 +47,29 @@
             TRAYID,
             TRAYNO
             FROM yx_ils_cell WHERE TRAYNO !='.'
+    </select>
+    <select id="queryTaryByRowCol" resultMap="yxWmsCellDto">
+        select
+            ROW,
+            COL,
+            LAYER,
+            TRAYID,
+            TRAYNO
+         FROM yx_ils_cell
+        where
+        row=#{row} and
+        col=#{col}
+    </select>
+    <select id="queryByTrayno" resultMap="yxWmsCellDto">
+        select
+            ROW,
+            COL,
+            LAYER,
+            TRAYID,
+            TRAYNO
+         FROM yx_ils_cell
+        where
+        trayno=#{trayno}
     </select>
 
 </mapper>
