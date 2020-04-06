@@ -36,4 +36,13 @@ public class MaterialConttroller {
         return result;
     }
 
+
+    @PostMapping(value = "updateLocked")
+    public Result<?> updateLocked(@RequestBody JSONObject jsonObject) {
+        log.info("updateLocked begin..");
+        Result<?> result = materialService.updateLocked(jsonObject);
+        log.info("updateLocked end..");
+        return result;
+    }
+
 }

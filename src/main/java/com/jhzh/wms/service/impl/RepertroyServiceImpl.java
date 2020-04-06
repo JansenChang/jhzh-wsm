@@ -32,6 +32,10 @@ public class RepertroyServiceImpl implements RepertroyService {
         resultMap.put("var18",IlscellDao.queryDynamicRepertroy(map));
         map.put("row",19);
         resultMap.put("var19",IlscellDao.queryDynamicRepertroy(map));
+         map.put("row",26);
+        resultMap.put("var26",IlscellDao.queryDynamicRepertroy(map));
+         map.put("row",25);
+        resultMap.put("var25",IlscellDao.queryDynamicRepertroy(map));
         return Result.success(resultMap);
     }
 

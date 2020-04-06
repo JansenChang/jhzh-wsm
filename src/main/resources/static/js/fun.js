@@ -130,4 +130,17 @@ function getExplorer() {
 
 
 
+/**
+* 左补零操作
+* 自定义函数名：PrefixZero
+* @param num： 被操作数
+* @param n： 固定的总位数
+* var myNum = 9;var myNum2 = 12;
+* console.log('处理后myNum：'+PrefixZero(myNum, 3));//009
+* console.log('处理后myNum2：'+PrefixZero(myNum2, 3));//012
+*/
+function PrefixZero(num, n) {
+return (Array(n).join(0) + num).slice(-n);
+}
+
 

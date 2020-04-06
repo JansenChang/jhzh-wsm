@@ -308,6 +308,7 @@ public class PutInStorageServiceImpl implements PutInStorageService {
             WmsInvInDto date;
             List<WmsInvInDto.ItemListBean> itemList = wmsInvInDto.getItemList();
             for (WmsInvInDto.ItemListBean itemListBean : itemList) {
+                //拼装数据插入in表
                 date = wmsInvInDto;
                 date.setId(String.valueOf(System.currentTimeMillis() / 1000));
                 date.setIsMultiPalForLot(itemListBean.getIsMultiPalForLot());

@@ -58,7 +58,29 @@
    </set>
    where id=#{id}
  </update>
- <select id="queryCell" resultMap="ilsCellDto">
+    <update id="cleanCellByCellId">
+         update yx_ils_cell
+          <set>
+          trayid=0,
+          trayno='000000',
+          partid=0,
+          partdesc='.',
+          partnum=0,
+          partwoid=0,
+          partlotid=0
+           </set>
+           where id=#{id}
+    </update>
+    <update id="updateLocked">
+         update yx_ils_cell
+          <set>
+          locked = 1,
+          lockedtype=#{lockedtype},
+          partnum =#{partnum}
+           </set>
+           where id=#{id}
+    </update>
+    <select id="queryCell" resultMap="ilsCellDto">
         select
          id,
          unt,
@@ -172,8 +194,6 @@
          row,
          col,
          layer,
-         locked,
-         lockedtype,
          trayid,
          trayno,
          CONCAT(left(partid,LENGTH(partid)-4),'-',right(partid,LENGTH(partid)-9)) AS partid,
@@ -183,12 +203,33 @@
                  then ''
              when partdate !=0
                  then
-             FROM_UNIXTIME(partdate/1000, '%Y-%m-%d')
+             FROM_UNIXTIME(partdate, '%Y-%m-%d')
              end
                         AS partdate,
          partwoid,
          partlotid,
          partlotdiv,
+         locked,
+         case
+             when lockedtype=0
+                 then ''
+             when lockedtype =1
+                 then
+                 '过期锁定'
+             when lockedtype =2
+             then
+             '手动锁定'
+             end
+                        AS lockedtype,
+
+          case
+             when partdate=0
+                 then ''
+             when partdate !=0
+                 then
+             FROM_UNIXTIME(UNIX_TIMESTAMP(DATE_SUB(FROM_UNIXTIME(partdate), INTERVAL -30 DAY)) , '%Y-%m-%d')
+             end
+                        AS duetime,
          cmd,
          cmdstatus
          from yx_ils_cell
@@ -206,10 +247,13 @@
             <if test="areano!=null and areano !=''">
              and areano=#{areano}
             </if>
-             <if test="begindate!=null and begindate !=''">
+            <if test="begindate!=null and begindate !=''">
              and partdate between  #{begindate} and #{enddate}
             </if>
-             and locked=0
+            <if test="locked!=null and locked !=''">
+              and locked=#{locked}
+            </if>
+
              and partid !=0
          </where>
 
@@ -284,9 +328,7 @@
          cmd,
          cmdstatus
          from yx_ils_cell
-         <where>
-           and  instr(CAST(name AS CHAR),CAST(#{rowandcol} AS CHAR))>0
-         </where>
+        where row =#{row}  and col =#{col}
     </select>
     <select id="dynamicRepertroyFirstlayer" resultType="java.lang.String">
         select firstlayer from (

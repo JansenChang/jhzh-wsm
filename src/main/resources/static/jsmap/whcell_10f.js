@@ -9,8 +9,10 @@ $(function () {
 	//var w_20f,h_20f;
 
 	var x0_hov, y0_hov;
+	var x0_pick, y0_pick;  //拣选区
 
 	var map_layer_10f;
+	var map_layer_pick;  //拣选区
 
 	localStorage.setItem("CAGE2_1", '');
 	localStorage.setItem("CAGE2_2", '');
@@ -76,61 +78,90 @@ $(function () {
 			}
 
 		})
-		var dynamicRepertroy={
-			"areano":10
-		}
 		$.ajax({
 			type: "POST",
-			url: url+"/wms/dynamicRepertroy",
+			url: url + "/wms/dynamicRepertroy",
 			contentType: "application/json;charset=utf-8",
 			dataType: "JSON",
 			async: false,
-			data: JSON.stringify(dynamicRepertroy),
+			data: "",
 			success: function (resul) {
-				var hasMaterial=[];
-				var hasTrayno=[];
-				$(resul.resultData).each(function(num,itme){
-					if(itme.partnum>0){
-						hasMaterial.push(itme);
-					}
-					if(itme.trayno !='000000' && itme.partnum<1){
-						hasTrayno.push(itme);
-					}
-				})
-				for (var i = 0; i < mapnode_pri_10f.length; i++) {
-					if(mapnode_pri_10f[i][13]=='pilerSeat'){
-						for (var j = 0; j < hasMaterial.length; j++) {
-							if(mapnode_pri_10f[i][3]==hasMaterial[j].name){
-								mapnode_pri_10f[i][12]="#61a51e";
-								mapnode_pri_10f[i][11]=hasMaterial[j];
+
+				// 一楼立库
+				if (resul.resultData.var10) {
+					var hasMaterial = [];
+					var hasTrayno = [];
+					$(resul.resultData.var10).each(function (num, itme) {
+						if (itme.partnum > 0) {
+							hasMaterial.push(itme);
+						}
+						if (itme.trayno != '000000' && itme.partnum < 1) {
+							hasTrayno.push(itme);
+						}
+					})
+
+					for (var i = 0; i < mapnode_pri_10f.length; i++) {
+
+							mapnode_pri_10f[i][12] = "#dfdfe7";
+
+						if (mapnode_pri_10f[i][13] == 'pilerSeat') {
+							for (var j = 0; j < hasMaterial.length; j++) {
+								if (mapnode_pri_10f[i][3] == hasMaterial[j].name) {
+									mapnode_pri_10f[i][12] = "#61a51e";
+									mapnode_pri_10f[i][11] = hasMaterial[j];
+								}
+							}
+							for (var j = 0; j < hasTrayno.length; j++) {
+								if (mapnode_pri_10f[i][3] == hasTrayno[j].name) {
+									mapnode_pri_10f[i][12] = "#7c9266";
+									mapnode_pri_10f[i][11] = hasTrayno[j];
+								}
 							}
 						}
 
-						for (var j = 0; j < hasTrayno.length; j++) {
-							if(mapnode_pri_10f[i][3]==hasTrayno[j].name){
-								mapnode_pri_10f[i][12]="#7c9266";
-								mapnode_pri_10f[i][11]=hasTrayno[j];
-							}
-						}
-						
 					}
-					
 				}
+
+				var pickList = []
+				for (var i = 0; i < mapnode_pri_pick.length; i++) {
+						mapnode_pri_pick[i][12] = "#dfdfe7";
+						if(mapnode_pri_pick[i][3]=='160101' || mapnode_pri_pick[i][3]=='160102'){
+							if(mapnode_pri_pick[i][13]=='pick'){
+								pickList.push(mapnode_pri_pick[i])
+							}
+														
+						}
+				}
+				$(resul.resultData.var16).each(function (num, itme) {
+					if(itme.trayno != '000000'){
+						if(itme.partwoid>0){
+							pickList[num][12] = "#61a51e";
+							pickList[num][11] =itme;
+						}else{
+							pickList[num][12] = "#7c9266";
+							pickList[num][11] =itme;
+						}
+					}
+				})
+				mapnode_pri_pick = pickList;
 			},
 			error: function (jqxhr, textStatus, error) {
 				console.log(error);
-		
+
 			}
-		
+
 		})
+
 
 
 
 		// 获取静态数??
 		create_node(mapnode_pri_10f);
-
+		create_node(mapnode_pri_pick);  //拣选区
+		
 		//使用画图数组(全局变量)，mapclass.js定义??
 		map_layer_10f = mapnode_10f;
+		map_layer_pick = mapnode_pick;
 
 		// 获取图画区域id
 		svgdivid = "drawing";
@@ -148,8 +179,9 @@ $(function () {
 		svgdraw = SVG(svgdivid).size(w_max, h_max);
 		var rect = svgdraw.rect(w_max, h_max).attr({ fill: '#27282f' });
 
-		x0_hov = 20; y0_hov = 30; w_hov = 0.5 * w_max; h_hov = 0.6 * h_max;
-		x0_10f = 20; y0_10f = y0_hov+200; w_10f = 1 * w_max; h_10f = 1 * h_max;
+		x0_hov = 0; y0_hov = 30; w_hov = 0.5 * w_max; h_hov = 0.6 * h_max;
+		x0_10f = 0; y0_10f = y0_hov+200; w_10f = 0.7 * w_max; h_10f = 1 * h_max;
+		x0_pick = 850; y0_pick = 370; w_pick = 1 * w_max; h_pick = 0.6 * h_max;
 
 	}
 
@@ -166,13 +198,22 @@ $(function () {
 			map_layer_10f[j].draw(draw);
 	}
 
-
+	//夹层拣选
+	function draw_pick(x0, y0, w, h, draw) {
+		var w_ratio = w / 1600;
+		var h_ratio = h / 1080;
+		for (j = 0, len = map_layer_pick.length; j < len; j++)
+			map_layer_pick[j].update_whxy(w, h, x0, y0, w_ratio, h_ratio);
+		for (j = 0, len = map_layer_pick.length; j < len; j++)
+			map_layer_pick[j].draw(draw);
+	}
 
 	function draw_all() {
 		draw_10f(x0_10f, y0_10f, w_10f, h_10f, svgdraw);
+		draw_pick(x0_pick, y0_pick, w_pick, h_pick, svgdraw);
 	}
-	intervalId = setInterval(function () {
+	// intervalId = setInterval(function () {
 		init();
 		draw_all();
-	}, 2000);
+	// }, 2000);
 })

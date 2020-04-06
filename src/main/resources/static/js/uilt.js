@@ -32,12 +32,20 @@ function page(data,fun) {
     })
 }
 
+function tips(msg){
+    var html='<div class="bg_tips"></div>'+
+        '<div class="msg">'+ msg +'</div>';
+        $(".tips_box").empty().html(html).show();
+         setTimeout(function () {
+        $(".tips_box").empty().hide();
+        }, 2000);
 
+}
 
 function ajaxData(url, data, fun) {
     $.ajax({
         type: "POST",
-        url: "/wms/" + url,
+        url: "wms/" + url,
         contentType: "application/json;charset=utf-8",
         dataType: "JSON",
         async: false,

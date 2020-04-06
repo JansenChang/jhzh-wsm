@@ -129,13 +129,14 @@ class mapNode { //定义了一个绘制节点类
         }
 
         //一楼库位查询
-        if (_this.explain == 'pilerSeat') {
+        if (_this.explain == 'pilerSeat' || _this.explain == 'pick' ) {
             $(".title_name").empty().html('一楼' + _this.name + '库位');
             html += '<table class = "table table-responsive table-bordered table-hover piler_box" width = "100%">' +
                 '<tr><th width="15%">托盘号</th><td width="35%"><input type="text" id="newtrayno" value="' + (_this.dataobj.trayno ? _this.dataobj.trayno : '-') + '"></td><th width="15%">物料号</th><td><input type="text" id="newpartid" value="' + (_this.dataobj.partid ? _this.dataobj.partid : '-') + '"></td></tr>' +
                 '<tr><th>工单号</th><td><input type="text" id="newpartwoid" value="' + (_this.dataobj.partwoid ? _this.dataobj.partwoid : '-') + '"></td><th>数量</th><td><input type="text" id="newpartnum" value="' + (_this.dataobj.partnum ? _this.dataobj.partnum : '-') + '"></td></tr>' +
                 '<tr><th>时间</th><td><input type="text" id="newpartdate" value="' + _this.dataobj.partdate + '"></td><th></th><td></td></tr>' +
                 '</table><div class="btn_box"></div>';
+                // <button type="button" class="btn btn-success">保存</button>
             $(".list").empty().html(html).show();
             $(".whcell_15f").show();
             var strs=_this.name.split("");
@@ -191,7 +192,6 @@ class mapNode { //定义了一个绘制节点类
 
     draw(draw) {
         var _this = this;
-        var html = '';
         if (_this.svgtype == "rect") {
             var obj = draw.rect(this.w, this.h);
             var piler_1 = localStorage.getItem("piler_1"),
@@ -233,13 +233,13 @@ class mapNode { //定义了一个绘制节点类
                 }
 
                 if (_this.dataobj[10] == 2) {
-                    _this.changeposition(_this.dataobj[10] * 123, _this.y);
+                    _this.changeposition(_this.dataobj[10] * 108, _this.y);
                 } else if (_this.dataobj[10] == 3) {
-                    _this.changeposition(_this.dataobj[10] * 129, _this.y);
+                    _this.changeposition(_this.dataobj[10] * 115, _this.y);
                 } else if (_this.dataobj[10] == 4) {
-                    _this.changeposition(_this.dataobj[10] * 132, _this.y);
+                    _this.changeposition(_this.dataobj[10] * 118, _this.y);
                 } else if (_this.dataobj[10] == 5) {
-                    _this.changeposition(_this.dataobj[10] * 134, _this.y);
+                    _this.changeposition(_this.dataobj[10] * 121, _this.y);
                 }
 
             }
@@ -264,8 +264,9 @@ class mapNode { //定义了一个绘制节点类
 //创建描绘对象节点的函数,创建一个装有对象节点的数组
 function create_node(dataarr) { //参数分别为:待转换数组\待改变文字索引\文字改变后值(字符串类型)\待改变颜色索引\颜色改变后值(字符串类型)
     var out = [];
-
+console.log(dataarr)
     dataarr.map(function (item) {
+        
         var c = new mapNode(item);
         out.push(c);
     });

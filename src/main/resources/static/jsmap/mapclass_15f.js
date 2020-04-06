@@ -82,8 +82,11 @@ class mapNode { //定义了一个绘制节点类
         var y = e.pageY || e.clientY + scrollY;
 
         if (_this.explain == 'cabinet') {
+            var row1=_this.name.split('')[0] + _this.name.split('')[1];
+            var col1=_this.name.split('')[2] + _this.name.split('')[3];
             var dynData = {
-                "rowandcol": _this.name
+                "row":row1,
+                "col":col1
             }
             $.ajax({
                 type: "POST",
@@ -94,17 +97,17 @@ class mapNode { //定义了一个绘制节点类
                 data: JSON.stringify(dynData),
                 success: function (resul) {
                     $(".title_name").empty().html('夹层' + _this.name + '立库');
-                    html += '<tr><th></th><th>托盘号</th><th>工单号</th><th>物料号</th><th width="7%">数量</th><th width="25%">时间</th></tr>';
+                    html += '<tr><th></th><th>托盘号</th><th>工单号</th><th>物料号</th><th width="7%">数量</th><th width="25%">时间</th><th width="9%">操作</th></tr>';
                     $(resul.resultData).each(function (i, obj) {
 
                         var startTime = new Date(Date.parse(_this.getPartdate(_this.dataobj.partdate)));
                         var endTime = new Date();
 
                         if (startTime < endTime) {
-                             html += '<tr class="bg-pink"><td>' + (i + 1) + '层</td><td><input type="text" id="newtrayno_'+ i +'" value="' + obj.trayno + '"></td><td><input type="text" id="newpartwoid_'+ i +'" value="' + (obj.partwoid == 0 ? '-' : obj.partwoid) + '"></td><td><input type="text" id="newpartid_'+ i +'" value="' + (obj.partid == 0 ? '-' : obj.partid) + '"></td><td><input type="text" id="newpartnum_'+ i +'" value="' + (obj.partnum == 0 ? '-' : obj.partnum) + '"></td><td><input type="text" id="newpartdate_'+ i +'" value="' + obj.partdate + '"></td></tr>'
+                            html += '<tr class="bg-pink"><td>' + (i + 1) + '层</td><td>' + obj.trayno + '</td><td>' + (obj.partwoid == 0 ? '-' : obj.partwoid) + '</td><td>' + (obj.partid == 0 ? '-' : obj.partid) + '</td><td>' + (obj.partnum == 0 ? '-' : obj.partnum) + '</td><td>' + (obj.partdate ? _this.getPartdate(obj.partdate) : '-') + '</td><td><button type="button" class="btn btn-success bc">保存</button></td></tr>'
                         }
 
-                        html += '<tr><td>' + (i + 1) + '层</td><td><input type="text" id="newtrayno_'+ i +'" value="' + obj.trayno + '"></td><td><input type="text" id="newpartwoid_'+ i +'" value="' + (obj.partwoid == 0 ? '-' : obj.partwoid) + '"></td><td><input type="text" id="newpartid_'+ i +'" value="' + (obj.partid == 0 ? '-' : obj.partid) + '"></td><td><input type="text" id="newpartnum_'+ i +'" value="' + (obj.partnum == 0 ? '-' : obj.partnum) + '"></td><td><input type="text" id="newpartdate_'+ i +'" value="' + obj.partdate + '"></td></tr>'
+                        html += '<tr><td>' + (i + 1) + '层</td><td><input type="text" id="newtrayno_'+ i +'" value="' + obj.trayno + '"></td><td><input type="text" id="newpartwoid_'+ i +'" value="' + (obj.partwoid == 0 ? '-' : obj.partwoid) + '"></td><td><input type="text" id="newpartid_'+ i +'" value="' + (obj.partid == 0 ? '-' : obj.partid) + '"></td><td><input type="text" id="newpartnum_'+ i +'" value="' + (obj.partnum == 0 ? '-' : obj.partnum) + '"></td><td><input type="text" id="newpartdate_'+ i +'" value="' + obj.partdate + '"></td><td><button type="button" class="btn btn-success bc" orderID="'+ i +'">保存</button></td></tr>'
                     })
                     $(".piler_box").empty().html(html);
                     $(".whcell_15f").show();

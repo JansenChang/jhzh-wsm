@@ -1,436 +1,138 @@
 <html>
 <head>
-    <title>DPH</title>
+    <title>盘库</title>
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/css_0_0_normalize.css">
-    <link rel="stylesheet" href="css/css_0_0_f5.css">
-    <link rel="stylesheet" href="css/css_0_0_back.css">
     <link rel="stylesheet" href="css/standardization.css">
     <script src="js/mapnode.js"></script>
     <script src="js/jquery.js"></script>
     <script src="js/js_0_0_f5m.js"></script>
     <script src="js/vendor/modernizr.js"></script>
     <script src="js/svg.min.js" type="text/javascript" ></script>
-    <style>
-      .container{
-          width:60%;
-          padding: 0 1rem;
-          margin: 0.2rem auto;
-          border-radius: 5px;
 
-      }
-      .container  input{
-         margin: 0;
-         height: 2rem;
-      }
 
-      .container button{
-        border-radius: 5px;;
-      }
-    </style>
 
 </head>
 <body>
 <div class="container row">
-    <div class="medium-3 columns">
+    <div class="medium-8 columns">
+        <span class="title">盘库</span>
+        <div class="clear_box row">
+        <div class="medium-3 columns">
 
-        <div class="grop">
-            <label for="">行</label>
-            <select name="" id="row" onchange="rowchange()">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="31">31</option>
-                <option value="32">32</option>
-            </select>
+            <div class="grop">
+                <label for="">行</label>
+                <select name="" id="row">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="31">31</option>
+                    <option value="32">32</option>
+                </select>
+            </div>
+
+            <div class="buttonbox">
+                <!-- <div class="grop"><button onclick="save()">保存</button></div>保存当前焦点所在文本框数据!!--> 
+                <div class="grop"><button class="clearinput">清空所有库位</button></div>
+            </div>
+
+
+
+        </div>
+        <div class="medium-3 columns">
+            <div class="grop">
+                <label for="">列</label>
+                <select name="" id="col">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+
+                </select>
+            </div>
+
+        </div>
+        <div class="medium-3 columns">
+            <div class="grop grop1"> <label for="">1层</label><input type="text" placeholder="盘号"class="ptxt" id="player00"/></div>
+            <div class="grop grop2"><label for="">2层</label> <input type="text" placeholder="盘号" class="ptxt" id="player01"/></div>
+            <div class="grop"> <label for="">3层</label><input type="text" placeholder="盘号" class="ptxt" id="player02"/></div>
+            <div class="grop"> <label for="">4层</label><input type="text" placeholder="盘号" class="ptxt" id="player03"/></div>
+            <div class="grop"> <label for="">5层</label><input type="text" placeholder="盘号" class="ptxt" id="player04"/></div>
+            <div class="grop"> <label for="">6层</label><input type="text" placeholder="盘号" class="ptxt" id="player05"/></div>
+            <div class="grop"> <label for="">7层</label><input type="text" placeholder="盘号" class="ptxt" id="player06"/></div>
+            <div class="grop"> <label for="">8层</label><input type="text" placeholder="盘号" class="ptxt" id="player07"/></div>
+            <div class="grop"> <label for="">9层</label><input type="text" placeholder="盘号" class="ptxt" id="player08"/></div>
+            <div class="grop"> <label for="">10层</label><input type="text" placeholder="盘号" class="ptxt"id="player09" /></div>
+            <div class="grop grop10"> <label for="">11层</label><input type="text" placeholder="盘号" class="ptxt" id="player10"/></div>
+            <div class="grop grop11"> <label for="">12层</label><input type="text" placeholder="盘号" class="ptxt"id="player11" /></div>
         </div>
 
-        <div class="buttonbox">
-            <!--<div class="grop"><button onclick="save()">保存</button></div>!--><!--保存当前焦点所在文本框数据!-->
-            <div class="grop"><button onclick="clearinput()">清除</button></div>
+         <div class="medium-3 columns">
+            <div class="grop grop1"> <label for="">&nbsp;</label><p class="tips"></p></div>
+            <div class="grop"><label for="">&nbsp;</label><p class="tips"></p></div>
+            <div class="grop"> <label for="">&nbsp;</label><p class="tips"></p></div>
+            <div class="grop"> <label for="">&nbsp;</label><p class="tips"></p></div>
+            <div class="grop"> <label for="">&nbsp;</label><p class="tips"></p></div>
+            <div class="grop"> <label for="">&nbsp;</label><p class="tips"></p></div>
+            <div class="grop"> <label for="">&nbsp;</label><p class="tips"></p></div>
+            <div class="grop"> <label for="">&nbsp;</label><p class="tips"></p></div>
+            <div class="grop"> <label for="">&nbsp;</label><p class="tips"></p></div>
+            <div class="grop"> <label for="">&nbsp;</label><p class="tips"></p></div>
+            <div class="grop"> <label for="">&nbsp;</label><p class="tips"></p></div>
+            <div class="grop"> <label for="">&nbsp;</label><p class="tips"></p></div>
         </div>
 
 
-
-    </div>
-    <div class="medium-3 columns">
-        <div class="grop">
-            <label for="">列</label>
-            <select name="" id="col" >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="22">22</option>
-                <option value="23">23</option>
-                <option value="24">24</option>
-
-            </select>
-        </div>
-
-    </div>
-    <div class="medium-3 columns">
-        <div class="grop grop1"> <label for="">1层</label><input type="text" placeholder="盘号"class="ptxt" id="player01"/></div>
-        <div class="grop"><label for="">2层</label> <input type="text" placeholder="盘号" class="ptxt" id="player02"/></div>
-        <div class="grop"> <label for="">3层</label><input type="text" placeholder="盘号" class="ptxt" id="player03"/></div>
-        <div class="grop"> <label for="">4层</label><input type="text" placeholder="盘号" class="ptxt" id="player04"/></div>
-        <div class="grop"> <label for="">5层</label><input type="text" placeholder="盘号" class="ptxt" id="player05"/></div>
-        <div class="grop"> <label for="">6层</label><input type="text" placeholder="盘号" class="ptxt" id="player06"/></div>
-        <div class="grop"> <label for="">7层</label><input type="text" placeholder="盘号" class="ptxt" id="player07"/></div>
-        <div class="grop"> <label for="">8层</label><input type="text" placeholder="盘号" class="ptxt" id="player08"/></div>
-        <div class="grop"> <label for="">9层</label><input type="text" placeholder="盘号" class="ptxt" id="player09"/></div>
-        <div class="grop"> <label for="">10层</label><input type="text" placeholder="盘号" class="ptxt"id="player10" /></div>
-        <div class="grop"> <label for="">11层</label><input type="text" placeholder="盘号" class="ptxt" id="player11"/></div>
-        <div class="grop"> <label for="">12层</label><input type="text" placeholder="盘号" class="ptxt"id="player12" /></div>
-    </div>
-
-    <div class="medium-3 columns">
-
-
-        <div class="grop grop1"><label for="">1层</label><input type="text" placeholder="物料号" class="mtxt" id="mlayer1"/></div>
-        <div class="grop"><label for="">2层</label><input type="text" placeholder="物料号" class="mtxt" id="mlayer2"/></div>
-        <div class="grop"><label for="">3层</label><input type="text" placeholder="物料号" class="mtxt" id="mlayer3"/></div>
-        <div class="grop"><label for="">4层</label><input type="text" placeholder="物料号" class="mtxt" id="mlayer4"/></div>
-        <div class="grop"><label for="">5层</label><input type="text" placeholder="物料号" class="mtxt" id="mlayer5"/></div>
-        <div class="grop"><label for="">6层</label><input type="text" placeholder="物料号" class="mtxt" id="mlayer6"/></div>
-        <div class="grop"><label for="">7层</label><input type="text" placeholder="物料号" class="mtxt" id="mlayer7"/></div>
-        <div class="grop"><label for="">8层</label><input type="text" placeholder="物料号" class="mtxt" id="mlayer8"/></div>
-        <div class="grop"><label for="">9层</label><input type="text" placeholder="物料号" class="mtxt" id="mlayer9"/></div>
-        <div class="grop"><label for="">10层</label><input type="text" placeholder="物料号" class="mtxt" id="mlayer10"/></div>
-        <div class="grop"><label for="">11层</label><input type="text" placeholder="物料号"class="mtxt"  id="mlayer11"/></div>
-        <div class="grop"><label for="">12层</label><input type="text" placeholder="物料号" class="mtxt"id="mlayer12" /></div>
-
-
-
-    </div>
 </div>
-
-
-
-<script>
-    $(document).ready(function() {// 初始化 Foundation JS
-        $(document).foundation();
-    });
-
-
-    function cutafter2 (str){//截取字符串后面2位并转为数字
-        var len=str.length;
-        str=str.substring(len-2,len);
-        num= parseInt(str);
-        return num;
-    }
-    function cutafter5 (str){//截取字符串后面5位并转为数字
-        var len=str.length;
-        str=str.substring(len-5,len);
-        num= parseInt(str);
-        return num;
-    }
-
-    function cutafter3 (str){//截取字符串后面3位并转为数字
-        var len=str.length;
-        str=str.substring(len-3,len);
-        num= parseInt(str);
-        return num;
-    }
-
-
-
-    onload = function(){
-        palletidtxtonblur();
-        mattertxtonblur();
-    }
-
-
-
-    function palletidtxtonblur(){//盘号输入框失焦事件
-        var txts = document.getElementsByClassName("ptxt");
-
-
-
-        var traylist=[];
-
-        for(var i = 0; i<txts.length;i++){
-
-
-
-            var t = txts[i];
-
-            t.index = i;
-
-
-            t.onkeyup=function(){
-
-
-                if(event.keyCode == 13){
-                    console.log("键码"+event.keyCode);
-                    var next = this.index + 1;
-                    if((this.value!="")&&(next > txts.length - 1)) {//如果是最后一个
-                        var lastid=this.id;
-                        var row=parseInt(document.getElementById("row").value);
-
-                        var col=parseInt(document.getElementById("col").value);
-
-                        var layer=cutafter2(lastid);
-
-                        var trayno=document.getElementById(lastid).value;
-
-                        if(trayno[0]=="P"){
-                            var trayid=cutafter5(trayno);
-                        }else if(trayno[0]=="6"){
-                            var trayid=cutafter3(trayno);
-                        }
-
-
-                        var objt={
-                            'layer':layer,
-                            'trayid':trayid,
-                            'trayno':trayno
-                        };
-
-                        traylist.push(objt);
-
-                        //化成对象再作为ajax的data
-                        var obj={
-                            'row':row,
-                            'col':col,
-                            'traylist':traylist
-
-                        }
-                        console.log(obj);
-                        var str=JSON.stringify(obj);
-
-                        save(str);//ajax
-
-
-
-                        for(var j=0;j<txts.length;j++){
-                            txts[j].value="";
-                        }
-                        traylist=[];//置空traylist
-                        txts[0].focus();//第一个重新获得焦点
-                        return;
-                    }
-
-                    if(this.value!=""){
-                     //此处可写保存语句
-
-
-                        var pid=this.id;
-                        var row=parseInt(document.getElementById("row").value);
-
-                        var col=parseInt(document.getElementById("col").value);
-
-                        var layer=cutafter2(pid);
-                        console.log(layer);
-                        var trayno =document.getElementById(pid).value;
-                        if(trayno[0]=="P"){
-                            var trayid=cutafter5(trayno);
-                        }else if(trayno[0]=="6"){
-                            var trayid=cutafter3(trayno);
-                        }
-
-
-                        console.log(trayid);
-                        var objt={
-                            'layer':layer,
-                            'trayid':trayid,
-                            'trayno':trayno
-                        };
-
-                        traylist.push(objt);
-
-                        console.log(traylist);
-                        txts[next].focus();//下一个输入框获得焦点
-                    }
-                }else if(event.keyCode == 16){//禁止条码枪默认的shift鍵
-                    event.returnValue=false;
-                }
-
-
-            }//
-
-            t.onclick=function(){
-                this.focus();
-            }
-
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
-
-
-    function mattertxtonblur(){//物料号输入框失焦事件
-        var txts = document.getElementsByClassName("mtxt");
-        for(var i = 0; i<txts.length;i++){
-
-            var t = txts[i];
-
-            t.index = i;
-
-
-            t.onkeyup=function(){
-                if(event.keyCode == 13){
-
-                    var next = this.index + 1;
-                    if(next > txts.length - 1) {//如果是最后一个
-                        for(var j=0;j<txts.length;j++){//真正自动保存在此处
-                            txts[j].value="";
-                        }
-                        txts[0].focus();//第一个重新获得焦点
-                        return;
-                    }
-
-                    if(this.value!=""){
-                        console.log(this.id);//此处可写保存语句
-                        txts[next].focus();//下一个输入框获得焦点
-                    }
-
-                }
-
-
-            }//
-            t.onclick=function(){
-                this.focus();
-            }
-        }
-
-    }
-
-
-    function clearinput(){
-       $("input").val("");
-
-    }
-
-
-    function save(data){//把输入框内容保存进数据库
-        console.log(data);
-
-       $.ajax({
-            type: "post", //使用post方法访问后台
-            url: "/saveTrayInfo",
-            contentType:"application/json;charset=utf-8",
-            dataType: "JSON",
-            data:  data, //要发送的参数
-            async: false,//同步调用
-            success : function(resultData) {
-                console.log(resultData);
-                console.log(resultData.code);
-                if(resultData.errorCode==0){
-                    var x=Number($('#col').val())+1;
-                    $('#col').find('option[value='+x+']').prop('selected',true);
-                    $('#player01').focus();
-                }else{
-                    alert("存入失败");
-                }
-
-
-            },
-            error:function(errorMsg){
-                console.log(errorMsg);
-            }
-        });
-
-    }
-
-</script>
-<script>
-    var rowcol=[//夹层库位行列数据
-        [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,22,23,24],
-        [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
-        [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
-        [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],
-        [13,14,15,16,17,18,19],
-        [13,14,15,16,17,18,19],
-        [13,14,15,16,17,18,19],
-        [13,14,15,16,17,18,19],
-        [13,14,15,16,17,18,19,20],
-        [13,14,15,16,17,18,19,20],
-        [13,14,15,16,17,18,19,20],
-        [13,14,15,16,17,18,19,20],
-        [9,10,11,12,13,14,15,16,17,18,19,20],
-        [9,10,11,12,13,14,15,16,17,18,19,20],
-        [13,14,15,16,17,18,19,20],
-        [],
-        [],
-        [],
-        [],
-        [],
-        [],
-        [],
-        [],
-        [],
-        [],
-        [],
-        [],
-        [],
-        [],
-        [],
-        [1,2,3,4,5],
-        [2,3,4,5]
-    ];
-
-
-    var row=document.getElementById("row");
-    var col=document.getElementById("col");
-    function rowchange(){//行下拉列表关联列下拉列表(利用夹层库位行列数据)
-            var i=row.value;
-            console.log(i);
-            var htmlstr="";
-            debugger;
-            for(var j=0;j<rowcol[i-1].length;j++){
-                console.log(rowcol[i-1]);
-                htmlstr+="<option value="+rowcol[i-1][j]+">"+rowcol[i-1][j]+"</option>";
-
-            }
-        col.innerHTML=htmlstr;
-
-    }
-
-</script>
+    </div>
+     <div class="medium-4 columns">
+        <span class="title" style="margin:0;">查询</span>
+        <div class="clear_box">
+            <div class="grop grop1"> <label for="">输入托盘号</label><input type="text" placeholder="输入托盘号"class="" id="inquire"/></div>
+            <button class="ask">查询</button>
+            <p class="show_tip"></p>
+        </div>
+    </div>
+     <div class="tips_box"></div>
+ </div>   
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/js_0_0_f5m.js"></script>
+    <script src="js/vendor/modernizr.js"></script>
+    <script src="js/uilt.js"></script>
+    <script src="js/check.js" type="text/javascript" ></script>
 </body>
 </html>

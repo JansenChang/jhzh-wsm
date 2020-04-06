@@ -24,8 +24,6 @@ public class RepertroyController {
     }
     @PostMapping(value = "dynamicRepertroyById")
     public Result<?> dynamicRepertroyById(@RequestBody JSONObject jsonObject) {
-        String rowandcol = (String) jsonObject.get("rowandcol");
-        jsonObject.put("rowandcol",rowandcol.substring(0,rowandcol.length()-2));
         Result<?> result = repertroyService.queryDynamicRepertroyById(jsonObject);
         return result;
     }

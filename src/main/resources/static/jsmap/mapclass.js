@@ -189,12 +189,15 @@ class mapNode { //定义了一个绘制节点类
         var x = e.pageX || e.clientX + scrollX;
         var y = e.pageY || e.clientY + scrollY;
 
-        var dynData = {
-            "rowandcol": _this.name
-        }
         // 夹层立柜
 
         if ((_this.explain == 'cabinet')) {
+            var row1=_this.name.split('')[0] + _this.name.split('')[1];
+            var col1=_this.name.split('')[2] + _this.name.split('')[3];
+            var dynData = {
+                "row":row1,
+                "col":col1
+            }
             $.ajax({
                 type: "POST",
                 url: url + "/wms/dynamicRepertroyById",
@@ -207,9 +210,9 @@ class mapNode { //定义了一个绘制节点类
 
                     html += '<h1>' + _this.objid + '库位详情 <span class="clos">x</span></h1>' +
                         '<table class = "table-responsive" width = "100%">' +
-                        '<tr><th></th><th>托盘号</th><th>工单号</th><th>物料号</th><th>数量</th><th>到期时间</th></tr>';
+                        '<tr><th></th><th>托盘号</th><th>工单号</th><th>物料号</th><th>数量</th><th>锁定类型</th><th>到期时间</th></tr>';
                     $(resul.resultData).each(function (i, obj) {
-                        html += '<tr><td>' + (i + 1) + '层</td><td>' + obj.trayno + '</td><td>' + (obj.partwoid == 0 ? '-' : obj.partwoid) + '</td><td>' + (obj.partid == 0 ? '-' : obj.partid) + '</td><td>' + (obj.partnum == 0 ? '-' : obj.partnum) + '</td><td>' + (obj.partdate?_this.getPartdate(obj.partdate):'-') + '</td></tr>'
+                        html += '<tr><td>' + (i + 1) + '层</td><td>' + obj.trayno + '</td><td>' + (obj.partwoid == 0 ? '-' : obj.partwoid) + '</td><td>' + (obj.partid == 0 ? '-' : obj.partid) + '</td><td>' + (obj.partnum == 0 ? '-' : obj.partnum) + '</td><td>未过期</td><td>' + (obj.partdate?_this.getPartdate(obj.partdate):'-') + '</td></tr>'
                     })
                     html += '<table>';
                     $(".tips").empty().html(html).show();
@@ -265,7 +268,7 @@ class mapNode { //定义了一个绘制节点类
         if((_this.explain=='pilerSeat') || (_this.name=="160102") || (_this.name=="160101") || (_this.explain=="pick") || (_this.explain=="waste")){
                     html += '<h1>' + _this.name + '库位详情 <span class="clos">x</span>   </h1>' +
                         '<table class = "table-responsive" width = "100%">' +
-                        '<tr><th>托盘号</th><td>'+ (_this.dataobj.trayno?_this.dataobj.trayno:'-') +'</td><th>物料号</th><td>'+ (_this.dataobj.partid?_this.dataobj.partid:'-') +'</td></tr>'+
+                        '<tr><th width="20%">托盘号</th><td width="30%">'+ (_this.dataobj.trayno?_this.dataobj.trayno:'-') +'</td><th>物料号</th><td width="30%">'+ (_this.dataobj.partid?_this.dataobj.partid:'-') +'</td></tr>'+
                         '<tr><th>工单号</th><td>'+ (_this.dataobj.partwoid?_this.dataobj.partwoid:'-') +'</td><th>数量</th><td>'+ (_this.dataobj.partnum?_this.dataobj.partnum:'-') +'</td></tr>'+
                         '<tr><th>到期时间</th><td>'+ (_this.dataobj.partdate?_this.getPartdate(_this.dataobj.partdate):'-') +'</td><th></th><td></td></tr>'+
                         '<table>';
@@ -275,12 +278,12 @@ class mapNode { //定义了一个绘制节点类
 
 
 
-        // 3楼存盘
+        // 2楼存盘
         if (_this.explain == 'trayno') {
-            // console.log(_this.dataobj);
-            html += '<h1>' + _this.name + '<span class="clos">x</span></h1>' +
+            console.log(_this);
+            html += '<h1>' + _this.name + ' 载具<span class="clos">x</span></h1>' +
                 '<table class = "table-responsive" width = "100%">' +
-                '<tr><th width="25%"> 托盘号 </th><td width="25%">' + (_this.dataobj?_this.dataobj:'-') + '</td></tr>'
+                '<tr><th width="25%"> 托盘号 </th><td width="25%">' + (_this.dataobj.trayno?_this.dataobj.trayno:'-') + '</td></tr>'
             '<table>';
 
 
@@ -371,7 +374,6 @@ class mapNode { //定义了一个绘制节点类
                 }
             }
 
-
             // 警报
             if ((_this.dataobj) && (_this.dataobj[2] > 0)) {
                 if (_this.explain == 'piler') {
@@ -382,6 +384,7 @@ class mapNode { //定义了一个绘制节点类
                 if ((_this.explain == '1#') || (_this.explain == '2#')) {
                     _this.svgobj = obj.addClass('my-clsss');
                     var tip = cagtTips(_this.dataobj[2])
+                    var tip = "22222"
                     $(".dui").empty().html(_this.explain + '吊笼：' + tip);
                 }
                 $(".wrap").show();

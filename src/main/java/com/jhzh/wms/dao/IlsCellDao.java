@@ -27,4 +27,7 @@ public interface IlsCellDao {
 
     List<String> dynamicRepertroyFirstlayer();
 
+    int cleanCellByCellId(IlsCellDto ilsCellDto);
+
+    int updateLocked(Map<String, Object> map);
 }

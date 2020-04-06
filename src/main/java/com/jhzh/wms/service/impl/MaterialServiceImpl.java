@@ -33,5 +33,11 @@ public class MaterialServiceImpl implements MaterialService {
         return Result.success(pageInfo);
     }
 
+    @Override
+    public Result<?> updateLocked(Map<String, Object> map) {
+        return Result.success(IlscellDao.updateLocked(map));
+    }
+
+
 
 }

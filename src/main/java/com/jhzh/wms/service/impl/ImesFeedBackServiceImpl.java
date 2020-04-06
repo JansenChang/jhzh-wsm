@@ -125,6 +125,9 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
             taskmesDao.updateTaskmes(taskmesDto);
             wmsInvOutDao.updateStatus(taskid);
             resultMap.putAll(doHttp(map, wmsInvOutResultUrl));
+            IlscellDao.cleanCellByCellId(IlsCellDto.builder()
+                    .id(Long.parseLong(celliddst))
+                    .build());
         }
         return resultMap;
     }

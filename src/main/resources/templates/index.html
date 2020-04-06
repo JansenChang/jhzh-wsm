@@ -16,7 +16,6 @@
 </head>
 
 <body>
-    <div class="head"></div>
     <div class="nav-head">
         <div class="container">
             <div class="row">
@@ -33,7 +32,7 @@
 
     <div class="tab-content">
 
-        <div class="tab-pane active" >
+        <div class="tab-pane active">
             <!-- 查询条件 -->
             <div class="container-fluid">
                 <div class="row">
@@ -72,6 +71,16 @@
                                     </div>
                                 </form>
                             </div>
+                            <div class="col col-md-2">
+                                <label class="radio-inline">
+                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio6" value="1">
+                                    已锁定库存
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio7" value="2">
+                                    未锁定库存
+                                </label>
+                            </div>
                         </div>
                         <!-- 物资入库查询 -->
                         <div class="row inStorage">
@@ -79,10 +88,10 @@
                                 <div class="row">
                                     <div class="col col-md-2"> <input type="text" class="form-control inStorage_taskid"
                                             placeholder="任务号"></div>
-                                    <div class="col col-md-2"> <input type="text" class="form-control inStorage_partwoid"
-                                            placeholder="工单号"></div>
-                                    <div class="col col-md-2"> <input type="text" class="form-control inStorage_Itemcode"
-                                            placeholder="物料号"></div>
+                                    <div class="col col-md-2"> <input type="text"
+                                            class="form-control inStorage_partwoid" placeholder="工单号"></div>
+                                    <div class="col col-md-2"> <input type="text"
+                                            class="form-control inStorage_Itemcode" placeholder="物料号"></div>
                                     <div class="col col-md-2"> <input type="text" class="form-control inStorage_stockno"
                                             placeholder="托盘号"></div>
                                     <div class="col">
@@ -111,7 +120,8 @@
                                 <div class="row">
                                     <div class="col">
                                         <label class="radio-inline">
-                                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1" checked>
+                                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1"
+                                                checked>
                                             料盘入库
                                         </label>
                                         <label class="radio-inline">
@@ -128,7 +138,8 @@
                                     placeholder="任务号"></div>
                             <div class="col col-md-2"> <input type="text" class="form-control outStorage_wipentityid"
                                     placeholder="工单号"></div>
-                            <div class="col col-md-2"> <input type="text" class="form-control outStorage_Itemcode" placeholder="物料号">
+                            <div class="col col-md-2"> <input type="text" class="form-control outStorage_Itemcode"
+                                    placeholder="物料号">
                             </div>
                             <div class="col">
                                 <form class="form-inline">
@@ -171,8 +182,10 @@
                             <td>库位号</td>
                             <td>托盘号</td>
                             <td>数量</td>
+                            <td>过期类型</td>
                             <td>入库时间</td>
                             <td>过期时间</td>
+                            <td width="5%">操作</td>
                     </thead>
                     <thead class="inStorage">
                         <tr>
@@ -208,7 +221,8 @@
                     <tbody class="listData"></tbody>
                 </table>
             </div>
-            <div class="storage_box" id="storage_box"><button type="button" class="btn btn-success" >下载 Excel</button></div>
+            <div class="storage_box" id="storage_box"><button type="button" class="btn btn-success">下载 Excel</button>
+            </div>
         </div>
 
         <div class="page">
@@ -221,9 +235,31 @@
 
 
     </div>
-
-
-
+    <div class="whcell_15f " style="width:35% ;">
+        <!-- <h2 class="title_name">提示</h2>
+        <div class="list">
+            <table class="table table-responsive table-bordered table-hover piler_box" width="100%">
+                <tr>
+                    <th width="20%">工单号</th>
+                    <td  width="30%"></td>
+                    <th width="20%">物料号</th>
+                    <td width="30%"></td>
+                </tr>
+                <tr>
+                    <th>数量</th>
+                    <td>
+                        <span class="jian" id="p1_id_button_partnumsub" onclick="las_partnum_sub(1)">-</span id="p1_id_partnum">
+                            <input type="text" value="1">  
+                        <span class="jia" id="p1_id_button_partnumadd" onclick="las_partnum_add(1)">+</span></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <table>
+                    <div class="btn_box">
+                        <button type="button" class="btn btn-success">确定锁定</button>
+                    </div>
+        </div> -->
+    </div>
     <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
         id="myModal">
         <div class="modal-dialog" role="document">
