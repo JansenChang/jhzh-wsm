@@ -61,7 +61,7 @@ public class QueryTask {
                     List<WmsInvInDto> wmsInvInDtos = putInStorageDao.queryWmsInvInForTaskId(taskmes.getTaskid());
                     Map<String, String> map = imesFeedBackService.wmsInvInResult(wmsInvInDtos);
                     putInStorageDao.updateStatus(taskmes.getTaskid(),Long.parseLong("12"));
-                    taskmes.setTaskid(".");
+                    //taskmes.setTaskid(".");
                     taskmes.setStatus(0);
                     taskmesDao.updateTaskmes(taskmes);
                 });
@@ -86,11 +86,11 @@ public class QueryTask {
                 if (taskmesList.size() > 0) {
                     //List<WmsInvOutDto> wmsInvOutDtoList = wmsInvOutDao.QueryWmsInvOutFinsh();
                     Map<String, String> map = imesFeedBackService.wmsInvOutResult(taskmesList);
-                    if (map.size() > 0) {
+                   /* if (map.size() > 0) {
                         map.forEach((key, value) -> {
                             wmsInvOutDao.updateStatus(key);
                         });
-                    }
+                    }*/
                     Thread.sleep(10000);
                 } else {
 
