@@ -5,7 +5,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <link rel="stylesheet" href="css/css_0_0_normalize.css">
@@ -31,11 +31,11 @@
   </div>
   </div>
   <div class="large-2 small-2 columns">
-	<button onclick="drawmap()">¼à¿ØË¢ĞÂ</button>
-	<label>Ö¸¶¨³µÁ¾ <input type="text" placeholder="agv"></label>
-	<label>Ö¸¶¨Î»ÖÃ<input type="text" placeholder="loc"></label>
-	<label><button type="button" class="button radius" id='uploadmapdata'>ÉÏ´«µØ±ê</button></label>
-	<label><button type="button" class="button radius" >ÊÖ¹¤µ÷¶È</button></label>
+	<button onclick="drawmap()">ç›‘æ§åˆ·æ–°</button>
+	<label>æŒ‡å®šè½¦è¾† <input type="text" placeholder="agv"></label>
+	<label>æŒ‡å®šä½ç½®<input type="text" placeholder="loc"></label>
+	<label><button type="button" class="button radius" id='uploadmapdata'>ä¸Šä¼ åœ°æ ‡</button></label>
+	<label><button type="button" class="button radius" >æ‰‹å·¥è°ƒåº¦</button></label>
   </div>
 </div>
 
@@ -75,17 +75,17 @@ drawmap();
 		$.ajax({type: "POST",
 			url:"/yxpower/ajaxjson",   
 			contentType: "application/json;charset=utf-8",
-			data:JSON.stringify(mapdata.grids),//mapdata, //½«Json¶ÔÏóĞòÁĞ»¯³ÉJson×Ö·û´®£¬JSON.stringify()Ô­ÉúÌ¬·½·¨
+			data:JSON.stringify(mapdata.grids),//mapdata, //å°†Jsonå¯¹è±¡åºåˆ—åŒ–æˆJsonå­—ç¬¦ä¸²ï¼ŒJSON.stringify()åŸç”Ÿæ€æ–¹æ³•
 			dataType:"json",
 			success:function (message) {
-				//var jsObject = JSON.parse(message);    //×ª»»Îªjson¶ÔÏó
-                //alert("²éÑ¯µ½:"+jsObject);
+				//var jsObject = JSON.parse(message);    //è½¬æ¢ä¸ºjsonå¯¹è±¡
+                //alert("æŸ¥è¯¢åˆ°:"+jsObject);
 				//for(var i = 0; i < message.length; i++) {
-				//	alert(message[i].robotid);    //È¡jsonÖĞµÄÖµ
+				//	alert(message[i].robotid);    //å–jsonä¸­çš„å€¼
 				//}
             },
             error:function (message) {
-                //alert("²éÑ¯Ê§°Ü:"+JSON.stringify(message));
+                //alert("æŸ¥è¯¢å¤±è´¥:"+JSON.stringify(message));
             }
          });
     });

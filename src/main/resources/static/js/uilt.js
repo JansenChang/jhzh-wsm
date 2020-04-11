@@ -45,7 +45,7 @@ function tips(msg){
 function ajaxData(url, data, fun) {
     $.ajax({
         type: "POST",
-        url: "wms/" + url,
+        url: "" + url,
         contentType: "application/json;charset=utf-8",
         dataType: "JSON",
         async: false,

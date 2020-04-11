@@ -4,7 +4,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/css_0_0_normalize.css">
   <link rel="stylesheet" href="css/css_0_0_f5.css">
@@ -44,7 +44,7 @@
 
     }
 
-    .accordion .accordion-navigation > .content{/** Õâ¸öÒ»¶¨Òª±£ÁôÔÚÒ³Ãæstyle**/
+    .accordion .accordion-navigation > .content{/** è¿™ä¸ªä¸€å®šè¦ä¿ç•™åœ¨é¡µé¢style**/
         padding:0;
         margin: 0;
         width:100%;
@@ -169,81 +169,81 @@
     <div id="drawing"></div>
   </div>
   <div class="medium-2 columns controls">
-  <!-- ÓÒ±ß²Ù×÷Ãæ°å!-->
+  <!-- å³è¾¹æ“ä½œé¢æ¿!-->
       <ul class="accordion accordion1" data-accordion>
 
           <li class="accordion-navigation">
-              <a href="#demo2" class="title1">JF²Ù×÷</a>
+              <a href="#demo2" class="title1">JFæ“ä½œ</a>
               <div id="demo2" class="content content1">
 
                   <div class="menu1">
                       <ul class="tabs row" data-tab>
-                          <li class="tab-title active medium-3 columns"><a href="#home">Èë¿â</a></li>
-                          <li class="tab-title medium-3 columns"><a href="#menu1">¿âÎ»×ªÒÆ</a></li>
-                          <li class="tab-title medium-3 columns"><a href="#menu2">Òì³£´¦Àí</a></li>
-                          <li class="tab-title medium-3 columns"><a href="#menu3">´óÅÌ°áÔË</a></li>
+                          <li class="tab-title active medium-3 columns"><a href="#home">å…¥åº“</a></li>
+                          <li class="tab-title medium-3 columns"><a href="#menu1">åº“ä½è½¬ç§»</a></li>
+                          <li class="tab-title medium-3 columns"><a href="#menu2">å¼‚å¸¸å¤„ç†</a></li>
+                          <li class="tab-title medium-3 columns"><a href="#menu3">å¤§ç›˜æ¬è¿</a></li>
                       </ul>
                       <div class="tabs-content">
                           <div class="content active" id="home">
-                              <h5>ÓÉÓÚ¸÷ÖÖÔ­Òò´ó¡¢Ğ¡ÔØÅÌÎ´ËÍ´ïÄ¿µÄÎ»ÖÃÊ±ÇëÊ¹ÓÃ´Ë¹¦ÄÜ</h5>
+                              <h5>ç”±äºå„ç§åŸå› å¤§ã€å°è½½ç›˜æœªé€è¾¾ç›®çš„ä½ç½®æ—¶è¯·ä½¿ç”¨æ­¤åŠŸèƒ½</h5>
                               <div class="controlgrop">
-                                  <label for="">ÇëÊäÈë¿âÎ»×ø±ê</label>
+                                  <label for="">è¯·è¾“å…¥åº“ä½åæ ‡</label>
                                   <input type="text"id="cell"/>
-                                  <label for="" >ÇëÊäÈëÔØÅÌID</label>
+                                  <label for="" >è¯·è¾“å…¥è½½ç›˜ID</label>
                                   <input type="text" id="palletid2"/>
-                                  <button id="instore" onclick="into()">Èë¿â</button>
+                                  <button id="instore" onclick="into()">å…¥åº“</button>
                               </div>
                           </div>
                           <div class="content" id="menu1">
-                              <h5>¼Ğ²ã¿âÔØÅÌ¼°Ò»Â¥¿âÔØÅÌĞè½øĞĞ¿âÎ»×ªÒÆÊ±Ê¹ÓÃ</h5>
+                              <h5>å¤¹å±‚åº“è½½ç›˜åŠä¸€æ¥¼åº“è½½ç›˜éœ€è¿›è¡Œåº“ä½è½¬ç§»æ—¶ä½¿ç”¨</h5>
                               <div class="controlgrop"style="vertical-align: middle;line-height: 0.5rem;">
                                   <input type="radio" name="type" value="10" style="vertical-align: middle;margin-top: 0.9rem;" />
-                                  <label for="" style="vertical-align: middle;">¶Ñ¶â»ú¿â</label>
+                                  <label for="" style="vertical-align: middle;">å †å›æœºåº“</label>
 
                                   <input type="radio" name="type" value="15" style="vertical-align: middle;margin-top: 0.9rem; " />
-                                  <label for="" style="vertical-align: middle;">¼Ğ²ã¿â</label>
+                                  <label for="" style="vertical-align: middle;">å¤¹å±‚åº“</label>
                               </div>
                               <div class="controlgrop" >
-                                  <label for="">ÇëÊäÈëÀ´Ô´¿âÎ»</label>
+                                  <label for="">è¯·è¾“å…¥æ¥æºåº“ä½</label>
                                   <input type="text" id="srccell"/>
-                                  <label for="">ÇëÊäÈëÄ¿±ê¿âÎ»</label>
+                                  <label for="">è¯·è¾“å…¥ç›®æ ‡åº“ä½</label>
                                   <input type="text" id="dstcell"/>
-                                  <button id="move" onclick="las_move()">¿ªÊ¼ÒÆ¿â</button>
+                                  <button id="move" onclick="las_move()">å¼€å§‹ç§»åº“</button>
                               </div>
                           </div>
                           <div class="content" id="menu2">
-                              <h5>»Ø¼Ğ²ãµÄ´óÔØÅÌÓĞÒì³£Ê±Ê¹ÓÃ£¨Ç°¸ö¹¦ÄÜÓÃÓÚ×Ô¶¯Ä£Ê½ÏÂ³öÒì³£Ê±Ê¹ÓÃ£¬ºó¸öÓ¦ÓÃÓÚµ¥»ú²âÊÔ£©</h5>
+                              <h5>å›å¤¹å±‚çš„å¤§è½½ç›˜æœ‰å¼‚å¸¸æ—¶ä½¿ç”¨ï¼ˆå‰ä¸ªåŠŸèƒ½ç”¨äºè‡ªåŠ¨æ¨¡å¼ä¸‹å‡ºå¼‚å¸¸æ—¶ä½¿ç”¨ï¼Œåä¸ªåº”ç”¨äºå•æœºæµ‹è¯•ï¼‰</h5>
                               <div class="controlgrop">
-                                  <p> <label for="">µ±Ç°´óÅÌ:</label>
-                                      <span style="display: none;">ÕıÔÚ»ØÁ÷ÖĞÇëÉÔµÈ</span>
-                                      <span>Î´ÄÜÕı³£»ØÁ÷ÇëÊÖ¶¯µã»÷»ØÁ÷°´Å¥ <button id="backflow" onclick="backflow()">»ØÁ÷</button> </span>
+                                  <p> <label for="">å½“å‰å¤§ç›˜:</label>
+                                      <span style="display: none;">æ­£åœ¨å›æµä¸­è¯·ç¨ç­‰</span>
+                                      <span>æœªèƒ½æ­£å¸¸å›æµè¯·æ‰‹åŠ¨ç‚¹å‡»å›æµæŒ‰é’® <button id="backflow" onclick="backflow()">å›æµ</button> </span>
                                   </p>
 
                               </div>
                               <div class="controlgrop">
-                                  <label for="">ÇëÊäÈë¶Ñ¶â»ú¿âĞèÒª°áÔËµÄ´óÔØÅÌµÄ¿âÎ»×ø±ê£¬µãÈ·¶¨ºó»á°áÅÌµ½¼Ğ²ãµÄ¼ğÑ¡Î»</label>
+                                  <label for="">è¯·è¾“å…¥å †å›æœºåº“éœ€è¦æ¬è¿çš„å¤§è½½ç›˜çš„åº“ä½åæ ‡ï¼Œç‚¹ç¡®å®šåä¼šæ¬ç›˜åˆ°å¤¹å±‚çš„æ‹£é€‰ä½</label>
                                   <div class="enterbox" >
                                       <input type="text" id="cell2"/>
-                                      <button id="enter1" onclick="enter1()">È·¶¨</button>
+                                      <button id="enter1" onclick="enter1()">ç¡®å®š</button>
                                   </div>
 
                               </div>
                           </div>
                           <div class="content content1" id="menu3">
-                              <h5>¼ğÑ¡Íê³ÉºóËÍ´óÔØÅÌÏÂÒ»Â¥£¨×Ô¶¯Ä£Ê½ÏÂĞèÈ«²¿ÊäÈëÊıÖµ£¬µ¥»ú²âÊÔÊ±ÎŞĞèÊäÈë¹¤µ¥ID¼°´óÅÌ±àÂë¡¢Ö»ĞèÒªµãÑ¡ÉÏÏÂ²ãºóµã»÷¿ªÊ¼°áÔË£©</h5>
+                              <h5>æ‹£é€‰å®Œæˆåé€å¤§è½½ç›˜ä¸‹ä¸€æ¥¼ï¼ˆè‡ªåŠ¨æ¨¡å¼ä¸‹éœ€å…¨éƒ¨è¾“å…¥æ•°å€¼ï¼Œå•æœºæµ‹è¯•æ—¶æ— éœ€è¾“å…¥å·¥å•IDåŠå¤§ç›˜ç¼–ç ã€åªéœ€è¦ç‚¹é€‰ä¸Šä¸‹å±‚åç‚¹å‡»å¼€å§‹æ¬è¿ï¼‰</h5>
                               <div class="controlgrop"style="vertical-align: middle;line-height: 0.5rem;">
                                   <input type="radio" name="layer" value="10" style="vertical-align: middle;margin-top: 0.9rem;" />
-                                  <label for="" style="vertical-align: middle;">ÉÏ²ã</label>
+                                  <label for="" style="vertical-align: middle;">ä¸Šå±‚</label>
 
                                   <input type="radio" name="layer" value="15" style="vertical-align: middle;margin-top: 0.9rem; " />
-                                  <label for="" style="vertical-align: middle;">ÏÂ²ã</label>
+                                  <label for="" style="vertical-align: middle;">ä¸‹å±‚</label>
                               </div>
                               <div class="controlgrop">
-                                  <label for="">ÇëÊäÈëÍâ²ã¹¤µ¥id</label>
+                                  <label for="">è¯·è¾“å…¥å¤–å±‚å·¥å•id</label>
                                   <input type="text" id="workid"/>
-                                  <label for="" >ÇëÊäÈë´óÅÌ±àÂë</label>
+                                  <label for="" >è¯·è¾“å…¥å¤§ç›˜ç¼–ç </label>
                                   <input type="text" id="bigpalletid"/>
-                                  <button id="starttransport" onclick="starttransport()">¿ªÊ¼°áÔË</button>
+                                  <button id="starttransport" onclick="starttransport()">å¼€å§‹æ¬è¿</button>
                               </div>
                           </div>
                       </div>
@@ -255,46 +255,46 @@
               </div>
           </li>
           <li class="accordion-navigation">
-              <a href="#demo3" class="title1">1F²Ù×÷</a>
+              <a href="#demo3" class="title1">1Fæ“ä½œ</a>
               <div id="demo3" class="content">
                   <div class="menu1">
                       <ul class="tabs row" data-tab>
-                          <li class="tab-title active medium-3 columns"><a href="#home2">³ö¿â</a></li>
-                          <li class="tab-title medium-3 columns"><a href="#menu4">´óÅÌÈë¿â</a></li>
+                          <li class="tab-title active medium-3 columns"><a href="#home2">å‡ºåº“</a></li>
+                          <li class="tab-title medium-3 columns"><a href="#menu4">å¤§ç›˜å…¥åº“</a></li>
 
                       </ul>
                       <div class="tabs-content">
                           <div class="content active" id="home2">
-                              <h5>ÓÃÓÚÒ»Â¥ĞèÒª½øĞĞ³ö¿âÊ±Ê¹ÓÃ,¿Éµ¥»ú²âÊÔ»ò×Ô¶¯Ä£Ê½</h5>
+                              <h5>ç”¨äºä¸€æ¥¼éœ€è¦è¿›è¡Œå‡ºåº“æ—¶ä½¿ç”¨,å¯å•æœºæµ‹è¯•æˆ–è‡ªåŠ¨æ¨¡å¼</h5>
                               <div class="controlgrop">
-                                  <label for="">ÇëÊäÈëÒª³ö¿âµÄÔØÅÌID±àÂë,¿ÉÒÔ²»Á¬Í¬ÏÂÃæ¹¦ÄÜÒ»ÆğÊ¹ÓÃ</label>
+                                  <label for="">è¯·è¾“å…¥è¦å‡ºåº“çš„è½½ç›˜IDç¼–ç ,å¯ä»¥ä¸è¿åŒä¸‹é¢åŠŸèƒ½ä¸€èµ·ä½¿ç”¨</label>
                                   <div  class="enterbox">
                                       <input type="text" id="palletid3" />
-                                      <button id="enter2" onclick="enter2()">È·¶¨</button>
+                                      <button id="enter2" onclick="enter2()">ç¡®å®š</button>
 
                                   </div>
 
-                                  <label for="">ÇëÊäÈë´ı°áÔËµÄ¿âÎ»×ø±ê,¿ÉÒÔ²»Á¬Í¬ÉÏÃæ¹¦ÄÜÒ»ÆğÊ¹ÓÃ </label>
+                                  <label for="">è¯·è¾“å…¥å¾…æ¬è¿çš„åº“ä½åæ ‡,å¯ä»¥ä¸è¿åŒä¸Šé¢åŠŸèƒ½ä¸€èµ·ä½¿ç”¨ </label>
                                   <div class="enterbox">
                                       <input type="text" id="cell3"/>
-                                      <button id="enter3" onclick="enter3()">È·¶¨</button>
+                                      <button id="enter3" onclick="enter3()">ç¡®å®š</button>
                                   </div>
 
                               </div>
                           </div>
                           <div class="content" id="menu4">
-                              <h5>ÓÃÓÚÒ»Â¥½øĞĞ¿ÕµÄ´óÔØÅÌÈë¿âÊ±Ê¹ÓÃ,¿Éµ¥»ú²âÊÔ»ò×Ô¶¯Ä£Ê½</h5>
+                              <h5>ç”¨äºä¸€æ¥¼è¿›è¡Œç©ºçš„å¤§è½½ç›˜å…¥åº“æ—¶ä½¿ç”¨,å¯å•æœºæµ‹è¯•æˆ–è‡ªåŠ¨æ¨¡å¼</h5>
                               <div class="controlgrop">
-                                  <label for="">ÇëÊäÈëÒªÈë¿âµÄÔØÅÌID±àÂë,¿ÉÒÔ²»Á¬Í¬ÏÂÃæ¹¦ÄÜÒ»ÆğÊ¹ÓÃ</label>
+                                  <label for="">è¯·è¾“å…¥è¦å…¥åº“çš„è½½ç›˜IDç¼–ç ,å¯ä»¥ä¸è¿åŒä¸‹é¢åŠŸèƒ½ä¸€èµ·ä½¿ç”¨</label>
                                   <div class="enterbox">
                                       <input type="text" id="palletid4"/>
-                                      <button onclick="enter4()">È·¶¨</button>
+                                      <button onclick="enter4()">ç¡®å®š</button>
                                   </div>
 
-                                  <label for="">ÇëÊäÈë´ı·ÅÖÃµÄ¿âÎ»×ø±ê,¿ÉÒÔ²»Á¬Í¬ÉÏÃæ¹¦ÄÜÒ»ÆğÊ¹ÓÃ </label>
+                                  <label for="">è¯·è¾“å…¥å¾…æ”¾ç½®çš„åº“ä½åæ ‡,å¯ä»¥ä¸è¿åŒä¸Šé¢åŠŸèƒ½ä¸€èµ·ä½¿ç”¨ </label>
                                   <div class="enterbox">
                                       <input type="text" id="cell4"/>
-                                      <button onclick="enter5()">È·¶¨</button>
+                                      <button onclick="enter5()">ç¡®å®š</button>
                                   </div>
 
                               </div>
@@ -310,8 +310,8 @@
 
       </div>
       <div class="row">
-          <div class="medium-6 columns"><button class="show" onclick="showtrayid()">°´ÍĞÅÌºÅÏÔÊ¾</button></div>
-          <div class="medium-6 columns"> <button class="show"onclick="partid()" >°´ÎïÁÏºÅÏÔÊ¾</button></div>
+          <div class="medium-6 columns"><button class="show" onclick="showtrayid()">æŒ‰æ‰˜ç›˜å·æ˜¾ç¤º</button></div>
+          <div class="medium-6 columns"> <button class="show"onclick="partid()" >æŒ‰ç‰©æ–™å·æ˜¾ç¤º</button></div>
       </div>
 
 </div>
@@ -320,19 +320,19 @@
 </div>
 
 <script>
-    $(document).ready(function() {// ³õÊ¼»¯ Foundation JS
+    $(document).ready(function() {// åˆå§‹åŒ– Foundation JS
         $(document).foundation();
     })
 </script>
 
 <script type="text/javascript">
     /**
-    * ×Ô¶¨Òåº¯ÊıÃû£ºPrefixZero
-    * @param num£º ±»²Ù×÷Êı
-    * @param n£º ¹Ì¶¨µÄ×ÜÎ»Êı
+    * è‡ªå®šä¹‰å‡½æ•°åï¼šPrefixZero
+    * @param numï¼š è¢«æ“ä½œæ•°
+    * @param nï¼š å›ºå®šçš„æ€»ä½æ•°
     * var myNum = 9;var myNum2 = 12;
-    * console.log('´¦ÀíºómyNum£º'+PrefixZero(myNum, 3));//009
-    * console.log('´¦ÀíºómyNum2£º'+PrefixZero(myNum2, 3));//012
+    * console.log('å¤„ç†åmyNumï¼š'+PrefixZero(myNum, 3));//009
+    * console.log('å¤„ç†åmyNum2ï¼š'+PrefixZero(myNum2, 3));//012
     */
     function PrefixZero(num, n) {
     return (Array(n).join(0) + num).slice(-n);
@@ -374,7 +374,7 @@ function init()
     create_node(mapnode_pri_agv );
     create_node(mapnode_pri_duiduoji );
     create_node(mapnode_pri_select );
-	//Ê¹ÓÃ»­Í¼Êı×é(È«¾Ö±äÁ¿)
+	//ä½¿ç”¨ç”»å›¾æ•°ç»„(å…¨å±€å˜é‡)
     map_layer_10f=mapnode_10f;
     map_layer_hov=mapnode_hov;
     map_layer_15f=mapnode_15f;
@@ -390,7 +390,7 @@ function init()
 	var boxdiv = document.getElementById("box");
 	var boxheight= boxdiv.clientHeight+drawdiv.offsetHeight;
 	if(drawdiv==null)
-		return; //²»´æÔÚ¸ÃÍ¼²ã£¬»æÍ¼Ê§°Ü
+		return; //ä¸å­˜åœ¨è¯¥å›¾å±‚ï¼Œç»˜å›¾å¤±è´¥
 	drawdiv.innerHTML=""; //clean svg content
 	w_max = drawdiv.clientWidth||drawdiv.offsetWidth;
 	//h_max = drawdiv.clientHeight||drawdiv.offsetHeight;
@@ -410,7 +410,7 @@ function draw_hov(x0,y0,w,h,draw)
 	var w_ratio = w/680;
 	var h_ratio = h/600;
 	
-    //ĞŞÕıÕæÊµ×ø±ê
+    //ä¿®æ­£çœŸå®åæ ‡
     for (j = 0, len = map_layer_hov.length; j < len; j++)
         map_layer_hov[j].update_whxy(w, h, x0, y0, w_ratio, h_ratio);
     for (j = 0, len = map_layer_hov.length; j < len; j++)
@@ -509,7 +509,7 @@ function agvtrace(message){
 	 		return;
 		for(j = 0,len=map_layer_agv.length; j < len; j++)
 		   if(map_layer_agv[j].name == (agvnum + '')){
-		   		//Ñ°ÕÒ¶ÔÓ¦µÄµÀÂ·µØ±êmessage[f].posX,posY
+		   		//å¯»æ‰¾å¯¹åº”çš„é“è·¯åœ°æ ‡message[f].posX,posY
 		   		var x1=map_layer_road[k].svgobj.attr('x');
 		   		var y1= map_layer_road[k].svgobj.attr('y');
 		   		map_layer_agv[j].svgobj.move(map_layer_road[k].svgobj.attr('x'), map_layer_road[k].svgobj.attr('y'));
@@ -517,16 +517,16 @@ function agvtrace(message){
 	}	 
 }
 
-function srmtrace(message){  //·µ»Ø¶Ñ¶â»úµÄ½á¹ûÏÔÊ¾
-	//È¡³öĞĞÁĞ²ã
-		for(j = 0,len=map_layer_srm.length; j < len; j++) //±éÀú¶Ñ¶â»ú
+function srmtrace(message){  //è¿”å›å †å›æœºçš„ç»“æœæ˜¾ç¤º
+	//å–å‡ºè¡Œåˆ—å±‚
+		for(j = 0,len=map_layer_srm.length; j < len; j++) //éå†å †å›æœº
 		   if(map_layer_srm[j].name == (agvnum + '')){
 	}
 }
 
 $("#mancontrol").click(function(){
   $.get("/yxpower/ajax?a=manop",function(data,status){
-    alert("Êı¾İ£º" + data + "\n×´Ì¬£º" + status);
+    alert("æ•°æ®ï¼š" + data + "\nçŠ¶æ€ï¼š" + status);
   });
   });
     
@@ -540,27 +540,27 @@ function timer_display()
 <script>
 function las_agvenable(){//
 	$.ajax({  
-		type : "get", //Ê¹ÓÃget·½·¨·ÃÎÊºóÌ¨        
+		type : "get", //ä½¿ç”¨getæ–¹æ³•è®¿é—®åå°        
 		url : "/yxpower/ajax",		
 		dataType : "html",  			
-		data : "a=las_agvenable", //Òª·¢ËÍµÄ²ÎÊı  
-		async : false,//Í¬²½µ÷ÓÃ   			
+		data : "a=las_agvenable", //è¦å‘é€çš„å‚æ•°  
+		async : false,//åŒæ­¥è°ƒç”¨   			
 		success : function(msg) {
 			//$("#patinfo").val(msg); 
 			//getlistjust(15);
-			alert("ÒÑÖ´ĞĞ");
+			alert("å·²æ‰§è¡Œ");
 		}
 	});
 }
 
-function showtrayid(){//°´ÍĞÅÌºÅÏÔÊ¾°´Å¥
+function showtrayid(){//æŒ‰æ‰˜ç›˜å·æ˜¾ç¤ºæŒ‰é’®
     addcell(mapnode_pri_10f,1);
     addcell(mapnode_pri_15f,1);
     addcell(mapnode_pri_hov,1);
     addcell(mapnode_pri_select,1);
 }
 
-function partid(){//°´ÁÏºÅÏÔÊ¾°´Å¥
+function partid(){//æŒ‰æ–™å·æ˜¾ç¤ºæŒ‰é’®
     addcell(mapnode_pri_10f,0);
     addcell(mapnode_pri_15f,0);
     addcell(mapnode_pri_hov,0);
@@ -569,15 +569,15 @@ function partid(){//°´ÁÏºÅÏÔÊ¾°´Å¥
 
 function las_agvrun(){//  
 	$.ajax({  
-		type : "get", //Ê¹ÓÃget·½·¨·ÃÎÊºóÌ¨        
+		type : "get", //ä½¿ç”¨getæ–¹æ³•è®¿é—®åå°        
 		url : "/yxpower/ajax",		
 		dataType : "html",  			
-		data : "a=las_agvrun", //Òª·¢ËÍµÄ²ÎÊı  
-		async : false,//Í¬²½µ÷ÓÃ   			
+		data : "a=las_agvrun", //è¦å‘é€çš„å‚æ•°  
+		async : false,//åŒæ­¥è°ƒç”¨   			
 		success : function(msg) {
 			//$("#patinfo").val(msg); 
 			//getlistjust(15);
-			alert("ÒÑÖ´ĞĞ");
+			alert("å·²æ‰§è¡Œ");
 		}
 	});
 }
@@ -627,12 +627,12 @@ function getagvs()
 	data:null,//content, 
 	dataType:"json",
 	success:function (message) {
-              //alert("Ìá½»³É¹¦"+JSON.stringify(message));
+              //alert("æäº¤æˆåŠŸ"+JSON.stringify(message));
               //message=message = [{"robotid":3202,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":87,"posX":19,"posY":16,"posCode":819,"direction":0,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":798,"count":151313,"system_pause":true,"offset":15120,"exception":0},{"robotid":3201,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":86,"posX":19,"posY":9,"posCode":469,"direction":1,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":794,"count":205455,"system_pause":true,"offset":8682,"exception":0},{"robotid":3199,"status":0,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":76,"posX":20,"posY":9,"posCode":470,"direction":1,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":203875,"system_pause":true,"offset":21846,"exception":0},{"robotid":3197,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":73,"posX":19,"posY":12,"posCode":619,"direction":0,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":797,"count":628308,"system_pause":true,"offset":6402,"exception":0},{"robotid":3205,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":27,"posY":23,"posCode":1177,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":992389,"system_pause":true,"offset":28112,"exception":0},{"robotid":3203,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":29,"posY":23,"posCode":1179,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":-1,"count":204129,"system_pause":true,"offset":13186,"exception":0},{"robotid":3200,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":25,"posY":23,"posCode":1175,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":783,"count":131145,"system_pause":true,"offset":15946,"exception":0},{"robotid":3198,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":28,"posY":23,"posCode":1178,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":100674,"system_pause":true,"offset":21362,"exception":0},{"robotid":3204,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":24,"posY":23,"posCode":1174,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":-1,"count":1341011,"system_pause":true,"offset":20228,"exception":0},{"robotid":3196,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":26,"posY":23,"posCode":1176,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":784,"count":204369,"system_pause":true,"offset":24154,"exception":0}];
               agvtrace(message);
           },
           error:function (message) {
-              //alert("Ìá½»Ê§°Ü"+JSON.stringify(message));
+              //alert("æäº¤å¤±è´¥"+JSON.stringify(message));
               //var message = [{"robotid":3202,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":87,"posX":19,"posY":16,"posCode":819,"direction":0,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":798,"count":151313,"system_pause":true,"offset":15120,"exception":0},{"robotid":3201,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":86,"posX":19,"posY":9,"posCode":469,"direction":1,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":794,"count":205455,"system_pause":true,"offset":8682,"exception":0},{"robotid":3199,"status":0,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":76,"posX":20,"posY":9,"posCode":470,"direction":1,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":203875,"system_pause":true,"offset":21846,"exception":0},{"robotid":3197,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":73,"posX":19,"posY":12,"posCode":619,"direction":0,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":797,"count":628308,"system_pause":true,"offset":6402,"exception":0},{"robotid":3205,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":27,"posY":23,"posCode":1177,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":992389,"system_pause":true,"offset":28112,"exception":0},{"robotid":3203,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":29,"posY":23,"posCode":1179,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":-1,"count":204129,"system_pause":true,"offset":13186,"exception":0},{"robotid":3200,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":25,"posY":23,"posCode":1175,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":783,"count":131145,"system_pause":true,"offset":15946,"exception":0},{"robotid":3198,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":28,"posY":23,"posCode":1178,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":100674,"system_pause":true,"offset":21362,"exception":0},{"robotid":3204,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":24,"posY":23,"posCode":1174,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":-1,"count":1341011,"system_pause":true,"offset":20228,"exception":0},{"robotid":3196,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":26,"posY":23,"posCode":1176,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":784,"count":204369,"system_pause":true,"offset":24154,"exception":0}];
               //agvtrace(message);
           }
@@ -648,12 +648,12 @@ function getsrms()
 	data:null,//content, 
 	dataType:"json",
 	success:function (message) {
-              //alert("Ìá½»³É¹¦"+JSON.stringify(message));
+              //alert("æäº¤æˆåŠŸ"+JSON.stringify(message));
               //message=message = [{"robotid":3202,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":87,"posX":19,"posY":16,"posCode":819,"direction":0,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":798,"count":151313,"system_pause":true,"offset":15120,"exception":0},{"robotid":3201,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":86,"posX":19,"posY":9,"posCode":469,"direction":1,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":794,"count":205455,"system_pause":true,"offset":8682,"exception":0},{"robotid":3199,"status":0,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":76,"posX":20,"posY":9,"posCode":470,"direction":1,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":203875,"system_pause":true,"offset":21846,"exception":0},{"robotid":3197,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":73,"posX":19,"posY":12,"posCode":619,"direction":0,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":797,"count":628308,"system_pause":true,"offset":6402,"exception":0},{"robotid":3205,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":27,"posY":23,"posCode":1177,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":992389,"system_pause":true,"offset":28112,"exception":0},{"robotid":3203,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":29,"posY":23,"posCode":1179,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":-1,"count":204129,"system_pause":true,"offset":13186,"exception":0},{"robotid":3200,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":25,"posY":23,"posCode":1175,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":783,"count":131145,"system_pause":true,"offset":15946,"exception":0},{"robotid":3198,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":28,"posY":23,"posCode":1178,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":100674,"system_pause":true,"offset":21362,"exception":0},{"robotid":3204,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":24,"posY":23,"posCode":1174,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":-1,"count":1341011,"system_pause":true,"offset":20228,"exception":0},{"robotid":3196,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":26,"posY":23,"posCode":1176,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":784,"count":204369,"system_pause":true,"offset":24154,"exception":0}];
               srmtrace(message);
           },
           error:function (message) {
-              //alert("Ìá½»Ê§°Ü"+JSON.stringify(message));
+              //alert("æäº¤å¤±è´¥"+JSON.stringify(message));
               //var message = [{"robotid":3202,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":87,"posX":19,"posY":16,"posCode":819,"direction":0,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":798,"count":151313,"system_pause":true,"offset":15120,"exception":0},{"robotid":3201,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":86,"posX":19,"posY":9,"posCode":469,"direction":1,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":794,"count":205455,"system_pause":true,"offset":8682,"exception":0},{"robotid":3199,"status":0,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":76,"posX":20,"posY":9,"posCode":470,"direction":1,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":203875,"system_pause":true,"offset":21846,"exception":0},{"robotid":3197,"status":1,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":73,"posX":19,"posY":12,"posCode":619,"direction":0,"speed":100,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":797,"count":628308,"system_pause":true,"offset":6402,"exception":0},{"robotid":3205,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":27,"posY":23,"posCode":1177,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":992389,"system_pause":true,"offset":28112,"exception":0},{"robotid":3203,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":29,"posY":23,"posCode":1179,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":-1,"count":204129,"system_pause":true,"offset":13186,"exception":0},{"robotid":3200,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":25,"posY":23,"posCode":1175,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":783,"count":131145,"system_pause":true,"offset":15946,"exception":0},{"robotid":3198,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":28,"posY":23,"posCode":1178,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":-1,"count":100674,"system_pause":true,"offset":21362,"exception":0},{"robotid":3204,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":24,"posY":23,"posCode":1174,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":699,"missionid":-1,"count":1341011,"system_pause":true,"offset":20228,"exception":0},{"robotid":3196,"status":4,"runTime":0,"runDistance":0,"batteryTimes":0,"batteryPower":100,"posX":26,"posY":23,"posCode":1176,"direction":0,"speed":0,"error":255,"enable":2,"boxID":"0000000000000000","warning_code":255,"cargo_status":0,"lifter_pos":698,"missionid":784,"count":204369,"system_pause":true,"offset":24154,"exception":0}];
               //agvtrace(message);
           }

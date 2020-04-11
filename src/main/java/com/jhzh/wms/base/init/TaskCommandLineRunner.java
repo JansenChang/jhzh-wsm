@@ -26,10 +26,10 @@ public class TaskCommandLineRunner implements CommandLineRunner, Ordered {
     @Override
     public void run(String... strings) throws Exception {
        log.info("项目启动任务执行计划开始>>>>>>>>>>>>>>>>>>>>>>>>>");
-       //queryTask.QueryWarehouseStatus();
-       //queryTask.QueryExWarehouseStatus();
+       queryTask.QueryWarehouseStatus();
+       queryTask.QueryExWarehouseStatus();
        //queryTask.QueryWoPlanInfo();
-       //queryTask.QueryCompletedTask();
+       queryTask.QueryCompletedTask();
 
     }
 
