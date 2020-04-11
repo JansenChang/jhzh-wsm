@@ -16,4 +16,6 @@ public interface TaskmesDao {
 
     List<TaskmesDto> queryCompletedTask(TaskmesDto taskmesDto);
 
+    List<TaskmesDto> queryPickTask();
+
 }

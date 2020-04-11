@@ -51,7 +51,8 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
     private ItemInfoDao itemInfoDao;
     @Autowired
     private TaskmesDao taskmesDao;
-
+    @Autowired
+    private IlsPickRackDao ilsPickRackDao;
 
     private Integer wipQtyTemp;
 
@@ -243,6 +244,7 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
             taskmesDto2.setStatus(0);
             taskmesDao.updateTaskmes(taskmesDto2);
             woPlanInfoDao.updateStatus(taskid);
+            ilsPickRackDao.updateStatus(taskid);
         });
     }
 
@@ -391,6 +393,14 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
         }
         return "";
     }
+
+
+
+
+
+
+
+
 
 
     @Async
