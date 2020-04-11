@@ -290,9 +290,7 @@ public class PickTask {
                                   noVacancy=true;
                               }
                            }
-
-
-                       }
+                        }
                     //备用选用3，2层进行操作，只有1进行备盘
                     }else if(!integers4[0].equals(0)&&integers2[0].equals(0)){
                        boolean flag=false;
@@ -343,10 +341,7 @@ public class PickTask {
                                   noVacancy=true;
                               }
                            }
-
-
-
-                       }
+                        }
                     }
 
 
