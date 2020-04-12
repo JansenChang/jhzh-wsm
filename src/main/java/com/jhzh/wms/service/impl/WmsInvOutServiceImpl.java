@@ -133,15 +133,11 @@ public class WmsInvOutServiceImpl implements WmsInvOutService {
         Integer wipEntityId = dto.getWipEntityId();
         String itemCode = dto.getItemCode();
         Integer quantity = dto.getQuantity();
-        if (EmptyUtils.isEmpty(taskId) ||
-                EmptyUtils.isEmpty(taskSource) ||
-                EmptyUtils.isEmpty(invOutType) ||
-                EmptyUtils.isEmpty(wipEntityId) ||
-                EmptyUtils.isEmpty(itemCode) ||
-                EmptyUtils.isEmpty(quantity)
-        ) {
-            return false;
-        }
-        return true;
+	    return !EmptyUtils.isEmpty(taskId) &&
+			    !EmptyUtils.isEmpty(taskSource) &&
+			    !EmptyUtils.isEmpty(invOutType) &&
+			    !EmptyUtils.isEmpty(wipEntityId) &&
+			    !EmptyUtils.isEmpty(itemCode) &&
+			    !EmptyUtils.isEmpty(quantity);
     }
 }

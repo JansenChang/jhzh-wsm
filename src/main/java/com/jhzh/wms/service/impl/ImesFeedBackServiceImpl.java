@@ -38,17 +38,9 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
     @Autowired
     private WoPlanInfoDao woPlanInfoDao;
     @Autowired
-    private ItemBomInfoDao itemBomInfoDao;
-    @Autowired
-    private PutInStorageDao putInStorageDao;
-    @Autowired
     private WmsInvOutDao wmsInvOutDao;
     @Autowired
-    private YxWmsCellDao yxWmsCellDao;
-    @Autowired
     private IlsCellDao IlscellDao;
-    @Autowired
-    private ItemInfoDao itemInfoDao;
     @Autowired
     private TaskmesDao taskmesDao;
     @Autowired
@@ -131,31 +123,6 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
                     .build());
         }
         return resultMap;
-    }
-
-    public void QueryItemInfo(String itemCode) {
-        try {
-            HashMap<String, Object> map = new HashMap();
-            map.put("organizationId", "142");
-            map.put("itemCode", itemCode);
-            map.put("lastUpdateDateFrom", "1990-01-01 00:00:00");
-            map.put("lastUpdateDateTo", "9999-12-31 00:00:00");
-            map.put("lineNumber", "1");
-            map.put("lineTotal", "2000");
-            ItemInfoDto itemInfoDto = httpAPIService.getResultData(queryItemInfoUrl, JSONObject.toJSONString(map), ItemInfoDto.class);
-            itemInfoDto.setId(UUID.randomUUID().toString().replaceAll("-", ""));
-            itemInfoDto.setUnt(9);
-            itemInfoDto.setApp(900);
-            Integer counts = itemInfoDao.queryItemInfoByItemCode(itemCode);
-            if (counts == 0) {
-                itemInfoDao.insertItemInfo(itemInfoDto);
-            } else {
-                itemInfoDao.updateItemInfo(itemInfoDto);
-            }
-
-        } catch (Exception e) {
-            log.error(e.getMessage());
-        }
     }
 
 

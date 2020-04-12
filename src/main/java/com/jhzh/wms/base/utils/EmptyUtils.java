@@ -1,7 +1,5 @@
 package com.jhzh.wms.base.utils;
 
-import com.alibaba.fastjson.JSONObject;
-
 import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Map;
@@ -214,11 +212,8 @@ public class EmptyUtils {
         if (obj instanceof Collection && ((Collection) obj).isEmpty()) {    // 集合（包含list和set）
             return true;
         }
-        if (obj instanceof Map && ((Map) obj).isEmpty()) {                  // map键值对集合
-            return true;
-        }
-
-        return false;
+	    // map键值对集合
+	    return obj instanceof Map && ((Map) obj).isEmpty();
     }
 
     /**

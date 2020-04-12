@@ -431,16 +431,10 @@ public class PutInStorageServiceImpl implements PutInStorageService {
             }
 
         }
-        if (
-                !(jsonpObject.containsKey("taskId") &&
-                        jsonpObject.containsKey("taskSource") &&
-                        jsonpObject.containsKey("locator") &&
-                        jsonpObject.containsKey("shelfCode"))
-        ) {
-            return false;
-        }
-
-        return true;
+        return jsonpObject.containsKey("taskId") &&
+                jsonpObject.containsKey("taskSource") &&
+                jsonpObject.containsKey("locator") &&
+                jsonpObject.containsKey("shelfCode");
     }
 
     @Override
@@ -509,13 +503,7 @@ public class PutInStorageServiceImpl implements PutInStorageService {
         String taskSource = (String)jsonObject.get("taskSource");
         String wipEntityId= (String)jsonObject.get("wipEntityId");
         String lotCode = (String)jsonObject.get("lotCode");
-        if(EmptyUtils.isEmpty(taskSource)&&(
-                EmptyUtils.isEmpty(wipEntityId)&&EmptyUtils.isEmpty(lotCode)
-                )){
-            return false;
-        }
-
-        return true;
+        return !EmptyUtils.isEmpty(taskSource) || (!EmptyUtils.isEmpty(wipEntityId) || !EmptyUtils.isEmpty(lotCode));
     }
 
 

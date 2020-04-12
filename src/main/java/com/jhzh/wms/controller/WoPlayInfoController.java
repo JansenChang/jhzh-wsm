@@ -33,7 +33,7 @@ public class WoPlayInfoController {
 
     @ResponseBody
     @RequestMapping(value = "/woPlayInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public Result<?> woPlayInfo( @RequestBody JSONObject jsonpObject) throws Exception {
+    public Result<?> woPlayInfo( @RequestBody JSONObject jsonpObject) {
         Map<String,Object> map=jsonpObject;
         map.put("wipEntityId",jsonpObject.get("wipEntityId"));
         map.put("itemCode","");
@@ -56,7 +56,7 @@ public class WoPlayInfoController {
     }
     @ResponseBody
     @RequestMapping(value = "/woPlayInfo2", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public Result<?> woPlayInfo2( @RequestBody JSONObject jsonpObject) throws Exception {
+    public Result<?> woPlayInfo2( @RequestBody JSONObject jsonpObject) {
         Map<String,Object> map=jsonpObject;
         map.put("wipEntityId",jsonpObject.get("wipEntityId"));
         map.put("itemCode","");

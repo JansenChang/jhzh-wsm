@@ -1,9 +1,15 @@
 package com.jhzh.wms.base.export;
 
+import com.alibaba.fastjson.JSON;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+
+import java.util.*;
+
 public class ExportUtil {
 
 
-   /* public static HSSFWorkbook exportExcel(List<Map<String, Object>> data, Map<String, String> map) throws Exception {
+    public static HSSFWorkbook exportExcel(List<Map<String, Object>> data, Map<String, String> map) throws Exception {
         List<String> lists=new ArrayList();
         for(Map.Entry<String, String> entry : map.entrySet()){
             String key = entry.getKey();
@@ -27,9 +33,9 @@ public class ExportUtil {
     public static HSSFWorkbook exportExcel(List<Map<String, Object>> data, List<String> title) throws Exception {
 
         // 从参数data中解析出打印的每列标题，放入title中
-        *//*for(Map.Entry<String, Object> entry : data.get(0).entrySet()) {
+        for(Map.Entry<String, Object> entry : data.get(0).entrySet()) {
             title.add(entry.getKey());
-        }*//*
+        }
         // 新建一个Excel文件
         HSSFWorkbook wb = new HSSFWorkbook();
         // Excel中的sheet
@@ -38,7 +44,7 @@ public class ExportUtil {
         HSSFRow row = sheet.createRow(0);
         // 设置标题居中
         HSSFCellStyle cellStyle = wb.createCellStyle();
-        cellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+        cellStyle.setAlignment(HorizontalAlignment.CENTER);
         // sheet中的单元格
         HSSFCell cell = null;
 
@@ -68,7 +74,6 @@ public class ExportUtil {
         return wb;
     }
 
-*/
 
 
 }
