@@ -2,6 +2,7 @@ package com.jhzh.wms.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.jhzh.wms.base.result.Result;
+import com.jhzh.wms.base.utils.EmptyUtils;
 import com.jhzh.wms.dto.TaskStatusDto;
 import com.jhzh.wms.service.InvQtyService;
 import com.jhzh.wms.service.WmsTaskService;
@@ -33,6 +34,9 @@ public class WmsTaskController {
         String taskId = jsonpObject.get("taskId").toString();
         log.info(jsonpObject.toJSONString());
         List<TaskStatusDto> taskStatusDtos = wmsTaskService.queryTaskStatus(taskId);
+        if(EmptyUtils.isEmpty(taskStatusDtos)){
+            return Result.success("");
+        }
         log.info("立体库任务状态查询接口 end..");
         return Result.success(taskStatusDtos.get(0));
     }

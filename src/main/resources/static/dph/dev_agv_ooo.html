@@ -7,7 +7,7 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
-  <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
@@ -38,11 +38,11 @@
     <div id="drawing"></div>
   </div>
   <div class="medium-2 columns">
-      <button onclick="draw_all();">¼à¿ØË¢ĞÂ</button>
-      <label>Ö¸¶¨Ä¿±êµØµ÷¶È        <input type="text" placeholder="Name">      </label>
-      <label>Ö¸¶¨³µÁ¾ <input type="text" placeholder="agv"></label>
-      <label>Ö¸¶¨Î»ÖÃ<input type="text" placeholder="loc"></label>
-      <label><button type="button" class="button radius">ÊÖ¹¤µ÷¶È</button></label>
+      <button onclick="draw_all();">ç›‘æ§åˆ·æ–°</button>
+      <label>æŒ‡å®šç›®æ ‡åœ°è°ƒåº¦        <input type="text" placeholder="Name">      </label>
+      <label>æŒ‡å®šè½¦è¾† <input type="text" placeholder="agv"></label>
+      <label>æŒ‡å®šä½ç½®<input type="text" placeholder="loc"></label>
+      <label><button type="button" class="button radius">æ‰‹å·¥è°ƒåº¦</button></label>
 </div>
 
 
@@ -82,7 +82,7 @@
 		[ 00, 00,  00, 00, 00, 00, 00, 00, 30, 50,30, 50, 10, 10, 10, 10, 10, 10, 10, 10, 10, 00, 00, 00, 00, 00  ],	//5
 		[ 00, 00,  00, 00, 00, 00, 00, 00, 14, 50,14, 50, 10, 10, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00, 00  ],
 
-		//6ÓÒ8				
+		//6å³8				
 		[ 00, 00,  00, 00, 00, 00, 00, 00, 10, 14,10, 14, 10, 10, 01, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00  ],
 		[ 00, 00,  00, 00, 00, 00, 00, 00, 10, 00,10, 00, 14, 10, 10, 10, 10, 10, 10, 10, 10, 10, 00, 00, 00, 00  ],	//6
 		[ 00, 00,  00, 00, 00, 00, 00, 00, 10, 14,10, 14, 10, 10, 01, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00  ],
@@ -92,14 +92,14 @@
 		[ 00, 00,  00, 00, 00, 00, 00, 00, 01, 01,01, 01, 10, 10, 01, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00  ],
 		//8			
 		[ 00, 00,  00, 00, 00, 00, 00, 00, 00, 00,00, 00, 10, 10, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00, 00  ],
-		[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 00, 00, 00, 00  ],	//8	//³äµç×®
-		[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 00, 00, 00, 00  ],	//9	//³äµç×®
+		[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 00, 00, 00, 00  ],	//8	//å……ç”µæ¡©
+		[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 00, 00, 00, 00  ],	//9	//å……ç”µæ¡©
 
-		[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00  ],	//0-10 ¼ğÑ¡Ì¨  	//³äµç×®
+		[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 00, 00, 00, 00  ],	//0-10 æ‹£é€‰å°  	//å……ç”µæ¡©
 
-		[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00  ],	//³äµç×®
-		[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00  ],	//³äµç×®
-		[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00  ],	//³äµç×®
+		[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00  ],	//å……ç”µæ¡©
+		[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00  ],	//å……ç”µæ¡©
+		[ 00, 00,  00, 00, 00, 00, 00, 20, 12, 10,14, 10, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00  ],	//å……ç”µæ¡©
 
 	];
 
@@ -110,22 +110,22 @@
 
 
 /**
-* ×Ô¶¨Òåº¯ÊıÃû£ºPrefixZero
-* @param num£º ±»²Ù×÷Êı
-* @param n£º ¹Ì¶¨µÄ×ÜÎ»Êı
+* è‡ªå®šä¹‰å‡½æ•°åï¼šPrefixZero
+* @param numï¼š è¢«æ“ä½œæ•°
+* @param nï¼š å›ºå®šçš„æ€»ä½æ•°
 * var myNum = 9;var myNum2 = 12;
-* console.log('´¦ÀíºómyNum£º'+PrefixZero(myNum, 3));//009
-* console.log('´¦ÀíºómyNum2£º'+PrefixZero(myNum2, 3));//012
+* console.log('å¤„ç†åmyNumï¼š'+PrefixZero(myNum, 3));//009
+* console.log('å¤„ç†åmyNum2ï¼š'+PrefixZero(myNum2, 3));//012
 */
 function PrefixZero(num, n) {
     return (Array(n).join(0) + num).slice(-n);
 }
 
-var count_svg_obj =0; // ¼ÇÂ¼SVG¶ÔÏó£¬¹ØÁªµ½¡£
-var array_svgobj = new Array(5000);//¼ÇÂ¼ËùÓĞ±¾¼à¿Ø»­ÃæµÄsvg ¶ÔÏó£¬Í¨¹ıÏÂ±ê¹ØÁªÊı¾İ¶ÔÏó
+var count_svg_obj =0; // è®°å½•SVGå¯¹è±¡ï¼Œå…³è”åˆ°ã€‚
+var array_svgobj = new Array(5000);//è®°å½•æ‰€æœ‰æœ¬ç›‘æ§ç”»é¢çš„svg å¯¹è±¡ï¼Œé€šè¿‡ä¸‹æ ‡å…³è”æ•°æ®å¯¹è±¡
 var array_inf = [
-{svgobj:null,name:"A_1_1_1_PNO", value: "aaaaaa"},  //A_1_1_1_PNOÍĞÅÌºÅ
-{svgobj:null,name:"D_1_HEIGHT", value: "71.4"},  //1#ÌáÉı»ú¸ß¶È
+{svgobj:null,name:"A_1_1_1_PNO", value: "aaaaaa"},  //A_1_1_1_PNOæ‰˜ç›˜å·
+{svgobj:null,name:"D_1_HEIGHT", value: "71.4"},  //1#æå‡æœºé«˜åº¦
 ];
 
 function init()
@@ -136,7 +136,7 @@ function init()
 	var boxdiv = document.getElementById("box");
 	var boxheight= boxdiv.clientHeight+drawdiv.offsetHeight;
 	if(drawdiv==null)
-		return; //²»´æÔÚ¸ÃÍ¼²ã£¬»æÍ¼Ê§°Ü
+		return; //ä¸å­˜åœ¨è¯¥å›¾å±‚ï¼Œç»˜å›¾å¤±è´¥
 	drawdiv.innerHTML=""; //clean svg content
 	w_max = drawdiv.clientWidth||drawdiv.offsetWidth;
 	//h_max = drawdiv.clientHeight||drawdiv.offsetHeight;
@@ -156,37 +156,37 @@ function draw_hov(x0,y0,w,h,draw)
 	var hper = h/20;
 	
 	count_svg_obj =0; 
-	array_svgobj[count_svg_obj]  = draw.rect(2*wper,13*hper).fill('#444').move(x0, y0);  //Ã¿Ò»´Î»­Í¼²úÉúobj ¶ÔÏó£¬´æ´¢µ½svg¶ÔÏóÊı×éÖĞ
+	array_svgobj[count_svg_obj]  = draw.rect(2*wper,13*hper).fill('#444').move(x0, y0);  //æ¯ä¸€æ¬¡ç”»å›¾äº§ç”Ÿobj å¯¹è±¡ï¼Œå­˜å‚¨åˆ°svgå¯¹è±¡æ•°ç»„ä¸­
 	array_inf[count_svg_obj].svgobj  = array_svgobj[count_svg_obj];
-	count_svg_obj++; //Íê³É¹ØÁª£¬ÒÔ±ã¶¯Ì¬¸Ä±ä
+	count_svg_obj++; //å®Œæˆå…³è”ï¼Œä»¥ä¾¿åŠ¨æ€æ”¹å˜
 
 	for (var row = 0; row < 6; row++) {
 		var rect = draw.rect(wper*4, hper-1).fill('#444').move(1+2*wper,row*hper);  //short hov 2F 6 station text
 		var text = draw.text(row+2+" ").fill('#444').move(1+6.5*wper,row*hper);  //short hov  2F 6 station rect
 	}
-	var text1 = draw.text("1#¶ÌµõÁı").fill('#444').move(1+2*wper,6*hper); 
+	var text1 = draw.text("1#çŸ­åŠç¬¼").fill('#444').move(1+2*wper,6*hper); 
 	
-	//¶ÌµõÁı¼Ğ²ã¶Ô½ÓÌ¨ 
+	//çŸ­åŠç¬¼å¤¹å±‚å¯¹æ¥å° 
 	var text = draw.text("A21").fill('#444').move(1+2*wper,3*hper+6*hper-2);	var text = draw.text("A22").fill('#444').move(2+6*wper,3*hper+6*hper-2);
 	var rect = draw.rect(wper*4, hper).fill('#444').move(1+2*wper,4*hper+6*hper);	var rect = draw.rect(wper*4, hper).fill('#440').move(2+6*wper,4*hper+6*hper);
 	var rect = draw.rect(wper*4, hper).fill('#444').move(1+2*wper,1+5*hper+6*hper);	var rect = draw.rect(wper*4, hper).fill('#440').move(2+6*wper,1+5*hper+6*hper);
 	var text = draw.text("A11").fill('#444').move(1+2*wper,4*hper+8*hper);		var text = draw.text("A12").fill('#444').move(2+6*wper,4*hper+8*hper);
 
-	//³¤µõÁı
+	//é•¿åŠç¬¼
 	var rect1 = draw.rect(2*wper,19*hper).fill('#444').move(x0+12*wper, y0);
-	//³¤µõÁı2F6X1¶Ô½ÓÌ¨
+	//é•¿åŠç¬¼2F6X1å¯¹æ¥å°
 	for (var row = 0; row < 6; row++) {
 		var rect = draw.rect(wper*4, hper-1).fill('#444').move(1+14*wper,row*hper);
 		var text = draw.text(row+2+" ").fill('#444').move(1+18.5*wper,row*hper);
 	}
-	var text1 = draw.text("2#³¤µõÁı").fill('#444').move(1+14*wper,row*hper);//row==6
-	//³¤µõÁı¼Ğ²ã¶Ô½ÓÌ¨
+	var text1 = draw.text("2#é•¿åŠç¬¼").fill('#444').move(1+14*wper,row*hper);//row==6
+	//é•¿åŠç¬¼å¤¹å±‚å¯¹æ¥å°
 	var text = draw.text("B41").fill('#444').move(1+14*wper,4*hper+5*hper-2);	var text = draw.text("B42").fill('#440').move(2+18*wper,4*hper+5*hper-2);
 	var rect = draw.rect(wper*4, hper).fill('#444').move(1+14*wper,5*hper+5*hper);	var rect = draw.rect(wper*4, hper).fill('#440').move(2+18*wper,5*hper+5*hper);
 	var rect = draw.rect(wper*4, hper).fill('#444').move(1+14*wper,1+6*hper+5*hper);var rect = draw.rect(wper*4, hper).fill('#440').move(2+18*wper,1+5*hper+6*hper);
 	var text = draw.text("B31").fill('#444').move(1+14*wper,4*hper+8*hper);	var text = draw.text("B32").fill('#440').move(2+18*wper,4*hper+8*hper);
 
-	//³¤µõÁı1²ã¶Ô½ÓÌ¨
+	//é•¿åŠç¬¼1å±‚å¯¹æ¥å°
 	var text = draw.text("B21").fill('#444').move(1+14*wper,4*hper+11*hper-2);	var text = draw.text("B22").fill('#444').move(2+18*wper,4*hper+11*hper-2);
 	var rect = draw.rect(wper*4, hper).fill('#444').move(1+14*wper,5*hper+11*hper);	var rect = draw.rect(wper*4, hper).fill('#444').move(2+18*wper,5*hper+11*hper);
 	var rect = draw.rect(wper*4, hper).fill('#444').move(1+14*wper,1+6*hper+11*hper);	var rect = draw.rect(wper*4, hper).fill('#444').move(2+18*wper,1+5*hper+12*hper);
@@ -207,7 +207,7 @@ function draw_10f(x0,y0,w,h,draw)
 	}
 	row=10; 
 	for (col=0; col<5; col++)
-		text = draw.text(col + 1 + "ÁĞ").fill('#444').move(x0+wper*col+1, y0+row*hper+1); //col title
+		text = draw.text(col + 1 + "åˆ—").fill('#444').move(x0+wper*col+1, y0+row*hper+1); //col title
 	
 	for (row=11; row<21; row++){
 		for (var col=0;col<5;col++) 
@@ -264,7 +264,7 @@ function draw_all()
 	//draw_15f(drawdivid);
 	//obj= draw.attr(1001);
 	//drawmap();
-	//window.¦Ïnresize=findWindowSize;
+	//window.Î¿nresize=findWindowSize;
 }
 
 </script>
