@@ -1,10 +1,12 @@
 package com.jhzh.wms.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jhzh.wms.base.http.HttpResult;
 import com.jhzh.wms.base.init.PickTask;
 import com.jhzh.wms.base.result.Result;
 import com.jhzh.wms.base.utils.EmptyUtils;
+import com.jhzh.wms.dto.ItemBomInfoDto;
 import com.jhzh.wms.service.ImesFeedBackService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +30,13 @@ public class WoPlayInfoController {
     private HttpResult.HttpAPIService httpAPIService;
     @Value("${queryWoPlanInfoUrl}")
     private String queryWoPlanInfoUrl;
+    @Value("${queryItemBomInfoUrl}")
+    private String queryItemBomInfoUrl;
     @Autowired
     private PickTask pickTask;
 
     @ResponseBody
-    @RequestMapping(value = "/woPlayInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/woPlayInf", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public Result<?> woPlayInfo( @RequestBody JSONObject jsonpObject) {
         Map<String,Object> map=jsonpObject;
         map.put("wipEntityId",jsonpObject.get("wipEntityId"));
@@ -71,7 +75,18 @@ public class WoPlayInfoController {
         String uuid=null;
         Map<String, Object> objectMap=new HashMap<>();
         if (resultData.size()!=0){
-          objectMap = pickTask.woPlanInfo(map);
+            objectMap = pickTask.woPlanInfo(map);
+            JSONArray itemList = resultData.getJSONArray("itemList");
+            if (itemList.size() == 1) {
+                JSONObject jsonObject = (JSONObject) itemList.get(0);
+                String itemCode = (String) jsonObject.get("itemCode");
+                HashMap map1=new HashMap();
+                map1.put("organizationId", "142");
+                map1.put("itemCode", itemCode);
+                //根据物资编码获取物资组件信息
+                ItemBomInfoDto itemBomInfoDto = httpAPIService.getResultData(queryItemBomInfoUrl, JSONObject.toJSONString(map1), ItemBomInfoDto.class);
+                resultData.put("bomlist", itemBomInfoDto);
+            }
         }
         if("1".equals(objectMap.get("success"))){
              resultData.put("msg","配套成功！");
@@ -84,11 +99,11 @@ public class WoPlayInfoController {
         }
         return Result.success(null);
     }
-     @RequestMapping(value = "/woPlayInfoView")
+     @RequestMapping(value = "/woPlayInfoVie")
      public String woPlayInfoView() throws Exception {
         return "woplaninfo";
      }
-     @RequestMapping(value = "/woPlayInfoView2")
+     @RequestMapping(value = "/woPlayInfoView")
      public String woPlayInfoView2() throws Exception {
         return "woplaninfo2";
      }

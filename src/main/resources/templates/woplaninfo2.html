@@ -23,44 +23,21 @@
                 <div class="col col-xs-2 col-md-1 "> <p class="query"> 查询条件:</p></div>
                 <div class="col col-xs-10 col-md-11">
                     <div class="row">
-                        <div class="col col-md-2">
+                        <div class="col col-md-8">
                             <div class="form-group">
-                                <label for="organizationId" class="sr-only">库存组织 Id</label>
-                                <input type="text" class="form-control" id="organizationId" placeholder="库存组织 Id" disabled>
-                            </div>
-                        </div>
-                        <div class="col   col-md-2">
-                            <div class="form-group">
-                                <label for="deptCode" class="sr-only">工序代码</label>
-                                <input type="text" class="form-control" id="deptCode" placeholder="工序代码" disabled>
+                                <label for="wipEntityId" class="sr-only">外层工单</label>
+                                <input type="text" class="form-control" id="wipEntityId" placeholder="外层工单">
                             </div>
                         </div>
                         <div class="col col-md-2">
-                            <div class="form-group">
-                                <label for="wipEntityName" class="sr-only">工单号</label>
-                                <input type="text" class="form-control" id="wipEntityName" placeholder="工单号" disabled>
-                            </div>
-                        </div>
-                        <div class="col col-md-2">
-                            <div class="form-group">
-                                <label for="wipEntityId" class="sr-only">工单 ID</label>
-                                <input type="text" class="form-control" id="wipEntityId" placeholder="工单 ID">
-                            </div>
-                        </div>
-                        <div class="col col-md-2">
-                            <div class="form-group">
-                                <label for="itemCode" class="sr-only">物资编码</label>
-                                <input type="text" class="form-control" id="itemCode" placeholder="物资编码" disabled>
-                            </div>
+                            <button type="button" class="btn btn-primary queryBtn">工序计划待产查询</button>
                         </div>
                 </div>
             </div>
         </div>
 
     </div>
-    <div class="queryBtn">
-        <button type="button" class="btn btn-primary">工序计划待产查询</button>
-    </div>
+
     
     </div>
             <div class="table-responsive table-bordered">
@@ -78,8 +55,21 @@
             </thead>
             <tbody class="listData"></tbody>
         </table>
-    </div>
 
+    </div>
+    <div class="table-responsive table-bordered">
+    <table class="table">
+                        <thead>
+                            <tr>
+                                <td>组件物资编码</td>
+                                <td>组件物资编码</td>
+                                <td>组件物资描述</td>
+                                <td>单位用量</td>
+                                </tr>
+                        </thead>
+                        <tbody class="bomlistData"></tbody>
+             </table>
+    </div>
     <div class="tips_box"></div>
 </body>
 <script src="js/jquery.min.js"></script>

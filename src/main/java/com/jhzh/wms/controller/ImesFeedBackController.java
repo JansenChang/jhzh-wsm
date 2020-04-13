@@ -54,17 +54,7 @@ public class ImesFeedBackController {
         return Result.success(jsonObject);
     }
 
-     //物资BOM查询接口
-    @RequestMapping(value = "queryItemBomInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-    public Result<?> queryItemBomInfo(@RequestBody JSONObject jsonpObject) throws Exception {
-        log.info("queryItemBomInfo begin..");
-        log.info("In Param : \n"+jsonpObject.toJSONString());
-        /*Result<?> result=putInStorageService.queryFreeSpace(jsonpObject);*/
-        HttpResult httpResult = httpAPIService.doPostJson(queryItemBomInfoUrl, jsonpObject.toJSONString());
-        log.info(httpResult.toString());
-        log.info("queryItemBomInfo end..");
-        return Result.success(httpResult.getBody());
-    }
+
 
      //工序计划待产查询接口
     @RequestMapping(value = "queryWoPlanInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
