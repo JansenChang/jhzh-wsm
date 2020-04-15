@@ -38,7 +38,7 @@ function tips(msg){
         $(".tips_box").empty().html(html).show();
          setTimeout(function () {
         $(".tips_box").empty().hide();
-        }, 2000);
+        }, 5000);
 
 }
 

@@ -271,7 +271,6 @@ public class PickTask {
 								if (flag && integers2.length == 10 && noDish(integers2, i)) {
 									integers2[i] = Integer.parseInt(ilsCellDto.getId().toString());
 								} else {
-									//TODO 无空闲备盘位
 									log.info("当前工单：" + data.getWipEntityId() + ",无空闲备盘位");
 									msgMap.put("success", "0");
 									msgMap.put("msg", "当前无空闲拣选位置");
@@ -501,15 +500,38 @@ public class PickTask {
 		//List<IlsCellDto> qtyGt = value.stream().filter(ilsCellDto -> ilsCellDto.getPartnum() >= wipQtyTemp).collect(Collectors.toList());
 		if (qtyGt.size() > 0) {
 			//如果大于两个则按日期逆序排序，如果日期相同则按数量排序
-			if (qtyGt.size() > 2) {
-				qtyGt.sort(Comparator.comparing(IlsCellDto::getPartdate).reversed().thenComparing(IlsCellDto::getPartnum));
-				IlsCellDto ilsCellDto=qtyGt.get(0);
-				if(ilsCellDto.getPartnum()>wipQtyTemp){
+			if (qtyGt.size() >= 2) {
+				qtyGt.sort(Comparator.comparing(IlsCellDto::getPartdate));
+				List<IlsCellDto> list=new ArrayList<>();
+				IlsCellDto ilsCellDto1=qtyGt.get(0);
+				IlsCellDto ilsCellDto2=qtyGt.get(1);
+				//等于40只拉第一盘作为主盘
+				if(ilsCellDto1.getPartnum()==wipQtyTemp){
+					list=new ArrayList<>();
+					list.add(ilsCellDto1);
+					return list;
+				}
+				if(ilsCellDto1.getPartnum()>wipQtyTemp  &&  (ilsCellDto2.getPartnum()+ilsCellDto1.getPartnum()) <=40 ){
+					list.add(ilsCellDto1);
+					list.add(ilsCellDto2);
+					list.sort(Comparator.comparing(IlsCellDto::getPartdate).reversed());
+					return list;
+				}else if(ilsCellDto1.getPartnum()>wipQtyTemp){
+					list=new ArrayList<>();
+					list.add(ilsCellDto1);
+					return list;
+				}
+				list.add(ilsCellDto1);
+				list.add(ilsCellDto2);
+				list.sort(Comparator.comparing(IlsCellDto::getPartdate).reversed());
+				return list;
+				/*IlsCellDto ilsCellDto=qtyGt.get(0);
+				if(ilsCellDto.getPartnum()>=wipQtyTemp){
 					List<IlsCellDto> list=new ArrayList<>();
 					list.add(ilsCellDto);
 					return list;
-				}
-				return qtyGt;
+				}*/
+				//return qtyGt;
 				//等于1则直接返回
 			} else if (qtyGt.size() == 1) {
 				return qtyGt;

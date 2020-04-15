@@ -20,7 +20,7 @@
      <result column="trayno" property="trayno"/>
      <result column="partid" property="partid" javaType="long"/>
      <result column="partnum" property="partnum"/>
-     <result column="partdate" property="partdate" />
+     <result column="partdate" property="partdate" javaType="long"/>
      <result column="partwoid" property="partwoid" javaType="long"/>
      <result column="partlotid" property="partlotid" javaType="long"/>
      <result column="partlotdiv" property="partlotdiv"/>
@@ -30,7 +30,9 @@
  <update id="updateCellByCellId">
   update yx_ils_cell
   <set>
-  partdate=unix_timestamp(),
+  <if test="partnum!=null and partnum !=''">
+        partdate=unix_timestamp(now()),
+   </if>
   <if test="trayid!=null and trayid !=''">
         trayid=#{trayid},
    </if>
