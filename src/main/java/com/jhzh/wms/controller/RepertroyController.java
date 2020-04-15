@@ -34,9 +34,18 @@ public class RepertroyController {
     }
     @PostMapping(value = "updateRepertroy")
     public Result<?> updateRepertroy(@RequestBody JSONObject jsonObject) {
-        log.info("updateRepertroy begin..");
-        Result<?> result = repertroyService.updateRepertroy(jsonObject);
-        log.info("updateRepertroy end..");
+        Result<?> result = repertroyService.updateRepertroy(jsonObject); 
         return result;
+    }
+
+    @PostMapping(value = "getCabinetData")
+    public Result<?> getCabinetData() {
+        Result<?> result = repertroyService.getCabinetData();
+        return result;
+    }
+    @PostMapping(value = "getCageData")
+    public Result<?> getCageData() {
+       Result<?> result = repertroyService.getCageData();
+       return result;
     }
 }

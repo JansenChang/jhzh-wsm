@@ -18,4 +18,5 @@ public interface TaskmesDao {
 
     List<TaskmesDto> queryPickTask();
 
+    List<TaskmesDto> getCageData();
 }

@@ -19,7 +19,6 @@ public class UrlHandlerIntercepter implements HandlerInterceptor {
     }
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-       // TODO Auto-generated method stub
 		// 从session作用域中取值
 		//request.getSession().getAttribute("user");
 		// 判断是否为空

@@ -30,8 +30,8 @@ $(function () {
                                                '<td>' + item.componentUnitQty + '</td></tr>'
                            })
                          }
-                        $(".listData").append(html);
-                        $(".bomlistData").append(bomhtml);
+                        $(".listData").empty().append(html);
+                        $(".bomlistData").empty().append(bomhtml);
                         tips(resultData.resultData.msg);
                     } else {
                         tips("查无配套");

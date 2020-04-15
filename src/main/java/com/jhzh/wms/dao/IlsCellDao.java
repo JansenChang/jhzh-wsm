@@ -1,5 +1,6 @@
 package com.jhzh.wms.dao;
 
+import com.jhzh.wms.dto.CabinetDto;
 import com.jhzh.wms.dto.IlsCellDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -30,4 +31,10 @@ public interface IlsCellDao {
     int cleanCellByCellId(IlsCellDto ilsCellDto);
 
     int updateLocked(Map<String, Object> map);
+
+    List<CabinetDto> getCabinetData();
+
+    List<IlsCellDto> queryByRowCol(Integer rowcol);
+
+    List<Map> queryInvIn(String cageStr);
 }

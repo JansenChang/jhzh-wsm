@@ -18,7 +18,6 @@ public class WebConfig implements WebMvcConfigurer {
 
   @Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		// TODO Auto-generated method stub
 		// 这句话表示拦截所有，但是不拦截登录页面和登录的方法还有static下的所有
 		registry.addInterceptor(new UrlHandlerIntercepter()).addPathPatterns("/**")
                /* .excludePathPatterns("/login.jsp","/shop/login","/static/**")*/;

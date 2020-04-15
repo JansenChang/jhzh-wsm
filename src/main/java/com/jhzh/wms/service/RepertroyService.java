@@ -12,4 +12,9 @@ public interface RepertroyService {
     Result<?> dynamicRepertroyFirstlayer();
 
     Result<?> updateRepertroy(Map<String, Object> map);
+
+    Result<?> getCabinetData();
+
+    Result<?> getCageData();
+
 }

@@ -182,7 +182,7 @@ public class PickTask {
 								} else if ((integers4.length == 10) && noDish(integers4, i)) {
 									integers4[i] = Integer.parseInt(ilsCellDto.getId().toString());
 								} else {
-									//TODO 无空闲拣选位,可前置判断
+									//  无空闲拣选位,可前置判断
 									log.info("当前工单：" + data.getWipEntityId() + ",当前无空闲拣选位置");
 									msgMap.put("success", "0");
 									msgMap.put("msg", "当前无空闲拣选位置");
@@ -197,7 +197,7 @@ public class PickTask {
 								} else if (integers2.length == 10 && noDish(integers2, i)) {
 									integers2[i] = Integer.parseInt(ilsCellDto.getId().toString());
 								} else {
-									//TODO 无空闲拣选位,可前置判断
+									// 无空闲拣选位,可前置判断
 									log.info("当前工单：" + data.getWipEntityId() + ",当前无空闲拣选位置");
 									msgMap.put("success", "0");
 									msgMap.put("msg", "当前无空闲拣选位置");
@@ -209,14 +209,14 @@ public class PickTask {
 								} else if (integers2.length == 10 && integers4.length == 10 && noDish(integers2, i)) {
 									integers2[i] = Integer.parseInt(ilsCellDto2.getId().toString());
 								} else {
-									//TODO 无空闲备盘位
+									// 无空闲备盘位
 									log.info("当前工单：" + data.getWipEntityId() + ",当前无空闲备盘位");
 									msgMap.put("success", "0");
 									msgMap.put("msg", "当前无空闲拣选位置");
 									noVacancy = true;
 								}
 							} else if (ilsCellDtoList.size() > 2) {
-								//TODO 合盘大于两盘
+								// 合盘大于两盘
 								log.info("当前工单：" + data.getWipEntityId() + ",合盘大于两盘");
 								msgMap.put("success", "0");
 								msgMap.put("msg", "物料合盘大于两盘，先进行合盘操作后拣选！");
@@ -227,7 +227,7 @@ public class PickTask {
 				} else if (itemSize <= 18) {
 					//预先判断可用层
 					if (!integers3[0].equals(0)) {
-						//TODO 三层占用,等待拣选完成后执行
+						// 三层占用,等待拣选完成后执行
 						log.info("当前工单：" + data.getWipEntityId() + ",层数较多且三层占用,等待拣选完成后执行");
 						msgMap.put("success", "0");
 						msgMap.put("msg", "层数较多且三层占用,等待拣选完成后执行");
@@ -249,7 +249,7 @@ public class PickTask {
 								if (integers1.length == 10 && noDish(integers1, i)) {
 									integers1[i] = Integer.parseInt(ilsCellDto.getId().toString());
 								} else {
-									//TODO 无空闲备盘位
+									// 无空闲备盘位
 									log.info("当前工单：" + data.getWipEntityId() + ",无空闲备盘位");
 									msgMap.put("success", "0");
 									msgMap.put("msg", "当前无空闲拣选位置");
@@ -271,6 +271,7 @@ public class PickTask {
 								if (flag && integers2.length == 10 && noDish(integers2, i)) {
 									integers2[i] = Integer.parseInt(ilsCellDto.getId().toString());
 								} else {
+									// 无空闲备盘位
 									log.info("当前工单：" + data.getWipEntityId() + ",无空闲备盘位");
 									msgMap.put("success", "0");
 									msgMap.put("msg", "当前无空闲拣选位置");
@@ -279,7 +280,7 @@ public class PickTask {
 								if (!flag && integers1.length == 10 && noDish(integers1, i)) {
 									integers1[i] = Integer.parseInt(ilsCellDto.getId().toString());
 								} else {
-									//TODO 无空闲备盘位
+									// 无空闲备盘位
 									log.info("当前工单：" + data.getWipEntityId() + ",无空闲备盘位");
 									msgMap.put("success", "0");
 									msgMap.put("msg", "当前无空闲拣选位置");
@@ -348,7 +349,7 @@ public class PickTask {
 				} else if (itemSize <= 27) {
 					msgMap.put("success", "0");
 					msgMap.put("msg", "大层数工单，暂时不处理");
-					//TODO 大层数工单
+					// 大层数工单
 				}
 
 				if (noVacancy) {

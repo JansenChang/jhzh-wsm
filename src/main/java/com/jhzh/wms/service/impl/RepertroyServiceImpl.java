@@ -3,7 +3,10 @@ package com.jhzh.wms.service.impl;
 import com.jhzh.wms.base.result.CodeMsg;
 import com.jhzh.wms.base.result.Result;
 import com.jhzh.wms.dao.IlsCellDao;
+import com.jhzh.wms.dao.TaskmesDao;
+import com.jhzh.wms.dto.CabinetDto;
 import com.jhzh.wms.dto.IlsCellDto;
+import com.jhzh.wms.dto.TaskmesDto;
 import com.jhzh.wms.service.RepertroyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,8 @@ import java.util.Map;
 public class RepertroyServiceImpl implements RepertroyService {
     @Autowired
     private IlsCellDao IlscellDao;
+    @Autowired
+    private TaskmesDao taskmesDao;
 
     @Override
     public Result<?> queryDynamicRepertroy() {
@@ -78,5 +83,26 @@ public class RepertroyServiceImpl implements RepertroyService {
                         //TODO 批号
                         .build());*/
         return Result.success("修改成功");
+    }
+
+    @Override
+    public Result<?> getCabinetData() {
+        List<CabinetDto> list=IlscellDao.getCabinetData();
+        return Result.success(list);
+    }
+
+    @Override
+    public Result<?> getCageData() {
+        HashMap<String,Object>resultMap=new HashMap<>();
+        List<TaskmesDto> cageData = taskmesDao.getCageData();
+        TaskmesDto taskmesDto1 = cageData.get(0);
+        TaskmesDto taskmesDto2 = cageData.get(1);
+        String shortCageStr = taskmesDto1.getCellstrdst();
+        String longCageStr = taskmesDto2.getCellstrdst();
+        List<Map> shortCageMaps = IlscellDao.queryInvIn(shortCageStr);
+        List<Map> longCageMaps =IlscellDao.queryInvIn(longCageStr);
+        resultMap.put("longCage",shortCageMaps);
+        resultMap.put("shortCage",longCageMaps);
+        return Result.success(resultMap);
     }
 }

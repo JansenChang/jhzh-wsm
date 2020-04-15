@@ -27,6 +27,43 @@
      <result column="cmd" property="cmd"/>
      <result column="cmdstatus" property="cmdstatus"/>
     </resultMap>
+
+    <resultMap id="cabinetDto" type="com.jhzh.wms.dto.CabinetDto">
+        <result column="rowcol" property="rowcol"/>
+        <collection property="ilsCellDtos" ofType="com.jhzh.wms.dto.IlsCellDto" column="{rowcol=rowcol}" select="queryByRowCol"/>
+    </resultMap>
+<select id="queryByRowCol" resultMap="ilsCellDto">
+    select rowcol
+           id,
+           unt,
+    app,
+    name,
+    areano,
+    row,
+    col,
+    layer,
+    arg,
+    argx,
+    argy,
+    argz,
+    locked,
+    lockedtype,
+    trayid,
+    trayno,
+    partid,
+    partdesc,
+    partnum,
+    partdate,
+    partwoid,
+    partlotid,
+    partlotdiv,
+    cmd,
+    cmdid,
+    cmdstatus
+    from (select left(name,4) as rowcol,t.*  from yx_ils_cell t)t1 where rowcol=#{rowcol}
+    order by row desc,col,layer
+</select>
+
  <update id="updateCellByCellId">
   update yx_ils_cell
   <set>
@@ -335,6 +372,41 @@
     <select id="dynamicRepertroyFirstlayer" resultType="java.lang.String">
         select firstlayer from (
 select CONCAT(substring(CONCAT(name,''),1,4),'01') as firstlayer   from yx_ils_cell c  where c.areano=15 and c.partid !=0) c group by firstlayer
+    </select>
+    <select id="getCabinetData" resultMap="cabinetDto">
+        select left(name,4) as rowcol   from yx_ils_cell where partid!=0 and areano=15 group by rowcol order by id,layer desc
+    </select>
+    <select id="queryInvIn" resultMap="ilsCellDto">
+        select
+                 id,
+                 unt,
+                 app,
+                 areano,
+                 name,
+                 row,
+                 col,
+                 layer,
+                 locked,
+                 lockedtype,
+                 trayid,
+                 trayno,
+                 partid,
+                 partnum,
+                 case
+                     when partdate=0
+                         then ''
+                     when partdate !=0
+                         then
+                     FROM_UNIXTIME(partdate, '%Y-%m-%d %H:%i:%S')
+                     end
+                                AS partdate,
+                 partwoid,
+                 partlotid,
+                 partlotdiv,
+                 cmd,
+                 cmdstatus
+        from yx_ils_cell where instr(#{cageStr},id)
+
     </select>
 
 
