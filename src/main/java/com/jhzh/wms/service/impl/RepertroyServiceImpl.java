@@ -23,6 +23,8 @@ public class RepertroyServiceImpl implements RepertroyService {
         Map<String,Object>map=new HashMap<>();
         map.put("areano",10);
         resultMap.put("var10",IlscellDao.queryDynamicRepertroy(map));
+        map.put("areano",15);
+        resultMap.put("var15",IlscellDao.queryDynamicRepertroy(map));
         map.put("areano","");
         map.put("row",16);
         resultMap.put("var16",IlscellDao.queryDynamicRepertroy(map));
@@ -32,9 +34,9 @@ public class RepertroyServiceImpl implements RepertroyService {
         resultMap.put("var18",IlscellDao.queryDynamicRepertroy(map));
         map.put("row",19);
         resultMap.put("var19",IlscellDao.queryDynamicRepertroy(map));
-         map.put("row",26);
+        map.put("row",26);
         resultMap.put("var26",IlscellDao.queryDynamicRepertroy(map));
-         map.put("row",25);
+        map.put("row",25);
         resultMap.put("var25",IlscellDao.queryDynamicRepertroy(map));
         return Result.success(resultMap);
     }

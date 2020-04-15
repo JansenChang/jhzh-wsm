@@ -440,7 +440,7 @@ public class PickTask {
 	 * 查询bom齐套
 	 *
 	 * @param itemCode 物资编码
-	 * @param wipQtyTemp
+	 * @param wipQtyTemp 工单层数
 	 * @return 齐套物资集合
 	 */
 	private List<List<IlsCellDto>> QueryItemBomInfo(String itemCode, Integer wipQtyTemp) {
@@ -493,7 +493,7 @@ public class PickTask {
 	/**
 	 * 排序
 	 * @param qtyGt 料号相同数据
-	 * @param wipQtyTemp
+	 * @param wipQtyTemp 工单层数
 	 * @return 料号相同的排序后数据
 	 */
 	private List<IlsCellDto> matchData(List<IlsCellDto> qtyGt, Integer wipQtyTemp) {

@@ -1,12 +1,10 @@
 package com.jhzh.wms.controller;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jhzh.wms.base.http.HttpResult;
 import com.jhzh.wms.base.init.PickTask;
 import com.jhzh.wms.base.result.Result;
 import com.jhzh.wms.base.utils.EmptyUtils;
-import com.jhzh.wms.dto.ItemBomInfoDto;
 import com.jhzh.wms.service.ImesFeedBackService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,15 +101,13 @@ public class WoPlayInfoController {
         }
         return Result.success(null);
     }
-
-    @RequestMapping(value = "/woPlayInfoView")
-    public String woPlayInfoView() throws Exception {
+     @RequestMapping(value = "/woPlayInfoVie")
+     public String woPlayInfoView() throws Exception {
         return "woplaninfo";
-    }
-
-    @RequestMapping(value = "/woPlayInfoView2")
-    public String woPlayInfoView2() throws Exception {
+     }
+     @RequestMapping(value = "/woPlayInfoView")
+     public String woPlayInfoView2() throws Exception {
         return "woplaninfo2";
-    }
+     }
 
 }
