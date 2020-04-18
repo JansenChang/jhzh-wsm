@@ -1,17 +1,17 @@
-$(function() {
+$(function () {
   // 初始化
   var pagenum = 1;
   $('.nav-tabs a:first').tab('show');
   $(".material").show();
-  var dataID = 1;
+  var dataID = '1';
   var locatorID = 1; //入库有无物料
-  var locked="";//是否锁定
+  var locked = "";//是否锁定
   $("#inlineRadio1").prop("checked", true);
   unconditional(dataID); //初始化第一个查询
 
 
   // tab切换
-  $('.nav-tabs li').click(function(e) {
+  $('.nav-tabs li').click(function (e) {
     // 上一页disabled
     $(".prevPage").attr("disabled", "disabled").removeClass("btn-primary").addClass("btn-default");
     $(".num").html("1");
@@ -80,21 +80,21 @@ $(function() {
     locale: moment.locale('zh-CN')
   });
 
-  $("#inlineRadio1").change(function() {
+  $("#inlineRadio1").change(function () {
     locatorID = this.value
   })
-  $("#inlineRadio2").change(function() {
+  $("#inlineRadio2").change(function () {
     locatorID = this.value
   })
-  $("#inlineRadio6").change(function() {
+  $("#inlineRadio6").change(function () {
     locked = this.value
   })
-  $("#inlineRadio7").change(function() {
+  $("#inlineRadio7").change(function () {
     locked = this.value
   })
 
   // 查询
-  $(".materialBtn").click(function() {
+  $(".materialBtn").click(function () {
     if (dataID == 1) {
       // 库存物资查询
       var time1 = new Date($("#datetimepicker1 input").val());
@@ -112,7 +112,7 @@ $(function() {
 
       if ((data.begindate && data.enddate) || (!data.begindate && !data.enddate)) {
         allData("innerMaterial", data, dataID);
-        page(data, function() {
+        page(data, function () {
           allData("innerMaterial", data, dataID)
         })
       } else {
@@ -139,7 +139,7 @@ $(function() {
 
       if ((data.begindate && data.enddate) || (!data.begindate && !data.enddate)) {
         allData("wmsInvInFlow", data, dataID);
-        page(data, function() {
+        page(data, function () {
           allData("wmsInvInFlow", data, dataID)
         })
       } else {
@@ -163,7 +163,7 @@ $(function() {
 
       if ((data.begindate && data.enddate) || (!data.begindate && !data.enddate)) {
         allData("wmsInvOutFlow", data, dataID);
-        page(data, function() {
+        page(data, function () {
           allData("wmsInvOutFlow", data, dataID)
         })
       } else {
@@ -178,7 +178,7 @@ $(function() {
   })
 
   // 重置条件
-  $(".resetBtn").click(function() {
+  $(".resetBtn").click(function () {
     var lo = $(".nav-tabs .active").attr('data-id');
     $("input[type='radio']").prop("checked", false);
     console.log(lo)
@@ -196,12 +196,12 @@ $(function() {
         "id": '',
         "lastUpdateDateFrom": "",
         "lastUpdateDateTo": "",
-        "locked":"",
+        "locked": "",
         "pagesize": 15,
         "pagenum": 1
       }
       allData("innerMaterial", data, dataID)
-      page(data, function() {
+      page(data, function () {
         allData("innerMaterial", data, dataID)
       })
     } else if (dataID == 2) {
@@ -218,7 +218,7 @@ $(function() {
         "pagenum": 1
       }
       allData("wmsInvInFlow", data, dataID)
-      page(data, function() {
+      page(data, function () {
         allData("wmsInvInFlow", data, dataID)
       })
     } else if (dataID == 3) {
@@ -233,7 +233,7 @@ $(function() {
         "pagenum": 1
       }
       allData("wmsInvOutFlow", data, dataID)
-      page(data, function() {
+      page(data, function () {
         allData("wmsInvOutFlow", data, dataID)
       })
     }
@@ -242,12 +242,12 @@ $(function() {
 
   // html结构
   function allData(url, data, dataID) {
-    ajaxData(url, data, function(resul) {
+    ajaxData(url, data, function (resul) {
       var getData = resul.resultData;
       var html = "";
       if (getData.list) {
         $(".nextPage").removeAttr("disabled").removeClass("btn-default").addClass("btn-primary");
-        $(resul.resultData.list).each(function(index, item) {
+        $(getData.list).each(function (index, item) {
           if (dataID == 1) {
             html += '<tr><td >' + (item.partid ? item.partid : '-') + '</td>' +
               '<td>' + (item.partwoid ? item.partwoid : '-') + '</td>' +
@@ -255,31 +255,34 @@ $(function() {
               '<td >' + (item.trayno ? item.trayno : '-') + '</td>' +
               '<td>' + (item.partnum ? item.partnum : '-') + '</td>' +
               '<td >' + item.lockedtype + '</td>' +
-              '<td>' + (item.partdate ? item.partdate : '-') + '</td>'+
-              '<td>' + (item.duetime ? item.duetime : '-') + '</td>'+
-              '<td><button type="button" class="btn btn-primary locked" partid="'+ item.partid +'" id="'+ item.id +'" partwoid="'+ item.partwoid +'" partnum="'+ item.partnum +'">锁定</button></td></tr>'
-          } else if (dataID == 2) {
-            if (item.locator == 3) {
+              '<td>' + (item.partdate ? item.partdate : '-') + '</td>' +
+              '<td>' + (item.duetime ? item.duetime : '-') + '</td>' +
+              '<td><button type="button" class="btn btn-primary locked" partid="' + item.partid + '" id="' + item.id + '" partwoid="' + item.partwoid + '" partnum="' + item.partnum + '">锁定</button></td></tr>'
+          } else if (dataID == '2') {
+
+            html += '<tr><td style="vertical-align: middle;">' + (item.taskid ? item.taskid : '-') + '</td><td colspan="10" style="padding:0"><table class="table" style="border-bottom:none;">';
+            $(item.wmsInvInDtos).each(function(k,obj){
+              if (obj.locator == 3) {
               html += '<tr class="kong">'
             } else {
               html += '<tr>'
             }
+              html +='<td width="8%">' + (obj.locator ? obj.locator : '-') + '</td>'+
+              '<td width="11.89%">' + (obj.shelfcode ? obj.shelfcode : '-') + '</td>' +
+              '<td width="8%">' + (obj.shelflay ? obj.shelflay : '-') + '</td>' +
+              '<td width="10.67%">' + (obj.wipentityid ? obj.wipentityid : '-') + '</td>' +
+              '<td width="9.33%">' + (obj.stockno ? obj.stockno : '-') + '</td>' +
+              '<td width="12%">' + (obj.ismultipalforlot ? obj.ismultipalforlot : '-') + '</td>' +
+              '<td width="10.67%">' + (obj.lotcode ? obj.lotcode : '-') + '</td>' +
+              '<td width="10.67%">' + (obj.quantity ? obj.quantity : '-') + '</td>' +
+              '<td width="10.67%">' + (obj.itemcode ? obj.itemcode : '-') + '</td>' +
+              '<td width="8%">' + (obj.status ? obj.status : '-') + '</td>'
+              '</tr>'
+              // }
+          })
+            html += '</table></td><td>' + (item.partdate ? item.partdate : '-') + '</td></tr>';
 
-            html += '<td>' + (item.taskid ? item.taskid : '-') + '</td>' +
-              '<td>' + (item.tasksource ? item.tasksource : '-') + '</td>' +
-              '<td >' + (item.locator ? item.locator : '-') + '</td>' +
-              '<td >' + (item.shelfcode ? item.shelfcode : '-') + '</td>' +
-              '<td>' + (item.shelflay ? item.shelflay : '-') + '</td>' +
-              '<td >' + (item.wipentityid ? item.wipentityid : '-') + '</td>' +
-              '<td>' + (item.stockno ? item.stockno : '-') + '</td>' +
-              '<td >' + (item.ismultipalforlot ? item.ismultipalforlot : '-') + '</td>' +
-              '<td >' + (item.lotcode ? item.lotcode : '-') + '</td>' +
-              '<td>' + (item.quantity ? item.quantity : '-') + '</td>' +
-              '<td >' + (item.itemcode ? item.itemcode : '-') + '</td>' +
-              '<td>' + (item.status ? item.status : '-') + '</td>' +
-              '<td>' + (item.partdate ? item.partdate : '-') + '</td></tr>'
-
-          } else if (dataID == 3) {
+          } else if (dataID == '3') {
             html += '<tr><td>' + (item.taskid ? item.taskid : '-') + '</td>' +
               '<td>' + (item.tasksource ? item.tasksource : '-') + '</td>' +
               '<td >' + (item.locator ? item.locator : '-') + '</td>' +
@@ -296,67 +299,68 @@ $(function() {
           }
 
         })
-        $(".listData").empty().append(html);
-              // 锁定
-      $(".locked").click(function(){
-        var _this=this;
-        console.log($(this).attr('partwoid'),$(this).attr('partid'))
-        var num = $(this).attr('partnum');
-        var html='<h2 class="title_name">提示 <span class="cols">X</span>  </h2>'+
-        '<div class="list">'+
-        '<table class="table table-responsive table-bordered table-hover piler_box" width="100%">'+
-        '<tr>'+
-                    '<th width="20%">工单号</th>'+
-                    '<td  width="30%">'+ $(this).attr('partwoid') +'</td>'+
-                    '<th width="20%">物料号</th>'+
-                    '<td width="30%">'+ $(this).attr('partid') +'</td>'+
-                '</tr>'+
-                '<tr>'+
-                    '<th width="20%">剩余数量</th>'+
-                    '<td width="30%"><input type="text" class="num_text" value="'+ num +'"></td><td></td><td></td>'+
-                '</tr>'+
-                '<table>'+
-                    '<div class="btn_box">'+
-                        '<button type="button" class="btn btn-success success">确定锁定</button>'+
-                    '</div>'+
-        '</div>'
-        $(".whcell_15f").html(html).show();
-        $(".success").click(function(){
-          if($(".num_text").val()>num){
-            alert("请输入剩余数量。")
-          }else{
-            var lockedtypeData ={
-            "lockedtype":2,
-            "id":$(_this).attr('id'),
-            "partnum":$(".num_text").val()
-          }
-          }
 
-          $.ajax({
-            type: "POST",
-            url: "wms/updateLocked",
-            contentType: "application/json;charset=utf-8",
-            dataType: "JSON",
-            async: false,
-            data: JSON.stringify(lockedtypeData),
-            success: function (resul) {
+        $(".listData").empty().append(html);
+        // 锁定
+        $(".locked").click(function () {
+          var _this = this;
+          console.log($(this).attr('partwoid'), $(this).attr('partid'))
+          var num = $(this).attr('partnum');
+          var html = '<h2 class="title_name">提示 <span class="cols">X</span>  </h2>' +
+            '<div class="list">' +
+            '<table class="table table-responsive table-bordered table-hover piler_box" width="100%">' +
+            '<tr>' +
+            '<th width="20%">工单号</th>' +
+            '<td  width="30%">' + $(this).attr('partwoid') + '</td>' +
+            '<th width="20%">物料号</th>' +
+            '<td width="30%">' + $(this).attr('partid') + '</td>' +
+            '</tr>' +
+            '<tr>' +
+            '<th width="20%">剩余数量</th>' +
+            '<td width="30%"><input type="text" class="num_text" value="' + num + '"></td><th>锁定类型</th><td>手动锁</td>' +
+            '</tr>' +
+            '<table>' +
+            '<div class="btn_box">' +
+            '<button type="button" class="btn btn-success success">确定锁定</button>' +
+            '</div>' +
+            '</div>'
+          $(".whcell_15f").html(html).show();
+          $(".success").click(function () {
+            if ($(".num_text").val() > num) {
+              alert("请输入剩余数量。")
+            } else {
+              var lockedtypeData = {
+                "lockedtype": 2,
+                "id": $(_this).attr('id'),
+                "partnum": $(".num_text").val()
+              }
+            }
+
+            $.ajax({
+              type: "POST",
+              url: "http://192.168.43.152:8093/wms/updateLocked",
+              contentType: "application/json;charset=utf-8",
+              dataType: "JSON",
+              async: false,
+              data: JSON.stringify(lockedtypeData),
+              success: function (resul) {
                 alert('成功');
                 $(".whcell_15f").empty().hide();
                 allData("innerMaterial", data, dataID)
-                    page(data, function() {
-                      allData("innerMaterial", data, dataID)
-                    })
-            }, error: function (jqxhr, textStatus, error) {
+                page(data, function () {
+                  allData("innerMaterial", data, dataID)
+                })
+              }, error: function (jqxhr, textStatus, error) {
                 console.log(error);
-    
-            }
-    
+
+              }
+
+            })
+          })
+          $(".cols").click(function () {
+            $(".whcell_15f").empty().hide();
+          })
         })
-        })
-        $(".cols").click(function(){
-          $(".whcell_15f").empty().hide();
-        })
-      })
       } else {
         $(".listData").empty();
       }
