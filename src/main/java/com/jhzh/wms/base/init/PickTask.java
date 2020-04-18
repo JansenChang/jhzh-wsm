@@ -148,6 +148,26 @@ public class PickTask {
 					msgMap.put("msg", "夹层库物资未齐套。");
 					continue;
 				}
+				HashSet set=new HashSet();
+				for (List<IlsCellDto> list : lists) {
+					list.forEach(ilsCellDto -> {
+						set.add(ilsCellDto.getId());
+					});
+				}
+				List<PickRackDto> pickRack = pickRackService.getPickRack();
+				boolean flag1=false;
+				for (PickRackDto pickRackDto : pickRack) {
+					if(set.contains(pickRackDto.getCol1())){
+						flag1=true;
+						continue;
+					}
+				}
+				if(flag1){
+					msgMap.put("success", "0");
+					msgMap.put("msg", "此工单已有内层物资存在拣选架上，稍后重试。");
+					continue;
+				}
+
 
 				Map<Integer, Integer[]> integerMap = setInitArrays();
 				Integer[] integers4 = integerMap.get(4);
@@ -365,7 +385,7 @@ public class PickTask {
 				data.setCellids(cellstrsrcStr);
 				data.setCellids(cellstrsrcStr);
 				List<TaskmesDto> taskmesDtos = taskmesDao.queryPickTask();
-				if (EmptyUtils.isEmpty(taskmesDtos)) {
+				if (EmptyUtils.isEmpty(taskmesDtos)) {  
 					msgMap.put("success", "0");
 					msgMap.put("msg", "当前存在执行的任务。");
 					continue;
@@ -469,7 +489,6 @@ public class PickTask {
 				ilsCellDto.setLocked(0);
 				ilsCellDto.setAreano(15);
 				List<IlsCellDto> ilsCellDtos = IlscellDao.queryCell(ilsCellDto);
-
 				//假如不存在对应的内层物资则直接返回
 				if (EmptyUtils.isEmpty(ilsCellDtos)) {
 					return null;

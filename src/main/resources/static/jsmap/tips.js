@@ -1100,3 +1100,97 @@ function pilerTips(num) {
             break;
     }
 }
+function AGVTips(num) {
+    switch (num) {
+        case '0':
+            return '直行出线'
+            break;
+        case '1':
+            return '停车过线'
+            break;
+        case '2':
+            return '气压碰撞'
+            break;
+        case '3':
+            return '叉杆撞托板'
+            break;
+        case '4':
+            return '叉杆撞障碍物'
+            break;
+        case '5':
+            return '小车顶货架'
+            break;
+        case '6':
+            return '红外避障'
+            break;
+        case '7':
+            return 'wifi通讯异常'
+            break;
+        case '8':
+            return 'SPI校验错误'
+            break;
+        case '9':
+            return 'SPI通讯超时'
+            break;
+        case '10':
+            return '角度传感器超时'
+            break;
+        case '11':
+            return '前摄像头超时'
+            break;
+        case '12':
+            return '中摄像头超时'
+            break;
+        case '13':
+            return '后摄像头超时'
+            break;
+        case '14':
+            return '升降杆堵转'
+            break;
+        case '15':
+            return '升降杆超界'
+            break;
+        case '16':
+            return '控制器超时'
+            break;
+        case '17':
+            return '电池电压低'
+            break;
+        case '18':
+            return '充电器连接失败'
+            break;
+        case '19':
+            return '电池充电电压异常'
+            break;
+        case '20':
+            return '轮毂堵转'
+            break;
+        case '21':
+            return '轮毂速度异常'
+            break;
+        case '22':
+            return '升降杆保险管异常'
+            break;
+        case '23':
+            return '电源开关断开'
+            break;
+        case '24':
+            return '紧急开关闭合'
+            break;
+        case '25':
+            return '命令错误'
+            break;
+        case '26':
+            return '后退防撞'
+            break;
+        case '27':
+            return '托盘检测出错'
+            break;
+        case '27':
+            return '插货满入错误'
+            break;
+        case '29':
+            return '放货满入错误'
+            break;
+    }
+}

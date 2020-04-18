@@ -128,18 +128,102 @@ $(function () {
 				]
 
 
-				var traynoList = [inr[118], inr[117], inr[116], inr[115], inr[114], inr[113], inr[125], inr[124], inr[123], inr[122], inr[121], inr[120]];
+				// var traynoList = [
+				// 	inr[118],
+				// 	inr[117],
+				// 	inr[116],
+				// 	inr[115],
+				// 	inr[114],
+				// 	inr[113],
+				// 	inr[125],
+				// 	inr[124],
+				// 	inr[123],
+				// 	inr[122],
+				// 	inr[121],
+				// 	inr[120]
+				// ];
 
+				var traynoList = [
+					inr[200],
+					inr[199],
+					inr[198],
+					inr[197],
+					inr[196],
+					inr[195],
+					inr[193],
+					inr[192],
+					inr[191],
+					inr[190],
+					inr[189],
+					inr[188]
+				];
 
-				// console.log(mapnode_pri_10f[0][11]);
-				// 2楼立柜
-				// $(mapnode_pri_10f).each(function (i, arr) {
-				// 	if (arrList.name == 'piler') {
-				// 		arr[11] = pilerData;
+				var agvold = [
+					[inr[141], inr[161]],
+					[inr[142], inr[162]],
+					[inr[143], inr[163]],
+					[inr[144], inr[164]],
+					[inr[145], inr[165]],
+					[inr[146], inr[166]],
+					[inr[147], inr[167]],
+					[inr[148], inr[168]],
+					[inr[149], inr[169]],
+					[inr[150], inr[170]],
+				];
+				// var agvold = [inr[141],inr[142],inr[143],inr[144],inr[145],inr[146],inr[147],inr[148],inr[149],inr[150]]
+				// var agvnew = [[517, 1], [605, 0], [718, 3], [507, 4]]
+				var agvnew = [];
+				$(agvold).each(function (i, itme) {
+					var b = [itme[0].substring(0, itme[0].length - 5), itme[1],itme[0].substr(itme[0].length-1,1)]
+					agvnew.push(b)
+				});
+				//3对应单数，1对应双数
+				// return
+				var agvXY = [];
+				for (var i = 0; i < mapnode_pri_road.length; i++) {
+					for (var j = 0; j < agvnew.length; j++) {
+						if (mapnode_pri_road[i][3] == agvnew[j][0]) {
+							var a = [mapnode_pri_road[i][8], mapnode_pri_road[i][9], agvnew[j][1],agvnew[j][2]];
+							agvXY.push(a)
+						}
+					}
+				}
+						
+
+				// for (var i = 0; i < mapnode_pri_15f.length; i++) {
+				// 	for (var j = 0; j < agvnew.length; j++) {
+				// 		// if (mapnode_pri_15f[i][3] == agvnew[j][0]) {
+				// 			var onum=mapnode_pri_15f[i][3].split('');
+				// 				if(onum[0]==0){
+				// 					var num = parseInt(onum[1]);
+				// 				}else{
+				// 					var num = parseInt(onum[0]+onum[1])
+				// 				}
+				// 				console.log(agvnew[j][2]);
+				// 			if(agvnew[j][2]=='3'){
+				// 				if(num%2==0){
+				// 					console.log(num,mapnode_pri_15f[i]);
+				// 				}else{
+
+				// 				}
+				// 			}
+				// 			// var a = [mapnode_pri_road[i][8], mapnode_pri_road[i][9], agvnew[j][1]];
+				// 			// agvXY.push(a)
+				// 		// }
 				// 	}
-				// })
+				// }
 
-				// console.log(inr[64] + '------111--------' + inr[65], inr[30] + '----------222222-----------' + inr[31])
+				
+				for (var i = 0; i < mapnode_pri_agv.length; i++) {
+					for (var j = 0; j < agvXY.length; j++) {
+						if (i == j) {
+							mapnode_pri_agv[i][8] = agvXY[j][0];
+							mapnode_pri_agv[i][9] = agvXY[j][1];
+							mapnode_pri_agv[i][11] = agvXY[j][2];
+							// console.log(mapnode_pri_agv[i][8],mapnode_pri_agv[i][9])
+						}
+					}
+				}
 				var a = 0, b = 0, c = 0, d = 0, e = 0;
 				// 吊机
 				for (var i = 0; i < mapnode_pri_hov.length; i++) {
@@ -152,6 +236,9 @@ $(function () {
 						if (mapnode_pri_hov[i][13] == 'conveyor') {
 							mapnode_pri_hov[i][11] = conveyorList[b];
 							b++
+							if (mapnode_pri_hov[i][11][1] == 1) {
+								mapnode_pri_hov[i][12] = "#c8deb1";
+							}
 						}
 						if (mapnode_pri_hov[i][13] == 'conveyor_#') {
 
@@ -201,7 +288,7 @@ $(function () {
 
 					for (var i = 0; i < mapnode_pri_10f.length; i++) {
 
-							mapnode_pri_10f[i][12] = "#dfdfe7";
+						mapnode_pri_10f[i][12] = "#dfdfe7";
 
 						if (mapnode_pri_10f[i][13] == 'pilerSeat') {
 							for (var j = 0; j < hasMaterial.length; j++) {
@@ -212,7 +299,7 @@ $(function () {
 							}
 							for (var j = 0; j < hasTrayno.length; j++) {
 								if (mapnode_pri_10f[i][3] == hasTrayno[j].name) {
-									mapnode_pri_10f[i][12] = "#7c9266";
+									mapnode_pri_10f[i][12] = "#c8deb1";
 									mapnode_pri_10f[i][11] = hasTrayno[j];
 								}
 							}
@@ -221,10 +308,10 @@ $(function () {
 					}
 				}
 
-				
+
 				// 大托盘
-				var upstair=resul.resultData.var25;
-				$(resul.resultData.var26).each(function(i,itme){
+				var upstair = resul.resultData.var25;
+				$(resul.resultData.var26).each(function (i, itme) {
 					upstair.push(itme);
 				})
 
@@ -236,41 +323,47 @@ $(function () {
 						// 	hasMaterial_25.push(itme);
 						// }
 						if (itme.trayno != '000000') {
-							if(itme.partwoid != 0 && itme.partwoid){
+							if (itme.partwoid != 0 && itme.partwoid) {
 								hasMaterial_25.push(itme);
-							}else{
+							} else {
 								hasTrayno_26.push(itme);
 							}
-							
+
 						}
-						console.log(hasMaterial_25)
 					})
-					
+
 					for (var i = 0; i < mapnode_pri_hov.length; i++) {
 						if (mapnode_pri_hov[i][13] == 'trayno') {
-							mapnode_pri_hov[i][12] = "#dfdfe7";
-							for (var j = 0; j < hasMaterial_25.length; j++) {
-								if (mapnode_pri_hov[i][3] == hasMaterial_25[j].name) {
-									mapnode_pri_hov[i][12] = "#61a51e";
-									mapnode_pri_hov[i][11] = hasMaterial_25[j];
-									console.log(mapnode_pri_hov[i])
+							if (mapnode_pri_hov[i][11] == 0) {
+								mapnode_pri_hov[i][12] = "#dfdfe7";
+
+							} else {
+								mapnode_pri_hov[i][12] = "#c8deb1";
+								for (var j = 0; j < hasMaterial_25.length; j++) {
+									if (mapnode_pri_hov[i][3] == hasMaterial_25[j].name) {
+										mapnode_pri_hov[i][12] = "#61a51e";
+										mapnode_pri_hov[i][11] = hasMaterial_25[j];
+									}
 								}
+								// for (var j = 0; j < hasTrayno_26.length; j++) {
+								// 	if (mapnode_pri_hov[i][3] == hasTrayno_26[j].name) {
+								// 		mapnode_pri_hov[i][12] = "#c8deb1";
+								// 		mapnode_pri_hov[i][11] = hasTrayno_26[j];
+								// 		console.log(mapnode_pri_hov[i],hasTrayno_26[j],mapnode_pri_hov[i][3] == hasTrayno_26[j].name)
+								// 	}
+								// }
 							}
-							for (var j = 0; j < hasTrayno_26.length; j++) {
-								if (mapnode_pri_hov[i][3] == hasTrayno_26[j].name) {
-									mapnode_pri_hov[i][12] = "#7c9266";
-									mapnode_pri_hov[i][11] = hasTrayno_26[j];
-								}
-							}
+
+
 						}
 
 					}
 				}
-			
+
 
 				// 拣选架
-				var pickList=resul.resultData.var17;
-				$(resul.resultData.var16).each(function(i,itme){
+				var pickList = resul.resultData.var17;
+				$(resul.resultData.var16).each(function (i, itme) {
 					pickList.push(itme);
 				})
 				if (pickList) {
@@ -284,7 +377,7 @@ $(function () {
 							hasTrayno_17.push(itme);
 						}
 					})
-					
+
 					for (var i = 0; i < mapnode_pri_pick.length; i++) {
 						mapnode_pri_pick[i][12] = "#dfdfe7";
 						if (mapnode_pri_pick[i][13] == 'pick') {
@@ -297,7 +390,7 @@ $(function () {
 							}
 							for (var j = 0; j < hasTrayno_17.length; j++) {
 								if (mapnode_pri_pick[i][3] == hasTrayno_17[j].name) {
-									mapnode_pri_pick[i][12] = "#7c9266";
+									mapnode_pri_pick[i][12] = "#c8deb1";
 									mapnode_pri_pick[i][11] = hasTrayno_17[j];
 								}
 							}
@@ -306,11 +399,13 @@ $(function () {
 					}
 				}
 
-				var wasteList=resul.resultData.var18;
-				$(resul.resultData.var19).each(function(i,itme){
+
+				// 虚仓
+				var wasteList = resul.resultData.var18;
+				$(resul.resultData.var19).each(function (i, itme) {
 					wasteList.push(itme);
 				})
-				// 虚仓
+
 				if (wasteList) {
 					var hasMaterial_18 = [];
 					var hasTrayno_18 = [];
@@ -332,7 +427,7 @@ $(function () {
 							}
 							for (var j = 0; j < hasTrayno_18.length; j++) {
 								if (mapnode_pri_pick[i][3] == hasTrayno_18[j].name) {
-									mapnode_pri_pick[i][12] = "#7c9266";
+									mapnode_pri_pick[i][12] = "#c8deb1";
 									mapnode_pri_pick[i][11] = hasTrayno_18[j];
 								}
 							}

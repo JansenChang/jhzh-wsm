@@ -196,10 +196,11 @@ $(".ask").click(function(){
       $(".tips").empty();
         $(".ptxt").val('');
             var i=row.value;
-            if(i=='31'||i=='32'){
-                $(".grop10,.grop11,.grop2").hide();
+            var colI= row.value;
+            if(i=='31' ||i=='32'){
+                $(".grop10,.grop11").hide();
             }else{
-                $(".grop10,.grop11,.grop2").show();
+                $(".grop10,.grop11").show();
             }
             var htmlstr="";
             // debugger;
@@ -274,10 +275,24 @@ $(".ask").click(function(){
             success: function(resultData) {
                 if (resultData.errorMsg == 'ok') {
                   $(".tips").empty();
-                    if (next == (txts.length - 1)) {
+                  if(objt.row == '31' || objt.row == '32'){
+                      if(next=='9'){
                         var x = Number($('#col').val()) + 1;
                         $('#col').find('option[value=' + x + ']').prop('selected', true);
                         txts[0].focus(); //第一个重新获得焦点
+                        getTrayno(objt.row,x);
+                        return;
+                      }else {
+                        txts[next + 1].focus(); //下一个输入框获得焦点
+                    }
+                    if(objt.row == '31' && next=='0'){
+                        txts[next + 2].focus();
+                    }
+                  }else if (next == (txts.length - 1)) {
+                        var x = Number($('#col').val()) + 1;
+                        $('#col').find('option[value=' + x + ']').prop('selected', true);
+                        txts[0].focus(); //第一个重新获得焦点
+                        getTrayno(objt.row,x);
                         return;
                     } else {
                         txts[next + 1].focus(); //下一个输入框获得焦点
@@ -298,9 +313,14 @@ $(".ask").click(function(){
         var traynoData = {
             "trayno": trayno
         }
+        console.log(traynoData.trayno.length);
+        if(traynoData.trayno.length>7){
+            id.empty().html('请输入合规的盘号。');
+            return
+        }
         if (trayno != '000000') {
             $.ajax({
-                type: "post", //使用post方法访问后台
+                type: "post",
                 url: "wms/queryByTrayno",
                 contentType: "application/json;charset=utf-8",
                 dataType: "JSON",
@@ -327,13 +347,13 @@ $(".ask").click(function(){
                             
                             ku.push(hao);
                         })
-                        console.log(ku)
                         var place = "";
                         $(ku).each(function(num, kukiu) {
                             place = place + kukiu + ' ';
                         })
 
                         id.empty().html('目标托盘在<span>' + place + '</span>号库位！');
+                        
                     } else {
 
                         if (objt, next, txts) {

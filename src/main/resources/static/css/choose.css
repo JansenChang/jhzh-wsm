@@ -1,0 +1,106 @@
+body{
+    background-color: #f4f5f5;
+    padding:30px;
+    margin:0;
+    font-size: 16px;
+}
+.web{
+    background: #fff;
+    padding:20px;
+    border-radius: 10px;
+   
+}
+.time{
+    font-family: fantasy;
+    font-size: 45px;
+    color: #666;
+   
+}
+.dai{
+   margin: 30px 0 0;
+   border-bottom: 1px dashed #483f77;
+}
+ .location{
+    color: white;
+    background-color: #483f77;
+    width: 120px;
+    /* height: 38px; */
+    /* line-height: 39px; */
+    text-align: center;
+    transform: skewX(-25deg);
+    padding: 5px 12px;
+ }
+.dai_title{
+    display: inline-block;
+    transform: skewX(25deg);
+}
+.dai_box{
+    /* border: 2px solid #483f77; */
+    padding: 20px 10px;
+}
+.dai_box span{
+    display: inline-block;
+    background: #eee;
+    color: #666;
+    padding: 7px 10px;
+    margin: 4px;
+    border-radius: 5px;
+}
+.dai_box .show_bg{
+    background: #483f77;
+    color: #fff;
+}
+.inquire{
+    margin-top: 30px;
+    height: 45px;
+}
+.inquire input{
+    padding: 10px;
+    border-color: #483f77;
+    margin-left: 50px;
+}
+.float-l{float: left;}
+table{
+    border: 1px solid #483f77;
+    text-align: center;
+    border-left: 2px solid #483f77;
+}
+thead{
+    background: #483f77;
+    color: #fff;
+}
+tbody tr:hover,tbody td:hover{background-color:rgba(83,200,255,.5);}
+td{border-right:1px solid #483f77;border-bottom:1px solid #483f77;padding: 10px 0;}
+ul{    padding: 0;margin: 0;margin-top: 10px;}
+ul li{list-style: none;}
+li{border-top:1px solid #eee;padding:5px 0;}
+.inquire .activ{
+    background: #483f77;
+    border: 1px solid #ffffff;
+    padding: 8px;
+    color: #fff;
+}
+.inquire button{
+    background: #ffffff;
+    border: 1px solid #483f77;
+    padding: 8px;
+    color: #483f77;
+    margin:0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+button:focus,
+button:active:focus,
+button.active:focus,
+button.focus,
+button:active.focus,
+button.active.focus {
+    outline: none;
+    border-color: transparent;
+    box-shadow:none;
+}
+.pink{background: pink;}
+.tips{
+    padding:20px;
+    color: red;
+}

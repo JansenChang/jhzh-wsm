@@ -140,6 +140,7 @@ class mapNode { //定义了一个绘制节点类
                 break;
         }
     }
+
     // 堆垛机模式
     pilerState(num) {
         switch (num) {
@@ -174,11 +175,11 @@ class mapNode { //定义了一个绘制节点类
                 break;
         }
     }
-    getPartdate(time){
+    getPartdate(time) {
         var date1 = new Date(time);
         var date2 = new Date(date1);
         date2.setDate(date1.getDate() + 30);
-        return date2.getFullYear() + "-" + (date2.getMonth() + 1) + "-" + date2.getDate()+ '  ' +date2.getHours()+ ":"+ date2.getMinutes()+ ":"+ date2.getSeconds()
+        return date2.getFullYear() + "-" + (date2.getMonth() + 1) + "-" + date2.getDate() + '  ' + date2.getHours() + ":" + date2.getMinutes() + ":" + date2.getSeconds()
     }
     getMousePos(event) {
         var _this = this;
@@ -192,11 +193,11 @@ class mapNode { //定义了一个绘制节点类
         // 夹层立柜
 
         if ((_this.explain == 'cabinet')) {
-            var row1=_this.name.split('')[0] + _this.name.split('')[1];
-            var col1=_this.name.split('')[2] + _this.name.split('')[3];
+            var row1 = _this.name.split('')[0] + _this.name.split('')[1];
+            var col1 = _this.name.split('')[2] + _this.name.split('')[3];
             var dynData = {
-                "row":row1,
-                "col":col1
+                "row": row1,
+                "col": col1
             }
             $.ajax({
                 type: "POST",
@@ -208,11 +209,11 @@ class mapNode { //定义了一个绘制节点类
                 success: function (resul) {
                     console.log(resul);
 
-                    html += '<h1>' + _this.objid + '库位详情 <span class="clos">x</span></h1>' +
+                    html += '<h1>' + _this.name + '库位详情 <span class="clos">x</span></h1>' +
                         '<table class = "table-responsive" width = "100%">' +
                         '<tr><th></th><th>托盘号</th><th>工单号</th><th>物料号</th><th>数量</th><th>锁定类型</th><th>到期时间</th></tr>';
                     $(resul.resultData).each(function (i, obj) {
-                        html += '<tr><td>' + (i + 1) + '层</td><td>' + obj.trayno + '</td><td>' + (obj.partwoid == 0 ? '-' : obj.partwoid) + '</td><td>' + (obj.partid == 0 ? '-' : obj.partid) + '</td><td>' + (obj.partnum == 0 ? '-' : obj.partnum) + '</td><td>未过期</td><td>' + (obj.partdate?_this.getPartdate(obj.partdate):'-') + '</td></tr>'
+                        html += '<tr><td>' + (i + 1) + '层</td><td>' + obj.trayno + '</td><td>' + (obj.partwoid == 0 ? '-' : obj.partwoid) + '</td><td>' + (obj.partid == 0 ? '-' : obj.partid) + '</td><td>' + (obj.partnum == 0 ? '-' : obj.partnum) + '</td><td>' + (obj.locked == 0 ? '未锁定' : '已锁定') + '</td><td>' + (obj.partdate ? _this.getPartdate(obj.partdate) : '-') + '</td></tr>'
                     })
                     html += '<table>';
                     $(".tips").empty().html(html).show();
@@ -225,7 +226,7 @@ class mapNode { //定义了一个绘制节点类
             })
         }
 
-        // if (_this.dataobj) {
+
 
         // 堆垛机
         if (_this.explain == 'piler') {
@@ -234,7 +235,7 @@ class mapNode { //定义了一个绘制节点类
                 '<table class = "table-responsive" width = "100%">' +
                 '<tr><th width="25%"> 控制模式 </th><td width="25%">' + _this.pilerState(_this.dataobj[0]) + ' </td><th width="25%"> 作业类型 </th ><td width="25%" > ' + _this.pilerType(_this.dataobj[1]) + ' </td></tr>' +
                 '<tr><th width="25%"> 警报 </th><td width="25%">' + pilerTips(_this.dataobj[2]) + '</td><th width = "25%"> 取货站台 </th> <td width="25%">' + (_this.dataobj[3] ? _this.dataobj[3] : '-') + '</td></tr>' +
-                '<tr><th width="25%"> 入库号 </th><td width="25%"> ' + _this.dataobj[4]  + ' </td><th width="25%">出库号 </th><td width="25%"> ' + _this.dataobj[5]  + ' </td></tr>' +
+                '<tr><th width="25%"> 入库号 </th><td width="25%"> ' + _this.dataobj[4] + ' </td><th width="25%">出库号 </th><td width="25%"> ' + _this.dataobj[5] + ' </td></tr>' +
                 '<tr><th width="25%"> 任务号 </th><td width="25%"> ' + (_this.dataobj[6]) + ' </td><th width="25%"> 当前位置 </th><td width="25%"> ' + _this.dataobj[7] + ' </td></tr>' +
                 '<table>';
             $(".tips").empty().html(html).show();
@@ -265,31 +266,43 @@ class mapNode { //定义了一个绘制节点类
 
         }
         //一楼库位查询
-        if((_this.explain=='pilerSeat') || (_this.name=="160102") || (_this.name=="160101") || (_this.explain=="pick") || (_this.explain=="waste")){
-                    html += '<h1>' + _this.name + '库位详情 <span class="clos">x</span>   </h1>' +
-                        '<table class = "table-responsive" width = "100%">' +
-                        '<tr><th width="20%">托盘号</th><td width="30%">'+ (_this.dataobj.trayno?_this.dataobj.trayno:'-') +'</td><th>物料号</th><td width="30%">'+ (_this.dataobj.partid?_this.dataobj.partid:'-') +'</td></tr>'+
-                        '<tr><th>工单号</th><td>'+ (_this.dataobj.partwoid?_this.dataobj.partwoid:'-') +'</td><th>数量</th><td>'+ (_this.dataobj.partnum?_this.dataobj.partnum:'-') +'</td></tr>'+
-                        '<tr><th>到期时间</th><td>'+ (_this.dataobj.partdate?_this.getPartdate(_this.dataobj.partdate):'-') +'</td><th></th><td></td></tr>'+
-                        '<table>';
-                    $(".tips").empty().html(html).show();
-               
+        if ((_this.explain == 'pilerSeat') || (_this.name == "160102") || (_this.name == "160101") || (_this.explain == "pick") || (_this.explain == "waste") || (_this.explain == 'trayno')) {
+            html += '<h1>' + _this.name + '库位详情 <span class="clos">x</span>   </h1>' +
+                '<table class = "table-responsive" width = "100%">' +
+                '<tr><th width="20%">托盘号</th><td width="30%">' + (_this.dataobj.trayno ? _this.dataobj.trayno : '-') + '</td><th>物料号</th><td width="30%">' + (_this.dataobj.partid ? _this.dataobj.partid : '-') + '</td></tr>' +
+                '<tr><th>工单号</th><td>' + (_this.dataobj.partwoid ? _this.dataobj.partwoid : '-') + '</td><th>数量</th><td>' + (_this.dataobj.partnum ? _this.dataobj.partnum : '-') + '</td></tr>' +
+                '<tr><th>到期时间</th><td>' + (_this.dataobj.partdate ? _this.getPartdate(_this.dataobj.partdate) : '-') + '</td><th></th><td></td></tr>' +
+                '<table>';
+            $(".tips").empty().html(html).show();
+
+        }
+
+        //agv
+        if (_this.explain == 'agv') {
+            console.log(_this)
+            html += '<h1>' + _this.name + '号AGV <span class="clos">x</span>   </h1>' +
+                '<table class = "table-responsive" width = "100%">' +
+                '<tr><th width="20%">状态</th><td width="30%">' + (_this.dataobj.trayno ? _this.dataobj.trayno : '-') + '</td><th>报警</th><td width="30%">' + (_this.dataobj.partid ? _this.dataobj.partid : '-') + '</td></tr>' +
+                '<tr><th>当前位置</th><td>' + _this.id + '</td><th></th><td></td></tr>' +
+                '<table>';
+            $(".tips").empty().html(html).show();
+
         }
 
 
 
         // 2楼存盘
-        if (_this.explain == 'trayno') {
-            console.log(_this);
-            html += '<h1>' + _this.name + ' 载具<span class="clos">x</span></h1>' +
-                '<table class = "table-responsive" width = "100%">' +
-                '<tr><th width="25%"> 托盘号 </th><td width="25%">' + (_this.dataobj.trayno?_this.dataobj.trayno:'-') + '</td></tr>'
-            '<table>';
+        // if (_this.explain == 'trayno') {
+        //     console.log(_this);
+        //     html += '<h1>' + _this.name + ' 载具<span class="clos">x</span></h1>' +
+        //         '<table class = "table-responsive" width = "100%">' +
+        //         '<tr><th width="25%"> 托盘号 </th><td width="25%">' + (_this.dataobj.trayno ? _this.dataobj.trayno : '-') + '</td></tr>'
+        //     '<table>';
 
 
-            $(".tips").empty().html(html).show();
-        }
-    // }
+        //     $(".tips").empty().html(html).show();
+        // }
+        // }
 
         $(".clos").click(function () {
             $(".tips").hide();
@@ -303,7 +316,7 @@ class mapNode { //定义了一个绘制节点类
         var w = $(".tips").offset().left;
         if ((w - 1000) > 0) {
             $(".tips").offset({
-                left: x - 650
+                left: x - 750
             })
         }
         if ((h - 250) > 0) {
@@ -313,7 +326,7 @@ class mapNode { //定义了一个绘制节点类
         }
         if ((h - 660) > 0) {
             $(".tips").offset({
-                top: y - 650
+                top: y - 200
             })
         }
 
@@ -322,7 +335,7 @@ class mapNode { //定义了一个绘制节点类
     draw(draw) {
         var _this = this;
         if (_this.svgtype == "rect") {
-            var obj = draw.rect(_this.w, _this.h);
+            var obj = draw
             // if (_this.color == '#dfdfe7') {
             //     _this.svgobj = obj.addClass('pointer');
             // }
@@ -356,7 +369,7 @@ class mapNode { //定义了一个绘制节点类
             // 一楼立库位置
 
             if (piler_1 && piler_2) {
-                console.log(piler_1,piler_2)
+                console.log(piler_1, piler_2)
                 if (_this.name == piler_1) {
                     _this.svgobj = obj.addClass('lv');
                 }
@@ -366,32 +379,40 @@ class mapNode { //定义了一个绘制节点类
             }
 
             // 是否到期
-            if(_this.dataobj.partdate){
-                var startTime= new Date(Date.parse(_this.getPartdate(_this.dataobj.partdate)));
-                var endTime=new Date();
-                if(startTime<endTime){
+            if (_this.dataobj.partdate) {
+                var startTime = new Date(Date.parse(_this.getPartdate(_this.dataobj.partdate)));
+                var endTime = new Date();
+                if (startTime < endTime) {
                     _this.svgobj = obj.addClass('my-tips');
                 }
             }
-
             // 警报
-            if ((_this.dataobj) && (_this.dataobj[2] > 0)) {
+            if ((_this.dataobj) && (_this.dataobj[2] == 0)){
+                $(".wrap").hide();
+            } else {
                 if (_this.explain == 'piler') {
                     _this.svgobj = obj.addClass('my-clsss');
-                    var tip = pilerTips(_this.dataobj[2])
+                    var tip = pilerTips(_this.dataobj[2]);
+                    $(".wrap").show();
                     $(".piler").empty().html(_this.text + '：' + tip);
                 }
-                if ((_this.explain == '1#') || (_this.explain == '2#')) {
+                if (_this.explain == '1#' || _this.explain == '2#') {
                     _this.svgobj = obj.addClass('my-clsss');
-                    var tip = cagtTips(_this.dataobj[2])
-                    var tip = "22222"
+                    console.log(_this.dataobj[2],cagtTips(_this.dataobj[2]));
+                    var tip = cagtTips(_this.dataobj[2]);
+                    $(".wrap").show();
                     $(".dui").empty().html(_this.explain + '吊笼：' + tip);
+                } else {
+                    // debugger;
                 }
-                $(".wrap").show();
-            }else{
-                $(".wrap").hide();
+            
             }
-            // 3楼存放托盘
+            // if(_this.objid=='624'){
+            //     _this.changecolor('#234');
+            //     console.log(_this.x,_this.y)
+
+            // }
+            // 2楼存放托盘
             if (_this.explain == 'conveyor') {
                 // if (_this.dataobj[0] != '0') {
                 //     _this.changecolor(color1);
@@ -401,36 +422,38 @@ class mapNode { //定义了一个绘制节点类
                 if (_this.dataobj[0] == 0) {
                     _this.changecolor(color2);
                 }
-                console.log(_this.explain + 'svg--------' + _this.dataobj[0])
             }
-
             // 堆垛机位移
             if (_this.explain == 'piler') {
-                if(_this.dataobj[1] == 0){
+                if (_this.dataobj[1] == 0) {
                     _this.changecolor(color2);
                 }
-                if(_this.dataobj[10] ==2 ){
-                    _this.changeposition(_this.dataobj[10]*98, _this.y);    
-                }else if(_this.dataobj[10] ==3){
-                    _this.changeposition(_this.dataobj[10]*104, _this.y);   
-                }else if(_this.dataobj[10] ==4){
-                    _this.changeposition(_this.dataobj[10]*107, _this.y);   
-                }else if(_this.dataobj[10] ==5){
-                    _this.changeposition(_this.dataobj[10]*109, _this.y);   
-                }
-                
+                _this.changeposition(_this.x + (_this.dataobj[10] - 1) * 115.58823529411765, _this.y);
             }
 
-            _this.svgobj = obj.fill(_this.color).move(_this.x, _this.y).addClass('pointer');
+            // agv位置
+            if (_this.explain == 'agv') {
+                if (_this.dataobj == 0) {
+                    console.log('agv错误代码========' + _this.dataobj[0])
+                } else if (_this.dataobj == 1) {
+                    _this.changecolor('#4c92ff');
+                    _this.svgobj = obj.addClass('my-tips');
+                } else if (_this.dataobj == 3) {
+                    _this.svgobj = obj.addClass('my-clsss');
+                }
+            }
+
+            _this.svgobj = obj.rect(_this.w, _this.h).fill(_this.color).move(_this.x, _this.y).addClass('pointer');
+            
 
             _this.svgobj.click(function (event) {
                 _this.getMousePos(event)
             })
 
         } else if (this.svgtype == "text") {
-         
-                this.svgobj = draw.text(this.text).fill(this.color).move(this.x, this.y).size(15);
-            }
+
+            this.svgobj = draw.text(this.text).fill(this.color).move(this.x, this.y).size(15);
+        }
     }
 }
 
