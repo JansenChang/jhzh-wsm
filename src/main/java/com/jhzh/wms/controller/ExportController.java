@@ -44,11 +44,11 @@ public class ExportController {
         titleMap.put("partdate","存入日期");
         titleMap.put("status","状态");
         Map queryMap=jsonObject;
-        List<Map<String, Object>> listMap = putInStorageDao.queryWmsInvInFlow(queryMap);
-        HSSFWorkbook hssfWorkbook = ExportUtil.exportExcel(listMap,titleMap);
+        //List<Map<String, Object>> listMap = putInStorageDao.queryWmsInvInFlow(queryMap);
+        //HSSFWorkbook hssfWorkbook = ExportUtil.exportExcel(listMap,titleMap);
         response.setContentType("application/xls;charset=UTF-8");
 		response.setHeader("Content-Disposition", "attachment;filename="+ jsonObject.get("filename")+".xls");
-        hssfWorkbook.write(response.getOutputStream());
+       // hssfWorkbook.write(response.getOutputStream());
     }
 
 

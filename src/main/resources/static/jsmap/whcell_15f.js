@@ -17,7 +17,61 @@ $(function () {
 
 
 	function init() {
+		$.ajax({
+			type: "GET",
+			url: url + "/wms/infonews",
+			contentType: "application/json;charset=utf-8",
+			dataType: "JSON",
+			async: false,
+			data: "",
+			success: function (resul) {
+				var inr = (resul.resultData).split(',');
+				var agvold = [
+					[inr[141], inr[161]],
+					[inr[142], inr[162]],
+					[inr[143], inr[163]],
+					[inr[144], inr[164]],
+					[inr[145], inr[165]],
+					[inr[146], inr[166]],
+					[inr[147], inr[167]],
+					[inr[148], inr[168]],
+					[inr[149], inr[169]],
+					[inr[150], inr[170]],
+				];
+				var agvnew=[];
+				$(agvold).each(function(i,itme){
+					var b = [itme[0].substring(0,itme[0].length-4),itme[1]]
+					agvnew.push(b)
+				});
 
+				var agvXY = [];
+				for (var i = 0; i < mapnode_pri_road.length; i++) {
+					for (var j = 0; j < agvnew.length; j++) {
+						if (mapnode_pri_road[i][3] == agvnew[j][0]) {
+							var a = [mapnode_pri_road[i][8], mapnode_pri_road[i][9], agvnew[j][1]];
+							agvXY.push(a)
+						}
+					}
+				}
+				for (var i = 0; i < mapnode_pri_agv.length; i++) {
+					for (var j = 0; j < agvXY.length; j++) {
+						if (i == j) {
+							mapnode_pri_agv[i][8] = agvXY[j][0];
+							mapnode_pri_agv[i][9] = agvXY[j][1];
+							mapnode_pri_agv[i][11] = agvXY[j][2];
+						}
+					}
+				}
+
+
+
+			},
+			error: function (jqxhr, textStatus, error) {
+				console.log(error);
+
+			}
+
+		})
 
 		$.ajax({
 			type: "POST",

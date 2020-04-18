@@ -36,7 +36,7 @@ public class WmsInvOutServiceImpl implements WmsInvOutService {
     private IlsCellDao ilsCellDao;
     @Resource
     private HttpResult.HttpAPIService httpAPIService;
-     @Value("${queryWoPlanInfoUrl}")
+    @Value("${queryWoPlanInfoUrl}")
     private String queryWoPlanInfoUrl;
 
     @Override

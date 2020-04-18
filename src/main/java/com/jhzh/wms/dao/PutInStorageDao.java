@@ -1,5 +1,6 @@
 package com.jhzh.wms.dao;
 
+import com.jhzh.wms.dto.FlowRecordDto;
 import com.jhzh.wms.dto.WmsInvInDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -17,9 +18,9 @@ public interface PutInStorageDao {
 
     List<WmsInvInDto> queryItemCode(@Param("itemCode") String itemCode);
 
-     List<WmsInvInDto> queryWmsInvInForTaskId(@Param("taskId") String taskId);
+     List<WmsInvInDto> queryWmsInvInForTaskId(@Param("taskid") String taskid);
 
-     List<Map<String, Object>> queryWmsInvInFlow(Map map);
+     List<FlowRecordDto> queryWmsInvInFlow(Map map);
 
 
 

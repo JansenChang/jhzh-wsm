@@ -6,12 +6,14 @@ import com.github.pagehelper.PageInfo;
 import com.jhzh.wms.base.result.Result;
 import com.jhzh.wms.dao.PutInStorageDao;
 import com.jhzh.wms.dao.WmsInvOutDao;
+import com.jhzh.wms.dto.FlowRecordDto;
 import com.jhzh.wms.service.FlowRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 @Service
 public class FlowRecordServiceImpl implements FlowRecordService {
@@ -26,9 +28,8 @@ public class FlowRecordServiceImpl implements FlowRecordService {
         Integer pagesize = (Integer) jsonObject.get("pagesize");
         PageHelper.startPage(pagenum,pagesize);
         Map map=jsonObject;
-        List<Map<String, Object>> maps = putInStorageDao.queryWmsInvInFlow(map);
-
-        PageInfo<Map<String, Object>> pageInfo=new PageInfo<>(maps);
+        List<FlowRecordDto> maps = putInStorageDao.queryWmsInvInFlow(map);
+        PageInfo<FlowRecordDto> pageInfo=new PageInfo<>(maps);
         return Result.success(pageInfo);
     }
 
@@ -41,5 +42,9 @@ public class FlowRecordServiceImpl implements FlowRecordService {
         List<Map<String, Object>> maps =wmsInvOutDao.queryWmsInvOutFlow(map);
         PageInfo<Map<String, Object>> pageInfo=new PageInfo<>(maps);
         return Result.success(pageInfo);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Pattern.compile("(?i)[a-z]").matcher("101261081-6/7").find());
     }
 }

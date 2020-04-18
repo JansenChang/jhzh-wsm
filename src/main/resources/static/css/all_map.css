@@ -12,10 +12,11 @@ body {
   position: fixed;
   background: #fff;
   /* padding: 20px 5px; */
-  width: 600px;
+  width: 700px;
   height: auto;
   border-radius: 5px;
   border: 10px solid #dbe7f4;
+  z-index: 99999;
 }
 .tips table {
   margin-bottom: 0;
@@ -181,10 +182,11 @@ h1 {
 .legend .kong{background: #dfdfe7ed;}
 .legend .alarm{background: red;}
 .legend .has{background: #61a51e;}
-.legend .noMaterial{background: #7c9266ed;}
+.legend .noMaterial{background: #c8deb1;}
 .legend .operation{background: #f39e18;}
 .legend .leisure{background: #444653;}
-.legend  .car{background: #4545ad;}
+.legend  .car{background: #0606a0;}
+.legend  .car1{background: #4c92ff;}
 .legend  .relation{background: #6a21af;}
 .whcell_15f .bg-pink{background: pink;}
 .whcell_15f .list input{

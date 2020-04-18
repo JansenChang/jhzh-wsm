@@ -14,7 +14,6 @@ table tr td {
     border: 1px #DDDDDD solid;
     padding: 0.2rem;
     background-color: white;
-    height: 40px;
 }
 .accordion .accordion-navigation > a {
     display: block;
@@ -36,7 +35,7 @@ button {
     height: 1.4rem;
     line-height: 0.9rem;
     background-color: #483f77;
-    padding:0.3rem 1rem;
+    padding:0.3rem 5px;
     display: table-cell;
     border-radius: 3px;
 }
@@ -78,19 +77,20 @@ button[disabled]:hover {
     text-align: center;
 }
 .choose_conten table th{background: #342d58;color: #fff;border-right: 1px solid #fff;text-align: center;}
-.choose_conten table td{height: 40px;text-align: center;}
+.choose_conten table td{text-align: center;}
 .choose_conten{
     background: #fff;
     border: 1px solid #2c264a;
     /* height: 300px; */
     margin-bottom: 10px;
-    padding: 15px 10px;
+    padding: 25px 10px;
 }
 .div_input {
-    border-bottom: 2px dashed #2c264a;
-    padding-bottom: 20px;
-    height: 58px;
+    /* padding-bottom: 30px; */
+    height: 80px;
     position: relative;
+    /* margin-bottom: 30px; */
+    padding-top: 10px;
 }
 .div_input span{
     line-height: 38px;
@@ -106,16 +106,35 @@ button[disabled]:hover {
     line-height: 30px;
     background: #483f77;
 }
-.div_table{
-    padding-top: 20px;
-}
 .div_radio{
-    width: 95px;
+    width: 190px;
     position: absolute;
-    right:0px;
-    top: -5px;
+    right: 65px;
+    bottom: 15px;
 }
 .div_radio input{margin-bottom: 1px;}
+.pattern{
+    display: inline-block;
+    width: 130px;
+    text-align: center;
+    padding: 10px 0;
+    cursor: pointer;
+    background: #f2f2f2;
+    color: #666;
+    /* border-radius: 5px 0 0 5px;
+    border-radius: 5px; */
+}
+/* .autopilot{
+    background: #f2f2f2;
+    color: #666;
+    float: left;
+    border-radius: 5px 0 0 5px;
+} */
+.manual{
+    background: #483f77;
+    color: #fff;
+    /* border-radius: 0 5px 5px 0; */
+}
 .jian{
     display: inline-block;
     width: 19px;
@@ -208,12 +227,22 @@ input[type="text"]{border:none;text-align: center;margin:0;background: none;}
     height: 40px;
     margin: 0px auto;
 }
-.div_table.facility{padding:0;}
+.div_table.facility{padding:0;border: none;}
 .bind input{width: 100px;}
 .clear_box td{
     height: 50px;padding:5px 10px;
 }
 .clear_box td button{
     height: 40px;
-    padding:0 12px;
+    /* padding:0 12px; */
+}
+.input_choose{
+    position: relative;
+    height: 90px;
+    
+}
+.input_choose button{height: 30px;margin-left: 15px;}
+.choos_box{
+    border-top: 2px dashed #2c264a;
+    padding-top: 30px;
 }
