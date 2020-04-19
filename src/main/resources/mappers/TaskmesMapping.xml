@@ -153,6 +153,24 @@
                 status
     from yx_ils_taskmes where name in ('B1PI','B2PI')
     </select>
+    <select id="query1LForTaskMes" resultMap="taskmesDto">
+     select
+            id,
+                    unt,
+                    app,
+                    name,
+                    taskid,
+                    areano,
+                    action,
+                    locator,
+                    cellstrsrc,
+                    cellstrdst,
+                    cellidsrc,
+                    celliddst,
+                    status
+        from yx_ils_taskmes where name in ( 'CTI', 'CPO', 'CTO', 'CPI') and status=100
+
+    </select>
 
 
 </mapper>

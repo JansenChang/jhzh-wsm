@@ -11,7 +11,9 @@ public enum ErrorCode {
     NOT_HAVE_LOCATION(2002,"没有储存位"),
     TASK_BUSY(2003,"同类型任务忙,稍后重试."),
     IS_NULL(2004,"库中查无对应物料"),
-    IS_NULL_BOM(2004,"查询不到BOM信息")
+    IS_NULL_BOM(2004,"查询不到BOM信息"),
+    LONGCAGE_DISABLED(2005,"当前长吊笼不可用。"),
+    EXIST_1L_TASK(2006,"当前一楼存在任务")
     ;
 
     private Integer code;
