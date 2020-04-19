@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.*;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -474,7 +475,10 @@ public class PickTask {
 			ItemBomInfoDto itemBomInfoDto = httpAPIService.getResultData(queryItemBomInfoUrl, JSONObject.toJSONString(map), ItemBomInfoDto.class);
 			List<ItemBomInfoDto.ItemListBean> itemList = itemBomInfoDto.getItemList();
 			itemList.sort(Comparator.comparing(ItemBomInfoDto.ItemListBean::getComponentItemCode).reversed());
-			itemList = itemList.stream().filter(ItemListBean -> Character.isDigit(ItemListBean.getComponentItemDesc().charAt(ItemListBean.getComponentItemDesc().length() - 1))).collect(Collectors.toList());
+			itemList = itemList.stream().filter(ItemListBean ->
+					!Pattern.compile("(?i)[a-z]").matcher(ItemListBean.getComponentItemDesc()).find()
+					/*Character.isDigit(ItemListBean.getComponentItemDesc().charAt(ItemListBean.getComponentItemDesc().length() - 1))*/
+			).collect(Collectors.toList());
 			//查询物资组件数量并存入MAP
 			TreeMap<String, List<IlsCellDto>> tempMap = new TreeMap<>();
 			for (ItemBomInfoDto.ItemListBean itemListBean : itemList) {
@@ -531,7 +535,7 @@ public class PickTask {
 					list.add(ilsCellDto1);
 					return list;
 				}
-				if(ilsCellDto1.getPartnum()>wipQtyTemp  &&  (ilsCellDto2.getPartnum()+ilsCellDto1.getPartnum()) <=40 ){
+				if(ilsCellDto1.getPartnum()>wipQtyTemp  &&  (ilsCellDto2.getPartnum()+ilsCellDto1.getPartnum()-wipQtyTemp) <=40 ){
 					list.add(ilsCellDto1);
 					list.add(ilsCellDto2);
 					list.sort(Comparator.comparing(IlsCellDto::getPartdate).reversed());

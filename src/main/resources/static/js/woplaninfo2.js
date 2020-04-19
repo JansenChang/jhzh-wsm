@@ -9,7 +9,7 @@ $(function () {
                         $(".listData").html('');
                         var list = resultData.resultData.itemList;
                         var bomlist;
-                        if(list.length>0){
+                        if(list){
                             bomlist=resultData.resultData.bomlist.itemList;
                         }
                         $(list).each(function (index, item) {
@@ -22,7 +22,7 @@ $(function () {
                                 '<td>' + item.itemDesc + '</td></tr>'
                         })
                         var bomhtml;
-                        if(bomlist.length>0){
+                        if(bomlist  ){
                             $(bomlist).each(function (index, item) {
                                 bomhtml += '<tr><td>' + item.componentItemId + '</td>' +
                                                '<td >' + item.componentItemCode + '</td>' +
@@ -30,6 +30,8 @@ $(function () {
                                                '<td>' + item.componentUnitQty + '</td></tr>'
                            })
                          }
+                        $(".listData").html('');
+                        $(".bomlistData").html('');
                         $(".listData").empty().append(html);
                         $(".bomlistData").empty().append(bomhtml);
                         tips(resultData.resultData.msg);
