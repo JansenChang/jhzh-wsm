@@ -48,4 +48,9 @@ public class RepertroyController {
        Result<?> result = repertroyService.getCageData();
        return result;
     }
+    @PostMapping(value = "getChoose")
+    public Result<?> getChoose() {
+       Result<?> result = repertroyService.getChoose();
+       return result;
+    }
 }

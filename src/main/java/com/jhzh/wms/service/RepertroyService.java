@@ -17,4 +17,6 @@ public interface RepertroyService {
 
     Result<?> getCageData();
 
+	Result<?> getChoose();
+
 }

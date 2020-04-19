@@ -172,6 +172,8 @@ public class PutInStorageServiceImpl implements PutInStorageService {
                 return Result.error(CodeMsg.builder().code(ErrorCode.IDALREADY_EXIST.getCode()).msg(ErrorCode.IDALREADY_EXIST.getMsg()).build());
             }
 
+
+
             //locator转换
             Map<String,String>stringMap=new HashMap<>();
             stringMap.put("1","2");
@@ -179,6 +181,11 @@ public class PutInStorageServiceImpl implements PutInStorageService {
             stringMap.put("3","3");
             //校验locator
             String locator = (String) jsonpObject.get("locator");
+            //限制长吊笼使用。
+            if(locator.equals("2")){
+                log.error("当前长吊笼不可用！：\n"+jsonpObject.toJSONString());
+                return Result.error(CodeMsg.builder().code(ErrorCode.LONGCAGE_DISABLED.getCode()).msg(ErrorCode.LONGCAGE_DISABLED.getMsg()).build());
+            }
             locator=stringMap.get(locator);
             boolean invalidLocator = validateLocator(locator);
             if (!invalidLocator) {
@@ -268,6 +275,11 @@ public class PutInStorageServiceImpl implements PutInStorageService {
             }
             //3是空盘入库
             if (locator.equals("3")) {
+                List<TaskmesDto> taskmesFor1L = taskmesDao.query1LForTaskMes();
+                if(EmptyUtils.isNotEmpty(taskmesFor1L)){
+                    log.error("当前一楼存在任务，请稍后重试：\n"+jsonpObject.toJSONString());
+                     return Result.error(CodeMsg.builder().code(ErrorCode.EXIST_1L_TASK.getCode()).msg(ErrorCode.EXIST_1L_TASK.getMsg()).build());
+                }
                 dto = TaskmesDto.builder()
                         .locator(3)
                         .areano(10)

@@ -55,6 +55,10 @@ public class WmsInvOutServiceImpl implements WmsInvOutService {
             if (existTaskId) {
                 return Result.error(CodeMsg.builder().code(ErrorCode.IDALREADY_EXIST.getCode()).msg(ErrorCode.IDALREADY_EXIST.getMsg()).build());
             }
+            List<TaskmesDto> taskmesFor1L = taskmesDao.query1LForTaskMes();
+            if(EmptyUtils.isNotEmpty(taskmesFor1L)){
+                 return Result.error(CodeMsg.builder().code(ErrorCode.EXIST_1L_TASK.getCode()).msg(ErrorCode.EXIST_1L_TASK.getMsg()).build());
+            }
             Integer wipEntityId = wmsInvOutDto.getWipEntityId();
             HashMap<String, Object> map = new HashMap();
             map.put("organizationId", "142");
