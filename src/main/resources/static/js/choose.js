@@ -56,41 +56,44 @@ $(function () {
 
     })
 
-    // traynoFun();
-    // traynoInterval = setInterval(function () {
-    //     traynoFun(oId)
-    // }, 5000)
-
-    $.ajax({
-        type: "POST",
-        url: "http://192.168.43.152:8093/wms/wmsInvInFlow",
-        contentType: "application/json;charset=utf-8",
-        dataType: "JSON",
-        async: false,
-        data: JSON.stringify({"pagenum":1,"pagesize": 10}),
-        success: function (resul) {
-            let dataList = (resul.resultData.var15).reverse();
-            let rowList = chunk(dataList, 12);
-            // var partwoidList = [];
-            $(rowList).each(function (i, itme) {
-                itme[key = 'id'] = itme.list[0].row + '-' + itme.list[0].col;
-                itme.list.reverse();
-
-            })
-            localStorage.setItem('rowList', JSON.stringify(rowList));
-            htmlData(1, rowList);
-        },
-        error: function (jqxhr, textStatus, error) {
-            console.log(error);
-
-        }
-    })
+    traynoFun();
+    traynoInterval = setInterval(function () {
+        traynoFun(oId)
+    }, 5000)
+    //
+    // $.ajax({
+    //     type: "POST",
+    //     url: "/wms/wmsInvInFlow",
+    //     contentType: "application/json;charset=utf-8",
+    //     dataType: "JSON",
+    //     async: false,
+    //     data: JSON.stringify({"pagenum":1,"pagesize": 10}),
+    //     success: function (resul) {
+    //         if(resul.resultData.var15){
+    //             let dataList = (resul.resultData.var15).reverse();
+    //             let rowList = chunk(dataList, 12);
+    //         }
+    //
+    //         // var partwoidList = [];
+    //         $(rowList).each(function (i, itme) {
+    //             itme[key = 'id'] = itme.list[0].row + '-' + itme.list[0].col;
+    //             itme.list.reverse();
+    //
+    //         })
+    //         localStorage.setItem('rowList', JSON.stringify(rowList));
+    //         htmlData(1, rowList);
+    //     },
+    //     error: function (jqxhr, textStatus, error) {
+    //         console.log(error);
+    //
+    //     }
+    // })
 
     // 选择托盘号
     function traynoFun() {
         $.ajax({
             type: "POST",
-            url: "wms/dynamicRepertroy",
+            url: "/wms/dynamicRepertroy",
             contentType: "application/json;charset=utf-8",
             dataType: "JSON",
             async: false,
@@ -119,7 +122,7 @@ $(function () {
     function getCabine(oId,BomList) {
     $.ajax({
         type: "POST",
-        url: "wms/getCabinetData",
+        url: "/wms/getCabinetData",
         contentType: "application/json;charset=utf-8",
         dataType: "JSON",
         async: false,
@@ -165,7 +168,7 @@ $(function () {
         var wipEntityId = $(".wip").val();
         $.ajax({
             type: "POST",
-            url: "wms/queryItemBomInfo",
+            url: "/wms/queryItemBomInfo",
             contentType: "application/json;charset=utf-8",
             dataType: "JSON",
             async: false,
@@ -192,7 +195,7 @@ $(function () {
     function getCage(oId) {
         $.ajax({
             type: "POST",
-            url: "wms/getCageData",
+            url: "/wms/getCageData",
             contentType: "application/json;charset=utf-8",
             dataType: "JSON",
             async: false,

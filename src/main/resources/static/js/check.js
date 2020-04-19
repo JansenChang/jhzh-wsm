@@ -133,7 +133,7 @@ $(".ask").click(function(){
 
         $.ajax({
             type: "post", //使用post方法访问后台
-            url: "wms/delByRowAndCol",
+            url: "/wms/delByRowAndCol",
             contentType: "application/json;charset=utf-8",
             dataType: "JSON",
             data: JSON.stringify(data), //要发送的参数
@@ -237,7 +237,7 @@ $(".ask").click(function(){
 
         $.ajax({
             type: "post", //使用post方法访问后台
-            url: "wms/queryTaryByRowCol",
+            url: "/wms/queryTaryByRowCol",
             contentType:"application/json;charset=utf-8",
             dataType: "JSON",
             data:  JSON.stringify(dataArr), //要发送的参数
@@ -267,7 +267,7 @@ $(".ask").click(function(){
     function save(objt, next, txts) {
         $.ajax({
             type: "post", //使用post方法访问后台
-            url: "wms/updateData",
+            url: "/wms/updateData",
             contentType: "application/json;charset=utf-8",
             dataType: "JSON",
             data: JSON.stringify(objt), //要发送的参数
@@ -321,7 +321,7 @@ $(".ask").click(function(){
         if (trayno != '000000') {
             $.ajax({
                 type: "post",
-                url: "wms/queryByTrayno",
+                url: "/wms/queryByTrayno",
                 contentType: "application/json;charset=utf-8",
                 dataType: "JSON",
                 data: JSON.stringify(traynoData), //要发送的参数

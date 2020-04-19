@@ -117,7 +117,6 @@ class mapNode { //定义了一个绘制节点类
 
         // 堆垛机
         if (_this.explain == 'piler') {
-            console.log(_this.pilerState(_this.dataobj[0]))
             $(".title_name").empty().html('堆垛机')
             html += '<table class = "table table-responsive table-bordered table-hover piler_box" width = "100%">' +
                 '<tr><th width="25%"> 控制模式 </th><td width="25%">' + _this.pilerState(_this.dataobj[0]) + ' </td><th width="25%"> 作业类型 </th ><td width="25%" > ' + _this.pilerType(_this.dataobj[1]) + ' </td></tr>' +
@@ -125,22 +124,21 @@ class mapNode { //定义了一个绘制节点类
                 '<tr><th width="25%"> 入库号 </th><td width="25%"> ' + _this.dataobj[4] + ' </td><th width="25%">出库号 </th><td width="25%"> ' + _this.dataobj[5] + ' </td></tr>' +
                 '<tr><th width="25%"> 任务号 </th><td width="25%"> ' + (_this.dataobj[6]) + ' </td><th width="25%"> 当前位置 </th><td width="25%"> ' + _this.dataobj[7] + ' </td></tr>' +
                 '</table>';
-            $(".list").empty().html(html).show();
+            $(".plist").empty().html(html).show();
             $(".whcell_15f").show();
         }
 
         //一楼库位查询
-        if (_this.explain == 'pilerSeat' || _this.explain == 'pick') {
+        if (_this.explain == 'pilerSeat') {
             $(".title_name").empty().html('一楼' + _this.name + '库位');
             html += '<table class = "table table-responsive table-bordered table-hover piler_box" width = "100%">' +
                 '<tr><th width="15%">托盘号</th><td width="35%"><input type="text" id="newtrayno" value="' + (_this.dataobj.trayno ? _this.dataobj.trayno : '-') + '"></td><th width="15%">物料号</th><td><input type="text" id="newpartid" value="' + (_this.dataobj.partid ? _this.dataobj.partid : '-') + '"></td></tr>' +
                 '<tr><th>工单号</th><td><input type="text" id="newpartwoid" value="' + (_this.dataobj.partwoid ? _this.dataobj.partwoid : '-') + '"></td><th>数量</th><td><input type="text" id="newpartnum" value="' + (_this.dataobj.partnum ? _this.dataobj.partnum : '-') + '"></td></tr>' +
-                '<tr><th>时间</th><td><input type="text" id="newpartdate" value="' + (_this.dataobj.partdate ? _this.dataobj.partdate : '-') + '"></td><th></th><td></td></tr>' +
+                '<tr><th>时间</th><td><input type="text" id="newpartdate" value="' + _this.dataobj.partdate + '"></td><th></th><td></td></tr>' +
                 '</table><div class="btn_box"></div>';
-            // <button type="button" class="btn btn-success">保存</button>
             $(".list").empty().html(html).show();
             $(".whcell_15f").show();
-            var strs = _this.name.split("");
+            var strs=_this.name.split("");
             // 修改一楼数据库
             $(".btn-success").click(function () {
                 var changeData = {
@@ -148,19 +146,19 @@ class mapNode { //定义了一个绘制节点类
                     "areano": 10,
                     "cmd": 0,
                     "cmdstatus": 0,
-                    "col": strs[2] + strs[3],
+                    "col": strs[2]+strs[3],
                     "id": _this.name,
-                    "layer": strs[4] + strs[5],
+                    "layer": strs[4]+strs[5],
                     "locked": 0,
                     "lockedtype": 0,
                     "name": _this.name,
-                    "partdate": $("#newpartdate").val(),
-                    "partid": $("#newpartid").val(),
+                    "partdate":$("#newpartdate").val(),
+                    "partid":$("#newpartid").val(),
                     "partlotdiv": 0,
                     "partlotid": 0,
                     "partnum": $("#newpartnum").val(),
-                    "partwoid": $("#newpartwoid").val(),
-                    "row": strs[0] + strs[1],
+                    "partwoid":$("#newpartwoid").val(),
+                    "row": strs[0]+strs[1],
                     "trayid": 0,
                     "trayno": $("#newtrayno").val(),
                     "unt": 9,
@@ -168,21 +166,21 @@ class mapNode { //定义了一个绘制节点类
                 console.log(changeData);
                 $.ajax({
                     type: "POST",
-                    url: url + "/wms/updateRepertroy",
+                    url: url+"/wms/updateRepertroy",
                     contentType: "application/json;charset=utf-8",
                     dataType: "JSON",
                     async: false,
                     data: JSON.stringify(changeData),
                     success: function (resul) {
-                        if (resul.errorMsg == "ok") {
-                            alert('修改成功')
-                        }
+                       if(resul.errorMsg == "ok"){
+                           alert('修改成功')
+                       }
                     },
                     error: function (jqxhr, textStatus, error) {
                         console.log(error);
-
+                
                     }
-
+                
                 })
             })
 
@@ -193,8 +191,9 @@ class mapNode { //定义了一个绘制节点类
 
     draw(draw) {
         var _this = this;
+        var html = '';
         if (_this.svgtype == "rect") {
-            var obj = draw;
+            var obj = draw.rect(this.w, this.h);
             var piler_1 = localStorage.getItem("piler_1"),
                 piler_2 = localStorage.getItem("piler_2");
 
@@ -232,26 +231,21 @@ class mapNode { //定义了一个绘制节点类
                 if (_this.dataobj[1] == 0) {
                     _this.changecolor(color2);
                 }
-                // _this.svgobj = obj.image('..//images/search.png',50,50);
+
                 if (_this.dataobj[10] == 2) {
-                    _this.changeposition(_this.dataobj[10] * 108, _this.y);
+                    _this.changeposition(_this.dataobj[10] * 123, _this.y);
                 } else if (_this.dataobj[10] == 3) {
-                    _this.changeposition(_this.dataobj[10] * 115, _this.y);
+                    _this.changeposition(_this.dataobj[10] * 129, _this.y);
                 } else if (_this.dataobj[10] == 4) {
-                    _this.changeposition(_this.dataobj[10] * 118, _this.y);
+                    _this.changeposition(_this.dataobj[10] * 132, _this.y);
                 } else if (_this.dataobj[10] == 5) {
-                    _this.changeposition(_this.dataobj[10] * 121, _this.y);
+                    _this.changeposition(_this.dataobj[10] * 134, _this.y);
                 }
 
             }
 
-            _this.svgobj = obj.rect(_this.w, _this.h).fill(_this.color).move(_this.x, _this.y).addClass('pointer');
-            // if(_this.color=='#61a51e'){
-            //     _this.svgobj = obj.image('../../images/huo.png',150,30).move(_this.x, _this.y).addClass('pointer');
-            // }else if(_this.explain=='piler'){
-            //     _this.svgobj = obj.image('../images/dui.png',200,30).move(_this.x, _this.y).addClass('pointer');
-            // }
-            
+            _this.svgobj = obj.fill(_this.color).move(_this.x, _this.y).addClass('pointer');
+
 
 
             _this.svgobj.click(function (event) {
@@ -270,8 +264,8 @@ class mapNode { //定义了一个绘制节点类
 //创建描绘对象节点的函数,创建一个装有对象节点的数组
 function create_node(dataarr) { //参数分别为:待转换数组\待改变文字索引\文字改变后值(字符串类型)\待改变颜色索引\颜色改变后值(字符串类型)
     var out = [];
-    dataarr.map(function (item) {
 
+    dataarr.map(function (item) {
         var c = new mapNode(item);
         out.push(c);
     });

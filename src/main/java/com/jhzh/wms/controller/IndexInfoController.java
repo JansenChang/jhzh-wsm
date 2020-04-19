@@ -12,5 +12,8 @@ public class IndexInfoController {
      public String woPlayInfoView() throws Exception {
         return "index";
     }
-
+    @RequestMapping(value = "/choose")
+     public String choose() throws Exception {
+        return "choose";
+    }
 }

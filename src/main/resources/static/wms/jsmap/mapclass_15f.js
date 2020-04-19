@@ -82,11 +82,8 @@ class mapNode { //定义了一个绘制节点类
         var y = e.pageY || e.clientY + scrollY;
 
         if (_this.explain == 'cabinet') {
-            var row1=_this.name.split('')[0] + _this.name.split('')[1];
-            var col1=_this.name.split('')[2] + _this.name.split('')[3];
             var dynData = {
-                "row":row1,
-                "col":col1
+                "rowandcol": _this.name
             }
             $.ajax({
                 type: "POST",
@@ -104,59 +101,59 @@ class mapNode { //定义了一个绘制节点类
                         var endTime = new Date();
 
                         if (startTime < endTime) {
-                            html += '<tr class="bg-pink"><td>' + (i + 1) + '层</td><td>' + obj.trayno + '</td><td>' + (obj.partwoid == 0 ? '-' : obj.partwoid) + '</td><td>' + (obj.partid == 0 ? '-' : obj.partid) + '</td><td>' + (obj.partnum == 0 ? '-' : obj.partnum) + '</td><td>' + (obj.partdate ? _this.getPartdate(obj.partdate) : '-') + '</td></tr>'
+                             html += '<tr class="bg-pink"><td>' + (i + 1) + '层</td><td><input type="text" id="newtrayno_'+ i +'" value="' + obj.trayno + '"></td><td><input type="text" id="newpartwoid_'+ i +'" value="' + (obj.partwoid == 0 ? '-' : obj.partwoid) + '"></td><td><input type="text" id="newpartid_'+ i +'" value="' + (obj.partid == 0 ? '-' : obj.partid) + '"></td><td><input type="text" id="newpartnum_'+ i +'" value="' + (obj.partnum == 0 ? '-' : obj.partnum) + '"></td><td><input type="text" id="newpartdate_'+ i +'" value="' + obj.partdate + '"></td></tr>'
                         }
 
                         html += '<tr><td>' + (i + 1) + '层</td><td><input type="text" id="newtrayno_'+ i +'" value="' + obj.trayno + '"></td><td><input type="text" id="newpartwoid_'+ i +'" value="' + (obj.partwoid == 0 ? '-' : obj.partwoid) + '"></td><td><input type="text" id="newpartid_'+ i +'" value="' + (obj.partid == 0 ? '-' : obj.partid) + '"></td><td><input type="text" id="newpartnum_'+ i +'" value="' + (obj.partnum == 0 ? '-' : obj.partnum) + '"></td><td><input type="text" id="newpartdate_'+ i +'" value="' + obj.partdate + '"></td></tr>'
-                    })//<button type="button" class="btn btn-success bc" orderID="'+ i +'">保存</button></tr></tr>
+                    })
                     $(".piler_box").empty().html(html);
                     $(".whcell_15f").show();
 
                     var strs = _this.name.split("");
                     // 修改一楼数据库
-                    // $(".btn-success").click(function () {
-                    //     var orderID=$(this).attr("orderID");
-                    //     var changeData = {
-                    //         "app": 900,
-                    //         "areano": 10,
-                    //         "cmd": 0,
-                    //         "cmdstatus": 0,
-                    //         "col": strs[2] + strs[3],
-                    //         "id": _this.name,
-                    //         "layer": strs[4] + strs[5],
-                    //         "locked": 0,
-                    //         "lockedtype": 0,
-                    //         "name": _this.name,
-                    //         "partdate": $("#newpartdate_"+orderID).val(),
-                    //         "partid": $("#newpartid_"+orderID).val(),
-                    //         "partlotdiv": 0,
-                    //         "partlotid": 0,
-                    //         "partnum": $("#newpartnum_"+orderID).val(),
-                    //         "partwoid": $("#newpartwoid_"+orderID).val(),
-                    //         "row": strs[0] + strs[1],
-                    //         "trayid": 0,
-                    //         "trayno": $("#newtrayno_"+orderID).val(),
-                    //         "unt": 9,
-                    //     }
-                    //     $.ajax({
-                    //         type: "POST",
-                    //         url: url + "/wms/updateRepertroy",
-                    //         contentType: "application/json;charset=utf-8",
-                    //         dataType: "JSON",
-                    //         async: false,
-                    //         data: JSON.stringify(changeData),
-                    //         success: function (resul) {
-                    //             if (resul.errorMsg == "ok") {
-                    //                 alert('修改成功')
-                    //             }
-                    //         },
-                    //         error: function (jqxhr, textStatus, error) {
-                    //             console.log(error);
+                    $(".btn-success").click(function () {
+                        var orderID=$(this).attr("orderID");
+                        var changeData = {
+                            "app": 900,
+                            "areano": 10,
+                            "cmd": 0,
+                            "cmdstatus": 0,
+                            "col": strs[2] + strs[3],
+                            "id": _this.name,
+                            "layer": strs[4] + strs[5],
+                            "locked": 0,
+                            "lockedtype": 0,
+                            "name": _this.name,
+                            "partdate": $("#newpartdate_"+orderID).val(),
+                            "partid": $("#newpartid_"+orderID).val(),
+                            "partlotdiv": 0,
+                            "partlotid": 0,
+                            "partnum": $("#newpartnum_"+orderID).val(),
+                            "partwoid": $("#newpartwoid_"+orderID).val(),
+                            "row": strs[0] + strs[1],
+                            "trayid": 0,
+                            "trayno": $("#newtrayno_"+orderID).val(),
+                            "unt": 9,
+                        }
+                        $.ajax({
+                            type: "POST",
+                            url: url + "/wms/updateRepertroy",
+                            contentType: "application/json;charset=utf-8",
+                            dataType: "JSON",
+                            async: false,
+                            data: JSON.stringify(changeData),
+                            success: function (resul) {
+                                if (resul.errorMsg == "ok") {
+                                    alert('修改成功')
+                                }
+                            },
+                            error: function (jqxhr, textStatus, error) {
+                                console.log(error);
 
-                    //         }
+                            }
 
-                    //     })
-                    // })
+                        })
+                    })
                     },
                         error: function (jqxhr, textStatus, error) {
                             console.log(error);
@@ -173,7 +170,7 @@ class mapNode { //定义了一个绘制节点类
         var _this = this;
         var html = '';
         if (_this.svgtype == "rect") {
-            var obj = draw;
+            var obj = draw.rect(this.w, this.h);
             // 是否到期
             if (_this.dataobj.partdate) {
                 var startTime = new Date(Date.parse(_this.getPartdate(_this.dataobj.partdate)));
@@ -184,18 +181,8 @@ class mapNode { //定义了一个绘制节点类
                 }
             }
 
-            _this.svgobj = obj.rect(this.w, this.h).fill(_this.color).move(_this.x, _this.y).addClass('pointer');
+            _this.svgobj = obj.fill(_this.color).move(_this.x, _this.y).addClass('pointer');
 
-            // agv位置
-            // if (_this.explain == 'agv') {
-            //     if (_this.dataobj == 0) {
-            //         _this.svgobj = obj.image('../images/che.png',30,30).move(_this.x, _this.y);
-            //     } else if (_this.dataobj == 1) {
-            //         _this.svgobj = obj.image('../images/che1.png',30,30).move(_this.x, _this.y);
-            //     } else if (_this.dataobj == 3) {
-            //         _this.svgobj = obj.addClass('my-clsss');
-            //     }
-            // }
 
 
             _this.svgobj.click(function (event) {
