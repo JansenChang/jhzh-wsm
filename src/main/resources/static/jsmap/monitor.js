@@ -614,7 +614,7 @@ $(function () {
 
 		x0_hov = 20; y0_hov = 30; w_hov = 0.5 * w_max; h_hov = 0.6 * h_max;
 		x0_10f = 10; y0_10f = h_hov - 10; w_10f = 0.5 * w_max; h_10f = 0.6 * h_max;
-		x0_15f = 720; y0_15f = 30; w_15f = 0.5 * w_max; h_15f = 0.5 * h_max;
+		x0_15f = 770; y0_15f = 30; w_15f = 0.5 * w_max; h_15f = 0.5 * h_max;
 		x0_pick = 720; y0_pick = h_15f + 32; w_pick = 0.5 * w_max; h_pick = 0.6 * h_max;
 
 	}
@@ -683,8 +683,7 @@ $(function () {
 	}
 	init();
 	draw_all();
-	 intervalId = setInterval(function () {
-	 init();
-	 draw_all();
-	 }, 2000);
+	intervalId = setInterval(function () {init();
+	draw_all();
+	}, 2000);
 })

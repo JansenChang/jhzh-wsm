@@ -7,6 +7,7 @@ $(function () {
   var locatorID = 1; //入库有无物料
   var locked = "";//是否锁定
   $("#inlineRadio1").prop("checked", true);
+  $("#dataTable2,#dataTable3,.inStorage,.outStorage").hide();
   unconditional(dataID); //初始化第一个查询
 
 
