@@ -6,7 +6,6 @@ import com.jhzh.wms.dao.IlsCellDao;
 import com.jhzh.wms.dao.TaskmesDao;
 import com.jhzh.wms.dto.CabinetDto;
 import com.jhzh.wms.dto.IlsCellDto;
-import com.jhzh.wms.dto.PickRackDto;
 import com.jhzh.wms.dto.TaskmesDto;
 import com.jhzh.wms.service.PickRackService;
 import com.jhzh.wms.service.RepertroyService;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -115,14 +113,7 @@ public class RepertroyServiceImpl implements RepertroyService {
 
     @Override
     public Result<?> getChoose() {
-        List<PickRackDto> pickRack = pickRackService.getPickRack();
-        HashSet set=new HashSet();
-        pickRack.forEach(dto->{
-            set.add(dto.getTaskid());
-        });
-        HashMap map=new HashMap();
-        map.put("taskids",set);
-        map.put("choose", pickRack);
-        return Result.success(map);
+        List<TaskmesDto> getChoose = taskmesDao.queryChoose();
+        return Result.success(getChoose);
     }
 }

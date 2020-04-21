@@ -2,8 +2,10 @@ package com.jhzh.wms.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.jhzh.wms.base.http.HttpResult;
-import com.jhzh.wms.service.ImesFeedBackService;
 import com.jhzh.wms.base.result.Result;
+import com.jhzh.wms.dao.PutInStorageDao;
+import com.jhzh.wms.dto.WmsInvInDto;
+import com.jhzh.wms.service.ImesFeedBackService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * IMES反馈接口
@@ -37,7 +41,10 @@ public class ImesFeedBackController {
     private String queryWoPlanInfoUrl;
     @Autowired
     private ImesFeedBackService ImesFeedBackservice;
-
+    @Autowired
+    private PutInStorageDao putInStorageDao;
+    @Autowired
+    private ImesFeedBackService imesFeedBackService;
     //物资编码查询接口
     @RequestMapping(value = "/queryItemInfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public Result<?> queryItemInfo(@RequestBody JSONObject jsonpObject) throws Exception {
@@ -73,11 +80,11 @@ public class ImesFeedBackController {
     public Result<?> wmsInvInResult(@RequestBody JSONObject jsonpObject) throws Exception {
         log.info("wmsInvInResult begin..");
         log.info("In Param : \n"+jsonpObject.toJSONString());
-        /*Result<?> result=putInStorageService.queryFreeSpace(jsonpObject);*/
-        HttpResult httpResult = httpAPIService.doPostJson(wmsInvInResultUrl, jsonpObject.toJSONString());
-        log.info(httpResult.toString());
+        String taskid = (String) jsonpObject.get("taskid");
+        List<WmsInvInDto> wmsInvInDtos = putInStorageDao.queryWmsInvInForTaskId(taskid);
+        Map<String, String> map = imesFeedBackService.wmsInvInResult(wmsInvInDtos);
         log.info("wmsInvInResult end..");
-        return Result.success(httpResult.getBody());
+        return Result.success(1);
     }
 
 
@@ -87,10 +94,8 @@ public class ImesFeedBackController {
     public Result<?> wmsInvOutResult(@RequestBody JSONObject jsonpObject) throws Exception {
         log.info("wmsInvOutResult begin..");
         log.info("In Param : \n"+jsonpObject.toJSONString());
-        /*Result<?> result=putInStorageService.queryFreeSpace(jsonpObject);*/
-        HttpResult httpResult = httpAPIService.doPostJson(wmsInvOutResultUrl, jsonpObject.toJSONString());
-        log.info(httpResult.toString());
+
         log.info("wmsInvOutResult end..");
-        return Result.success(httpResult.getBody());
+        return Result.success("");
     }
 }

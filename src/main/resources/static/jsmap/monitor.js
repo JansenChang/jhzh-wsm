@@ -59,6 +59,10 @@ $(function () {
 			async: false,
 			data: "",
 			success: function (resul) {
+				// var resul={
+				// 	'resultData':'0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,319180505,-252548241,318180398,215180398,-221638241,314200398,215190398,317180398,315200398,207190473,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0'
+				// }
+
 				var inr = (resul.resultData).split(',');
 				localStorage.setItem("CAGE2_1", inr[52]);
 				localStorage.setItem("CAGE2_2", inr[53]);
@@ -170,50 +174,60 @@ $(function () {
 					[inr[149], inr[169]],
 					[inr[150], inr[170]],
 				];
-				// var agvold = [inr[141],inr[142],inr[143],inr[144],inr[145],inr[146],inr[147],inr[148],inr[149],inr[150]]
-				// var agvnew = [[517, 1], [605, 0], [718, 3], [507, 4]]
+				// var agvnew = [[1613, 1, 1], [616, 0, 1], [616, 3, 3], [507, 4, 0], [719, 4, 1], [607, 4, 3], [517, 1, 3]]
 				var agvnew = [];
 				$(agvold).each(function (i, itme) {
-					var b = [itme[0].substring(0, itme[0].length - 5), itme[1],itme[0].substr(itme[0].length-1,1)]
+					var b = [itme[0].substring(0, itme[0].length - 5), itme[1], itme[0].substr(itme[0].length - 1, 1)]
 					agvnew.push(b)
 				});
 				//3对应单数，1对应双数
-				// return
+
 				var agvXY = [];
 				for (var i = 0; i < mapnode_pri_road.length; i++) {
 					for (var j = 0; j < agvnew.length; j++) {
 						if (mapnode_pri_road[i][3] == agvnew[j][0]) {
-							var a = [mapnode_pri_road[i][8], mapnode_pri_road[i][9], agvnew[j][1],agvnew[j][2]];
+							var a = [mapnode_pri_road[i][8], mapnode_pri_road[i][9], agvnew[j][1], agvnew[j][2]];
 							agvXY.push(a)
 						}
 					}
 				}
-						
 
-				// for (var i = 0; i < mapnode_pri_15f.length; i++) {
-				// 	for (var j = 0; j < agvnew.length; j++) {
-				// 		// if (mapnode_pri_15f[i][3] == agvnew[j][0]) {
-				// 			var onum=mapnode_pri_15f[i][3].split('');
-				// 				if(onum[0]==0){
-				// 					var num = parseInt(onum[1]);
-				// 				}else{
-				// 					var num = parseInt(onum[0]+onum[1])
-				// 				}
-				// 				console.log(agvnew[j][2]);
-				// 			if(agvnew[j][2]=='3'){
-				// 				if(num%2==0){
-				// 					console.log(num,mapnode_pri_15f[i]);
-				// 				}else{
+				// agv
 
-				// 				}
-				// 			}
-				// 			// var a = [mapnode_pri_road[i][8], mapnode_pri_road[i][9], agvnew[j][1]];
-				// 			// agvXY.push(a)
-				// 		// }
-				// 	}
-				// }
 
-				
+				for (var i = 0; i < agvDirection.length; i++) {
+
+					for (var j = 0; j < agvnew.length; j++) {
+						if (agvDirection[i][2] == agvnew[j][0]) {
+							var onum = agvDirection[i][3].split('');
+							if (onum[0] == 0) {
+								var num = parseInt(onum[1]);
+							} else {
+								var num = parseInt(onum[0] + onum[1])
+							}
+							if (agvDirection[i][3].length < 6) {
+								var a = [agvDirection[i][8], agvDirection[i][9], agvnew[j][1], agvnew[j][2]];
+								agvXY.push(a);
+							} else {
+								if (agvnew[j][2] == '3') {
+									if (num % 2 != 0) {
+										var a = [agvDirection[i][8], agvDirection[i][9], agvnew[j][1], agvnew[j][2]];
+										agvXY.push(a)
+									}
+								} else if (agvnew[j][2] == '1') {
+									if (num % 2 == 0) {
+										var a = [agvDirection[i][8], agvDirection[i][9], agvnew[j][1], agvnew[j][2]];
+										agvXY.push(a)
+									}
+								}
+							}
+						}
+					}
+
+				}
+
+
+
 				for (var i = 0; i < mapnode_pri_agv.length; i++) {
 					for (var j = 0; j < agvXY.length; j++) {
 						if (i == j) {
@@ -224,6 +238,7 @@ $(function () {
 						}
 					}
 				}
+
 				var a = 0, b = 0, c = 0, d = 0, e = 0;
 				// 吊机
 				for (var i = 0; i < mapnode_pri_hov.length; i++) {
@@ -475,6 +490,93 @@ $(function () {
 
 		})
 
+		
+
+		// 拣选架子
+		$.ajax({
+			type: "POST",
+			url: url + "/wms/getChoose",
+			contentType: "application/json;charset=utf-8",
+			dataType: "JSON",
+			async: false,
+			data: '',
+			success: function (resul) {
+				var list = resul.resultData;
+				var list1=[];
+				$(list).each(function(i,obj){
+					if(obj.cellstrdst && obj.cellstrsrc){
+						var ku = obj.cellstrdst.split(',')
+						var kuwei ={
+							'm':obj.cellstrdst.split(','),
+							'y':obj.cellstrsrc.split(',')
+						}
+						list1.push(kuwei)
+					}
+				})
+				console.log(list1)
+				// return
+				for (var i = 0; i < mapnode_pri_pick.length; i++) {
+					var m0=list1[0].m,m1=list1[1].m,m2=list1[2].m;
+					var y0=list1[0].y,y1=list1[1].y,y2=list1[2].y;
+					for (var j = 0; j < m0.length; j++) {
+						if(mapnode_pri_pick[i][3] ==m0[j] ){
+							for (var o = 0; o < y0.length; o++) {
+								if(j==o){									
+									mapnode_pri_pick[i][11] = y0[o];
+								}
+							}
+							
+							mapnode_pri_pick[i][12] = "#7500f1";
+						}
+					}
+					for (var j = 0; j < m1.length; j++) {
+						if(mapnode_pri_pick[i][3] ==m1[j] ){
+							for (var o = 0; o < y1.length; o++) {
+								if(j==o){									
+									mapnode_pri_pick[i][11] = y1[o];
+								}
+							}
+							mapnode_pri_pick[i][12] = "#ec65af";
+						}
+					}
+					for (var j = 0; j < m2.length; j++) {
+						if(mapnode_pri_pick[i][3] ==m2[j] ){
+							for (var o = 0; o < y2.length; o++) {
+								if(j==o){									
+									mapnode_pri_pick[i][11] = y2[o];
+								}
+							}
+							mapnode_pri_pick[i][12] = "#ff8c45";
+						}
+					}
+				}
+				// console.log(mapnode_pri_pick)
+
+			},
+			error: function (jqxhr, textStatus, error) {
+				console.log(error);
+
+			}
+
+		})
+
+		function chunk(arr, num) {
+			let j = 0,
+				o = j;
+			let newArray = [];
+	
+			while (j < arr.length) {
+				j += num;
+				var a = {
+					'id': num,
+					'list': arr.slice(o, j)
+				}
+	
+				newArray.push(a);
+				o = j;
+			}
+			return newArray;
+		}
 
 		// 获取静态数??
 		create_node(mapnode_pri_10f);
@@ -579,8 +681,10 @@ $(function () {
 		draw_hov(x0_hov, y0_hov, w_hov, h_hov, svgdraw);
 		draw_pick(x0_pick, y0_pick, w_pick, h_pick, svgdraw);
 	}
-	intervalId = setInterval(function () {
 	init();
 	draw_all();
-	}, 2000);
+	 intervalId = setInterval(function () {
+	 init();
+	 draw_all();
+	 }, 2000);
 })

@@ -1,10 +1,8 @@
 package com.jhzh.wms.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.jhzh.wms.base.export.ExportUtil;
 import com.jhzh.wms.dao.PutInStorageDao;
 import com.jhzh.wms.dao.WmsInvOutDao;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -70,11 +67,11 @@ public class ExportController {
         titleMap.put("partdate","存入日期");
         titleMap.put("status","状态");
         Map queryMap=jsonObject;
-        List<Map<String, Object>> maps =wmsInvOutDao.queryWmsInvOutFlow(queryMap);
-        HSSFWorkbook hssfWorkbook = ExportUtil.exportExcel(maps,titleMap);
+        //List<Map<String, Object>> maps =wmsInvOutDao.queryWmsInvOutFlow(queryMap);
+        //HSSFWorkbook hssfWorkbook = ExportUtil.exportExcel(maps,titleMap);
         response.setContentType("application/xls;charset=UTF-8");
 		response.setHeader("Content-Disposition", "attachment;filename="+ jsonObject.get("filename")+".xls");
-        hssfWorkbook.write(response.getOutputStream());
+        //hssfWorkbook.write(response.getOutputStream());
     }
 
 

@@ -173,7 +173,8 @@ class mapNode { //定义了一个绘制节点类
         var _this = this;
         var html = '';
         if (_this.svgtype == "rect") {
-            var obj = draw;
+            var obj = draw.rect(this.w, this.h);
+
             // 是否到期
             if (_this.dataobj.partdate) {
                 var startTime = new Date(Date.parse(_this.getPartdate(_this.dataobj.partdate)));
@@ -184,19 +185,21 @@ class mapNode { //定义了一个绘制节点类
                 }
             }
 
-            _this.svgobj = obj.rect(this.w, this.h).fill(_this.color).move(_this.x, _this.y).addClass('pointer');
+        
 
-            // agv位置
-            // if (_this.explain == 'agv') {
-            //     if (_this.dataobj == 0) {
-            //         _this.svgobj = obj.image('../images/che.png',30,30).move(_this.x, _this.y);
-            //     } else if (_this.dataobj == 1) {
-            //         _this.svgobj = obj.image('../images/che1.png',30,30).move(_this.x, _this.y);
-            //     } else if (_this.dataobj == 3) {
-            //         _this.svgobj = obj.addClass('my-clsss');
-            //     }
-            // }
 
+            if (_this.explain == 'agv') {
+                if (_this.dataobj == 0) {
+                    console.log('agv错误代码========' + _this.dataobj[0])
+                } else if (_this.dataobj == 1) {
+                    _this.changecolor('#4c92ff');
+                    _this.svgobj = obj.addClass('my-tips');
+                } else if (_this.dataobj == 3) {
+                    _this.svgobj = obj.addClass('my-clsss');
+                }
+            }
+
+            _this.svgobj = obj.fill(_this.color).move(_this.x, _this.y).addClass('pointer');
 
             _this.svgobj.click(function (event) {
                 _this.getMousePos(event)

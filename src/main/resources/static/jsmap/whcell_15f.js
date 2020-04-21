@@ -1,3 +1,4 @@
+
 $(function () {
 	var svgdivid;
 	var svgdiv;
@@ -38,21 +39,55 @@ $(function () {
 					[inr[149], inr[169]],
 					[inr[150], inr[170]],
 				];
-				var agvnew=[];
-				$(agvold).each(function(i,itme){
-					var b = [itme[0].substring(0,itme[0].length-4),itme[1]]
+				var agvnew = [];
+				$(agvold).each(function (i, itme) {
+					var b = [itme[0].substring(0, itme[0].length - 5), itme[1],itme[0].substr(itme[0].length-1,1)]
 					agvnew.push(b)
 				});
+				//3对应单数，1对应双数
 
 				var agvXY = [];
 				for (var i = 0; i < mapnode_pri_road.length; i++) {
 					for (var j = 0; j < agvnew.length; j++) {
 						if (mapnode_pri_road[i][3] == agvnew[j][0]) {
-							var a = [mapnode_pri_road[i][8], mapnode_pri_road[i][9], agvnew[j][1]];
+							var a = [mapnode_pri_road[i][8], mapnode_pri_road[i][9], agvnew[j][1],agvnew[j][2]];
 							agvXY.push(a)
 						}
 					}
 				}
+// console.log(JSON.parse(localStorage.getItem('agvDirection')))
+
+				for (var i = 0; i < agvDirection.length; i++) {
+
+					for (var j = 0; j < agvnew.length; j++) {
+						if (agvDirection[i][2] == agvnew[j][0]) {
+							var onum = agvDirection[i][3].split('');
+							if (onum[0] == 0) {
+								var num = parseInt(onum[1]);
+							} else {
+								var num = parseInt(onum[0] + onum[1])
+							}
+							if (agvDirection[i][3].length < 6) {
+								var a = [agvDirection[i][8], agvDirection[i][9], agvnew[j][1], agvnew[j][2]];
+								agvXY.push(a);
+							} else {
+								if (agvnew[j][2] == '3') {
+									if (num % 2 != 0) {
+										var a = [agvDirection[i][8], agvDirection[i][9], agvnew[j][1], agvnew[j][2]];
+										agvXY.push(a)
+									}
+								} else if (agvnew[j][2] == '1') {
+									if (num % 2 == 0) {
+										var a = [agvDirection[i][8], agvDirection[i][9], agvnew[j][1], agvnew[j][2]];
+										agvXY.push(a)
+									}
+								}
+							}
+						}
+					}
+
+				}
+
 				for (var i = 0; i < mapnode_pri_agv.length; i++) {
 					for (var j = 0; j < agvXY.length; j++) {
 						if (i == j) {
@@ -158,6 +193,8 @@ $(function () {
 	function draw_all() {
 		draw_15f(x0_15f, y0_15f, w_15f, h_15f, svgdraw);
 	}
+		init();
+		draw_all();
 	intervalId = setInterval(function () {
 		init();
 		draw_all();

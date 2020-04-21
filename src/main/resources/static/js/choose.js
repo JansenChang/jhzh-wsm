@@ -2,7 +2,7 @@ $(function () {
     let oId = 1;
     var CageInterval;
     var CabineInterval;
-    var  traynoInterval;
+    var traynoInterval;
     // 获取当前时间
     function getNow(s) {
         return s < 10 ? '0' + s : s;
@@ -40,13 +40,18 @@ $(function () {
             CageInterval = setInterval(function () {
                 getCage(oId)
             }, 5000)
-        }else if(oId == 0 ){
-            if($(".wip").val()){
-                 getQitao(oId);
-            }else{
+        } else if (oId == 0) {
+            if ($(".wip").val()) {
+                getQitao(oId);
+            } else {
                 alert("请输入正确的外层工单。")
             }
-           
+
+        } else if(oId == 7){
+            getChoose(oId)
+            // CabineInterval = setInterval(function () {
+            //     getCabine(oId)
+            // }, 5000)
         }else{
             getCabine(oId)
             CabineInterval = setInterval(function () {
@@ -57,37 +62,9 @@ $(function () {
     })
 
     traynoFun();
-    traynoInterval = setInterval(function () {
-        traynoFun(oId)
-    }, 5000)
-    //
-    // $.ajax({
-    //     type: "POST",
-    //     url: "/wms/wmsInvInFlow",
-    //     contentType: "application/json;charset=utf-8",
-    //     dataType: "JSON",
-    //     async: false,
-    //     data: JSON.stringify({"pagenum":1,"pagesize": 10}),
-    //     success: function (resul) {
-    //         if(resul.resultData.var15){
-    //             let dataList = (resul.resultData.var15).reverse();
-    //             let rowList = chunk(dataList, 12);
-    //         }
-    //
-    //         // var partwoidList = [];
-    //         $(rowList).each(function (i, itme) {
-    //             itme[key = 'id'] = itme.list[0].row + '-' + itme.list[0].col;
-    //             itme.list.reverse();
-    //
-    //         })
-    //         localStorage.setItem('rowList', JSON.stringify(rowList));
-    //         htmlData(1, rowList);
-    //     },
-    //     error: function (jqxhr, textStatus, error) {
-    //         console.log(error);
-    //
-    //     }
-    // })
+    // traynoInterval = setInterval(function () {
+    //     traynoFun(oId)
+    // }, 5000)
 
     // 选择托盘号
     function traynoFun() {
@@ -107,6 +84,7 @@ $(function () {
                     itme.list.reverse();
 
                 })
+                localStorage.setItem('dataList', JSON.stringify(dataList));
                 localStorage.setItem('rowList', JSON.stringify(rowList));
                 htmlData(1, rowList);
             },
@@ -119,52 +97,98 @@ $(function () {
 
 
     // 全库有物资
-    function getCabine(oId,BomList) {
-    $.ajax({
-        type: "POST",
-        url: "/wms/getCabinetData",
-        contentType: "application/json;charset=utf-8",
-        dataType: "JSON",
-        async: false,
-        data: '',
-        success: function (resul) {
-            var list = resul.resultData.reverse();
-            var BomHtml=[];
-            $(list).each(function (i, itme) {
-                itme[key = 'id'] = itme.ilsCellDtos[0].row + '-' + itme.ilsCellDtos[0].col;
-                if(BomList){
-                    var ilsCellDtos= itme.ilsCellDtos;
-                    for (var j = 0; j < ilsCellDtos.length; j++) {
+    function getCabine(oId, BomList) {
+        $.ajax({
+            type: "POST",
+            url: "/wms/getCabinetData",
+            contentType: "application/json;charset=utf-8",
+            dataType: "JSON",
+            async: false,
+            data: '',
+            success: function (resul) {
+                var list = resul.resultData.reverse();
+                var BomHtml = [];
+                $(list).each(function (i, itme) {
+                    itme[key = 'id'] = itme.ilsCellDtos[0].row + '-' + itme.ilsCellDtos[0].col;
+                    if (BomList) {
+                        var ilsCellDtos = itme.ilsCellDtos;
+                        for (var j = 0; j < ilsCellDtos.length; j++) {
                             for (var k = 0; k < BomList.length; k++) {
                                 if (ilsCellDtos[j].partid == BomList[k]) {
-                                    if($.inArray(itme,BomHtml)==-1) {  
-                                        BomHtml.push(itme)  
-                                         } 
+                                    if ($.inArray(itme, BomHtml) == -1) {
+                                        BomHtml.push(itme)
+                                    }
                                 }
                             }
-    
-                    }
-                }
-            })
-            if(BomList){
-                htmlData(3, BomHtml)
-            }else{
-                htmlData(oId, list)
-            }
-            
-            console.log(BomHtml);
-        },
-        error: function (jqxhr, textStatus, error) {
-            console.log(error);
 
-        }
-    })
-    // console.log(BomList);
+                        }
+                    }
+                })
+                if (BomList) {
+                    htmlData(3, BomHtml)
+                } else {
+                    htmlData(oId, list)
+                }
+
+                console.log(BomHtml);
+            },
+            error: function (jqxhr, textStatus, error) {
+                console.log(error);
+
+            }
+        })
+        // console.log(BomList);
     }
 
+    // 拣选
+    function getChoose(oId) {
+        var j1 = [];
+        $.ajax({
+            type: "POST",
+            url: "/wms/getChoose",
+            contentType: "application/json;charset=utf-8",
+            dataType: "JSON",
+            async: false,
+            data: '',
+            success: function (resul) {
+                var list = resul.resultData;
+                var list1 = [];
+                $(list).each(function (i, obj) {
+                    if (obj.cellstrsrc) {
+                        var ku = obj.cellstrsrc.split(',')
+                        list1.push(ku)
+                    }
+                })
+                var rowList = JSON.parse(localStorage.getItem('rowList'));
+                console.log(list1)
+                for (var j = 0; j < rowList.length; j++) {
+                    for (var i = 0; i < list1.length; i++) {
+                        for (var k = 0; k < list1[i].length; k++) {
+                            var name = list1[i][k].split(',')
+                            var namelist = name[0].split('')
+                            var nameId = namelist[0] + namelist[1] + '-' + namelist[2] + namelist[3];
+                            if (rowList[j].id == nameId) {
+                                if ($.inArray(rowList[j], j1) == -1) {
+                                    j1.push(rowList[j])
+                                }
+                            }
+                        }
+                    }
+                }
+                console.log(j1)
+            },
+            error: function (jqxhr, textStatus, error) {
+                console.log(error);
+
+            }
+        })
+        htmlData(oId, j1)
+    }
+
+
     // 查询工单齐套
-    function getQitao(oId){
-        var BomList= [];
+    function getQitao(oId) {
+        var BomList = [];
         var wipEntityId = $(".wip").val();
         $.ajax({
             type: "POST",
@@ -172,21 +196,21 @@ $(function () {
             contentType: "application/json;charset=utf-8",
             dataType: "JSON",
             async: false,
-            data: JSON.stringify({"wipEntityId": wipEntityId}),
+            data: JSON.stringify({ "wipEntityId": wipEntityId }),
             success: function (resul) {
-                var list=resul.resultData.bomlist.itemList;
-                $(list).each(function(i,item){
+                var list = resul.resultData.bomlist.itemList;
+                $(list).each(function (i, item) {
                     var code = item.componentItemCode.replace('-', '');
                     BomList.push(code);
                 })
-               
+
             },
             error: function (jqxhr, textStatus, error) {
                 console.log(error);
-    
+
             }
-        })  
-        getCabine(oId,BomList);
+        })
+        getCabine(oId, BomList);
     }
 
 
@@ -275,11 +299,11 @@ $(function () {
             $(rowList).each(function (i, itme) {
                 html += ' <tr>' +
                     '<td>' + itme.id + '</td>';
-                    if(oId == 5 || oId == 6){
-                        var conList =itme.list;
-                    }else{
-                        var conList =itme.ilsCellDtos;
-                    }
+                if (oId == 5 || oId == 6 || oId == 7) {
+                    var conList = itme.list;
+                } else {
+                    var conList = itme.ilsCellDtos;
+                }
                 $(conList).each(function (j, valList) {
                     if (oId == 3) {
                         if (valList.partid == 0) {

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 @Service
 public class FlowRecordServiceImpl implements FlowRecordService {
@@ -44,7 +43,5 @@ public class FlowRecordServiceImpl implements FlowRecordService {
         return Result.success(pageInfo);
     }
 
-    public static void main(String[] args) {
-        System.out.println(Pattern.compile("(?i)[a-z]").matcher("101261081-6/7").find());
-    }
+
 }

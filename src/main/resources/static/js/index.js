@@ -16,32 +16,32 @@ $(function () {
     $(".prevPage").attr("disabled", "disabled").removeClass("btn-primary").addClass("btn-default");
     $(".num").html("1");
     pagenum = 1;
-    $(".listData").empty()
+    $(".listData1,.listData2,.listData3").empty()
 
     e.preventDefault();
 
     dataID = $(this).attr("data-id");
     // 第一个
     if (dataID == 1) {
-      $(".material").show();
-      $(".inStorage,.outStorage").hide();
-      $(".storage_box").hide(); //没有excel
+      $("#dataTable1,.material").show();
+      $("#dataTable2,#dataTable3,.inStorage,.outStorage").hide();
+      // $(".storage_box").hide(); //没有excel
       unconditional(dataID)
 
     } else if (dataID == 2) {
-      $(".inStorage").show();
-      $(".material,.outStorage").hide();
+      $("#dataTable2,.inStorage").show();
+      $("#dataTable1,#dataTable3,.material,.outStorage").hide();
 
       //入库信息记录
       unconditional(dataID)
-      $(".storage_box").show();
+      // $(".storage_box").show();
 
     } else if (dataID == 3) {
-      $(".outStorage").show();
-      $(".material,.inStorage").hide();
+      $("#dataTable3,.outStorage").show();
+      $("#dataTable1,#dataTable2,.material,.inStorage").hide();
       //出库信息记录
       unconditional(dataID)
-      $(".storage_box").show();
+      // $(".storage_box").show();
     }
 
     $(this).tab('show');
@@ -244,47 +244,49 @@ $(function () {
   function allData(url, data, dataID) {
     ajaxData(url, data, function (resul) {
       var getData = resul.resultData;
-      var html = "";
+      var html1 = "";
+      var html2 = "";
+      var html3 = "";
       if (getData.list) {
         $(".nextPage").removeAttr("disabled").removeClass("btn-default").addClass("btn-primary");
         $(getData.list).each(function (index, item) {
           if (dataID == 1) {
-            html += '<tr><td >' + (item.partid ? item.partid : '-') + '</td>' +
+            html1 += '<tr><td >' + (item.partid ? item.partid : '-') + '</td>' +
               '<td>' + (item.partwoid ? item.partwoid : '-') + '</td>' +
               '<td >' + (item.id ? item.id : '-') + '</td>' +
               '<td >' + (item.trayno ? item.trayno : '-') + '</td>' +
               '<td>' + (item.partnum ? item.partnum : '-') + '</td>' +
-              '<td >' + item.lockedtype + '</td>' +
+              '<td >' + (item.lockedtype ? item.lockedtype : '-') + '</td>' +
               '<td>' + (item.partdate ? item.partdate : '-') + '</td>' +
               '<td>' + (item.duetime ? item.duetime : '-') + '</td>' +
               '<td><button type="button" class="btn btn-primary locked" partid="' + item.partid + '" id="' + item.id + '" partwoid="' + item.partwoid + '" partnum="' + item.partnum + '">锁定</button></td></tr>'
+
           } else if (dataID == '2') {
 
-            html += '<tr><td style="vertical-align: middle;">' + (item.taskid ? item.taskid : '-') + '</td><td colspan="10" style="padding:0"><table class="table" style="border-bottom:none;">';
-            $(item.wmsInvInDtos).each(function(k,obj){
+            html2 += '<tr><td style="vertical-align: middle;">' + (item.taskid ? item.taskid : '-') + '</td><td colspan="10" style="padding:0"><table class="table" style="border-bottom:none;">';
+            $(item.wmsInvInDtos).each(function (k, obj) {
               if (obj.locator == 3) {
-              html += '<tr class="kong">'
-            } else {
-              html += '<tr>'
-            }
-              console.log(obj.wipEntityId)
-              html +='<td width="8%">' + (obj.locator ? obj.locator : '-') + '</td>'+
-              '<td width="11.89%">' + (obj.shelfCode ? obj.shelfCode : '-') + '</td>' +
-              '<td width="8%">' + (obj.shelfLay ? obj.shelfLay : '-') + '</td>' +
-              '<td width="10.67%">' + (obj.wipEntityId ? obj.wipEntityId : '-') + '</td>' +
-              '<td width="9.33%">' + (obj.stockNo ? obj.stockNo : '-') + '</td>' +
-              '<td width="12%">' + (obj.isMultiPalForLot ? obj.isMultiPalForLot : '-') + '</td>' +
-              '<td width="10.67%">' + (obj.lotCode ? obj.lotCode : '-') + '</td>' +
-              '<td width="10.67%">' + (obj.quantity ? obj.quantity : '-') + '</td>' +
-              '<td width="10.67%">' + (obj.itemCode ? obj.itemCode : '-') + '</td>' +
-              '<td width="8%">' + (obj.status ? obj.status : '-') + '</td>'
+                html2 += '<tr class="kong">'
+              } else {
+                html2 += '<tr>'
+              }
+              html2 += '<td width="7.45%">' + (obj.locator ? obj.locator : '-') + '</td>' +
+                '<td width="11.39%">' + (obj.shelfCode ? obj.shelfCode : '-') + '</td>' +
+                '<td width="7.59%">' + (obj.shelfLay ? obj.shelfLay : '-') + '</td>' +
+                '<td width="10.12%">' + (obj.wipEntityId ? obj.wipEntityId : '-') + '</td>' +
+                '<td width="8.86%">' + (obj.stockNo ? obj.stockNo : '-') + '</td>' +
+                '<td width="10.12%">' + (obj.isMultiPalForLot ? obj.isMultiPalForLot : '-') + '</td>' +
+                '<td width="10.12%">' + (obj.lotCode ? obj.lotCode : '-') + '</td>' +
+                '<td width="6.32%">' + (obj.quantity ? obj.quantity : '-') + '</td>' +
+                '<td width="10.12%">' + (obj.itemCode ? obj.itemCode : '-') + '</td>' +
+                '<td width="7.59%">' + (obj.status ? obj.status : '-') + '</td>'
               '</tr>'
               // }
-          })
-            html += '</table></td><td>' + (item.partdate ? item.partdate : '-') + '</td></tr>';
+            })
+            html2 += '</table></td><td style="vertical-align: middle;">' + (item.partdate ? item.partdate : '-') + '</td><td style="vertical-align: middle;"><button type="button" class="btn btn-primary sbu" taskid="' + item.taskid + '">完成</button></td></tr>';
 
           } else if (dataID == '3') {
-            html += '<tr><td>' + (item.taskid ? item.taskid : '-') + '</td>' +
+            html3 += '<tr><td>' + (item.taskid ? item.taskid : '-') + '</td>' +
               '<td>' + (item.tasksource ? item.tasksource : '-') + '</td>' +
               '<td >' + (item.locator ? item.locator : '-') + '</td>' +
               '<td >' + (item.shelfcode ? item.shelfcode : '-') + '</td>' +
@@ -300,8 +302,50 @@ $(function () {
           }
 
         })
+        $(".listData1").empty().append(html1);
+        $(".listData2").empty().append(html2);
+        $(".listData3").empty().append(html3);
 
-        $(".listData").empty().append(html);
+        //操作完成
+        $(".sbu").click(function () {
+          var _this = this;
+          var taskid=$(this).attr('taskid');
+          var html = '<h2 class="title_name">提示 <span class="cols">X</span>  </h2>' +
+            '<div class="list">' +
+            '<p style="font-size: 18px;margin: 20px 0 18px;">您确定任务号为：'+ taskid +'的任务已完成？</p>'+
+            '<div class="btn_box">' +
+            '<button type="button" class="btn btn-success success">确 定</button>' +
+            '</div>' +
+            '</div>'
+          $(".whcell_15f").html(html).show();
+          $(".success").click(function () {
+            $.ajax({
+              type: "POST",
+              url: "/wms/wmsInvInResult",
+              contentType: "application/json;charset=utf-8",
+              dataType: "JSON",
+              async: false,
+              data: JSON.stringify({'taskid':taskid}),
+              success: function (resul) {
+                alert('成功');
+                $(".whcell_15f").empty().hide();
+                allData("wmsInvInFlow", data, dataID)
+                page(data, function () {
+                  allData("wmsInvInFlow", data, dataID)
+                })
+              }, error: function (jqxhr, textStatus, error) {
+                console.log(error);
+
+              }
+
+            })
+          })
+          $(".cols").click(function () {
+            $(".whcell_15f").empty().hide();
+          })
+        })
+
+
         // 锁定
         $(".locked").click(function () {
           var _this = this;
@@ -339,7 +383,7 @@ $(function () {
 
             $.ajax({
               type: "POST",
-              url: "http://192.168.43.152:8093/wms/updateLocked",
+              url: "/wms/updateLocked",
               contentType: "application/json;charset=utf-8",
               dataType: "JSON",
               async: false,
@@ -362,11 +406,34 @@ $(function () {
             $(".whcell_15f").empty().hide();
           })
         })
+
+
       } else {
-        $(".listData").empty();
+        $(".listData1").empty();
       }
     });
   }
 
+  $(".storage_box").click(function () {
+    console.log($(this).attr('typeD'))
+    if($(this).attr('typeD')==1){
+      download('库存记录','dataTable1')
+    }else if($(this).attr('typeD')==2){
+      download('入库记录','dataTable2')
+    }else{
+      download('出库记录','dataTable3')
+    }
+    return
+    download('名称')
+  })
+  function download(name,dataTable) {
+    var html2 = "<html><head><meta charset='utf-8' /></head><body>" + document.getElementById(dataTable).outerHTML + "</body></html>";
+    var blob2 = new Blob([html2], {
+      type: "application/vnd.ms-excel"
+    });
+    saveAs(blob2, name + '.xls');
+  };
+ 
 
-})
+
+  })

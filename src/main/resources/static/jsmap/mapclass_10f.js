@@ -194,7 +194,7 @@ class mapNode { //定义了一个绘制节点类
     draw(draw) {
         var _this = this;
         if (_this.svgtype == "rect") {
-            var obj = draw;
+            var obj = draw.rect(_this.w, _this.h);
             var piler_1 = localStorage.getItem("piler_1"),
                 piler_2 = localStorage.getItem("piler_2");
 
@@ -232,7 +232,7 @@ class mapNode { //定义了一个绘制节点类
                 if (_this.dataobj[1] == 0) {
                     _this.changecolor(color2);
                 }
-                // _this.svgobj = obj.image('..//images/search.png',50,50);
+                // _this.svgobj = obj.image('../../static/images/search.png',50,50);
                 if (_this.dataobj[10] == 2) {
                     _this.changeposition(_this.dataobj[10] * 108, _this.y);
                 } else if (_this.dataobj[10] == 3) {
@@ -245,11 +245,11 @@ class mapNode { //定义了一个绘制节点类
 
             }
 
-            _this.svgobj = obj.rect(_this.w, _this.h).fill(_this.color).move(_this.x, _this.y).addClass('pointer');
+            _this.svgobj = obj.fill(_this.color).move(_this.x, _this.y).addClass('pointer');
             // if(_this.color=='#61a51e'){
-            //     _this.svgobj = obj.image('../../images/huo.png',150,30).move(_this.x, _this.y).addClass('pointer');
+            //     _this.svgobj = obj.image('../../static/images/huo.png',150,30).move(_this.x, _this.y).addClass('pointer');
             // }else if(_this.explain=='piler'){
-            //     _this.svgobj = obj.image('../images/dui.png',200,30).move(_this.x, _this.y).addClass('pointer');
+            //     _this.svgobj = obj.image('../../static/images/dui.png',200,30).move(_this.x, _this.y).addClass('pointer');
             // }
             
 

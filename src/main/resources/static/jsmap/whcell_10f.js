@@ -264,6 +264,8 @@ $(function () {
 		draw_10f(x0_10f, y0_10f, w_10f, h_10f, svgdraw);
 		// draw_pick(x0_pick, y0_pick, w_pick, h_pick, svgdraw);
 	}
+	init();
+	draw_all();
 	intervalId = setInterval(function () {
 	init();
 	draw_all();
