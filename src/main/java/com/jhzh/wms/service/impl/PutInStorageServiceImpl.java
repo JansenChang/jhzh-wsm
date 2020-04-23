@@ -53,7 +53,8 @@ public class PutInStorageServiceImpl implements PutInStorageService {
     private HttpResult.HttpAPIService httpAPIService;
     @Value("${queryItemBomInfoUrl}")
     private String queryItemBomInfoUrl;
-
+    @Resource
+    private QueueTaskDao queueTaskDao;
     Map<Integer, Integer> longCage = new HashMap<Integer, Integer>() {
         {
             put(2, 250106);
@@ -165,7 +166,7 @@ public class PutInStorageServiceImpl implements PutInStorageService {
                 log.error("入库接口数据不完整，请检查：\n"+jsonpObject.toJSONString());
                 return Result.error(CodeMsg.builder().code(ErrorCode.NULL_OBJ.getCode()).msg(ErrorCode.NULL_OBJ.getMsg()).build());
             }
-             //校验TaskId是否已存在
+            //校验TaskId是否已存在
             boolean existTaskId = validateTaskId(jsonpObject);
             if (existTaskId) {
                 log.error("入库接口TaskId异常，请检查：\n"+jsonpObject.toJSONString());
@@ -277,6 +278,18 @@ public class PutInStorageServiceImpl implements PutInStorageService {
             if (locator.equals("3")) {
                 List<TaskmesDto> taskmesFor1L = taskmesDao.query1LForTaskMes();
                 if(EmptyUtils.isNotEmpty(taskmesFor1L)){
+                   /* List<QueueTaskDto> list=queueTaskDao.queryQueueTaskByTaskId((String) jsonpObject.get("taskId"));
+                                       if (EmptyUtils.isNotEmpty(list)){
+                                           log.info("当前任务存在任务队列表中：\n"+jsonpObject.toJSONString());
+                                           return Result.success("hastask");
+                                       }
+                                       queueTaskDao.insertQueueTask(QueueTaskDto.builder()
+                                                              .taskid((String) jsonpObject.get("taskId"))
+                                                              .requestbody(jsonpObject.toJSONString())
+                                                              .queuetype(2)
+                                                              .status(0)
+                                                              .build());
+                                       log.info("当前一楼存在任务，已存入队列：\n"+jsonpObject.toJSONString());*/
                     log.error("当前一楼存在任务，请稍后重试：\n"+jsonpObject.toJSONString());
                      return Result.error(CodeMsg.builder().code(ErrorCode.EXIST_1L_TASK.getCode()).msg(ErrorCode.EXIST_1L_TASK.getMsg()).build());
                 }

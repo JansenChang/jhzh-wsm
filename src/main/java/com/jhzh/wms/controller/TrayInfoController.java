@@ -22,9 +22,7 @@ public class TrayInfoController {
     public Result<?> saveTrayInfo(@RequestBody  JSONObject  jsonpObject) throws Exception {
         log.info("saveTrayInfo begin..");
         log.info("In Param : \n"+jsonpObject.toJSONString());
-        //获取前端传入数据
         YxWmsCellDto yxWmsCellDto = jsonpObject.toJavaObject(YxWmsCellDto.class);
-        //获取12条数据
         List<YxWmsCellDto> yxWmsCellDtos = trayInfoService.queryTrayInfo(yxWmsCellDto);
         Result<?> result = trayInfoService.updateTrayInfo(yxWmsCellDto, yxWmsCellDtos);
         log.info("saveTrayInfo begin..");

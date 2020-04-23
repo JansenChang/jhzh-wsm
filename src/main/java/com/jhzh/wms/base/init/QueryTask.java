@@ -1,18 +1,23 @@
 package com.jhzh.wms.base.init;
 
+import com.alibaba.fastjson.JSONObject;
+import com.jhzh.wms.base.result.CodeMsg;
+import com.jhzh.wms.base.result.Result;
 import com.jhzh.wms.base.utils.EmptyUtils;
-import com.jhzh.wms.dao.IlsCellDao;
-import com.jhzh.wms.dao.PutInStorageDao;
-import com.jhzh.wms.dao.TaskmesDao;
-import com.jhzh.wms.dao.WmsInvOutDao;
+import com.jhzh.wms.dao.*;
+import com.jhzh.wms.dto.QueueTaskDto;
 import com.jhzh.wms.dto.TaskmesDto;
 import com.jhzh.wms.dto.WmsInvInDto;
 import com.jhzh.wms.service.ImesFeedBackService;
+import com.jhzh.wms.service.PutInStorageService;
+import com.jhzh.wms.service.WmsInvOutService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +35,12 @@ public class QueryTask {
     private TaskmesDao taskmesDao;
     @Autowired
     private IlsCellDao ilsCellDao;
-
+    @Resource
+    private QueueTaskDao queueTaskDao;
+    @Resource
+    private PutInStorageService putInStorageService;
+    @Resource
+    private WmsInvOutService wmsInvOutService;
     @Async
     public void QueryWarehouseStatus() {
         while (true) {
@@ -131,5 +141,52 @@ public class QueryTask {
                 log.error(e.getMessage());
             }
         }
+    }
+    @Async
+	public void QueueTask() {
+        while (true) {
+               try {
+                   List<QueueTaskDto>queueTaskList=queueTaskDao.queryQueueTask();
+                   if(EmptyUtils.isEmpty(queueTaskList)){
+                       continue;
+                   }
+                   QueueTaskDto queueTaskDto = queueTaskList.get(0);
+                   Integer queuetype = queueTaskDto.getQueuetype();
+                   String requestbody = queueTaskDto.getRequestbody();
+                   JSONObject jsonObject = JSONObject.parseObject(requestbody);
+                   //空盘入库
+                   if(queuetype.equals(2)){
+                       Result<?> result = putInStorageService.wmsInvIn(jsonObject);
+                       Object resultData = result.getResultData();
+                       if(EmptyUtils.isNotEmpty(resultData)&&!resultData.equals("hastask")){
+                           queueTaskDto.setStatus(1);
+                           queueTaskDao.updateQueueTask(queueTaskDto);
+                       }
+                   }
+                   //料盘出库
+                   if(queuetype.equals(1)){
+                       Result<?> result = wmsInvOutService.wmsInvOut(jsonObject);
+                       Object resultData = result.getResultData();
+                       if(EmptyUtils.isNotEmpty(resultData)&&!resultData.equals("hastask")){
+                                                  queueTaskDto.setStatus(1);
+                                                  queueTaskDao.updateQueueTask(queueTaskDto);
+                       }
+                   }
+                   Thread.sleep(10000);
+               } catch (InterruptedException e) {
+                   log.error(e.getMessage());
+               }
+         }
+	}
+
+    public static void main(String[] args) {
+        Result<?> success = Result.success("");
+        Result<?> success2 = Result.success(
+                new ArrayList<>()
+        );
+        Result<?> error = Result.error(new CodeMsg(1, "11"));
+        Object resultData = success2.getResultData();
+        boolean equals = resultData.equals(".");
+        System.out.println();
     }
 }

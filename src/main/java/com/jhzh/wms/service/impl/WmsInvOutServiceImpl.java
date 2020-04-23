@@ -7,6 +7,7 @@ import com.jhzh.wms.base.result.ErrorCode;
 import com.jhzh.wms.base.result.Result;
 import com.jhzh.wms.base.utils.EmptyUtils;
 import com.jhzh.wms.dao.IlsCellDao;
+import com.jhzh.wms.dao.QueueTaskDao;
 import com.jhzh.wms.dao.TaskmesDao;
 import com.jhzh.wms.dao.WmsInvOutDao;
 import com.jhzh.wms.dto.*;
@@ -38,7 +39,8 @@ public class WmsInvOutServiceImpl implements WmsInvOutService {
     private HttpResult.HttpAPIService httpAPIService;
     @Value("${queryWoPlanInfoUrl}")
     private String queryWoPlanInfoUrl;
-
+    @Resource
+    private QueueTaskDao queueTaskDao;
     @Override
     public Result<?>  wmsInvOut(JSONObject jsonObject) {
         try {
@@ -57,7 +59,19 @@ public class WmsInvOutServiceImpl implements WmsInvOutService {
             }
             List<TaskmesDto> taskmesFor1L = taskmesDao.query1LForTaskMes();
             if(EmptyUtils.isNotEmpty(taskmesFor1L)){
-                 return Result.error(CodeMsg.builder().code(ErrorCode.EXIST_1L_TASK.getCode()).msg(ErrorCode.EXIST_1L_TASK.getMsg()).build());
+                List<QueueTaskDto> list=queueTaskDao.queryQueueTaskByTaskId((String) jsonObject.get("taskId"));
+                if (EmptyUtils.isNotEmpty(list)){
+                    log.info("当前任务存在任务队列表中：\n"+jsonObject.toJSONString());
+                    return Result.success("hastask");
+                }
+                queueTaskDao.insertQueueTask(QueueTaskDto.builder()
+                                                          .taskid((String) jsonObject.get("taskId"))
+                                                          .requestbody(jsonObject.toJSONString())
+                                                          .queuetype(2)
+                                                          .status(0)
+                                                          .build());
+                log.info("当前一楼存在任务，已存入队列：\n"+jsonObject.toJSONString());
+                return Result.success("");
             }
             Integer wipEntityId = wmsInvOutDto.getWipEntityId();
             HashMap<String, Object> map = new HashMap();

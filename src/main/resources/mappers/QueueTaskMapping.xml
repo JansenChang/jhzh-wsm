@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jhzh.wms.dao.QueueTaskDao">
+
+
+    <insert id="insertQueueTask">
+        insert into yx_ils_queuetask (
+        taskid,
+        requestbody,
+        requertdate,
+        queuetype,
+        status)
+        values
+        (#{taskid},#{requestbody},CURRENT_TIMESTAMP,#{queuetype},0)
+
+    </insert>
+    <update id="updateQueueTask">
+        update yx_ils_queuetask
+         <set>
+             status=0
+          </set>
+          where taskid=#{taskid}
+    </update>
+    <select id="queryQueueTask" resultType="com.jhzh.wms.dto.QueueTaskDto">
+        select
+        taskid,
+        requestbody,
+        requertdate,
+        queuetype,
+        status
+        from yx_ils_queuetask
+        where status=0
+    </select>
+    <select id="queryQueueTaskByTaskId" resultType="com.jhzh.wms.dto.QueueTaskDto" >
+         select
+        taskid,
+        requestbody,
+        requertdate,
+        queuetype,
+        status
+        from yx_ils_queuetask
+        where status=0
+        and taskid=#{taskId}
+    </select>
+</mapper>
