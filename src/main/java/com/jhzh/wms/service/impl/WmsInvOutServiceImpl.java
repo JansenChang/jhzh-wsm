@@ -124,7 +124,7 @@ public class WmsInvOutServiceImpl implements WmsInvOutService {
 
 			//List<TaskStatusDto> taskStatusDtos = wsmTaskService.queryTaskStatus(taskId);
 			if(!errorFlag){
-							taskmesDao.updateTaskmes(dto);
+				taskmesDao.updateTaskmes(dto);
 			}
 			wmsInvOutDao.insertWmsInvOut(wmsInvOutDto);
 		} catch (Exception e) {

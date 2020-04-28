@@ -14,4 +14,9 @@
       <module name="jhzh-wms" target="8" />
     </bytecodeTargetLevel>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="jhzh-wms" options="" />
+    </option>
+  </component>
 </project>

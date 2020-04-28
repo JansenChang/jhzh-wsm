@@ -163,7 +163,7 @@ public class QueryTask {
                                               .queuetype(2)
                                               .build());
 
-                   if(EmptyUtils.isEmpty(queueTaskList)){
+                   if(EmptyUtils.isEmpty(queueTaskList2)){
                                           continue;
                    }
                    //取得任务
@@ -173,7 +173,7 @@ public class QueryTask {
                    JSONObject jsonObject = JSONObject.parseObject(requestbody);
                    //调用出库接口
                    Result<?> result = wmsInvOutService.wmsInvOut(jsonObject);
-                   queueTaskDto.setStatus(3);
+                   queueTaskDto.setStatus(1);
                    queueTaskDao.updateQueueTask(queueTaskDto);
                    Thread.sleep(10000);
                } catch (InterruptedException e) {
