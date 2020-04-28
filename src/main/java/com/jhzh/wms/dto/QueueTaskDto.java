@@ -13,4 +13,5 @@ public class QueueTaskDto {
 	private Date requertdate;
 	private Integer status;
 	private Integer queuetype;
+	private String wipentityid;
 }

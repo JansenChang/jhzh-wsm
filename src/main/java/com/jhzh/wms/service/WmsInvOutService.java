@@ -5,4 +5,6 @@ import com.jhzh.wms.base.result.Result;
 
 public interface WmsInvOutService {
     Result<?> wmsInvOut(JSONObject jsonpObject);
+
+    Result<?> invOutqueueTask(JSONObject jsonpObject);
 }

@@ -1,6 +1,10 @@
 package com.jhzh.wms.service;
 
-import com.jhzh.wms.dto.*;
+import com.alibaba.fastjson.JSONObject;
+import com.jhzh.wms.dto.IlsCellDto;
+import com.jhzh.wms.dto.ItemInfoDto;
+import com.jhzh.wms.dto.TaskmesDto;
+import com.jhzh.wms.dto.WmsInvInDto;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,4 +23,6 @@ public interface ImesFeedBackService {
     ItemInfoDto queryItemInfo(HashMap<String, Object> map);
 
     void QueryCompletedTask();
+
+    Map<String, String> wmsInvOutResultError(JSONObject jsonObject);
 }

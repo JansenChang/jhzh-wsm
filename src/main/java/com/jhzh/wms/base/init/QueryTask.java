@@ -1,7 +1,6 @@
 package com.jhzh.wms.base.init;
 
 import com.alibaba.fastjson.JSONObject;
-import com.jhzh.wms.base.result.CodeMsg;
 import com.jhzh.wms.base.result.Result;
 import com.jhzh.wms.base.utils.EmptyUtils;
 import com.jhzh.wms.dao.*;
@@ -17,7 +16,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +39,7 @@ public class QueryTask {
     private PutInStorageService putInStorageService;
     @Resource
     private WmsInvOutService wmsInvOutService;
+
     @Async
     public void QueryWarehouseStatus() {
         while (true) {
@@ -142,36 +141,40 @@ public class QueryTask {
             }
         }
     }
+
     @Async
 	public void QueueTask() {
         while (true) {
                try {
-                   List<QueueTaskDto>queueTaskList=queueTaskDao.queryQueueTask();
-                   if(EmptyUtils.isEmpty(queueTaskList)){
+                   List<TaskmesDto> taskmesFor1L = taskmesDao.query1LForTaskMes();
+                   if(EmptyUtils.isNotEmpty(taskmesFor1L)){
                        continue;
                    }
+                   List<QueueTaskDto>queueTaskList=queueTaskDao.queryQueueTask(QueueTaskDto.builder()
+                           .status(1)
+                           .queuetype(2)
+                           .build());
+
+                   if(EmptyUtils.isNotEmpty(queueTaskList)){
+                       continue;
+                   }
+                   List<QueueTaskDto>queueTaskList2=queueTaskDao.queryQueueTask(QueueTaskDto.builder()
+                                              .status(0)
+                                              .queuetype(2)
+                                              .build());
+
+                   if(EmptyUtils.isEmpty(queueTaskList)){
+                                          continue;
+                   }
+                   //取得任务
                    QueueTaskDto queueTaskDto = queueTaskList.get(0);
-                   Integer queuetype = queueTaskDto.getQueuetype();
+
                    String requestbody = queueTaskDto.getRequestbody();
                    JSONObject jsonObject = JSONObject.parseObject(requestbody);
-                   //空盘入库
-                   if(queuetype.equals(2)){
-                       Result<?> result = putInStorageService.wmsInvIn(jsonObject);
-                       Object resultData = result.getResultData();
-                       if(EmptyUtils.isNotEmpty(resultData)&&!resultData.equals("hastask")){
-                           queueTaskDto.setStatus(1);
-                           queueTaskDao.updateQueueTask(queueTaskDto);
-                       }
-                   }
-                   //料盘出库
-                   if(queuetype.equals(1)){
-                       Result<?> result = wmsInvOutService.wmsInvOut(jsonObject);
-                       Object resultData = result.getResultData();
-                       if(EmptyUtils.isNotEmpty(resultData)&&!resultData.equals("hastask")){
-                                                  queueTaskDto.setStatus(1);
-                                                  queueTaskDao.updateQueueTask(queueTaskDto);
-                       }
-                   }
+                   //调用出库接口
+                   Result<?> result = wmsInvOutService.wmsInvOut(jsonObject);
+                   queueTaskDto.setStatus(3);
+                   queueTaskDao.updateQueueTask(queueTaskDto);
                    Thread.sleep(10000);
                } catch (InterruptedException e) {
                    log.error(e.getMessage());
@@ -179,14 +182,5 @@ public class QueryTask {
          }
 	}
 
-    public static void main(String[] args) {
-        Result<?> success = Result.success("");
-        Result<?> success2 = Result.success(
-                new ArrayList<>()
-        );
-        Result<?> error = Result.error(new CodeMsg(1, "11"));
-        Object resultData = success2.getResultData();
-        boolean equals = resultData.equals(".");
-        System.out.println();
-    }
+
 }

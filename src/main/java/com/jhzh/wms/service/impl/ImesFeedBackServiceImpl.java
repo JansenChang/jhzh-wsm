@@ -45,7 +45,8 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
     private TaskmesDao taskmesDao;
     @Autowired
     private IlsPickRackDao ilsPickRackDao;
-
+    @Autowired
+    private QueueTaskDao queueTaskDao;
     private Integer wipQtyTemp;
 
 
@@ -125,6 +126,39 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
         return resultMap;
     }
 
+    @Override
+    public Map<String, String> wmsInvOutResultError(JSONObject jsonObject) {
+        Map<String, String> resultMap = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
+        try {
+            map.put("taskId", jsonObject.get("taskId"));//任务 ID 号
+            map.put("taskSource", "103-C");//任务来源标识
+            map.put("invOutType", 1);//出库类型
+            map.put("locator", 4);//立体库出口位编码
+            map.put("shelfCode", 000000);//多层载具载具号/托盘号
+            map.put("wipEntityId", jsonObject.get("wipEntityId"));//工单 ID 号
+            map.put("stockNo", 000000);//托盘编号
+            map.put("itemCode", "");//物料编码
+            map.put("lotCode", jsonObject.get("wipEntityId"));//物料批次号 系统时间+30
+            map.put("quantity", 0);//数量
+            map.put("statusCode", 14);//任务状态
+            map.put("statusInfor", "任务取消");//同上
+            map.put("memoInfo1", null);
+            map.put("memoInfo2", null);
+            map.put("memoInfo3", null);
+            map.put("memoInfo4", null);
+            map.put("memoInfo5", null);
+            resultMap.putAll(doHttp(map, wmsInvOutResultUrl));
+            QueueTaskDto queueTaskDto=QueueTaskDto.builder()
+                    .taskid((String) jsonObject.get("taskId"))
+                    .status(3)
+                    .build();
+            queueTaskDao.updateQueueTask(queueTaskDto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resultMap;
+    }
 
     /**
      * 物资 BOM 查询接口
@@ -214,6 +248,8 @@ public class ImesFeedBackServiceImpl implements ImesFeedBackService {
             ilsPickRackDao.updateStatus(taskid);
         });
     }
+
+
 
     private List<IlsCellDto> matchData(List<IlsCellDto> qtyGt) {
         //List<IlsCellDto> qtyGt = value.stream().filter(ilsCellDto -> ilsCellDto.getPartnum() >= wipQtyTemp).collect(Collectors.toList());

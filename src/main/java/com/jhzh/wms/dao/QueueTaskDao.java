@@ -11,7 +11,7 @@ public interface QueueTaskDao {
 
 	void insertQueueTask(QueueTaskDto queueTaskDto);
 
-	List<QueueTaskDto> queryQueueTask();
+	List<QueueTaskDto> queryQueueTask(QueueTaskDto queueTaskDto);
 
 	int updateQueueTask(QueueTaskDto queueTaskDto);
 

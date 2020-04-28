@@ -30,7 +30,7 @@ public class TaskCommandLineRunner implements CommandLineRunner, Ordered {
        //queryTask.QueryExWarehouseStatus();
        //queryTask.QueryWoPlanInfo();
        //queryTask.QueryCompletedTask();
-
+       // queryTask.QueueTask();
     }
 
 

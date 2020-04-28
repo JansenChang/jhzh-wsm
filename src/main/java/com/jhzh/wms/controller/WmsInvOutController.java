@@ -24,7 +24,7 @@ public class WmsInvOutController {
     public Result<?> wmsInvOut(@RequestBody JSONObject jsonpObject) throws Exception {
         log.info("芯板出库请求 begin..");
         log.info("请求参数 : \n" + jsonpObject.toJSONString());
-        Result<?> result = wmsInvOutService.wmsInvOut(jsonpObject);
+        Result<?> result = wmsInvOutService.invOutqueueTask(jsonpObject);
         log.info("芯板出库请求 End..");
         return result;
     }

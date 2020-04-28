@@ -17,7 +17,7 @@
     <update id="updateQueueTask">
         update yx_ils_queuetask
          <set>
-             status=0
+             status=#{status}
           </set>
           where taskid=#{taskid}
     </update>
@@ -29,7 +29,7 @@
         queuetype,
         status
         from yx_ils_queuetask
-        where status=0
+        where status=#{status} and queuetype=#{queuetype}
     </select>
     <select id="queryQueueTaskByTaskId" resultType="com.jhzh.wms.dto.QueueTaskDto" >
          select

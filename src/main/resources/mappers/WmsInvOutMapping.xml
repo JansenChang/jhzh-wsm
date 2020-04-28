@@ -26,7 +26,7 @@
         statuscode,
         outtime
         )
-values (#{id},#{unt},#{app},#{taskId},#{taskSource},#{invOutType},#{wipEntityId},#{itemCode},#{quantity},0,CURRENT_TIMESTAMP)
+values (#{id},#{unt},#{app},#{taskId},#{taskSource},#{invOutType},#{wipEntityId},#{itemCode},#{quantity},#{statuscode},CURRENT_TIMESTAMP)
  </insert>
     <update id="updateStatus" parameterType="string">
         update yx_ils_whout set statuscode=12 where taskid=#{key}

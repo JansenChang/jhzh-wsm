@@ -290,7 +290,7 @@ public class PutInStorageServiceImpl implements PutInStorageService {
                                                               .status(0)
                                                               .build());
                                        log.info("当前一楼存在任务，已存入队列：\n"+jsonpObject.toJSONString());*/
-                    log.error("当前一楼存在任务，请稍后重试：\n"+jsonpObject.toJSONString());
+                     log.error("当前一楼存在任务，请稍后重试：\n"+jsonpObject.toJSONString());
                      return Result.error(CodeMsg.builder().code(ErrorCode.EXIST_1L_TASK.getCode()).msg(ErrorCode.EXIST_1L_TASK.getMsg()).build());
                 }
                 dto = TaskmesDto.builder()
