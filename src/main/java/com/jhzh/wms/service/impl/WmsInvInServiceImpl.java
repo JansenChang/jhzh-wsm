@@ -10,7 +10,7 @@ import com.jhzh.wms.base.utils.EmptyUtils;
 import com.jhzh.wms.dao.*;
 import com.jhzh.wms.dto.*;
 import com.jhzh.wms.service.ImesFeedBackService;
-import com.jhzh.wms.service.PutInStorageService;
+import com.jhzh.wms.service.WmsInvInService;
 import com.jhzh.wms.service.WmsTaskService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +33,9 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @Service
-public class PutInStorageServiceImpl implements PutInStorageService {
+public class WmsInvInServiceImpl implements WmsInvInService {
     @Autowired
-    private PutInStorageDao putInStorageDao;
+    private WmsInvInDao wmsInvInDao;
     private static ServerSocket serverSocket;
     @Autowired
     private ImesFeedBackService imesFeedBackService;
@@ -183,7 +183,7 @@ public class PutInStorageServiceImpl implements PutInStorageService {
             //校验locator
             String locator = (String) jsonpObject.get("locator");
             //限制长吊笼使用。
-            if(locator.equals("2")){
+            if(locator.equals("1")){
                 log.error("当前长吊笼不可用！：\n"+jsonpObject.toJSONString());
                 return Result.error(CodeMsg.builder().code(ErrorCode.LONGCAGE_DISABLED.getCode()).msg(ErrorCode.LONGCAGE_DISABLED.getMsg()).build());
             }
@@ -346,7 +346,7 @@ public class PutInStorageServiceImpl implements PutInStorageService {
                 date.setIsMultiPalForLot(0);
                 date.setLotCode(date.getLocator().equals(3) ? 0 : itemListBean.getLotCode());
                 date.setStatus(0);
-                putInStorageDao.insertWmsInvIn(date);
+                wmsInvInDao.insertWmsInvIn(date);
             }
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -355,6 +355,197 @@ public class PutInStorageServiceImpl implements PutInStorageService {
         return Result.success(jsonpObject);
     }
 
+    @Override
+    public Result<?> invInLongCage(JSONObject jsonObject) {
+        try {
+            WmsInvInDto wmsInvInDto = jsonObject.toJavaObject(WmsInvInDto.class);
+            //locator转换
+            Map<String, String> stringMap = new HashMap<>();
+            stringMap.put("1", "2");
+            stringMap.put("2", "1");
+            stringMap.put("3", "3");
+            //校验locator
+            String locator = (String) jsonObject.get("locator");
+            locator = stringMap.get(locator);
+            TaskmesDto dto;
+            Map<String, Object> map = new HashMap<>();
+            map.put("locator", jsonObject.get("locator"));
+            map.put("shelfCode", jsonObject.get("shelfCode"));
+            map.put("taskId", jsonObject.get("taskId"));
+            map.put("taskSource", jsonObject.get("taskSource"));
+            StringBuffer sb = new StringBuffer();
+            //locator 1和2 , 2楼料盘入库
+            if (locator.equals("2") || locator.equals("1")) {
+                List<WmsInvInDto.ItemListBean> itemList = wmsInvInDto.getItemList();
+                Integer trayid = null;
+                for (WmsInvInDto.ItemListBean itemListBean : itemList) {
+                    Integer shelfLay = itemListBean.getShelfLay();
+                    String trayno = itemListBean.getStockNo();
+                    Integer cellId = null;
+
+                    if (locator.equals("1")) {
+                        cellId = longCage.get(shelfLay);
+                    } else {
+                        cellId = shortCage.get(shelfLay);
+                    }
+                    sb.append(cellId + ",");
+                    if (trayno.contains("P")) {
+                        trayid = Integer.parseInt(trayno.replaceAll("P", ""));
+                    }
+                    if (trayno.indexOf("666") == 0) {
+                        trayid = Integer.parseInt(trayno);
+                    }
+                    String itemCode = itemListBean.getItemCode();
+                    HashMap<String, Object> bomMap = new HashMap();
+                    map.put("organizationId", "142");
+                    map.put("itemCode", itemCode);
+                    //根据物资编码获取物资组件信息
+                    ItemBomInfoDto itemBomInfoDto = httpAPIService.getResultData(queryItemBomInfoUrl, JSONObject.toJSONString(map), ItemBomInfoDto.class);
+
+                    //查询是否itemCode+ lotCode 已在 WMS 存在过
+                    List<IlsCellDto> ilsCellDtos = IlscellDao.queryCell(IlsCellDto.builder()
+                            .partid(Long.parseLong(itemCode.replace("-", "")))
+                            .partlotid(Long.parseLong(itemListBean.getLotCode().toString()))
+                            .build());
+                    IlscellDao.updateCellByCellId(IlsCellDto.builder()
+                            .id(Long.parseLong(cellId.toString()))
+                            .trayid(Long.parseLong(trayid.toString()))
+                            .trayno(trayno)
+                            .partid(Long.parseLong(itemCode.replace("-", "")))//物料号
+                            .partdesc(itemBomInfoDto.getItemDesc())
+                            .partnum(itemListBean.getQuantity())//数量
+                            .partdate(System.currentTimeMillis())//入库时间 TODO System.currentTimeMillis()/1000
+                            .partwoid(Long.parseLong(itemListBean.getWipEntityId().toString()))//工单号
+                            .partlotid(Long.parseLong(itemListBean.getLotCode().toString()))//批号
+                            .partlotdiv(0)//可拆批
+                            .build());
+                }
+                dto = TaskmesDto.builder()
+                        .areano(15)
+                        .action(120)
+                        .locator(Integer.parseInt(locator))
+                        .taskid((String) jsonObject.get("taskId"))
+                        .status(10)
+                        .cellstrsrc(sb.deleteCharAt(sb.length() - 1).toString())//
+                        .build();
+                taskmesDao.updateTaskmes(dto);
+                wmsInvInDto.setUnt(9);
+                wmsInvInDto.setApp(900);
+                wmsInvInDto.setDeptid(145);
+                WmsInvInDto date;
+                List<WmsInvInDto.ItemListBean> list = wmsInvInDto.getItemList();
+                for (WmsInvInDto.ItemListBean itemListBean : list) {
+                    //拼装数据插入in表
+                    date = wmsInvInDto;
+                    date.setId(String.valueOf(System.currentTimeMillis() / 1000));
+                    date.setIsMultiPalForLot(itemListBean.getIsMultiPalForLot());
+                    date.setItemCode(itemListBean.getItemCode());
+                    date.setLotCode(itemListBean.getLotCode());
+                    date.setQuantity(itemListBean.getQuantity());
+                    date.setShelfLay(itemListBean.getShelfLay());
+                    date.setStockNo(itemListBean.getStockNo());
+                    date.setWipEntityId(itemListBean.getWipEntityId());
+                    date.setIsMultiPalForLot(0);
+                    date.setLotCode(date.getLocator().equals(3) ? 0 : itemListBean.getLotCode());
+                    date.setStatus(0);
+                    wmsInvInDao.insertWmsInvIn(date);
+                }
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return Result.error(new CodeMsg(200, e.getMessage()));
+        }
+        return Result.success(jsonObject);
+    }
+    @Override
+    public Result<?> invIn1LCage(JSONObject jsonObject) {
+        try {
+            WmsInvInDto wmsInvInDto = jsonObject.toJavaObject(WmsInvInDto.class);
+            //locator转换
+            Map<String, String> stringMap = new HashMap<>();
+            stringMap.put("1", "2");
+            stringMap.put("2", "1");
+            stringMap.put("3", "3");
+            //校验locator
+            String locator = (String) jsonObject.get("locator");
+            locator = stringMap.get(locator);
+            TaskmesDto dto;
+            Map<String, Object> map = new HashMap<>();
+            map.put("locator", jsonObject.get("locator"));
+            map.put("shelfCode", jsonObject.get("shelfCode"));
+            map.put("taskId", jsonObject.get("taskId"));
+            map.put("taskSource", jsonObject.get("taskSource"));
+            StringBuffer sb = new StringBuffer();
+            if (locator.equals("3")) {
+                dto = TaskmesDto.builder()
+                        .locator(3)
+                        .areano(10)
+                        .action(110)
+                        .taskid((String) jsonObject.get("taskId"))
+                        .cellidsrc("310101")
+                        .status(10)
+                        .build();
+                List<TaskmesDto> taskmesDtos = taskmesDao.queryTaskmes(dto);
+                if (!EmptyUtils.isEmpty(taskmesDtos)) {
+                    return Result.error(new CodeMsg(200, ErrorCode.TASK_BUSY.getMsg()));
+                }
+                taskmesDao.updateTaskmes(dto);
+                Integer cellId = 310101;
+                //TODO 更新310101盘号
+                List<Map<String, Object>> itemList = (List<Map<String, Object>>) jsonObject.get("itemList");
+                String trayno = (String) itemList.get(0).get("stockNo");
+                Integer trayid = null;
+                if (trayno.indexOf("666") == 0) {
+                    trayid = Integer.parseInt(trayno);
+                }
+                IlscellDao.updateCellByCellId(IlsCellDto.builder()
+                        .id(Long.parseLong(cellId.toString()))
+                        .trayid(Long.parseLong(trayid.toString()))
+                        .trayno(trayno)
+                        .partid(Long.parseLong("000000000"))//物料号
+                        .partnum(0)//数量
+                        .partdate(System.currentTimeMillis())//入库时间 TODO System.currentTimeMillis()/1000
+                        .partwoid(Long.parseLong("-1"))//工单号
+                        .partlotid(Long.parseLong("0"))//批号
+                        .partlotdiv(0)//可拆批
+                        .build());
+            }
+            dto = TaskmesDto.builder()
+                    .areano(15)
+                    .action(120)
+                    .locator(Integer.parseInt(locator))
+                    .taskid((String) jsonObject.get("taskId"))
+                    .status(10)
+                    .cellstrsrc(sb.deleteCharAt(sb.length() - 1).toString())//
+                    .build();
+            taskmesDao.updateTaskmes(dto);
+            wmsInvInDto.setUnt(9);
+            wmsInvInDto.setApp(900);
+            wmsInvInDto.setDeptid(145);
+            WmsInvInDto date;
+            List<WmsInvInDto.ItemListBean> list = wmsInvInDto.getItemList();
+            for (WmsInvInDto.ItemListBean itemListBean : list) {
+                //拼装数据插入in表
+                date = wmsInvInDto;
+                date.setId(String.valueOf(System.currentTimeMillis() / 1000));
+                date.setIsMultiPalForLot(itemListBean.getIsMultiPalForLot());
+                date.setItemCode(itemListBean.getItemCode());
+                date.setLotCode(itemListBean.getLotCode());
+                date.setQuantity(itemListBean.getQuantity());
+                date.setShelfLay(itemListBean.getShelfLay());
+                date.setStockNo(itemListBean.getStockNo());
+                date.setWipEntityId(itemListBean.getWipEntityId());
+                date.setIsMultiPalForLot(0);
+                date.setLotCode(date.getLocator().equals(3) ? 0 : itemListBean.getLotCode());
+                date.setStatus(0);
+                wmsInvInDao.insertWmsInvIn(date);
+            }
+        } catch (NumberFormatException e) {
+            log.error(e.getMessage());
+            return Result.error(new CodeMsg(200, e.getMessage()));
+        }
+        return Result.success(jsonObject);
+    }
     private boolean   validateTaryNo(JSONObject jsonpObject) {
         List<Map<String, String>> itemList = (List<Map<String, String>>) jsonpObject.get("itemList");
         for (Map<String, String> map : itemList) {
@@ -518,6 +709,39 @@ public class PutInStorageServiceImpl implements PutInStorageService {
             return Result.success(new CodeMsg(200, e.getMessage()));
         }
     }
+
+    @Override
+    public Result<?> invInQueueTask(JSONObject jsonObject) {
+        Map<String,String>stringMap=new HashMap<>();
+                   stringMap.put("1","2");
+                   stringMap.put("2","1");
+                   stringMap.put("3","3");
+                   //校验locator
+        String locator = (String) jsonObject.get("locator");
+        locator=stringMap.get(locator);
+        if (locator.equals("2") || locator.equals("1")) {
+            //出库
+            queueTaskDao.insertQueueTask(QueueTaskDto.builder()
+                                                       .taskid((String) jsonObject.get("taskId"))
+                                                       .requestbody(jsonObject.toJSONString())
+                                                        //1长2短
+                                                       .queuetype(locator.equals("1")?3:4)
+                                                       .status(0)
+                                                       .build());
+        }
+        if (locator.equals("3")) {
+           queueTaskDao.insertQueueTask(QueueTaskDto.builder()
+                                            .taskid((String) jsonObject.get("taskId"))
+                                            .requestbody(jsonObject.toJSONString())
+                                            .queuetype(1)
+                                            .status(0)
+                                            .build());
+        }
+
+        return Result.success(jsonObject);
+    }
+
+
 
     private boolean validateStockNum(JSONObject jsonObject) {
         if (!(jsonObject.containsKey("taskSource") &&

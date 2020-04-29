@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @Mapper
-public interface PutInStorageDao {
+public interface WmsInvInDao {
     void insertWmsInvIn(WmsInvInDto wmsInvInDto);
 
     List<WmsInvInDto> QueryWarehouseFinish();

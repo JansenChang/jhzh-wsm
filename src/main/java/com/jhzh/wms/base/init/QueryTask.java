@@ -8,7 +8,7 @@ import com.jhzh.wms.dto.QueueTaskDto;
 import com.jhzh.wms.dto.TaskmesDto;
 import com.jhzh.wms.dto.WmsInvInDto;
 import com.jhzh.wms.service.ImesFeedBackService;
-import com.jhzh.wms.service.PutInStorageService;
+import com.jhzh.wms.service.WmsInvInService;
 import com.jhzh.wms.service.WmsInvOutService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ import java.util.Map;
 @Component
 public class QueryTask {
     @Autowired
-    private PutInStorageDao putInStorageDao;
+    private WmsInvInDao wmsInvInDao;
     @Autowired
     private WmsInvOutDao wmsInvOutDao;
     @Autowired
@@ -36,7 +36,7 @@ public class QueryTask {
     @Resource
     private QueueTaskDao queueTaskDao;
     @Resource
-    private PutInStorageService putInStorageService;
+    private WmsInvInService wmsInvInService;
     @Resource
     private WmsInvOutService wmsInvOutService;
 
@@ -67,12 +67,18 @@ public class QueryTask {
                  * 修改已完成的入库记录 -->12
                  */
                 taskmesList.forEach(taskmes -> {
-                    List<WmsInvInDto> wmsInvInDtos = putInStorageDao.queryWmsInvInForTaskId(taskmes.getTaskid());
+                    List<WmsInvInDto> wmsInvInDtos = wmsInvInDao.queryWmsInvInForTaskId(taskmes.getTaskid());
                     Map<String, String> map = imesFeedBackService.wmsInvInResult(wmsInvInDtos);
-                    putInStorageDao.updateStatus(taskmes.getTaskid(),Long.parseLong("12"));
+                    wmsInvInDao.updateStatus(taskmes.getTaskid(),Long.parseLong("12"));
                     //taskmes.setTaskid(".");
                     taskmes.setStatus(0);
                     taskmesDao.updateTaskmes(taskmes);
+                    QueueTaskDto queueTaskDto=QueueTaskDto.builder()
+                            .taskid(taskmes.getTaskid())
+                            .status(3)
+                            .build();
+                    queueTaskDao.updateQueueTask(queueTaskDto);
+
                 });
 
                 Thread.sleep(10000);
@@ -129,7 +135,7 @@ public class QueryTask {
         }
     }
 
-
+    @Async
     public void QueryCompletedTask() {
         while (true) {
 
@@ -143,11 +149,12 @@ public class QueryTask {
     }
 
     @Async
-	public void QueueTask() {
+	public void QueueInvOutTask() {
         while (true) {
                try {
                    List<TaskmesDto> taskmesFor1L = taskmesDao.query1LForTaskMes();
                    if(EmptyUtils.isNotEmpty(taskmesFor1L)){
+                       Thread.sleep(10000);
                        continue;
                    }
                    List<QueueTaskDto>queueTaskList=queueTaskDao.queryQueueTask(QueueTaskDto.builder()
@@ -156,6 +163,7 @@ public class QueryTask {
                            .build());
 
                    if(EmptyUtils.isNotEmpty(queueTaskList)){
+                       Thread.sleep(10000);
                        continue;
                    }
                    List<QueueTaskDto>queueTaskList2=queueTaskDao.queryQueueTask(QueueTaskDto.builder()
@@ -164,7 +172,8 @@ public class QueryTask {
                                               .build());
 
                    if(EmptyUtils.isEmpty(queueTaskList2)){
-                                          continue;
+                       Thread.sleep(10000);
+                       continue;
                    }
                    //取得任务
                    QueueTaskDto queueTaskDto = queueTaskList.get(0);
@@ -176,11 +185,103 @@ public class QueryTask {
                    queueTaskDto.setStatus(1);
                    queueTaskDao.updateQueueTask(queueTaskDto);
                    Thread.sleep(10000);
-               } catch (InterruptedException e) {
+               } catch (Exception e) {
                    log.error(e.getMessage());
                }
          }
 	}
 
+    @Async
+    public void QueueInvInLongCageTask() {
+        while (true) {
+            try {
+                String name="B1PI";
+                List<TaskmesDto> taskmesLongCage = taskmesDao.query2LForTaskMes(name);
+                //长吊笼执行中
+                if(EmptyUtils.isNotEmpty(taskmesLongCage)){
+                    Thread.sleep(10000);
+                    continue;
+                }
+                List<QueueTaskDto>queueTaskList=queueTaskDao.queryQueueTask(QueueTaskDto.builder()
+                                           .status(1)
+                                           .queuetype(3)
+                                           .build());
+                if(EmptyUtils.isEmpty(queueTaskList)){
+                    Thread.sleep(10000);
+                    continue;
+                }
+                QueueTaskDto queueTaskDto = queueTaskList.get(0);
+                String requestbody = queueTaskDto.getRequestbody();
+                JSONObject jsonObject = JSONObject.parseObject(requestbody);
+                Result<?> result =wmsInvInService.invInLongCage(jsonObject);
+                queueTaskDto.setStatus(1);
+                queueTaskDao.updateQueueTask(queueTaskDto);
+                Thread.sleep(10000);
+            } catch (Exception e) {
+                log.error(e.getMessage());
+            }
+        }
+    }
 
+    @Async
+    public void QueueInvInShortCageTask() {
+        while (true) {
+            try {
+                String name = "B2PI";
+                List<TaskmesDto> taskmesLongCage = taskmesDao.query2LForTaskMes(name);
+                //长吊笼执行中
+                if (EmptyUtils.isNotEmpty(taskmesLongCage)) {
+                    Thread.sleep(10000);
+                    continue;
+                }
+                List<QueueTaskDto> queueTaskList = queueTaskDao.queryQueueTask(QueueTaskDto.builder()
+                        .status(1)
+                        .queuetype(4)
+                        .build());
+                if (EmptyUtils.isEmpty(queueTaskList)) {
+                    Thread.sleep(10000);
+                    continue;
+                }
+                QueueTaskDto queueTaskDto = queueTaskList.get(0);
+                String requestbody = queueTaskDto.getRequestbody();
+                JSONObject jsonObject = JSONObject.parseObject(requestbody);
+                Result<?> result = wmsInvInService.invInLongCage(jsonObject);
+                queueTaskDto.setStatus(1);
+                queueTaskDao.updateQueueTask(queueTaskDto);
+                Thread.sleep(10000);
+            } catch (Exception e) {
+                log.error(e.getMessage());
+            }
+        }
+    }
+    @Async
+    public void QueueInvIn1LTask() {
+        while (true) {
+              try {
+                  List<TaskmesDto> taskmesLongCage = taskmesDao.query1LForTaskMes();
+                  //1楼任务已存在
+                  if (EmptyUtils.isNotEmpty(taskmesLongCage)) {
+                      Thread.sleep(10000);
+                      continue;
+                  }
+                  List<QueueTaskDto> queueTaskList = queueTaskDao.queryQueueTask(QueueTaskDto.builder()
+                          .status(1)
+                          .queuetype(1)
+                          .build());
+                  if (EmptyUtils.isEmpty(queueTaskList)) {
+                      Thread.sleep(10000);
+                      continue;
+                  }
+                  QueueTaskDto queueTaskDto = queueTaskList.get(0);
+                  String requestbody = queueTaskDto.getRequestbody();
+                  JSONObject jsonObject = JSONObject.parseObject(requestbody);
+                  Result<?> result = wmsInvInService.invIn1LCage(jsonObject);
+                  queueTaskDto.setStatus(1);
+                  queueTaskDao.updateQueueTask(queueTaskDto);
+                  Thread.sleep(10000);
+              } catch (Exception e) {
+                  log.error(e.getMessage());
+              }
+        }
+    }
 }

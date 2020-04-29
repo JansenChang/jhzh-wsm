@@ -3,7 +3,7 @@ package com.jhzh.wms.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.jhzh.wms.base.http.HttpResult;
 import com.jhzh.wms.base.result.Result;
-import com.jhzh.wms.dao.PutInStorageDao;
+import com.jhzh.wms.dao.WmsInvInDao;
 import com.jhzh.wms.dto.WmsInvInDto;
 import com.jhzh.wms.service.ImesFeedBackService;
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +42,7 @@ public class ImesFeedBackController {
     @Autowired
     private ImesFeedBackService ImesFeedBackservice;
     @Autowired
-    private PutInStorageDao putInStorageDao;
+    private WmsInvInDao wmsInvInDao;
     @Autowired
     private ImesFeedBackService imesFeedBackService;
     //物资编码查询接口
@@ -81,7 +81,7 @@ public class ImesFeedBackController {
         log.info("wmsInvInResult begin..");
         log.info("In Param : \n"+jsonpObject.toJSONString());
         String taskid = (String) jsonpObject.get("taskid");
-        List<WmsInvInDto> wmsInvInDtos = putInStorageDao.queryWmsInvInForTaskId(taskid);
+        List<WmsInvInDto> wmsInvInDtos = wmsInvInDao.queryWmsInvInForTaskId(taskid);
         Map<String, String> map = imesFeedBackService.wmsInvInResult(wmsInvInDtos);
         log.info("wmsInvInResult end..");
         return Result.success(1);

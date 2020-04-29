@@ -31,6 +31,9 @@ public class TaskCommandLineRunner implements CommandLineRunner, Ordered {
        //queryTask.QueryWoPlanInfo();
        //queryTask.QueryCompletedTask();
        // queryTask.QueueTask();
+       queryTask.QueueInvInLongCageTask();
+       queryTask.QueueInvInShortCageTask();
+       queryTask.QueueInvIn1LTask();
     }
 
 

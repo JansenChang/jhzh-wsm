@@ -1,7 +1,7 @@
 package com.jhzh.wms.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.jhzh.wms.dao.PutInStorageDao;
+import com.jhzh.wms.dao.WmsInvInDao;
 import com.jhzh.wms.dao.WmsInvOutDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class ExportController {
     @Autowired
-    private PutInStorageDao putInStorageDao;
+    private WmsInvInDao wmsInvInDao;
     @Autowired
     private WmsInvOutDao wmsInvOutDao;
 

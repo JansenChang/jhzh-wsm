@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jhzh.wms.base.result.Result;
-import com.jhzh.wms.dao.PutInStorageDao;
+import com.jhzh.wms.dao.WmsInvInDao;
 import com.jhzh.wms.dao.WmsInvOutDao;
 import com.jhzh.wms.dto.FlowRecordDto;
 import com.jhzh.wms.service.FlowRecordService;
@@ -17,7 +17,7 @@ import java.util.Map;
 @Service
 public class FlowRecordServiceImpl implements FlowRecordService {
     @Autowired
-    private PutInStorageDao putInStorageDao;
+    private WmsInvInDao wmsInvInDao;
     @Autowired
     private WmsInvOutDao wmsInvOutDao;
 
@@ -27,7 +27,7 @@ public class FlowRecordServiceImpl implements FlowRecordService {
         Integer pagesize = (Integer) jsonObject.get("pagesize");
         PageHelper.startPage(pagenum,pagesize);
         Map map=jsonObject;
-        List<FlowRecordDto> maps = putInStorageDao.queryWmsInvInFlow(map);
+        List<FlowRecordDto> maps = wmsInvInDao.queryWmsInvInFlow(map);
         PageInfo<FlowRecordDto> pageInfo=new PageInfo<>(maps);
         return Result.success(pageInfo);
     }
